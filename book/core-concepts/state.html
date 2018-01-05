@@ -1,0 +1,990 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>State · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-codetabs/codetabs.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="working-with-state.html" />
+    
+    
+    <link rel="prev" href="core-concepts.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../what-is-wallaroo.html">
+            
+                <a href="../what-is-wallaroo.html">
+            
+                    
+                    What is Wallaroo?
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Core Concepts</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="intro.html">
+            
+                <a href="intro.html">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="core-concepts.html">
+            
+                <a href="core-concepts.html">
+            
+                    
+                    Introducing Wallaroo Core Concepts
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.3" data-path="state.html">
+            
+                <a href="state.html">
+            
+                    
+                    State
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="working-with-state.html">
+            
+                <a href="working-with-state.html">
+            
+                    
+                    Working with State
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="partitioning.html">
+            
+                <a href="partitioning.html">
+            
+                    
+                    Partitioning
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Wallaroo with Python</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../python/intro.html">
+            
+                <a href="../python/intro.html">
+            
+                    
+                    Wallaroo with Python Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Setting up Your Environment</li>
+        
+        
+    
+        <li class="chapter " data-level="4.1" data-path="../getting-started/choosing-an-installation-option.html">
+            
+                <a href="../getting-started/choosing-an-installation-option.html">
+            
+                    
+                    Choosing an Installation Option
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2" >
+            
+                <span>
+            
+                    
+                    Installing with Docker
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="4.2.1" data-path="../getting-started/docker-setup.html">
+            
+                <a href="../getting-started/docker-setup.html">
+            
+                    
+                    Setting Up Your Environment
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2.2" data-path="../getting-started/run-a-wallaroo-application-docker.html">
+            
+                <a href="../getting-started/run-a-wallaroo-application-docker.html">
+            
+                    
+                    Run a Wallaroo Application in Docker
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3" >
+            
+                <span>
+            
+                    
+                    Installing From Source
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="4.3.1" data-path="../getting-started/setup.html">
+            
+                <a href="../getting-started/setup.html">
+            
+                    
+                    Setting up Your Environment
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="4.3.1.1" data-path="../getting-started/macos-setup.html">
+            
+                <a href="../getting-started/macos-setup.html">
+            
+                    
+                    MacOS Installation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3.1.2" data-path="../getting-started/linux-setup.html">
+            
+                <a href="../getting-started/linux-setup.html">
+            
+                    
+                    Ubuntu Installation
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3.2" data-path="../getting-started/run-a-wallaroo-application.html">
+            
+                <a href="../getting-started/run-a-wallaroo-application.html">
+            
+                    
+                    Run a Wallaroo Application
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="4.4" data-path="../getting-started/conclusion.html">
+            
+                <a href="../getting-started/conclusion.html">
+            
+                    
+                    Conclusion
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Wallaroo Python API</li>
+        
+        
+    
+        <li class="chapter " data-level="5.1" data-path="../python/running-a-wallaroo-python-application.html">
+            
+                <a href="../python/running-a-wallaroo-python-application.html">
+            
+                    
+                    Running a Wallaroo Python Application
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.2" data-path="../python/writing-your-own-application.html">
+            
+                <a href="../python/writing-your-own-application.html">
+            
+                    
+                    Writing Your Own Application
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.3" data-path="../python/writing-your-own-stateful-application.html">
+            
+                <a href="../python/writing-your-own-stateful-application.html">
+            
+                    
+                    Writing Your Own Stateful Application
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.4" data-path="../python/writing-your-own-partitioned-stateful-application.html">
+            
+                <a href="../python/writing-your-own-partitioned-stateful-application.html">
+            
+                    
+                    Writing Your Own Partitioned Stateful Application
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.5" data-path="../python/word-count.html">
+            
+                <a href="../python/word-count.html">
+            
+                    
+                    Word Count
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.6" data-path="../python/interworker-serialization-and-resilience.html">
+            
+                <a href="../python/interworker-serialization-and-resilience.html">
+            
+                    
+                    Interworker Serialization and Resilience
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="5.7" data-path="../python/api.html">
+            
+                <a href="../python/api.html">
+            
+                    
+                    Wallaroo Python API
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Debugging Python Wallaroo Applications</li>
+        
+        
+    
+        <li class="chapter " data-level="6.1" data-path="../python/debugging.html">
+            
+                <a href="../python/debugging.html">
+            
+                    
+                    Debugging
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Wallaroo with Go</li>
+        
+        
+    
+
+    
+        
+        <li class="header">Setting up Your Environment</li>
+        
+        
+    
+        <li class="chapter " data-level="8.1" data-path="../go/getting-started/setup.html">
+            
+                <a href="../go/getting-started/setup.html">
+            
+                    
+                    Setting up Your Environment
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="8.1.1" data-path="../go/getting-started/macos-setup.html">
+            
+                <a href="../go/getting-started/macos-setup.html">
+            
+                    
+                    MacOS Installation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.1.2" data-path="../go/getting-started/linux-setup.html">
+            
+                <a href="../go/getting-started/linux-setup.html">
+            
+                    
+                    Ubuntu Installation
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="8.2" data-path="../go/getting-started/run-a-wallaroo-go-application.html">
+            
+                <a href="../go/getting-started/run-a-wallaroo-go-application.html">
+            
+                    
+                    Run a Wallaroo Go Application
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="8.3" data-path="../go/getting-started/conclusion.html">
+            
+                <a href="../go/getting-started/conclusion.html">
+            
+                    
+                    Conclusion
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Wallaroo Go API</li>
+        
+        
+    
+        <li class="chapter " data-level="9.1" data-path="../go/api/intro.html">
+            
+                <a href="../go/api/intro.html">
+            
+                    
+                    Go API Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.2" data-path="../go/api/writing-your-own-application.html">
+            
+                <a href="../go/api/writing-your-own-application.html">
+            
+                    
+                    Writing Your Own Application
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.3" data-path="../go/api/writing-your-own-stateful-application.html">
+            
+                <a href="../go/api/writing-your-own-stateful-application.html">
+            
+                    
+                    Writing Your Own Stateful Application
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.4" data-path="../go/word-count.md">
+            
+                <span>
+            
+                    
+                    Word Count
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.5" data-path="../go/api/interworker-serialization-and-resilience.html">
+            
+                <a href="../go/api/interworker-serialization-and-resilience.html">
+            
+                    
+                    Interworker Serialization and Resilience
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.6" data-path="../go/api/start-a-project.html">
+            
+                <a href="../go/api/start-a-project.html">
+            
+                    
+                    Start A Go Project
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="9.7" data-path="../go/api/api.html">
+            
+                <a href="../go/api/api.html">
+            
+                    
+                    Wallaroo Go API
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Appendix</li>
+        
+        
+    
+        <li class="chapter " data-level="10.1" data-path="../appendix/clustering.html">
+            
+                <a href="../appendix/clustering.html">
+            
+                    
+                    Clustered Wallaroo
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.2" data-path="../appendix/virtualenv.html">
+            
+                <a href="../appendix/virtualenv.html">
+            
+                    
+                    Wallaroo and Virtualenv
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.3" data-path="../appendix/wallaroo-command-line-options.html">
+            
+                <a href="../appendix/wallaroo-command-line-options.html">
+            
+                    
+                    Wallaroo Command-Line Options
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.4" data-path="../appendix/tcp-decoders-and-encoders.html">
+            
+                <a href="../appendix/tcp-decoders-and-encoders.html">
+            
+                    
+                    TCP Decoders and Encoders
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.5" data-path="../wallaroo-tools/giles-sender.html">
+            
+                <a href="../wallaroo-tools/giles-sender.html">
+            
+                    
+                    Sending Data over TCP with Giles Sender
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.6" data-path="../wallaroo-tools/giles-receiver.html">
+            
+                <a href="../wallaroo-tools/giles-receiver.html">
+            
+                    
+                    Receiving Data over TCP with Giles Receiver
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.7" data-path="../metrics/metrics-ui.html">
+            
+                <a href="../metrics/metrics-ui.html">
+            
+                    
+                    Monitoring Metrics with the Monitoring Hub
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.8" data-path="../appendix/decoding-giles-receiver-output.html">
+            
+                <a href="../appendix/decoding-giles-receiver-output.html">
+            
+                    
+                    Decoding Giles Receiver Output
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.9" data-path="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
+            
+                <a href="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
+            
+                    
+                    Wallaroo and Long-Running Data Processing and Other Workflows
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="10.10" data-path="../appendix/wallaroo-in-docker-tips.html">
+            
+                <a href="../appendix/wallaroo-in-docker-tips.html">
+            
+                    
+                    Tips for using Wallaroo in Docker
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Legal</li>
+        
+        
+    
+        <li class="chapter " data-level="11.1" data-path="../legal/terms.html">
+            
+                <a href="../legal/terms.html">
+            
+                    
+                    Terms and Conditions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >State</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="state">State</h1>
+<p>The expectation with Wallaroo is that most applications will be stateful. Understanding how Wallaroo handles state is key to being able to design effective Wallaroo applications. In this section, we&apos;re going to take you through how state works in Wallaroo and what advantages this brings.</p>
+<h2 id="transactions-in-wallaroo">Transactions in Wallaroo</h2>
+<p>Transactions are awesome. Using a data management system that features transactions makes our lives as programmers much easier. Transactions provide certain guarantees about how data will be updated that make it easier to reason about our code, easier to understand what our code will do. This is particularly true when we are talking about concurrent operations.</p>
+<p>It&apos;s often quite easy to understand what our code is doing if we only have a single thread. Everything will happen in a nice linear, serial fashion. Sadly, the world in which our code runs isn&apos;t serial, it&apos;s concurrent. Many different operations happening at one time. Transactions, in part, allow us to think about how our code is updating data as though the updates were happening one at a time, that is in a serial fashion.</p>
+<p>Wallaroo doesn&apos;t have transactions in the traditional database sense. However, we do have a means of providing similar guarantees. Wallaroo allows you to atomically update individual bits of state. To understand how that works and the guarantees that Wallaroo provides, let&apos;s dig into how Wallaroo handles that.</p>
+<h2 id="wallaroo-and-state">Wallaroo and State</h2>
+<p>The simplest thing we could do to make it easy to reason about state is to lock all the state in your application. Only allowing a single update or read at a time. It would make Wallaroo applications very easy to reason about. It would also make them incredibly slow.</p>
+<p>What we&apos;ve done instead is to allow you to break your state down into more discrete entities we call &quot;state objects&quot;. All reads/writes of a given state object are guaranteed to happen in a serial fashion. No more than one thread will ever access a given state object at a time. </p>
+<p>This makes it easy to reason about state within Wallaroo. All the wonderful reasoning benefits we get from transactions apply in Wallaroo, except that rather than being across an entire database, it&apos;s across individual state objects.</p>
+<p>So what is a state object? Let&apos;s explain via an example. Imagine we are writing an application that keeps track of the latest price for different stock in the stock market. Each of the stocks would become a state object. It&apos;s the discrete unit of atomicity that we want to be able to safely update. We want to make sure only one thread at a time is updating IBM, but, we also want to go fast, so it&apos;s ok if APPL or AMZN is being updated at the same time.</p>
+<p>Wallaroo allows you to define your own state objects that match your domain. For example, our example application might define a state object as:</p>
+<p><div class="codetabs"><div class="codetabs-header"><div class="tab active" data-codetab="0">Python</div><div class="tab" data-codetab="1">Go</div></div><div class="codetabs-body"><div class="tab active" data-codetab="0"><pre><code class="lang-py"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Stock</span><span class="hljs-params">(object)</span>:</span>
+    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, symbol, price)</span>:</span>
+        self.symbol = symbol
+        self.price = price</code></pre></div><div class="tab" data-codetab="1"><pre><code class="lang-go"><span class="hljs-keyword">type</span> Stock <span class="hljs-keyword">struct</span> {
+  Symbol <span class="hljs-keyword">string</span>
+  Price <span class="hljs-keyword">float64</span>
+}</code></pre></div></div></div></p>
+<p>State objects can be arbitrarily complex. Our example is two fields. If your application required it, you could build a deeply nested series of objects.</p>
+<h2 id="wallaroo-state-and-parallelization">Wallaroo, state, and parallelization</h2>
+<p>In our stock market example, we can read from and write to each state object independently. Our state objects are a unit of parallelization. If we have 3,000 different state objects and 3,000 CPUS then we can update all our state objects concurrently. Odds are, we are going to have more state objects than we have CPUs. Wallaroo handles all parallelization and routing of messages to state objects. </p>
+<p>The Wallaroo API features a concept called a &quot;partitioning function&quot; that allows you to examine a message indicate how it should be routed. For example, imagine a message in our stock market application is:</p>
+<pre><code class="lang-json">{
+<span class="hljs-string">&quot;symbol&quot;</span>: <span class="hljs-string">&quot;IBM&quot;</span>,
+<span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-string">&quot;169.53&quot;</span>
+}
+</code></pre>
+<p>Our partitioning function would take a message as input and return <code>IBM</code> as output. This would, in turn, be used by Wallaroo to route the message.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Wallaroo gives you serialized access to state. by properly partitioning your state along transactional boundaries you can parallelize access to independent pieces of state. Wallaroo takes care of this parallelization for you, all you have to do is give it a function that can tell it which pieces of state should be accessed for a particular message.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="core-concepts.html" class="navigation navigation-prev " aria-label="Previous page: Introducing Wallaroo Core Concepts">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="working-with-state.html" class="navigation navigation-next " aria-label="Next page: Working with State">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"State","level":"2.3","depth":1,"next":{"title":"Working with State","level":"2.4","depth":1,"path":"book/core-concepts/working-with-state.md","ref":"book/core-concepts/working-with-state.md","articles":[]},"previous":{"title":"Introducing Wallaroo Core Concepts","level":"2.2","depth":1,"path":"book/core-concepts/core-concepts.md","ref":"book/core-concepts/core-concepts.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"wallaroo_version":"0.3.2"},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/core-concepts/state.md","mtime":"2018-01-05T18:37:12.869Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-05T18:41:13.639Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-codetabs/codetabs.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
