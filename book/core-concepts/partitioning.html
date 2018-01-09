@@ -999,13 +999,13 @@
   stock.Price = price
 }</code></pre></div></div></div></p>
 <p>If a message came into the system with a new stock price, the computation would take that message, get the symbol and the price, and use them to update the state.</p>
-<p><div class="codetabs"><div class="codetabs-header"><div class="tab active" data-codetab="0">Python</div><div class="tab" data-codetab="1">Go</div></div><div class="codetabs-body"><div class="tab active" data-codetab="0"><pre><code class="lang-py"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UpdateStock</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compute</span><span class="hljs-params">(self, stock, state)</span>:</span>
-        symbol = stock.symbol
-        price = stock.price
+<p><div class="codetabs"><div class="codetabs-header"><div class="tab active" data-codetab="0">Python</div><div class="tab" data-codetab="1">Go</div></div><div class="codetabs-body"><div class="tab active" data-codetab="0"><pre><code class="lang-py"><span class="hljs-meta">@wallaroo.state_computation(&quot;update stock&quot;)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_stock</span><span class="hljs-params">(stock, state)</span>:</span>
+    symbol = stock.symbol
+    price = stock.price
 
-        state.set(symbol, price)
-        <span class="hljs-keyword">return</span> (<span class="hljs-keyword">None</span>, <span class="hljs-keyword">True</span>)
+    state.set(symbol, price)
+    <span class="hljs-keyword">return</span> (<span class="hljs-keyword">None</span>, <span class="hljs-keyword">True</span>)
 </code></pre></div><div class="tab" data-codetab="1"><pre><code class="lang-go"><span class="hljs-keyword">type</span> UpdateStock <span class="hljs-keyword">struct</span> {}
 
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(us *UpdateStock)</span> <span class="hljs-title">Compute</span><span class="hljs-params">(data <span class="hljs-keyword">interface</span>{}, state <span class="hljs-keyword">interface</span>{})</span> <span class="hljs-params">(<span class="hljs-keyword">interface</span>{}, <span class="hljs-keyword">bool</span>)</span></span> {
@@ -1030,12 +1030,12 @@ To do this, a <em>partition function</em> is used to determine which <em>state p
   Price <span class="hljs-keyword">float64</span>
 }</code></pre></div></div></div></p>
 <p>Since the computation only has one stock in its state now, there is no need to do a dictionary look up. Instead, the computation can update the particular Stock&apos;s state right away.</p>
-<p><div class="codetabs"><div class="codetabs-header"><div class="tab active" data-codetab="0">Python</div><div class="tab" data-codetab="1">Go</div></div><div class="codetabs-body"><div class="tab active" data-codetab="0"><pre><code class="lang-py"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UpdateStock</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compute</span><span class="hljs-params">(self, stock, state)</span>:</span>
-        state.symbol = stock.symbol
-        state.price = stock.price
+<p><div class="codetabs"><div class="codetabs-header"><div class="tab active" data-codetab="0">Python</div><div class="tab" data-codetab="1">Go</div></div><div class="codetabs-body"><div class="tab active" data-codetab="0"><pre><code class="lang-py"><span class="hljs-meta">@wallaroo.state_computation(name=&quot;update stock&quot;)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_stock</span><span class="hljs-params">(stock, state)</span>:</span>
+    state.symbol = stock.symbol
+    state.price = stock.price
 
-        <span class="hljs-keyword">return</span> (<span class="hljs-keyword">None</span>, <span class="hljs-keyword">True</span>)
+    <span class="hljs-keyword">return</span> (<span class="hljs-keyword">None</span>, <span class="hljs-keyword">True</span>)
 </code></pre></div><div class="tab" data-codetab="1"><pre><code class="lang-go"><span class="hljs-keyword">type</span> UpdateStock <span class="hljs-keyword">struct</span> {}
 
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(us *UpdateStock)</span> <span class="hljs-title">Compute</span><span class="hljs-params">(data <span class="hljs-keyword">interface</span>{}, state <span class="hljs-keyword">interface</span>{})</span> <span class="hljs-params">(<span class="hljs-keyword">interface</span>{}, <span class="hljs-keyword">bool</span>)</span></span> {
@@ -1051,9 +1051,9 @@ To do this, a <em>partition function</em> is used to determine which <em>state p
 <p>Currently, the partition keys for a particular partition need to be defined along with the application. The specific details of keys vary between the different language APIs, but they are typically an object of some type that can support comparison and hashing. In the stock example, the partition key would be based on the symbol name (a string). All of the expected stock symbols are passed to the application setup code.</p>
 <h3 id="partition-function">Partition Function</h3>
 <p>The partition function takes in message data and returns a partition key. In the example, the message symbol would be extracted from the message data and returned as the key.</p>
-<p><div class="codetabs"><div class="codetabs-header"><div class="tab active" data-codetab="0">Python</div><div class="tab" data-codetab="1">Go</div></div><div class="codetabs-body"><div class="tab active" data-codetab="0"><pre><code class="lang-py"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SymbolPartitionFunction</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">partition</span><span class="hljs-params">(self, data)</span>:</span>
-        <span class="hljs-keyword">return</span> data.symbol</code></pre></div><div class="tab" data-codetab="1"><pre><code class="lang-go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">symbolToKey</span><span class="hljs-params">(symbol <span class="hljs-keyword">string</span>)</span> <span class="hljs-title">uint64</span></span> {
+<p><div class="codetabs"><div class="codetabs-header"><div class="tab active" data-codetab="0">Python</div><div class="tab" data-codetab="1">Go</div></div><div class="codetabs-body"><div class="tab active" data-codetab="0"><pre><code class="lang-py"><span class="hljs-meta">@wallaroo.partition</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">partition</span><span class="hljs-params">(data)</span>:</span>
+    <span class="hljs-keyword">return</span> data.symbol</code></pre></div><div class="tab" data-codetab="1"><pre><code class="lang-go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">symbolToKey</span><span class="hljs-params">(symbol <span class="hljs-keyword">string</span>)</span> <span class="hljs-title">uint64</span></span> {
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">uint64</span>(binary.BigEndian.Uint32([]<span class="hljs-keyword">byte</span>(fmt.Sprintf(<span class="hljs-string">&quot;%4s&quot;</span>, symbol))))
 }
 
@@ -1107,7 +1107,7 @@ To do this, a <em>partition function</em> is used to determine which <em>state p
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Partitioning","level":"2.5","depth":1,"next":{"title":"Wallaroo Languages Supported","level":"3.1","depth":1,"path":"book/language_support.md","ref":"book/language_support.md","articles":[]},"previous":{"title":"Working with State","level":"2.4","depth":1,"path":"book/core-concepts/working-with-state.md","ref":"book/core-concepts/working-with-state.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"wallaroo_version":"0.3.3"},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/core-concepts/partitioning.md","mtime":"2018-01-09T16:42:41.587Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-09T16:48:19.013Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Partitioning","level":"2.5","depth":1,"next":{"title":"Wallaroo Languages Supported","level":"3.1","depth":1,"path":"book/language_support.md","ref":"book/language_support.md","articles":[]},"previous":{"title":"Working with State","level":"2.4","depth":1,"path":"book/core-concepts/working-with-state.md","ref":"book/core-concepts/working-with-state.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"wallaroo_version":"0.3.3"},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/core-concepts/partitioning.md","mtime":"2018-01-09T20:22:41.396Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-09T20:27:20.053Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

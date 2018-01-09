@@ -983,13 +983,10 @@
 </ul>
 <h3 id="computation">Computation</h3>
 <p>The computation here is fairly straightforward: given a data object and a state object, update the state with the new data, and return some data that tells Wallaroo what to do next.</p>
-<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AddVotes</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;add votes&quot;</span>
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compute</span><span class="hljs-params">(self, data, state)</span>:</span>
-        state.update(data)
-        <span class="hljs-keyword">return</span> (state.get_votes(data.letter), <span class="hljs-keyword">True</span>)
+<pre><code class="lang-python"><span class="hljs-meta">@wallaroo.state_computation(name=&apos;add votes&apos;)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add_votes</span><span class="hljs-params">(self, data, state)</span>:</span>
+    state.update(data)
+    <span class="hljs-keyword">return</span> (state.get_votes(data.letter), <span class="hljs-keyword">True</span>)
 </code></pre>
 <p>Let&apos;s dig into that tuple that we are returning:</p>
 <pre><code class="lang-python">(state.get_votes(data.letter), <span class="hljs-keyword">True</span>)
@@ -1025,33 +1022,19 @@
 </code></pre>
 <p>This map is the <code>state</code> object that <code>AddVotes.compute</code> above takes.
 An important thing to note here is that <code>get_votes</code> returns a <em>new</em> <code>Votes</code> instance. This is important, as this is the value that is returned eventually passed to <code>Encoder.encode</code>, and if we passed a reference to a mutable object here, there is no guarantee that <code>Encoder.encode</code> will execute before another update to this object.</p>
-<p>Lastly, a stateful application&apos;s pipeline is going to need a <code>StateBuilder</code>, so let&apos;s create one:</p>
-<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LetterStateBuilder</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Letter State Builder&quot;</span>
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">build</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> AllVotes()
-</code></pre>
 <h3 id="encoder">Encoder</h3>
 <p>The encoder is going to receive a <code>Votes</code> instance and encode into a string with the letter, followed by the vote count as a big-endian 64-bit unsigned integer:</p>
-<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Encoder</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">encode</span><span class="hljs-params">(self, data)</span>:</span>
-        <span class="hljs-comment"># data is a Votes</span>
-        <span class="hljs-keyword">return</span> struct.pack(<span class="hljs-string">&quot;&gt;IsQ&quot;</span>, <span class="hljs-number">9</span>, data.letter, data.votes)
+<pre><code class="lang-python"><span class="hljs-meta">@wallaroo.encoder</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">encode</span><span class="hljs-params">(self, data)</span>:</span>
+    <span class="hljs-comment"># data is a Votes</span>
+    <span class="hljs-keyword">return</span> struct.pack(<span class="hljs-string">&quot;&gt;IsQ&quot;</span>, <span class="hljs-number">9</span>, data.letter, data.votes)
 </code></pre>
 <h3 id="decoder">Decoder</h3>
 <p>The decoder, like the one in Reverse Word, is going to use a <code>header_length</code> of 4 bytes to denote a big-endian 32-bit unsigned integer. Then, for the data, it is expecting a single character followed by a big-endian 32-bit unsigned integer. Here we use the <code>struct</code> module to unpack these integers from the bytes string.</p>
-<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Decoder</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">header_length</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-number">4</span>
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">payload_length</span><span class="hljs-params">(self, bs)</span>:</span>
-        <span class="hljs-keyword">return</span> struct.unpack(<span class="hljs-string">&quot;&gt;I&quot;</span>, bs)[<span class="hljs-number">0</span>]
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decode</span><span class="hljs-params">(self, bs)</span>:</span>
-        (letter, vote_count) = struct.unpack(<span class="hljs-string">&quot;&gt;sI&quot;</span>, bs)
-        <span class="hljs-keyword">return</span> Votes(letter, vote_count)
+<pre><code class="lang-python"><span class="hljs-meta">@wallaroo.decoder(header_length=4, length_fmt=&quot;&gt;I&quot;)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decode</span><span class="hljs-params">(self, bs)</span>:</span>
+    (letter, vote_count) = struct.unpack(<span class="hljs-string">&quot;&gt;sI&quot;</span>, bs)
+    <span class="hljs-keyword">return</span> Votes(letter, vote_count)
 </code></pre>
 <h3 id="application-setup">Application Setup</h3>
 <p>Finally, let&apos;s set up our application topology:</p>
@@ -1061,18 +1044,18 @@ An important thing to note here is that <code>get_votes</code> returns a <em>new
 
     ab = wallaroo.ApplicationBuilder(<span class="hljs-string">&quot;alphabet&quot;</span>)
     ab.new_pipeline(<span class="hljs-string">&quot;alphabet&quot;</span>,
-                    wallaroo.TCPSourceConfig(in_host, in_port, Decoder()))
-    ab.to_stateful(AddVotes(), LetterStateBuilder(), <span class="hljs-string">&quot;letter state&quot;</span>)
-    ab.to_sink(wallaroo.TCPSinkConfig(out_host, out_port, Encoder()))
+                    wallaroo.TCPSourceConfig(in_host, in_port, decoder))
+    ab.to_stateful(add_votes, AllVotes, <span class="hljs-string">&quot;letter state&quot;</span>)
+    ab.to_sink(wallaroo.TCPSinkConfig(out_host, out_port, encoder))
     <span class="hljs-keyword">return</span> ab.build()
 </code></pre>
 <p>The only difference between this setup and the stateless Reverse Word&apos;s one is that while in Reverse Word we used:</p>
-<pre><code class="lang-python">ab.to(Reverse)
+<pre><code class="lang-python">ab.to(reverse)
 </code></pre>
 <p>here we use:</p>
-<pre><code class="lang-python">ab.to_stateful(AddVotes(), LetterStateBuilder(), <span class="hljs-string">&quot;letter state&quot;</span>)
+<pre><code class="lang-python">ab.to_stateful(add_votes, AllVotes, <span class="hljs-string">&quot;letter state&quot;</span>)
 </code></pre>
-<p>That is, while the stateless computation constructor <code>to</code> took only a computation class as its argument, the stateful computation constructor <code>to_stateful</code> takes a computation <em>instance</em>, as well as a state-builder <em>instance</em>, along with the name of that state.</p>
+<p>That is, while the stateless computation constructor <code>to</code> took only a computation class as its argument, the stateful computation constructor <code>to_stateful</code> takes a computation <em>function</em>, as well as a state <em>class</em>, along with the name of that state.</p>
 <h3 id="miscellaneous">Miscellaneous</h3>
 <p>This module needs its imports:</p>
 <pre><code class="lang-python"><span class="hljs-keyword">import</span> struct
@@ -1127,7 +1110,7 @@ An important thing to note here is that <code>get_votes</code> returns a <em>new
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Writing Your Own Stateful Application","level":"4.3.3","depth":2,"next":{"title":"Writing Your Own Partitioned Stateful Application","level":"4.3.4","depth":2,"path":"book/python/writing-your-own-partitioned-stateful-application.md","ref":"book/python/writing-your-own-partitioned-stateful-application.md","articles":[]},"previous":{"title":"Writing Your Own Application","level":"4.3.2","depth":2,"path":"book/python/writing-your-own-application.md","ref":"book/python/writing-your-own-application.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"wallaroo_version":"0.3.3"},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/writing-your-own-stateful-application.md","mtime":"2018-01-09T16:42:41.607Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-09T16:48:19.013Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Writing Your Own Stateful Application","level":"4.3.3","depth":2,"next":{"title":"Writing Your Own Partitioned Stateful Application","level":"4.3.4","depth":2,"path":"book/python/writing-your-own-partitioned-stateful-application.md","ref":"book/python/writing-your-own-partitioned-stateful-application.md","articles":[]},"previous":{"title":"Writing Your Own Application","level":"4.3.2","depth":2,"path":"book/python/writing-your-own-application.md","ref":"book/python/writing-your-own-application.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"wallaroo_version":"0.3.3"},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/writing-your-own-stateful-application.md","mtime":"2018-01-09T20:22:41.416Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-09T20:27:20.053Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

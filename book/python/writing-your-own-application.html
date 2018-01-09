@@ -980,38 +980,27 @@
 </ul>
 <h3 id="computation">Computation</h3>
 <p>Let&apos;s start with the computation, because that&apos;s the purpose of the application:</p>
-<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Reverse</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;reverse&quot;</span>
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compute</span><span class="hljs-params">(self, data)</span>:</span>
-        <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;compute&quot;</span>, data
-        <span class="hljs-keyword">return</span> data[::<span class="hljs-number">-1</span>]
+<pre><code class="lang-python"><span class="hljs-meta">@wallaroo.computation(name=&apos;reverse&apos;):</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverse</span><span class="hljs-params">(self, data)</span>:</span>
+    <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;compute&quot;</span>, data
+    <span class="hljs-keyword">return</span> data[::<span class="hljs-number">-1</span>]
 </code></pre>
 <p>A Computation has no state, so it only needs to define its name, and how to convert input data into output data. In this case, string reversal is performed with a slice notation.</p>
 <p>Note that there is a <code>print</code> statement in the <code>compute</code> method (and in other methods in this document). They are here to help show the user what is happening at different points as the application executes. This is only for demonstration purposes and is not recommended in actual applications.</p>
 <h3 id="sink-encoder">Sink Encoder</h3>
 <p>Next, we are going to define how the output gets constructed for the sink. It is important to remember that Wallaroo sends its output over the network, so data going through the sink needs to be of type <code>bytes</code>. In Python2, this is the same as <code>str</code>.</p>
-<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Encoder</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">encode</span><span class="hljs-params">(self, data)</span>:</span>
-        <span class="hljs-comment"># data is a string</span>
-        <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;encode&quot;</span>, data
-        <span class="hljs-keyword">return</span> data + <span class="hljs-string">&quot;\n&quot;</span>
+<pre><code class="lang-python"><span class="hljs-meta">@wallaroo.encoder</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">encode</span><span class="hljs-params">(self, data)</span>:</span>
+    <span class="hljs-comment"># data is a string</span>
+    <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;encode&quot;</span>, data
+    <span class="hljs-keyword">return</span> data + <span class="hljs-string">&quot;\n&quot;</span>
 </code></pre>
 <h3 id="sourcedecoder">SourceDecoder</h3>
 <p>Now, we also need to decode the incoming bytes of the source.</p>
-<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Decoder</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">header_length</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;header_length&quot;</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-number">4</span>
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">payload_length</span><span class="hljs-params">(self, bs)</span>:</span>
-        <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;payload_length&quot;</span>, bs
-        <span class="hljs-keyword">return</span> struct.unpack(<span class="hljs-string">&quot;&gt;I&quot;</span>, bs)[<span class="hljs-number">0</span>]
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decode</span><span class="hljs-params">(self, bs)</span>:</span>
-        <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;decode&quot;</span>, bs
-        <span class="hljs-keyword">return</span> bs.decode(<span class="hljs-string">&quot;utf-8&quot;</span>)
+<pre><code class="lang-python"><span class="hljs-meta">@wallaroo.decoder(header_length=4, length_fmt=&quot;&gt;I&quot;)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decode</span><span class="hljs-params">(self, bs)</span>:</span>
+    <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;decode&quot;</span>, bs
+    <span class="hljs-keyword">return</span> bs.decode(<span class="hljs-string">&quot;utf-8&quot;</span>)
 </code></pre>
 <p>This one is different. When using a TCP source, Wallaroo handles <em>streams of bytes</em>, and in order to do that efficiently, it uses a method called message framing. This means that Wallaroo requires input data to follow a special structure, as well as for the application to provide the mechanism with which to decode this data.</p>
 <p>To read more about this, please refer to the <a href="../appendix/tcp-decoders-and-encoders.html#creating-a-decoder">Creating A Decoder</a> section.</p>
@@ -1041,14 +1030,14 @@ For this, two things are needed:</p>
 <p>An application is constructed of pipelines which, in turn, are constructed from a sequence of a source, steps, and optionally a sink. Our reverse application only has one pipeline, so we only need to create one:</p>
 <pre><code class="lang-python">ab = wallaroo.ApplicationBuilder(<span class="hljs-string">&quot;Reverse Word&quot;</span>)
 ab.new_pipeline(<span class="hljs-string">&quot;reverse&quot;</span>,
-                wallaroo.TCPSourceConfig(in_host, in_port, Decoder()))
+                wallaroo.TCPSourceConfig(in_host, in_port, decoder))
 </code></pre>
 <p>Each pipeline must have a source, and each source must have a decoder, so <code>new_pipeline</code> takes a name and a <code>TCPSourceConfig</code> instance as its arguments.</p>
 <p>Next, we add the computation step:</p>
-<pre><code class="lang-python">ab.to(Reverse)
+<pre><code class="lang-python">ab.to(reverse)
 </code></pre>
 <p>And finally, we add the sink, using a <code>TCPSinkConfig</code>:</p>
-<pre><code class="lang-python">ab.to_sink(wallaroo.TCPSinkConfig(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-string">&quot;7010&quot;</span>, Encoder()))
+<pre><code class="lang-python">ab.to_sink(wallaroo.TCPSinkConfig(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-string">&quot;7010&quot;</span>, encoder))
 </code></pre>
 <h3 id="the-applicationsetup-entry-point">The <code>application_setup</code> Entry Point</h3>
 <p>After Wallaroo has loaded the application&apos;s python file, it will try to execute its <code>application_setup()</code> function. This function is where the application builder steps from above are going to run.</p>
@@ -1058,9 +1047,9 @@ ab.new_pipeline(<span class="hljs-string">&quot;reverse&quot;</span>,
 
     ab = wallaroo.ApplicationBuilder(<span class="hljs-string">&quot;Reverse Word&quot;</span>)
     ab.new_pipeline(<span class="hljs-string">&quot;reverse&quot;</span>,
-                    wallaroo.TCPSourceConfig(in_host, in_port, Decoder()))
-    ab.to(Reverse)
-    ab.to_sink(wallaroo.TCPSinkConfig(out_host, out_port, Encoder()))
+                    wallaroo.TCPSourceConfig(in_host, in_port, decoder))
+    ab.to(reverse)
+    ab.to_sink(wallaroo.TCPSinkConfig(out_host, out_port, encoder))
     <span class="hljs-keyword">return</span> ab.build()
 </code></pre>
 <p>Configuration objects are used to pass information about sources and sinks to the application builder. Currently the only supported source and sink types are TCP and Kafka.</p>
@@ -1118,7 +1107,7 @@ ab.new_pipeline(<span class="hljs-string">&quot;reverse&quot;</span>,
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Writing Your Own Application","level":"4.3.2","depth":2,"next":{"title":"Writing Your Own Stateful Application","level":"4.3.3","depth":2,"path":"book/python/writing-your-own-stateful-application.md","ref":"book/python/writing-your-own-stateful-application.md","articles":[]},"previous":{"title":"Running a Wallaroo Python Application","level":"4.3.1","depth":2,"path":"book/python/running-a-wallaroo-python-application.md","ref":"book/python/running-a-wallaroo-python-application.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"wallaroo_version":"0.3.3"},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/writing-your-own-application.md","mtime":"2018-01-09T16:42:41.607Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-09T16:48:19.013Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Writing Your Own Application","level":"4.3.2","depth":2,"next":{"title":"Writing Your Own Stateful Application","level":"4.3.3","depth":2,"path":"book/python/writing-your-own-stateful-application.md","ref":"book/python/writing-your-own-stateful-application.md","articles":[]},"previous":{"title":"Running a Wallaroo Python Application","level":"4.3.1","depth":2,"path":"book/python/running-a-wallaroo-python-application.md","ref":"book/python/running-a-wallaroo-python-application.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"wallaroo_version":"0.3.3"},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/writing-your-own-application.md","mtime":"2018-01-09T20:22:41.416Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-09T20:27:20.053Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
