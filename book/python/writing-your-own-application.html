@@ -750,16 +750,16 @@
 
     
         
-        <li class="header">Appendix</li>
+        <li class="header">Running Wallaroo</li>
         
         
     
-        <li class="chapter " data-level="6.1" data-path="../appendix/clustering.html">
+        <li class="chapter " data-level="6.1" data-path="../running-wallaroo/running-wallaroo.html">
             
-                <a href="../appendix/clustering.html">
+                <a href="../running-wallaroo/running-wallaroo.html">
             
                     
-                    Clustered Wallaroo
+                    Running Wallaroo
             
                 </a>
             
@@ -767,7 +767,40 @@
             
         </li>
     
-        <li class="chapter " data-level="6.2" data-path="../appendix/virtualenv.html">
+        <li class="chapter " data-level="6.2" data-path="../running-wallaroo/autoscale.html">
+            
+                <a href="../running-wallaroo/autoscale.html">
+            
+                    
+                    Autoscale
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../running-wallaroo/wallaroo-command-line-options.html">
+            
+                <a href="../running-wallaroo/wallaroo-command-line-options.html">
+            
+                    
+                    Command line options
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Appendix</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../appendix/virtualenv.html">
             
                 <a href="../appendix/virtualenv.html">
             
@@ -780,20 +813,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.3" data-path="../appendix/wallaroo-command-line-options.html">
-            
-                <a href="../appendix/wallaroo-command-line-options.html">
-            
-                    
-                    Wallaroo Command-Line Options
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="6.4" data-path="../appendix/tcp-decoders-and-encoders.html">
+        <li class="chapter " data-level="7.2" data-path="../appendix/tcp-decoders-and-encoders.html">
             
                 <a href="../appendix/tcp-decoders-and-encoders.html">
             
@@ -806,7 +826,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.5" data-path="../wallaroo-tools/giles-sender.html">
+        <li class="chapter " data-level="7.3" data-path="../wallaroo-tools/giles-sender.html">
             
                 <a href="../wallaroo-tools/giles-sender.html">
             
@@ -819,7 +839,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.6" data-path="../wallaroo-tools/giles-receiver.html">
+        <li class="chapter " data-level="7.4" data-path="../wallaroo-tools/giles-receiver.html">
             
                 <a href="../wallaroo-tools/giles-receiver.html">
             
@@ -832,7 +852,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.7" data-path="../metrics/metrics-ui.html">
+        <li class="chapter " data-level="7.5" data-path="../metrics/metrics-ui.html">
             
                 <a href="../metrics/metrics-ui.html">
             
@@ -845,7 +865,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.8" data-path="../appendix/decoding-giles-receiver-output.html">
+        <li class="chapter " data-level="7.6" data-path="../appendix/decoding-giles-receiver-output.html">
             
                 <a href="../appendix/decoding-giles-receiver-output.html">
             
@@ -858,7 +878,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.9" data-path="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
+        <li class="chapter " data-level="7.7" data-path="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
             
                 <a href="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
             
@@ -871,7 +891,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.10" data-path="../appendix/wallaroo-in-docker-tips.html">
+        <li class="chapter " data-level="7.8" data-path="../appendix/wallaroo-in-docker-tips.html">
             
                 <a href="../appendix/wallaroo-in-docker-tips.html">
             
@@ -891,7 +911,7 @@
         
         
     
-        <li class="chapter " data-level="7.1" data-path="../legal/terms.html">
+        <li class="chapter " data-level="8.1" data-path="../legal/terms.html">
             
                 <a href="../legal/terms.html">
             
@@ -950,7 +970,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="writing-your-own-wallaroo-python-application">Writing Your Own Wallaroo Python Application</h1>
-<p>In this section, we will go over the components that are required in order to write a Wallaroo Python application. We will start with the stateless <code>reverse.py</code> application from the <a href="https://github.com/WallarooLabs/wallaroo/tree/0.3.3/examples/python/reverse/" target="_blank">examples</a> section, then move on to an application that maintains and modifies state and, finally, a stateful application that also uses partitioning to divide its work.</p>
+<p>In this section, we will go over the components that are required in order to write a Wallaroo Python application. We will start with the stateless <code>reverse.py</code> application from the <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.4.0/examples/python/reverse/" target="_blank">examples</a> section, then move on to an application that maintains and modifies state and, finally, a stateful application that also uses partitioning to divide its work.</p>
 <h2 id="a-stateless-application---reverse-words">A Stateless Application - Reverse Words</h2>
 <p>The <code>reverse.py</code> application is going to receive text as its input, reverse it, and then send out the reversed text to its sink. In order to do this, our application needs to provide the following functions:</p>
 <ul>
@@ -960,38 +980,27 @@
 </ul>
 <h3 id="computation">Computation</h3>
 <p>Let&apos;s start with the computation, because that&apos;s the purpose of the application:</p>
-<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Reverse</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;reverse&quot;</span>
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compute</span><span class="hljs-params">(self, data)</span>:</span>
-        <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;compute&quot;</span>, data
-        <span class="hljs-keyword">return</span> data[::<span class="hljs-number">-1</span>]
+<pre><code class="lang-python"><span class="hljs-meta">@wallaroo.computation(name=&apos;reverse&apos;):</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverse</span><span class="hljs-params">(self, data)</span>:</span>
+    <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;compute&quot;</span>, data
+    <span class="hljs-keyword">return</span> data[::<span class="hljs-number">-1</span>]
 </code></pre>
 <p>A Computation has no state, so it only needs to define its name, and how to convert input data into output data. In this case, string reversal is performed with a slice notation.</p>
 <p>Note that there is a <code>print</code> statement in the <code>compute</code> method (and in other methods in this document). They are here to help show the user what is happening at different points as the application executes. This is only for demonstration purposes and is not recommended in actual applications.</p>
 <h3 id="sink-encoder">Sink Encoder</h3>
 <p>Next, we are going to define how the output gets constructed for the sink. It is important to remember that Wallaroo sends its output over the network, so data going through the sink needs to be of type <code>bytes</code>. In Python2, this is the same as <code>str</code>.</p>
-<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Encoder</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">encode</span><span class="hljs-params">(self, data)</span>:</span>
-        <span class="hljs-comment"># data is a string</span>
-        <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;encode&quot;</span>, data
-        <span class="hljs-keyword">return</span> data + <span class="hljs-string">&quot;\n&quot;</span>
+<pre><code class="lang-python"><span class="hljs-meta">@wallaroo.encoder</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">encode</span><span class="hljs-params">(self, data)</span>:</span>
+    <span class="hljs-comment"># data is a string</span>
+    <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;encode&quot;</span>, data
+    <span class="hljs-keyword">return</span> data + <span class="hljs-string">&quot;\n&quot;</span>
 </code></pre>
 <h3 id="sourcedecoder">SourceDecoder</h3>
 <p>Now, we also need to decode the incoming bytes of the source.</p>
-<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Decoder</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">header_length</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;header_length&quot;</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-number">4</span>
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">payload_length</span><span class="hljs-params">(self, bs)</span>:</span>
-        <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;payload_length&quot;</span>, bs
-        <span class="hljs-keyword">return</span> struct.unpack(<span class="hljs-string">&quot;&gt;I&quot;</span>, bs)[<span class="hljs-number">0</span>]
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decode</span><span class="hljs-params">(self, bs)</span>:</span>
-        <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;decode&quot;</span>, bs
-        <span class="hljs-keyword">return</span> bs.decode(<span class="hljs-string">&quot;utf-8&quot;</span>)
+<pre><code class="lang-python"><span class="hljs-meta">@wallaroo.decoder(header_length=4, length_fmt=&quot;&gt;I&quot;)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decode</span><span class="hljs-params">(self, bs)</span>:</span>
+    <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;decode&quot;</span>, bs
+    <span class="hljs-keyword">return</span> bs.decode(<span class="hljs-string">&quot;utf-8&quot;</span>)
 </code></pre>
 <p>This one is different. When using a TCP source, Wallaroo handles <em>streams of bytes</em>, and in order to do that efficiently, it uses a method called message framing. This means that Wallaroo requires input data to follow a special structure, as well as for the application to provide the mechanism with which to decode this data.</p>
 <p>To read more about this, please refer to the <a href="../appendix/tcp-decoders-and-encoders.html#creating-a-decoder">Creating A Decoder</a> section.</p>
@@ -1021,14 +1030,14 @@ For this, two things are needed:</p>
 <p>An application is constructed of pipelines which, in turn, are constructed from a sequence of a source, steps, and optionally a sink. Our reverse application only has one pipeline, so we only need to create one:</p>
 <pre><code class="lang-python">ab = wallaroo.ApplicationBuilder(<span class="hljs-string">&quot;Reverse Word&quot;</span>)
 ab.new_pipeline(<span class="hljs-string">&quot;reverse&quot;</span>,
-                wallaroo.TCPSourceConfig(in_host, in_port, Decoder()))
+                wallaroo.TCPSourceConfig(in_host, in_port, decoder))
 </code></pre>
 <p>Each pipeline must have a source, and each source must have a decoder, so <code>new_pipeline</code> takes a name and a <code>TCPSourceConfig</code> instance as its arguments.</p>
 <p>Next, we add the computation step:</p>
-<pre><code class="lang-python">ab.to(Reverse)
+<pre><code class="lang-python">ab.to(reverse)
 </code></pre>
 <p>And finally, we add the sink, using a <code>TCPSinkConfig</code>:</p>
-<pre><code class="lang-python">ab.to_sink(wallaroo.TCPSinkConfig(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-string">&quot;7010&quot;</span>, Encoder()))
+<pre><code class="lang-python">ab.to_sink(wallaroo.TCPSinkConfig(<span class="hljs-string">&quot;localhost&quot;</span>, <span class="hljs-string">&quot;7010&quot;</span>, encoder))
 </code></pre>
 <h3 id="the-applicationsetup-entry-point">The <code>application_setup</code> Entry Point</h3>
 <p>After Wallaroo has loaded the application&apos;s python file, it will try to execute its <code>application_setup()</code> function. This function is where the application builder steps from above are going to run.</p>
@@ -1038,9 +1047,9 @@ ab.new_pipeline(<span class="hljs-string">&quot;reverse&quot;</span>,
 
     ab = wallaroo.ApplicationBuilder(<span class="hljs-string">&quot;Reverse Word&quot;</span>)
     ab.new_pipeline(<span class="hljs-string">&quot;reverse&quot;</span>,
-                    wallaroo.TCPSourceConfig(in_host, in_port, Decoder()))
-    ab.to(Reverse)
-    ab.to_sink(wallaroo.TCPSinkConfig(out_host, out_port, Encoder()))
+                    wallaroo.TCPSourceConfig(in_host, in_port, decoder))
+    ab.to(reverse)
+    ab.to_sink(wallaroo.TCPSinkConfig(out_host, out_port, encoder))
     <span class="hljs-keyword">return</span> ab.build()
 </code></pre>
 <p>Configuration objects are used to pass information about sources and sinks to the application builder. Currently the only supported source and sink types are TCP and Kafka.</p>
@@ -1052,7 +1061,7 @@ ab.new_pipeline(<span class="hljs-string">&quot;reverse&quot;</span>,
 <span class="hljs-keyword">import</span> wallaroo
 </code></pre>
 <h2 id="running-reversepy">Running <code>reverse.py</code></h2>
-<p>The complete example is available <a href="https://github.com/WallarooLabs/wallaroo/tree/0.3.3/examples/python/reverse/" target="_blank">here</a>. To run it, follow the <a href="https://github.com/WallarooLabs/wallaroo/tree/0.3.3/examples/python/reverse/README.md" target="_blank">Reverse application instructions</a></p>
+<p>The complete example is available <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.4.0/examples/python/reverse/" target="_blank">here</a>. To run it, follow the <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.4.0/examples/python/reverse/README.md" target="_blank">Reverse application instructions</a></p>
 <h2 id="next-steps">Next Steps</h2>
 <p>To learn how to write a stateful application, continue to <a href="writing-your-own-stateful-application.html">Writing Your Own Stateful Application</a>.</p>
 
@@ -1098,7 +1107,7 @@ ab.new_pipeline(<span class="hljs-string">&quot;reverse&quot;</span>,
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Writing Your Own Application","level":"4.3.2","depth":2,"next":{"title":"Writing Your Own Stateful Application","level":"4.3.3","depth":2,"path":"book/python/writing-your-own-stateful-application.md","ref":"book/python/writing-your-own-stateful-application.md","articles":[]},"previous":{"title":"Running a Wallaroo Python Application","level":"4.3.1","depth":2,"path":"book/python/running-a-wallaroo-python-application.md","ref":"book/python/running-a-wallaroo-python-application.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"wallaroo_version":"0.3.3"},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/writing-your-own-application.md","mtime":"2018-01-09T16:52:12.636Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-09T16:57:24.602Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Writing Your Own Application","level":"4.3.2","depth":2,"next":{"title":"Writing Your Own Stateful Application","level":"4.3.3","depth":2,"path":"book/python/writing-your-own-stateful-application.md","ref":"book/python/writing-your-own-stateful-application.md","articles":[]},"previous":{"title":"Running a Wallaroo Python Application","level":"4.3.1","depth":2,"path":"book/python/running-a-wallaroo-python-application.md","ref":"book/python/running-a-wallaroo-python-application.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/writing-your-own-application.md","mtime":"2018-01-10T01:10:01.225Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-10T01:10:02.580Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
