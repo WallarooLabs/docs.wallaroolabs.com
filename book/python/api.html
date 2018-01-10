@@ -990,8 +990,8 @@
 <li><a href="#tcpsinkconfig">TCPSinkConfig</a></li>
 </ul>
 <h3 id="application-setup">Application Setup</h3>
-<p>After Machida has loaded a Wallaroo Python application module, it executes its entry point function: <code>application_setup(args)</code>, which returns an application topology structure that tells Wallaroo how to connect the classes, functions, and objects behind the scenes. Therefore, any Wallaroo Python application must provide this function.</p>
-<p>The <code>wallaroo</code> module provides an <a href="#wallarooapplicationbuilder">ApplicationBuilder</a> that facilitates the creation of this data structure. When <code>ApplicationBuilder</code> is used, a topology can be built using its methods, and then its structure can be return by calling <code>ApplicationBuilder.build()</code>.</p>
+<p>After Machida has loaded a Wallaroo Python application module, it executes its entry point function, <code>application_setup(args)</code>, which returns an application topology structure that tells Wallaroo how to connect the classes, functions, and objects behind the scenes. Therefore, any Wallaroo Python application must provide this function.</p>
+<p>The <code>wallaroo</code> module provides an <a href="#wallarooapplicationbuilder">ApplicationBuilder</a> that facilitates the creation of this data structure. When <code>ApplicationBuilder</code> is used, a topology can be built using its methods, and then its structure can be returned by calling <code>ApplicationBuilder.build()</code>.</p>
 <p>For a simple application with a decoder, computation, and encoder, this function may look like</p>
 <pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">application_setup</span><span class="hljs-params">(args)</span>:</span>
     in_host, in_port = wallaroo.tcp_parse_input_addrs(args)[<span class="hljs-number">0</span>]
@@ -1029,19 +1029,19 @@ Creates one copy of the computation per worker in the cluster allowing you to pa
 <p>Add a state computation <em>function</em>, along with a <a href="#state">State</a> <em>class</em> and <code>state_name</code> to the current pipeline.</p>
 <p><code>computation</code> must be a <a href="#statecomputation">StateComputation</a>.</p>
 <p><code>state_class</code> must be a <a href="#state">State</a>.</p>
-<p><code>state_name</code> must be a str. <code>state_name</code> is the name of the state object that we will run computations against. You can share the object across pipelines by using the same name. Using different names for different objects, keeps them separate and in this way, acts as a sort of namespace.</p>
+<p><code>state_name</code> must be a str. <code>state_name</code> is the name of the state object that we will run computations against. You can share the object across pipelines by using the same name. Using different names for different objects, keeps them separate and, in this way, acts as a sort of namespace.</p>
 <h5 id="tostatepartitioncomputation-state-statepartitionname-partitionfunction-partitionkeys"><code>to_state_partition(computation, state, state_partition_name, partition_function, partition_keys)</code></h5>
 <p>Add a partitioned state computation to the current pipeline.</p>
 <p><code>computation</code> must be a <a href="#statecomputation">StateComputation</a>.</p>
 <p><code>state</code> must be <a href="#state">State</a>.</p>
-<p><code>state_partition_name</code> must be a str. <code>state_partition_name</code> is the name of the collection of state object that we will run computations against. You can share state partitions across pipelines by using the same name. Using different names for different partitions, keeps them separate and in this way, acts as a sort of namespace.</p>
+<p><code>state_partition_name</code> must be a str. <code>state_partition_name</code> is the name of the collection of state object that we will run computations against. You can share state partitions across pipelines by using the same name. Using different names for different partitions, keeps them separate and, in this way, acts as a sort of namespace.</p>
 <p><code>partition_function</code> must be a <a href="#partitionfunction">PartitionFunction</a>.</p>
 <p><code>partition_keys</code> must be a list of objects where all of the objects can be hashed with the <code>hash</code> function and be checked for equality with other objects.</p>
 <h5 id="tostatepartitionu64computation-statebuilder-statepartitionname-partitionfunction-partitionkeys"><code>to_state_partition_u64(computation, state_builder, state_partition_name, partition_function, partition_keys)</code></h5>
 <p>Add a partitioned stateful computation to the current pipeline.</p>
 <p><code>computation</code> must be a <a href="#statecomputation">StateComputation</a>.</p>
 <p><code>state</code> must be <a href="#state">State</a>.</p>
-<p><code>state_partition_name</code> must be a str. <code>state_partition_name</code> is the name of the collection of state object that we will run computations against. You can share state partitions across pipelines by using the same name. Using different names for different partitions, keeps them separate and in this way, acts as a sort of namespace.</p>
+<p><code>state_partition_name</code> must be a str. <code>state_partition_name</code> is the name of the collection of state object that we will run computations against. You can share state partitions across pipelines by using the same name. Using different names for different partitions, keeps them separate and, in this way, acts as a sort of namespace.</p>
 <p><code>partition_function</code> must be a <a href="#partitionfunction">PartitionFunction</a>.</p>
 <p><code>partition_keys</code> must be a list of non-negative <code>int</code>.</p>
 <h5 id="tosinksinkconfig"><code>to_sink(sink_config)</code></h5>
@@ -1049,12 +1049,12 @@ Creates one copy of the computation per worker in the cluster allowing you to pa
 <h5 id="build"><code>build()</code></h5>
 <p>Return the complete list of topology tuples. This is the topology structure Wallaroo requries in order to construct the topology connectinng all of the application components.</p>
 <h3 id="computation">Computation</h3>
-<p>A stateless computation is a simple function that takes input, returns an output, and does not modify any variables outside of its scope. e.g. a stateless computation has <em>no side effects</em>.</p>
+<p>A stateless computation is a simple function that takes input, returns an output, and does not modify any variables outside of its scope. A stateless computation has <em>no side effects</em>.</p>
 <p>A <code>computation</code> class must be wrapped by the <code>@computation(name)</code> decorator, which takes the name of the computation as an argument.</p>
 <h5 id="computedata"><code>compute(data)</code></h5>
 <p>Use <code>data</code> to perform a computation and return a new output. <code>data</code> is the python object the previous step in the pipeline returned.</p>
 <h5 id="computemultidata"><code>compute_multi(data)</code></h5>
-<p>Use <code>data</code> to perform a computation and return a series of new outputs. <code>data</code> is the python object the previous step in the pipeline returned. Output is a list of items. Used to turn 1 incoming object into many outgoing objects. Each item in the list will arrive individually at the next step; i.e. not as a list.</p>
+<p>Use <code>data</code> to perform a computation and return a series of new outputs. <code>data</code> is the python object the previous step in the pipeline returned. Output is a list of items. Used to turn 1 incoming object into many outgoing objects. Each item in the list will arrive individually at the next step, i.e. not as a list.</p>
 <h4 id="example-computations">Example Computations</h4>
 <p>A Computation that doubles an integer, or returns 0 if its input was not an int:</p>
 <pre><code class="lang-python"><span class="hljs-meta">@computation(&quot;double&quot;)</span>
@@ -1064,7 +1064,7 @@ Creates one copy of the computation per worker in the cluster allowing you to pa
     <span class="hljs-keyword">else</span>
         <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>
 </code></pre>
-<p>A Computation that returns both its input integer and double that value. If the incoming data isn&apos;t an integer, we filter aka drop the message by returning <code>None</code>.</p>
+<p>A Computation that returns both its input integer and double that value. If the incoming data isn&apos;t an integer, we filter (drop) the message by returning <code>None</code>.</p>
 <pre><code class="lang-python"><span class="hljs-meta">@computation_multi(&quot;doubledouble&quot;):</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compute_multi</span><span class="hljs-params">(data)</span>:</span>
     <span class="hljs-keyword">if</span> isinstance(data, int):
@@ -1073,14 +1073,14 @@ Creates one copy of the computation per worker in the cluster allowing you to pa
         <span class="hljs-keyword">return</span> <span class="hljs-keyword">None</span>
 </code></pre>
 <h3 id="data">Data</h3>
-<p>Data is the object that is passed to a <a href="#computation">Computation</a> and a <a href="#statecomputation">StateComputation</a>&apos;s method. It is a plain Python object and can be as simple or as complex as you would like it to be.</p>
+<p>Data is the object that is passed to a <a href="#computation">Computation</a>&apos;s and a <a href="#statecomputation">StateComputation</a>&apos;s method. It is a plain Python object and can be as simple or as complex as you would like it to be.</p>
 <p>It is important to ensure that data returned is always immutable or unique to avoid any unexpected behvaiour due to the asynchronous execution nature of Wallaroo.</p>
 <h3 id="key">Key</h3>
 <p>Partition Keys must correctly support the <code>__eq__</code> (<code>==</code>) and <code>__hash__</code> operators. Some built-in types, such as strings and numbers, already support these out of the box. If you are defining your own types, however, you must also implement the <code>__eq__</code> and <code>__hash__</code> methods.</p>
 <h3 id="partitionfunction">PartitionFunction</h3>
-<p>A partition function class must be wrapped in the <code>@partition_function</code> decorator and  return the appropriate <a href="#key">Key</a> for <code>data</code>.</p>
+<p>A partition function class must be wrapped in the <code>@partition_function</code> decorator and return the appropriate <a href="#key">Key</a> for <code>data</code>.</p>
 <h4 id="example-partitionfunction">Example PartitionFunction</h4>
-<p>An example that partitions words for a word-count based on their first character, and buckets all other cases to the empty string key</p>
+<p>An example that partitions words for a word count based on their first character, and buckets all other cases to the empty string key:</p>
 <pre><code class="lang-python"><span class="hljs-meta">@partition_function</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">partition</span><span class="hljs-params">(self, data)</span>:</span>
     <span class="hljs-keyword">try</span>:
@@ -1094,7 +1094,7 @@ Creates one copy of the computation per worker in the cluster allowing you to pa
 <h5 id="encodedata"><code>encode(data)</code></h5>
 <p>Return a <code>bytes</code> that can be sent over the network. It is up to the developer to determine how to translate <code>data</code> into a <code>bytes</code>, and what information to keep or discard.</p>
 <h4 id="example-tcpsinkencoder">Example TCPSinkEncoder</h4>
-<p>A complete <code>TCPSinkEncoder</code> example that takes a list of integers and encodes it to a sequence of big-endian Longs preceded by a big-endian short representing the number of integers in the list:</p>
+<p>A complete <code>TCPSinkEncoder</code> example that takes a list of integers and encodes it to a sequence of big-endian longs preceded by a big-endian short representing the number of integers in the list:</p>
 <pre><code class="lang-python"><span class="hljs-meta">@encoder</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">encode</span><span class="hljs-params">(self, data)</span>:</span>
     fmt = <span class="hljs-string">&apos;&gt;H{}&apos;</span>.format(<span class="hljs-string">&apos;L&apos;</span>*len(data))
@@ -1145,11 +1145,11 @@ Creates one copy of the computation per worker in the cluster allowing you to pa
     <span class="hljs-keyword">return</span> struct.unpack(<span class="hljs-string">&apos;&gt;1sL&apos;</span>, bs)
 </code></pre>
 <h3 id="state">State</h3>
-<p>State is an object that is passed to the <a href="#statecomputation">StateCompution&apos;s</a> <code>compute</code> method. It is a plain Python object and can be as simple or as complex as you would like it to. The class definition must be wrapped in the <code>@state</code> decorator.</p>
+<p>State is an object that is passed to the <a href="#statecomputation">StateCompution&apos;s</a> <code>compute</code> method. It is a plain Python object and can be as simple or as complex as you would like. The class definition must be wrapped in the <code>@state</code> decorator.</p>
 <p>A common issue that arises with asynchronous execution is that when references to mutable objects are passed to the next step, if another update to the state precedes the execution of the next step, it will then execute with the latest state (that is, it will execute with the &quot;wrong&quot; state). Therefore, anything returned by a <a href="#computation">Computation</a> or <a href="#statecomputation">StateComputation</a> ought to be either unique, or immutable.</p>
 <p>In either case, it is up to the developer to provide a side-effect safe value for the Computation to return!</p>
 <h4 id="example-state">Example State</h4>
-<p>An AlphabetCounts keeps a count for how many times each letter in the English alphabet has been seen</p>
+<p>An <code>AlphabetCounts</code> keeps a count for how many times each letter in the English alphabet has been seen:</p>
 <pre><code class="lang-python"><span class="hljs-keyword">import</span> copy
 
 <span class="hljs-meta">@state</span>
@@ -1236,7 +1236,7 @@ AlphabetCounts(objects):
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Wallaroo Python API","level":"4.3.7","depth":2,"next":{"title":"Debugging Python Wallaroo Applications","level":"4.4","depth":1,"ref":"","articles":[{"title":"Debugging","level":"4.4.1","depth":2,"path":"book/python/debugging.md","ref":"book/python/debugging.md","articles":[]}]},"previous":{"title":"Interworker Serialization and Resilience","level":"4.3.6","depth":2,"path":"book/python/interworker-serialization-and-resilience.md","ref":"book/python/interworker-serialization-and-resilience.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/api.md","mtime":"2018-01-10T15:54:43.381Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-10T15:54:44.454Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Wallaroo Python API","level":"4.3.7","depth":2,"next":{"title":"Debugging Python Wallaroo Applications","level":"4.4","depth":1,"ref":"","articles":[{"title":"Debugging","level":"4.4.1","depth":2,"path":"book/python/debugging.md","ref":"book/python/debugging.md","articles":[]}]},"previous":{"title":"Interworker Serialization and Resilience","level":"4.3.6","depth":2,"path":"book/python/interworker-serialization-and-resilience.md","ref":"book/python/interworker-serialization-and-resilience.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/api.md","mtime":"2018-01-10T20:06:40.457Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-10T20:06:41.560Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
