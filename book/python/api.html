@@ -970,7 +970,7 @@
                                 <h1 id="wallaroo-python-api-classes">Wallaroo Python API Classes</h1>
 <p>The Wallaroo Python API allows developers to create Wallaroo applications in Python, which can then be run by Machida.</p>
 <h2 id="overview">Overview</h2>
-<p>In order to create a Wallaroo application in Python, developers need to create functions and classes that provide the required interfaces for each step in their pipline, and then connect them together in a topology structure that is returned by the entry-point function <code>application_setup</code>.</p>
+<p>In order to create a Wallaroo application in Python, developers need to create functions and classes that provide the required interfaces for each step in their pipeline, and then connect them together in a topology structure that is returned by the entry-point function <code>application_setup</code>.</p>
 <p>The recommended way to create your topology structure is by using the <a href="#wallarooapplicationbuilder">ApplicationBuilder</a> in the <code>wallaroo</code> module.</p>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
@@ -1013,7 +1013,7 @@
 <h5 id="initname"><code>__init__(name)</code></h5>
 <p>Create a new application with the name <code>name</code>.</p>
 <h5 id="newpipelinename-sourceconfig"><code>new_pipeline(name, source_config)</code></h5>
-<p>Create a new pipline with the name <code>name</code> and a source config object.</p>
+<p>Create a new pipeline with the name <code>name</code> and a source config object.</p>
 <p>If you&apos;re adding more than one pipeline, make sure to call <code>done()</code> before creating another pipeline.</p>
 <h5 id="done"><code>done()</code></h5>
 <p>Close the current pipeline object.</p>
@@ -1047,7 +1047,7 @@ Creates one copy of the computation per worker in the cluster allowing you to pa
 <h5 id="tosinksinkconfig"><code>to_sink(sink_config)</code></h5>
 <p>Add a sink to the end of a pipeline. <code>sink_config</code> must be an instance of a sink configuration.</p>
 <h5 id="build"><code>build()</code></h5>
-<p>Return the complete list of topology tuples. This is the topology structure Wallaroo requries in order to construct the topology connectinng all of the application components.</p>
+<p>Return the complete list of topology tuples. This is the topology structure Wallaroo requires in order to construct the topology connecting all of the application components.</p>
 <h3 id="computation">Computation</h3>
 <p>A stateless computation is a simple function that takes input, returns an output, and does not modify any variables outside of its scope. A stateless computation has <em>no side effects</em>.</p>
 <p>A <code>computation</code> class must be wrapped by the <code>@computation(name)</code> decorator, which takes the name of the computation as an argument.</p>
@@ -1074,7 +1074,7 @@ Creates one copy of the computation per worker in the cluster allowing you to pa
 </code></pre>
 <h3 id="data">Data</h3>
 <p>Data is the object that is passed to a <a href="#computation">Computation</a>&apos;s and a <a href="#statecomputation">StateComputation</a>&apos;s method. It is a plain Python object and can be as simple or as complex as you would like it to be.</p>
-<p>It is important to ensure that data returned is always immutable or unique to avoid any unexpected behvaiour due to the asynchronous execution nature of Wallaroo.</p>
+<p>It is important to ensure that data returned is always immutable or unique to avoid any unexpected behavior due to the asynchronous execution nature of Wallaroo.</p>
 <h3 id="key">Key</h3>
 <p>Partition Keys must correctly support the <code>__eq__</code> (<code>==</code>) and <code>__hash__</code> operators. Some built-in types, such as strings and numbers, already support these out of the box. If you are defining your own types, however, you must also implement the <code>__eq__</code> and <code>__hash__</code> methods.</p>
 <h3 id="partitionfunction">PartitionFunction</h3>
@@ -1117,7 +1117,7 @@ Creates one copy of the computation per worker in the cluster allowing you to pa
 <p>Return a python a python object of the type the next step in the pipeline expects.</p>
 <p><code>bs</code> is a <code>bytes</code> of the length returned by <a href="#payload-length(bs">payload_length</a>), and it is up to the developer to translate that into a python object.</p>
 <h4 id="example-tcpsourcedecoder">Example TCPSourceDecoder</h4>
-<p>A complete TCPSourceDecoder example that decodes messages with a 32-bit unsigned integer <em>payload_length</em> and a character followed by a 32-bt unsigned int in its <em>payload</em>:</p>
+<p>A complete TCPSourceDecoder example that decodes messages with a 32-bit unsigned integer <em>payload_length</em> and a character followed by a 32-bit unsigned int in its <em>payload</em>:</p>
 <pre><code class="lang-python"><span class="hljs-meta">@decoder(header_length=4, length_fmt=&quot;&gt;L&quot;)</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decode</span><span class="hljs-params">(self, bs)</span>:</span>
     <span class="hljs-keyword">return</span> struct.unpack(<span class="hljs-string">&apos;&gt;1sL&apos;</span>, bs)
@@ -1145,7 +1145,7 @@ Creates one copy of the computation per worker in the cluster allowing you to pa
     <span class="hljs-keyword">return</span> struct.unpack(<span class="hljs-string">&apos;&gt;1sL&apos;</span>, bs)
 </code></pre>
 <h3 id="state">State</h3>
-<p>State is an object that is passed to the <a href="#statecomputation">StateCompution&apos;s</a> <code>compute</code> method. It is a plain Python object and can be as simple or as complex as you would like. The class definition must be wrapped in the <code>@state</code> decorator.</p>
+<p>State is an object that is passed to the <a href="#statecomputation">StateComputation&apos;s</a> <code>compute</code> method. It is a plain Python object and can be as simple or as complex as you would like. The class definition must be wrapped in the <code>@state</code> decorator.</p>
 <p>A common issue that arises with asynchronous execution is that when references to mutable objects are passed to the next step, if another update to the state precedes the execution of the next step, it will then execute with the latest state (that is, it will execute with the &quot;wrong&quot; state). Therefore, anything returned by a <a href="#computation">Computation</a> or <a href="#statecomputation">StateComputation</a> ought to be either unique, or immutable.</p>
 <p>In either case, it is up to the developer to provide a side-effect safe value for the Computation to return!</p>
 <h4 id="example-state">Example State</h4>
@@ -1179,7 +1179,7 @@ AlphabetCounts(objects):
 <p>Why wouldn&apos;t we always return <code>True</code>? There are two answers:</p>
 <ol>
 <li>Your computation might not have updated the state, in which case saving its state for recovery is wasteful.</li>
-<li>You might only want to save after some changes. Saving your state can be expensive for large objects. There&apos;s a tradeoff that can be made between performance and safety.</li>
+<li>You might only want to save after some changes. Saving your state can be expensive for large objects. There&apos;s a trade-off that can be made between performance and safety.</li>
 </ol>
 <h5 id="computemultidata-state"><code>compute_multi(data, state)</code></h5>
 <p>Same as <code>compute</code> but the first element of the return tuple is a list of messages to send on to our next step. Allows taking a single input message and creating multiple outputs. Each item in the list will arrive individually at the next step; i.e. not as a list. Wrap this function in <code>@state_computation_multi</code>.</p>
@@ -1236,7 +1236,7 @@ AlphabetCounts(objects):
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Wallaroo Python API","level":"4.3.7","depth":2,"next":{"title":"Debugging Python Wallaroo Applications","level":"4.4","depth":1,"ref":"","articles":[{"title":"Debugging","level":"4.4.1","depth":2,"path":"book/python/debugging.md","ref":"book/python/debugging.md","articles":[]}]},"previous":{"title":"Interworker Serialization and Resilience","level":"4.3.6","depth":2,"path":"book/python/interworker-serialization-and-resilience.md","ref":"book/python/interworker-serialization-and-resilience.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/api.md","mtime":"2018-01-10T20:06:40.457Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-10T20:06:41.560Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Wallaroo Python API","level":"4.3.7","depth":2,"next":{"title":"Debugging Python Wallaroo Applications","level":"4.4","depth":1,"ref":"","articles":[{"title":"Debugging","level":"4.4.1","depth":2,"path":"book/python/debugging.md","ref":"book/python/debugging.md","articles":[]}]},"previous":{"title":"Interworker Serialization and Resilience","level":"4.3.6","depth":2,"path":"book/python/interworker-serialization-and-resilience.md","ref":"book/python/interworker-serialization-and-resilience.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/api.md","mtime":"2018-01-11T17:55:41.406Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-11T17:55:42.592Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
