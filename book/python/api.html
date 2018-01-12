@@ -974,16 +974,16 @@
 <p>The recommended way to create your topology structure is by using the <a href="#wallarooapplicationbuilder">ApplicationBuilder</a> in the <code>wallaroo</code> module.</p>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
-<li><a href="#application-setup">Application setup</a></li>
-<li><a href="#wallarooapplicationbuilder">ApplicationBuilder</a></li>
+<li><a href="#application-setup">Application Setup</a></li>
+<li><a href="#applicationbuilder">ApplicationBuilder</a></li>
 <li><a href="#computation">Computation</a></li>
 <li><a href="#data">Data</a></li>
 <li><a href="#key">Key</a></li>
 <li><a href="#partitionfunction">PartitionFunction</a></li>
-<li><a href="#tcpsinkencoder">TCPSinkEncoder</a></li>
-<li><a href="#tcpsourcedecoder">TCPSourceDecoder</a></li>
-<li><a href="#kafkasinkencoder">KafkaSinkEncoder</a></li>
-<li><a href="#kafkasourcedecoder">kafkaSourceDecoder</a></li>
+<li><a href="#tcp-sink-encoder">TCPSinkEncoder</a></li>
+<li><a href="#tcp-source-decoder">TCPSourceDecoder</a></li>
+<li><a href="#kafka-sink-encoder">KafkaSinkEncoder</a></li>
+<li><a href="#kafka-source-decoder">KafkaSourceDecoder</a></li>
 <li><a href="#state">State</a></li>
 <li><a href="#statecomputation">StateComputation</a></li>
 <li><a href="#tcpsourceconfig">TCPSourceConfig</a></li>
@@ -1007,7 +1007,7 @@
 </code></pre>
 <h4 id="args"><code>args</code></h4>
 <p>Since the application is run in an embedded Python runtime, it does not have standard access to <code>sys.argv</code> from which various options parsers could be used. Instead, Wallaroo provides <code>application_setup</code> with <code>args</code>: a list of the string command-line arguments it has received.</p>
-<h3 id="wallarooapplicationbuilder">wallaroo.ApplicationBuilder</h3>
+<h3 id="applicationbuilder">ApplicationBuilder</h3>
 <p>The <code>ApplicationBuilder</code> class in <code>wallaroo</code> is a utility for constructing application topologies. It also provides some additional validation on the input parameters.</p>
 <h4 id="applicationbuilder-methods"><code>ApplicationBuilder</code> Methods</h4>
 <h5 id="initname"><code>__init__(name)</code></h5>
@@ -1236,7 +1236,7 @@ AlphabetCounts(objects):
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Wallaroo Python API","level":"4.3.7","depth":2,"next":{"title":"Debugging Python Wallaroo Applications","level":"4.4","depth":1,"ref":"","articles":[{"title":"Debugging","level":"4.4.1","depth":2,"path":"book/python/debugging.md","ref":"book/python/debugging.md","articles":[]}]},"previous":{"title":"Interworker Serialization and Resilience","level":"4.3.6","depth":2,"path":"book/python/interworker-serialization-and-resilience.md","ref":"book/python/interworker-serialization-and-resilience.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/api.md","mtime":"2018-01-11T23:54:58.647Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-11T23:54:59.796Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Wallaroo Python API","level":"4.3.7","depth":2,"next":{"title":"Debugging Python Wallaroo Applications","level":"4.4","depth":1,"ref":"","articles":[{"title":"Debugging","level":"4.4.1","depth":2,"path":"book/python/debugging.md","ref":"book/python/debugging.md","articles":[]}]},"previous":{"title":"Interworker Serialization and Resilience","level":"4.3.6","depth":2,"path":"book/python/interworker-serialization-and-resilience.md","ref":"book/python/interworker-serialization-and-resilience.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/api.md","mtime":"2018-01-12T00:22:55.047Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-12T00:22:56.079Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
