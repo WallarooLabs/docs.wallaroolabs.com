@@ -748,16 +748,16 @@
 
     
         
-        <li class="header">Appendix</li>
+        <li class="header">Running Wallaroo</li>
         
         
     
-        <li class="chapter " data-level="6.1" data-path="../appendix/clustering.html">
+        <li class="chapter " data-level="6.1" data-path="../running-wallaroo/running-wallaroo.html">
             
-                <a href="../appendix/clustering.html">
+                <a href="../running-wallaroo/running-wallaroo.html">
             
                     
-                    Clustered Wallaroo
+                    Running Wallaroo
             
                 </a>
             
@@ -765,7 +765,40 @@
             
         </li>
     
-        <li class="chapter " data-level="6.2" data-path="../appendix/virtualenv.html">
+        <li class="chapter " data-level="6.2" data-path="../running-wallaroo/autoscale.html">
+            
+                <a href="../running-wallaroo/autoscale.html">
+            
+                    
+                    Autoscale
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../running-wallaroo/wallaroo-command-line-options.html">
+            
+                <a href="../running-wallaroo/wallaroo-command-line-options.html">
+            
+                    
+                    Command line options
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Appendix</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../appendix/virtualenv.html">
             
                 <a href="../appendix/virtualenv.html">
             
@@ -778,20 +811,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.3" data-path="../appendix/wallaroo-command-line-options.html">
-            
-                <a href="../appendix/wallaroo-command-line-options.html">
-            
-                    
-                    Wallaroo Command-Line Options
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="6.4" data-path="../appendix/tcp-decoders-and-encoders.html">
+        <li class="chapter " data-level="7.2" data-path="../appendix/tcp-decoders-and-encoders.html">
             
                 <a href="../appendix/tcp-decoders-and-encoders.html">
             
@@ -804,7 +824,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.5" data-path="../wallaroo-tools/giles-sender.html">
+        <li class="chapter " data-level="7.3" data-path="../wallaroo-tools/giles-sender.html">
             
                 <a href="../wallaroo-tools/giles-sender.html">
             
@@ -817,7 +837,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.6" data-path="../wallaroo-tools/giles-receiver.html">
+        <li class="chapter " data-level="7.4" data-path="../wallaroo-tools/giles-receiver.html">
             
                 <a href="../wallaroo-tools/giles-receiver.html">
             
@@ -830,7 +850,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.7" data-path="../metrics/metrics-ui.html">
+        <li class="chapter " data-level="7.5" data-path="../metrics/metrics-ui.html">
             
                 <a href="../metrics/metrics-ui.html">
             
@@ -843,7 +863,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.8" data-path="../appendix/decoding-giles-receiver-output.html">
+        <li class="chapter " data-level="7.6" data-path="../appendix/decoding-giles-receiver-output.html">
             
                 <a href="../appendix/decoding-giles-receiver-output.html">
             
@@ -856,7 +876,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.9" data-path="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
+        <li class="chapter " data-level="7.7" data-path="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
             
                 <a href="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
             
@@ -869,7 +889,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.10" data-path="../appendix/wallaroo-in-docker-tips.html">
+        <li class="chapter " data-level="7.8" data-path="../appendix/wallaroo-in-docker-tips.html">
             
                 <a href="../appendix/wallaroo-in-docker-tips.html">
             
@@ -889,7 +909,7 @@
         
         
     
-        <li class="chapter " data-level="7.1" data-path="../legal/terms.html">
+        <li class="chapter " data-level="8.1" data-path="../legal/terms.html">
             
                 <a href="../legal/terms.html">
             
@@ -950,211 +970,192 @@
                                 <h1 id="wallaroo-python-api-classes">Wallaroo Python API Classes</h1>
 <p>The Wallaroo Python API allows developers to create Wallaroo applications in Python, which can then be run by Machida.</p>
 <h2 id="overview">Overview</h2>
-<p>In order to create a Wallaroo application in Python, developers need to create classes that provide the required interfaces for each step in their pipline, and then connect them together in a topology structure that is returned by the entry-point function <code>application_setup</code>.</p>
+<p>In order to create a Wallaroo application in Python, developers need to create functions and classes that provide the required interfaces for each step in their pipeline, and then connect them together in a topology structure that is returned by the entry-point function <code>application_setup</code>.</p>
 <p>The recommended way to create your topology structure is by using the <a href="#wallarooapplicationbuilder">ApplicationBuilder</a> in the <code>wallaroo</code> module.</p>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
-<li><a href="#application-setup">Application setup</a></li>
-<li><a href="#wallarooapplicationbuilder">ApplicationBuilder</a></li>
+<li><a href="#application-setup">Application Setup</a></li>
+<li><a href="#applicationbuilder">ApplicationBuilder</a></li>
 <li><a href="#computation">Computation</a></li>
 <li><a href="#data">Data</a></li>
 <li><a href="#key">Key</a></li>
 <li><a href="#partitionfunction">PartitionFunction</a></li>
-<li><a href="#tcpsinkencoder">TCPSinkEncoder</a></li>
-<li><a href="#tcpsourcedecoder">TCPSourceDecoder</a></li>
-<li><a href="#kafkasinkencoder">KafkaSinkEncoder</a></li>
-<li><a href="#kafkasourcedecoder">kafkaSourceDecoder</a></li>
+<li><a href="#tcp-sink-encoder">TCPSinkEncoder</a></li>
+<li><a href="#tcp-source-decoder">TCPSourceDecoder</a></li>
+<li><a href="#kafka-sink-encoder">KafkaSinkEncoder</a></li>
+<li><a href="#kafka-source-decoder">KafkaSourceDecoder</a></li>
 <li><a href="#state">State</a></li>
-<li><a href="#statebuilder">StateBuilder</a></li>
 <li><a href="#statecomputation">StateComputation</a></li>
 <li><a href="#tcpsourceconfig">TCPSourceConfig</a></li>
 <li><a href="#tcpsinkconfig">TCPSinkConfig</a></li>
+<li><a href="#inter-worker-serialization">Inter-worker serialization</a></li>
 </ul>
 <h3 id="application-setup">Application Setup</h3>
-<p>After Machida has loaded a Wallaroo Python application module, it executes its entry point function: <code>application_setup(args)</code>, which returns an application topology structure that tells Wallaroo how to connect the classes, functions, and objects behind the scenes. Therefore, any Wallaroo Python application must provide this function.</p>
-<p>The <code>wallaroo</code> module provides an <a href="#wallarooapplicationbuilder">ApplicationBuilder</a> that facilitates the creation of this data structure. When <code>ApplicationBuilder</code> is used, a topology can be built using its methods, and then its structure can be return by calling <code>ApplicationBuilder.build()</code>.</p>
-<p>For a simple application with a <code>Decoder</code>, <code>Computation</code>, and <code>Encoder</code>, this function may look like</p>
+<p>After Machida has loaded a Wallaroo Python application module, it executes its entry point function, <code>application_setup(args)</code>, which returns an application topology structure that tells Wallaroo how to connect the classes, functions, and objects behind the scenes. Therefore, any Wallaroo Python application must provide this function.</p>
+<p>The <code>wallaroo</code> module provides an <a href="#wallarooapplicationbuilder">ApplicationBuilder</a> that facilitates the creation of this data structure. When <code>ApplicationBuilder</code> is used, a topology can be built using its methods, and then its structure can be returned by calling <code>ApplicationBuilder.build()</code>.</p>
+<p>For a simple application with a decoder, computation, and encoder, this function may look like</p>
 <pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">application_setup</span><span class="hljs-params">(args)</span>:</span>
     in_host, in_port = wallaroo.tcp_parse_input_addrs(args)[<span class="hljs-number">0</span>]
     out_host, out_port = wallaroo.tcp_parse_output_addrs(args)[<span class="hljs-number">0</span>]
 
     ab = wallaroo.ApplicationBuilder(<span class="hljs-string">&quot;My Application&quot;</span>)
     ab.new_pipeline(<span class="hljs-string">&quot;pipeline 1&quot;</span>,
-                    wallaroo.TCPSourceConfig(in_host, in_port, Decoder()))
-    ab.to(Computation)
-    ab.to_sink(wallaroo.TCPSinkConfig(out_host, out_port, Encoder()))
+                    wallaroo.TCPSourceConfig(in_host, in_port, decoder))
+    ab.to(computation)
+    ab.to_sink(wallaroo.TCPSinkConfig(out_host, out_port, encoder))
     ab.done()
     <span class="hljs-keyword">return</span> ab.build()
 </code></pre>
 <h4 id="args"><code>args</code></h4>
 <p>Since the application is run in an embedded Python runtime, it does not have standard access to <code>sys.argv</code> from which various options parsers could be used. Instead, Wallaroo provides <code>application_setup</code> with <code>args</code>: a list of the string command-line arguments it has received.</p>
-<h3 id="wallarooapplicationbuilder">wallaroo.ApplicationBuilder</h3>
+<h3 id="applicationbuilder">ApplicationBuilder</h3>
 <p>The <code>ApplicationBuilder</code> class in <code>wallaroo</code> is a utility for constructing application topologies. It also provides some additional validation on the input parameters.</p>
 <h4 id="applicationbuilder-methods"><code>ApplicationBuilder</code> Methods</h4>
 <h5 id="initname"><code>__init__(name)</code></h5>
 <p>Create a new application with the name <code>name</code>.</p>
 <h5 id="newpipelinename-sourceconfig"><code>new_pipeline(name, source_config)</code></h5>
-<p>Create a new pipline with the name <code>name</code> and a source config object.</p>
+<p>Create a new pipeline with the name <code>name</code> and a source config object.</p>
 <p>If you&apos;re adding more than one pipeline, make sure to call <code>done()</code> before creating another pipeline.</p>
 <h5 id="done"><code>done()</code></h5>
 <p>Close the current pipeline object.</p>
 <p>This is necessary if you intend to add another pipeline.</p>
-<h5 id="tocomputationcls"><code>to(computation_cls)</code></h5>
-<p>Add a stateless computation <em>class</em> to the current pipeline. Only a single instance of the computation will be created.</p>
-<p>Note that this method takes a <em>class</em>, rather than an <em>instance</em> as its argument. <code>computation_cls</code> must be a <a href="#computation">Computation</a>.</p>
-<h5 id="toparallelcomputationcls"><code>to_parallel(computation_cls)</code></h5>
-<p>Add a stateless computation <em>class</em> to the current pipeline. Creates one copy of the computation per worker in the cluster allowing you to parallelize stateless work.</p>
-<p>Note that this method takes a <em>class</em>, rather than an <em>instance</em> as its argument. <code>computation_cls</code> must be a <a href="#computation">Computation</a>.</p>
-<h5 id="tostatefulcomputation-statebuilder-statename"><code>to_stateful(computation, state_builder, state_name)</code></h5>
-<p>Add a StateComputation <em>instance</em>, along with a <a href="#statebuilder">StateBuilder</a> <em>instance</em> and <code>state_name</code> to the current pipeline.</p>
+<h5 id="tocomputationf"><code>to(computation_f)</code></h5>
+<p>Add a stateless computation <em>function</em> to the current pipeline.</p>
+<p>Note that this method takes a <em>function</em> decorated by <code>@computation</code>. See <a href="#computation">Computation</a>.</p>
+<h5 id="toparallelcomputationf"><code>to_parallel(computation_f)</code></h5>
+<p>Add a stateless computation <em>function</em> to the current pipeline.
+Creates one copy of the computation per worker in the cluster allowing you to parallelize stateless work.</p>
+<p>Note that this method takes a <em>function</em>, decorated by <code>@computation</code>. See <a href="#computation">Computation</a>.</p>
+<h5 id="tostatefulcomputation-stateclass-statename"><code>to_stateful(computation, state_class, state_name)</code></h5>
+<p>Add a state computation <em>function</em>, along with a <a href="#state">State</a> <em>class</em> and <code>state_name</code> to the current pipeline.</p>
 <p><code>computation</code> must be a <a href="#statecomputation">StateComputation</a>.</p>
-<p><code>state_builder</code> must be a <a href="#statebuilder">StateBuilder</a>.</p>
-<p><code>state_name</code> must be a str. <code>state_name</code> is the name of the state object that we will run computations against. You can share the object across pipelines by using the same name. Using different names for different objects, keeps them separate and in this way, acts as a sort of namespace.</p>
-<h5 id="tostatepartitioncomputation-statebuilder-statepartitionname-partitionfunction-partitionkeys"><code>to_state_partition(computation, state_builder, state_partition_name, partition_function, partition_keys)</code></h5>
-<p>Add a partitioned StateComputation to the current pipeline.</p>
+<p><code>state_class</code> must be a <a href="#state">State</a>.</p>
+<p><code>state_name</code> must be a str. <code>state_name</code> is the name of the state object that we will run computations against. You can share the object across pipelines by using the same name. Using different names for different objects, keeps them separate and, in this way, acts as a sort of namespace.</p>
+<h5 id="tostatepartitioncomputation-state-statepartitionname-partitionfunction-partitionkeys"><code>to_state_partition(computation, state, state_partition_name, partition_function, partition_keys)</code></h5>
+<p>Add a partitioned state computation to the current pipeline.</p>
 <p><code>computation</code> must be a <a href="#statecomputation">StateComputation</a>.</p>
-<p><code>state_builder</code> must be <a href="#statebuilder">StateBuilder</a>.</p>
-<p><code>state_partition_name</code> must be a str. <code>state_partition_name</code> is the name of the collection of state object that we will run computations against. You can share state partitions across pipelines by using the same name. Using different names for different partitions, keeps them separate and in this way, acts as a sort of namespace.</p>
+<p><code>state</code> must be <a href="#state">State</a>.</p>
+<p><code>state_partition_name</code> must be a str. <code>state_partition_name</code> is the name of the collection of state object that we will run computations against. You can share state partitions across pipelines by using the same name. Using different names for different partitions, keeps them separate and, in this way, acts as a sort of namespace.</p>
 <p><code>partition_function</code> must be a <a href="#partitionfunction">PartitionFunction</a>.</p>
 <p><code>partition_keys</code> must be a list of objects where all of the objects can be hashed with the <code>hash</code> function and be checked for equality with other objects.</p>
 <h5 id="tostatepartitionu64computation-statebuilder-statepartitionname-partitionfunction-partitionkeys"><code>to_state_partition_u64(computation, state_builder, state_partition_name, partition_function, partition_keys)</code></h5>
 <p>Add a partitioned stateful computation to the current pipeline.</p>
 <p><code>computation</code> must be a <a href="#statecomputation">StateComputation</a>.</p>
-<p><code>state_builder</code> must be <a href="#statebuilder">StateBuilder</a>.</p>
-<p><code>state_partition_name</code> must be a str. <code>state_partition_name</code> is the name of the collection of state object that we will run computations against. You can share state partitions across pipelines by using the same name. Using different names for different partitions, keeps them separate and in this way, acts as a sort of namespace.</p>
+<p><code>state</code> must be <a href="#state">State</a>.</p>
+<p><code>state_partition_name</code> must be a str. <code>state_partition_name</code> is the name of the collection of state object that we will run computations against. You can share state partitions across pipelines by using the same name. Using different names for different partitions, keeps them separate and, in this way, acts as a sort of namespace.</p>
 <p><code>partition_function</code> must be a <a href="#partitionfunction">PartitionFunction</a>.</p>
 <p><code>partition_keys</code> must be a list of non-negative <code>int</code>.</p>
 <h5 id="tosinksinkconfig"><code>to_sink(sink_config)</code></h5>
 <p>Add a sink to the end of a pipeline. <code>sink_config</code> must be an instance of a sink configuration.</p>
 <h5 id="build"><code>build()</code></h5>
-<p>Return the complete list of topology tuples. This is the topology structure Wallaroo requries in order to construct the topology connectinng all of the application components.</p>
+<p>Return the complete list of topology tuples. This is the topology structure Wallaroo requires in order to construct the topology connecting all of the application components.</p>
 <h3 id="computation">Computation</h3>
-<p>A stateless computation is a simple function that takes input, returns an output, and does not modify any variables outside of its scope. e.g. a stateless computation has <em>no side effects</em>.</p>
-<p>A <code>Computation</code> class must provide the <code>name</code> and <code>compute</code> methods.</p>
-<h5 id="name"><code>name()</code></h5>
-<p>Return the name of the computation as a string.</p>
+<p>A stateless computation is a simple function that takes input, returns an output, and does not modify any variables outside of its scope. A stateless computation has <em>no side effects</em>.</p>
+<p>A <code>computation</code> class must be wrapped by the <code>@computation(name)</code> decorator, which takes the name of the computation as an argument.</p>
 <h5 id="computedata"><code>compute(data)</code></h5>
 <p>Use <code>data</code> to perform a computation and return a new output. <code>data</code> is the python object the previous step in the pipeline returned.</p>
 <h5 id="computemultidata"><code>compute_multi(data)</code></h5>
-<p>Use <code>data</code> to perform a computation and return a series of new outputs. <code>data</code> is the python object the previous step in the pipeline returned. Output is a list of items. Used to turn 1 incoming object into many outgoing objects. Each item in the list will arrive individually at the next step; i.e. not as a list.</p>
+<p>Use <code>data</code> to perform a computation and return a series of new outputs. <code>data</code> is the python object the previous step in the pipeline returned. Output is a list of items. Used to turn 1 incoming object into many outgoing objects. Each item in the list will arrive individually at the next step, i.e. not as a list.</p>
 <h4 id="example-computations">Example Computations</h4>
 <p>A Computation that doubles an integer, or returns 0 if its input was not an int:</p>
-<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Computation</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;double&quot;</span>
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compute</span><span class="hljs-params">(data)</span>:</span>
-        <span class="hljs-keyword">if</span> isinstance(data, int):
-            <span class="hljs-keyword">return</span> data*<span class="hljs-number">2</span>
-        <span class="hljs-keyword">else</span>
-            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>
+<pre><code class="lang-python"><span class="hljs-meta">@computation(&quot;double&quot;)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compute</span><span class="hljs-params">(data)</span>:</span>
+    <span class="hljs-keyword">if</span> isinstance(data, int):
+        <span class="hljs-keyword">return</span> data*<span class="hljs-number">2</span>
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>
 </code></pre>
-<p>A Computation that returns both its input integer and double that value. If the incoming data isn&apos;t an integer, we filter aka drop the message by returning <code>None</code>.</p>
-<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Computation</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;double&quot;</span>
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compute_multi</span><span class="hljs-params">(data)</span>:</span>
-        <span class="hljs-keyword">if</span> isinstance(data, int):
-            <span class="hljs-keyword">return</span> [data, data*<span class="hljs-number">2</span>]
-        <span class="hljs-keyword">else</span>
-            <span class="hljs-keyword">return</span> <span class="hljs-keyword">None</span>
+<p>A Computation that returns both its input integer and double that value. If the incoming data isn&apos;t an integer, we filter (drop) the message by returning <code>None</code>.</p>
+<pre><code class="lang-python"><span class="hljs-meta">@computation_multi(&quot;doubledouble&quot;):</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compute_multi</span><span class="hljs-params">(data)</span>:</span>
+    <span class="hljs-keyword">if</span> isinstance(data, int):
+        <span class="hljs-keyword">return</span> [data, data*<span class="hljs-number">2</span>]
+    <span class="hljs-keyword">else</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">None</span>
 </code></pre>
 <h3 id="data">Data</h3>
-<p>Data is the object that is passed to a <a href="#computation">Computation</a> and <a href="#statecomputation">StateComputation</a>&apos;s <code>compute</code> method. It is a plain Python object and can be as simple or as complex as you would like it to.</p>
-<p>It is important to ensure that data returned is always immutable or unique to avoid any unexpected behvaiour due to the asynchronous execution nature of Wallaroo.</p>
+<p>Data is the object that is passed to a <a href="#computation">Computation</a>&apos;s and a <a href="#statecomputation">StateComputation</a>&apos;s method. It is a plain Python object and can be as simple or as complex as you would like it to be.</p>
+<p>It is important to ensure that data returned is always immutable or unique to avoid any unexpected behavior due to the asynchronous execution nature of Wallaroo.</p>
 <h3 id="key">Key</h3>
 <p>Partition Keys must correctly support the <code>__eq__</code> (<code>==</code>) and <code>__hash__</code> operators. Some built-in types, such as strings and numbers, already support these out of the box. If you are defining your own types, however, you must also implement the <code>__eq__</code> and <code>__hash__</code> methods.</p>
 <h3 id="partitionfunction">PartitionFunction</h3>
-<p>A PartitionFunction class must provide the <code>partition</code> method.</p>
-<h5 id="partitiondata"><code>partition(data)</code></h5>
-<p>Return the appropriate <a href="#key">Key</a> for <code>data</code>.</p>
+<p>A partition function class must be wrapped in the <code>@partition_function</code> decorator and return the appropriate <a href="#key">Key</a> for <code>data</code>.</p>
 <h4 id="example-partitionfunction">Example PartitionFunction</h4>
-<p>An example that partitions words for a word-count based on their first character, and buckets all other cases to the empty string key</p>
-<pre><code class="lang-python">PartitionFunction(object):
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">partition</span><span class="hljs-params">(self, data)</span>:</span>
-        <span class="hljs-keyword">try</span>:
-            <span class="hljs-keyword">return</span> data[<span class="hljs-number">0</span>].lower() <span class="hljs-keyword">if</span> data[<span class="hljs-number">0</span>].isalpha() <span class="hljs-keyword">else</span> <span class="hljs-string">&apos;&apos;</span>
-        <span class="hljs-keyword">except</span>:
-            <span class="hljs-keyword">return</span> <span class="hljs-string">&apos;&apos;</span>
+<p>An example that partitions words for a word count based on their first character, and buckets all other cases to the empty string key:</p>
+<pre><code class="lang-python"><span class="hljs-meta">@partition_function</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">partition</span><span class="hljs-params">(self, data)</span>:</span>
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-keyword">return</span> data[<span class="hljs-number">0</span>].lower() <span class="hljs-keyword">if</span> data[<span class="hljs-number">0</span>].isalpha() <span class="hljs-keyword">else</span> <span class="hljs-string">&apos;&apos;</span>
+    <span class="hljs-keyword">except</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">&apos;&apos;</span>
 </code></pre>
-<h3 id="tcpsinkencoder">TCPSinkEncoder</h3>
-<p>The <code>TCPSinkEncoder</code> is responsible for taking the output of the last computation in a pipeline and converting it into a <code>bytes</code> for Wallaroo to send out over a TCP connection.</p>
-<p>To do this, a <code>TCPSinkEncoder</code> class must provide the <code>encode(data)</code> method.</p>
+<h3 id="tcp-sink-encoder">TCP Sink Encoder</h3>
+<p>The TCP Sink Encoder is responsible for taking the output of the last computation in a pipeline and converting it into a <code>bytes</code> for Wallaroo to send out over a TCP connection.</p>
+<p>Your function must be decorated with <code>@encoder</code>.</p>
 <h5 id="encodedata"><code>encode(data)</code></h5>
 <p>Return a <code>bytes</code> that can be sent over the network. It is up to the developer to determine how to translate <code>data</code> into a <code>bytes</code>, and what information to keep or discard.</p>
 <h4 id="example-tcpsinkencoder">Example TCPSinkEncoder</h4>
-<p>A complete <code>TCPSinkEncoder</code> example that takes a list of integers and encodes it to a sequence of big-endian Longs preceded by a big-endian short representing the number of integers in the list:</p>
-<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Encoder</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">encode</span><span class="hljs-params">(self, data)</span>:</span>
-        fmt = <span class="hljs-string">&apos;&gt;H{}&apos;</span>.format(<span class="hljs-string">&apos;L&apos;</span>*len(data))
-        <span class="hljs-keyword">return</span> struct.pack(fmt, len(data), *data)
+<p>A complete <code>TCPSinkEncoder</code> example that takes a list of integers and encodes it to a sequence of big-endian longs preceded by a big-endian short representing the number of integers in the list:</p>
+<pre><code class="lang-python"><span class="hljs-meta">@encoder</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">encode</span><span class="hljs-params">(self, data)</span>:</span>
+    fmt = <span class="hljs-string">&apos;&gt;H{}&apos;</span>.format(<span class="hljs-string">&apos;L&apos;</span>*len(data))
+    <span class="hljs-keyword">return</span> struct.pack(fmt, len(data), *data)
 </code></pre>
-<h3 id="tcpsourcedecoder">TCPSourceDecoder</h3>
-<p>The <code>TCPSourceDecoder</code> is responsible for two tasks:</p>
+<h3 id="tcp-source-decoder">TCP Source Decoder</h3>
+<p>The TCP Source Decoder is responsible for two tasks:</p>
 <ol>
 <li>Telling Wallaroo <em>how many bytes to read</em> from its input connection.</li>
 <li>Converting those bytes into an object that the rest of the application can process.</li>
 </ol>
-<p>To do this, a <code>TCPSourceDecoder</code> class must implement the following three methods:</p>
-<h5 id="headerlength"><code>header_length()</code></h5>
-<p>Return an integer representing the number of bytes from the beginning of an incoming message to return to the function that reads the payload length.</p>
-<h5 id="payloadlengthbs"><code>payload_length(bs)</code></h5>
-<p>Return an integer representing the number of bytes after the payload length bytes to return to the function that decodes the payload.</p>
-<p><code>bs</code> is a <code>bytes</code> of length <code>header_length()</code>, and it&apos;s up to the user to provide a method for converting that into an integer value.</p>
-<p>A common encoding used in Wallaroo is a big-endien 32-bit unsigned integer, which can be decoded with the <a href="https://docs.python.org/2/library/struct.html" target="_blank">struct module&apos;s</a> help:</p>
+<p>Your function must be decorated with <code>@decoder(header_length, fmt)</code>.</p>
+<h5 id="headerlength"><code>header_length</code></h5>
+<p>An integer representing the number of bytes from the beginning of an incoming message to return to the function that reads the payload length.</p>
+<h5 id="fmt"><code>fmt</code></h5>
+<p>A format string that represents how the message header is encoded. A common encoding used in Wallaroo is a big-endian 32-bit unsigned integer, which can be decoded with the <a href="https://docs.python.org/2/library/struct.html" target="_blank">struct module&apos;s</a> help:</p>
 <pre><code class="lang-python">struct.unpack(<span class="hljs-string">&apos;&gt;L&apos;</span>, bs)
 </code></pre>
 <h5 id="decodebs"><code>decode(bs)</code></h5>
 <p>Return a python a python object of the type the next step in the pipeline expects.</p>
 <p><code>bs</code> is a <code>bytes</code> of the length returned by <a href="#payload-length(bs">payload_length</a>), and it is up to the developer to translate that into a python object.</p>
 <h4 id="example-tcpsourcedecoder">Example TCPSourceDecoder</h4>
-<p>A complete TCPSourceDecoder example that decodes messages with a 32-bit unsigned integer <em>payload_length</em> and a character followed by a 32-bt unsigned int in its <em>payload</em>:</p>
-<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Decoder</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">header_length</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-number">4</span>
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">payload_length</span><span class="hljs-params">(self, bs)</span>:</span>
-         <span class="hljs-keyword">return</span> struct.unpack(<span class="hljs-string">&apos;&gt;L&apos;</span>, bs)
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decode</span><span class="hljs-params">(self, bs)</span>:</span>
-        <span class="hljs-keyword">return</span> struct.unpack(<span class="hljs-string">&apos;&gt;1sL&apos;</span>, bs)
+<p>A complete TCPSourceDecoder example that decodes messages with a 32-bit unsigned integer <em>payload_length</em> and a character followed by a 32-bit unsigned int in its <em>payload</em>:</p>
+<pre><code class="lang-python"><span class="hljs-meta">@decoder(header_length=4, length_fmt=&quot;&gt;L&quot;)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decode</span><span class="hljs-params">(self, bs)</span>:</span>
+    <span class="hljs-keyword">return</span> struct.unpack(<span class="hljs-string">&apos;&gt;1sL&apos;</span>, bs)
 </code></pre>
-<h3 id="kafkasinkencoder">KafkaSinkEncoder</h3>
-<p>The <code>KafkaSinkEncoder</code> is responsible for taking the output of the last computation in a pipeline and converting it into a <code>bytes</code> for Wallaroo to send out to a Kafka sink, along with a <code>key</code> or <code>None</code>.</p>
-<p>To do this, a <code>KafkaSinkEncoder</code> class must provide the <code>encode(data)</code> method.</p>
-<h5 id="encodedata"><code>encode(data)</code></h5>
-<p>Return a tuple of <code>(bytes, key)</code> that can be sent over the network. It is up to the developer to determine how to translate <code>data</code> into a <code>bytes</code> and <code>key</code>, and what information to keep or discard.</p>
+<h3 id="kafka-sink-encoder">Kafka Sink Encoder</h3>
+<p>The Kafka Sink Encoder is responsible for taking the output of the last computation in a pipeline and converting it into a <code>bytes</code> for Wallaroo to send out to a Kafka sink, along with a <code>key</code> or <code>None</code>.</p>
+<p>To do this, create an encoder function, in the same way you would for a TCP Sink Encoder, but Return a tuple of <code>(bytes, key)</code> that can be sent over the network. It is up to the developer to determine how to translate <code>data</code> into a <code>bytes</code> and <code>key</code>, and what information to keep or discard.</p>
+<p>Your encoder function must be decorated with <code>@encoder</code>.</p>
 <h4 id="example-kafkasinkencoder">Example KafkaSinkEncoder</h4>
 <p>A complete <code>KafkaSinkEncoder</code> example that takes a word and sends it to the partition corresponding to the first letter of the word:</p>
-<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Encoder</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">encode</span><span class="hljs-params">(self, data)</span>:</span>
-        word = data[:]
-        letter_key = data[<span class="hljs-number">0</span>]
-        <span class="hljs-keyword">return</span> (word, letter_key)
+<pre><code class="lang-python"><span class="hljs-meta">@encoder</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">encode</span><span class="hljs-params">(self, data)</span>:</span>
+    word = data[:]
+    letter_key = data[<span class="hljs-number">0</span>]
+    <span class="hljs-keyword">return</span> (word, letter_key)
 </code></pre>
-<h3 id="kafkasourcedecoder">KafkaSourceDecoder</h3>
-<p>The <code>KafkaSourceDecoder</code> is responsible for converting bytes into an object that the rest of the application can process.</p>
-<p>To do this, a <code>KafkaSourceDecoder</code> class must implement the following method:</p>
+<h3 id="kafka-source-decoder">Kafka Source Decoder</h3>
+<p>The Kafka Source Decoder is responsible for converting bytes into an object that the rest of the application can process. To do this, create a decoder function, in the same way you would for a TCP Source Decoder.</p>
 <h5 id="decodedata"><code>decode(data)</code></h5>
 <p>Return Python object of the type the next step in the pipeline expects.</p>
 <p><code>data</code> is a <code>bytes</code> object representing the incoming Kafka message, and it is up to the developer to translate that into a Python object.</p>
-<h4 id="example-kafkasourcedecoder">Example KafkaSourceDecoder</h4>
-<p>A complete KafkaSourceDecoder example that decodes messages with a 32-bit unsigned int in its <em>payload</em>:</p>
-<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Decoder</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decode</span><span class="hljs-params">(self, data)</span>:</span>
-        <span class="hljs-keyword">if</span> len(data) &lt; <span class="hljs-number">4</span>:
-          <span class="hljs-keyword">return</span> <span class="hljs-number">0.0</span>
-        <span class="hljs-keyword">return</span> struct.unpack(<span class="hljs-string">&apos;&gt;I&apos;</span>, data[:<span class="hljs-number">4</span>])[<span class="hljs-number">0</span>]
+<p>Your decoder function must be decorated with <code>@decoder</code>.</p>
+<h4 id="example-kafka-source-decoder">Example Kafka Source Decoder</h4>
+<p>A complete Kafka Source Decoder example that decodes messages with a 32-bit unsigned int in its <em>payload</em>:</p>
+<pre><code class="lang-python"><span class="hljs-meta">@decoder(header_length=4, length_fmt=&quot;&gt;L&quot;)</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decode</span><span class="hljs-params">(self, bs)</span>:</span>
+    <span class="hljs-keyword">return</span> struct.unpack(<span class="hljs-string">&apos;&gt;1sL&apos;</span>, bs)
 </code></pre>
 <h3 id="state">State</h3>
-<p>State is an object that is passed to the <a href="#statecomputation">StateCompution&apos;s</a> <code>compute</code> method. It is a plain Python object and can be as simple or as complex as you would like it to.</p>
-<p>A common issue that arises with asynchronous execution, is that when references to mutable objects are passed to the next step, if another update to the state precedes the execution of the next step, it will then execute with the latest state (that is, it will execute with the &quot;wrong&quot; state). Therefore, anything returned by a <a href="#computation">Computation</a> or <a href="#statecomputation">StateComputation</a> ought to be either unique, or immutable.</p>
+<p>State is an object that is passed to the <a href="#statecomputation">StateComputation&apos;s</a> <code>compute</code> method. It is a plain Python object and can be as simple or as complex as you would like. The class definition must be wrapped in the <code>@state</code> decorator.</p>
+<p>A common issue that arises with asynchronous execution is that when references to mutable objects are passed to the next step, if another update to the state precedes the execution of the next step, it will then execute with the latest state (that is, it will execute with the &quot;wrong&quot; state). Therefore, anything returned by a <a href="#computation">Computation</a> or <a href="#statecomputation">StateComputation</a> ought to be either unique, or immutable.</p>
 <p>In either case, it is up to the developer to provide a side-effect safe value for the Computation to return!</p>
 <h4 id="example-state">Example State</h4>
-<p>An AlphabetCounts keeps a count for how many times each letter in the English alphabet has been seen</p>
+<p>An <code>AlphabetCounts</code> keeps a count for how many times each letter in the English alphabet has been seen:</p>
 <pre><code class="lang-python"><span class="hljs-keyword">import</span> copy
 
+<span class="hljs-meta">@state</span>
 AlphabetCounts(objects):
     <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, initial_counts)</span>:</span>
         self.data = dict(initial_counts)
@@ -1171,54 +1172,38 @@ AlphabetCounts(objects):
         <span class="hljs-comment"># int is safe to return as is!</span>
         <span class="hljs-keyword">return</span> self.data[c]
 </code></pre>
-<h3 id="statebuilder">StateBuilder</h3>
-<p>A StateBuilder is used by Wallaroo to create an initial state object for a <a href="#statecomputation">StateComputation</a>.</p>
-<h5 id="name"><code>name()</code></h5>
-<p>Return the name of the StateBuilder as a string.</p>
-<h5 id="build"><code>build()</code></h5>
-<p>Return a new <a href="#state">State</a> instance.</p>
-<h4 id="example-statebuilder">Example StateBuilder</h4>
-<p>Return a AlphabetCounts object initialized with a count of zero for each letter in the English alphabet</p>
-<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StateBuilder</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Alphabet Counts State Builder&quot;</span>
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">build</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> AlphabetCounts([(c, <span class="hljs-number">0</span>) <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> string.ascii_lowercase])
-</code></pre>
 <h3 id="statecomputation">StateComputation</h3>
-<p>A StateComputation is similar to a <a href="#computation">Computation</a>, except that its <code>compute</code> method takes an additional argument: <code>state</code>.</p>
+<p>A State Computation is similar to a <a href="#computation">Computation</a>, except that it takes an additional argument: <code>state</code>.</p>
 <p>In order to provide resilience, Wallaroo needs to keep track of state changes, or side effects, and it does so by making <code>state</code> an explicit object that is given as input to any StateComputation step.</p>
-<p>Like Computation, a StateComputation class must provide the <code>name</code> and <code>compute</code> methods.</p>
-<h5 id="name"><code>name()</code></h5>
-<p>Return the name of the computation as a string.</p>
+<p>Similarly to a Computation, a StateComputation class must be wrapped in the <code>@state_computation</code> decorator.</p>
 <h5 id="computedata-state"><code>compute(data, state)</code></h5>
-<p><code>data</code> is anything that was returned by the previous step in the pipeline, and <code>state</code> is provided by the <a href="#statebuilder">StateBuilder</a> that was defined for this step in the pipeline definition.</p>
-<p>Returns a tuple. The first element is a message that we will send on to our next step. It should be a new object. Returning <code>None</code> will stop processing and no messages will be sent to the next step. The second element is a boolean value instructing Wallaroo to save our updated state so that in the event of a crash, we can recover to this point. Return <code>True</code> to save <code>state</code>. Return <code>False</code> to not save <code>state</code>.</p>
+<p><code>data</code> is anything that was returned by the previous step in the pipeline, and <code>state</code> is the <a href="#state">State</a> that was defined for this step in the pipeline definition.</p>
+<p>Returns a tuple. The first element is a message that we will send on to our next step. It should be a new object. Returning <code>None</code> will stop processing that message and no messages will be sent to the next step. The second element is a boolean value instructing Wallaroo to save our updated state so that in the event of a crash, we can recover to this point. Return <code>True</code> to save <code>state</code>. Return <code>False</code> to not save <code>state</code>.</p>
 <p>Why wouldn&apos;t we always return <code>True</code>? There are two answers:</p>
 <ol>
-<li>Your computation might not have updated the state, in which case, saving its state for recovery is wasteful.</li>
-<li>You might only want to save after some changes. Saving your state can be expensive for large objects. There&apos;s a tradeoff that can be made between performance and safety.</li>
+<li>Your computation might not have updated the state, in which case saving its state for recovery is wasteful.</li>
+<li>You might only want to save after some changes. Saving your state can be expensive for large objects. There&apos;s a trade-off that can be made between performance and safety.</li>
 </ol>
 <h5 id="computemultidata-state"><code>compute_multi(data, state)</code></h5>
-<p>Same as <code>compute</code> but the first element of the return tuple is a list of messages to send on to our next step. Allows taking a single input message and creating multiple outputs. Each item in the list will arrive individually at the next step; i.e. not as a list.</p>
+<p>Same as <code>compute</code> but the first element of the return tuple is a list of messages to send on to our next step. Allows taking a single input message and creating multiple outputs. Each item in the list will arrive individually at the next step; i.e. not as a list. Wrap this function in <code>@state_computation_multi</code>.</p>
 <h4 id="example-statecomputation">Example StateComputation</h4>
 <p>An example StateComputation that keeps track of the maximum integer value it has seen so far:</p>
-<pre><code class="lang-python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StateComputation</span><span class="hljs-params">(object)</span>:</span>
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">name</span><span class="hljs-params">(self)</span>:</span>
-        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;max&quot;</span>
-
-    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compute</span><span class="hljs-params">(self, data, state)</span>:</span>
-        <span class="hljs-keyword">try</span>:
-            state.update(data)
-        <span class="hljs-keyword">except</span> TypeError:
-            <span class="hljs-keyword">pass</span>
-        <span class="hljs-keyword">return</span> (state.get_max(), <span class="hljs-keyword">True</span>)
+<pre><code class="lang-python"><span class="hljs-meta">@state_computation(name=&apos;max&apos;):</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compute</span><span class="hljs-params">(self, data, state)</span>:</span>
+    <span class="hljs-keyword">try</span>:
+        state.update(data)
+    <span class="hljs-keyword">except</span> TypeError:
+        <span class="hljs-keyword">pass</span>
+    <span class="hljs-keyword">return</span> (state.get_max(), <span class="hljs-keyword">True</span>)
 </code></pre>
 <h3 id="tcpsourceconfig">TCPSourceConfig</h3>
 <p>A <code>TCPSourceConfig</code> object specifies the host, port, and encoder to use for a TCP source connection when creating an application. The host and port are both represented by strings. This object is provided as an argument to <code>new_pipeline</code>.</p>
+<p>The <code>decoder</code> argument must decorated as described in <a href="#tcp-source-decoder">TCP Source Decoder</a>.</p>
 <h3 id="tcpsinkconfig">TCPSinkConfig</h3>
 <p>A <code>TCPSinkConfig</code> object specifies the host, port, and decoder to use for the TCP sink connection when creating an application. The host and port are both represented by strings. This object is provided as an argument to <code>to_sink</code>.</p>
+<p>The <code>encoder</code> argument must decorated as described in <a href="#tcp-source-encoder">TCP Source Encoder</a>.</p>
+<h3 id="inter-worker-serialization">Inter-worker serialization</h3>
+<p>When Wallaroo runs with multiple workers, a built-in serializations and deserialization functions based on pickle take care of the encoding and decoding objects on the wire. The worker processes send each other these encoded objects. In some cases, you may wish to override this built-in serialization. If you wish to know more, please refer to the <a href="interworker-serialization-and-resilience.html">Inter-worker serialization and resilience</a> section of the manual.</p>
 
                                 
                                 </section>
@@ -1258,7 +1243,7 @@ AlphabetCounts(objects):
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Wallaroo Python API","level":"4.3.7","depth":2,"next":{"title":"Debugging Python Wallaroo Applications","level":"4.4","depth":1,"ref":"","articles":[{"title":"Debugging","level":"4.4.1","depth":2,"path":"book/python/debugging.md","ref":"book/python/debugging.md","articles":[]}]},"previous":{"title":"Interworker Serialization and Resilience","level":"4.3.6","depth":2,"path":"book/python/interworker-serialization-and-resilience.md","ref":"book/python/interworker-serialization-and-resilience.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"wallaroo_version":"0.3.3"},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/api.md","mtime":"2018-01-09T20:21:12.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-09T20:21:41.223Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Wallaroo Python API","level":"4.3.7","depth":2,"next":{"title":"Debugging Python Wallaroo Applications","level":"4.4","depth":1,"ref":"","articles":[{"title":"Debugging","level":"4.4.1","depth":2,"path":"book/python/debugging.md","ref":"book/python/debugging.md","articles":[]}]},"previous":{"title":"Interworker Serialization and Resilience","level":"4.3.6","depth":2,"path":"book/python/interworker-serialization-and-resilience.md","ref":"book/python/interworker-serialization-and-resilience.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/api.md","mtime":"2018-01-13T00:16:00.038Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-13T00:16:01.217Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

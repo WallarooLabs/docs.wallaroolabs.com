@@ -750,16 +750,16 @@
 
     
         
-        <li class="header">Appendix</li>
+        <li class="header">Running Wallaroo</li>
         
         
     
-        <li class="chapter " data-level="6.1" data-path="../appendix/clustering.html">
+        <li class="chapter " data-level="6.1" data-path="../running-wallaroo/running-wallaroo.html">
             
-                <a href="../appendix/clustering.html">
+                <a href="../running-wallaroo/running-wallaroo.html">
             
                     
-                    Clustered Wallaroo
+                    Running Wallaroo
             
                 </a>
             
@@ -767,7 +767,40 @@
             
         </li>
     
-        <li class="chapter " data-level="6.2" data-path="../appendix/virtualenv.html">
+        <li class="chapter " data-level="6.2" data-path="../running-wallaroo/autoscale.html">
+            
+                <a href="../running-wallaroo/autoscale.html">
+            
+                    
+                    Autoscale
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.3" data-path="../running-wallaroo/wallaroo-command-line-options.html">
+            
+                <a href="../running-wallaroo/wallaroo-command-line-options.html">
+            
+                    
+                    Command line options
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">Appendix</li>
+        
+        
+    
+        <li class="chapter " data-level="7.1" data-path="../appendix/virtualenv.html">
             
                 <a href="../appendix/virtualenv.html">
             
@@ -780,20 +813,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.3" data-path="../appendix/wallaroo-command-line-options.html">
-            
-                <a href="../appendix/wallaroo-command-line-options.html">
-            
-                    
-                    Wallaroo Command-Line Options
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="6.4" data-path="../appendix/tcp-decoders-and-encoders.html">
+        <li class="chapter " data-level="7.2" data-path="../appendix/tcp-decoders-and-encoders.html">
             
                 <a href="../appendix/tcp-decoders-and-encoders.html">
             
@@ -806,7 +826,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.5" data-path="../wallaroo-tools/giles-sender.html">
+        <li class="chapter " data-level="7.3" data-path="../wallaroo-tools/giles-sender.html">
             
                 <a href="../wallaroo-tools/giles-sender.html">
             
@@ -819,7 +839,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.6" data-path="../wallaroo-tools/giles-receiver.html">
+        <li class="chapter " data-level="7.4" data-path="../wallaroo-tools/giles-receiver.html">
             
                 <a href="../wallaroo-tools/giles-receiver.html">
             
@@ -832,7 +852,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.7" data-path="../metrics/metrics-ui.html">
+        <li class="chapter " data-level="7.5" data-path="../metrics/metrics-ui.html">
             
                 <a href="../metrics/metrics-ui.html">
             
@@ -845,7 +865,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.8" data-path="../appendix/decoding-giles-receiver-output.html">
+        <li class="chapter " data-level="7.6" data-path="../appendix/decoding-giles-receiver-output.html">
             
                 <a href="../appendix/decoding-giles-receiver-output.html">
             
@@ -858,7 +878,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.9" data-path="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
+        <li class="chapter " data-level="7.7" data-path="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
             
                 <a href="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
             
@@ -871,7 +891,7 @@
             
         </li>
     
-        <li class="chapter " data-level="6.10" data-path="../appendix/wallaroo-in-docker-tips.html">
+        <li class="chapter " data-level="7.8" data-path="../appendix/wallaroo-in-docker-tips.html">
             
                 <a href="../appendix/wallaroo-in-docker-tips.html">
             
@@ -891,7 +911,7 @@
         
         
     
-        <li class="chapter " data-level="7.1" data-path="../legal/terms.html">
+        <li class="chapter " data-level="8.1" data-path="../legal/terms.html">
             
                 <a href="../legal/terms.html">
             
@@ -951,7 +971,7 @@
                                 
                                 <h1 id="python-api-introduction">Python API Introduction</h1>
 <p>The Wallaroo Python API can be used to write Wallaroo applications entirely in Python without needing Java or a JVM. This lets developers quickly get started with Wallaroo by leveraging their existing Python knowledge. It currently supports Python 2.7. Support for Python 3.X is in the works and we encourage you to contact us if that is a requirement.</p>
-<p>In order to write a Wallaroo application in Python, the developer creates classes that provide the methods expected by the API (see <a href="api.html">Wallaroo Python API Classes</a> for more detail on this) and writes an entry point function that uses the Wallaroo <code>ApplicationBuilder</code> to define the layout of their application.</p>
+<p>In order to write a Wallaroo application in Python, the developer creates the functions (decorated with <a href="api.html">the Wallaroo API</a>) to be run at each step of their application, along with an entry point function that uses the Wallaroo <code>ApplicationBuilder</code> that defines the layout of their application.</p>
 <p>For a basic overview of what Wallaroo does, read <a href="../what-is-wallaroo.html">What is Wallaroo</a> and <a href="../core-concepts/intro.html">Core Concepts</a>. These documents will help you understand the system at a high level so that you can see how the pieces of the Python API fit into it.</p>
 <h2 id="machida">Machida</h2>
 <p>Machida is the program that runs Wallaroo applications written using the Wallaroo Python API. It takes a module name as its <code>--application-module</code> argument and requires a method called <code>application_setup(...)</code> to be defined in that module. This method returns the structure describing the Wallaroo application in terms of Python objects, which is then used to coordinate calling those objects&#x2019; methods with the appropriate arguments as the application is running.</p>
@@ -1004,7 +1024,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Wallaroo with Python Introduction","level":"4.1","depth":1,"next":{"title":"Setting up Your Environment","level":"4.2","depth":1,"path":"book/getting-started/setting-up-your-environment.md","ref":"book/getting-started/setting-up-your-environment.md","articles":[{"title":"Choosing an Installation Option","level":"4.2.1","depth":2,"path":"book/getting-started/choosing-an-installation-option.md","ref":"book/getting-started/choosing-an-installation-option.md","articles":[]},{"title":"Installing with Docker","level":"4.2.2","depth":2,"path":"book/getting-started/installing-with-docker.md","ref":"book/getting-started/installing-with-docker.md","articles":[{"title":"Setting Up Your Environment","level":"4.2.2.1","depth":3,"path":"book/getting-started/docker-setup.md","ref":"book/getting-started/docker-setup.md","articles":[]},{"title":"Run a Wallaroo Application in Docker","level":"4.2.2.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-docker.md","ref":"book/getting-started/run-a-wallaroo-application-docker.md","articles":[]}]},{"title":"Installing From Source","level":"4.2.3","depth":2,"path":"book/getting-started/installing-from-source.md","ref":"book/getting-started/installing-from-source.md","articles":[{"title":"Setting up Your Environment","level":"4.2.3.1","depth":3,"path":"book/getting-started/setup.md","ref":"book/getting-started/setup.md","articles":[{"title":"MacOS Installation","level":"4.2.3.1.1","depth":4,"path":"book/getting-started/macos-setup.md","ref":"book/getting-started/macos-setup.md","articles":[]},{"title":"Ubuntu Installation","level":"4.2.3.1.2","depth":4,"path":"book/getting-started/linux-setup.md","ref":"book/getting-started/linux-setup.md","articles":[]}]},{"title":"Run a Wallaroo Application","level":"4.2.3.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application.md","ref":"book/getting-started/run-a-wallaroo-application.md","articles":[]}]},{"title":"Conclusion","level":"4.2.4","depth":2,"path":"book/getting-started/conclusion.md","ref":"book/getting-started/conclusion.md","articles":[]}]},"previous":{"title":"Wallaroo Languages Supported","level":"3.1","depth":1,"path":"book/language_support.md","ref":"book/language_support.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{"wallaroo_version":"0.3.3"},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/intro.md","mtime":"2018-01-09T20:21:03.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-09T20:21:41.223Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Wallaroo with Python Introduction","level":"4.1","depth":1,"next":{"title":"Setting up Your Environment","level":"4.2","depth":1,"path":"book/getting-started/setting-up-your-environment.md","ref":"book/getting-started/setting-up-your-environment.md","articles":[{"title":"Choosing an Installation Option","level":"4.2.1","depth":2,"path":"book/getting-started/choosing-an-installation-option.md","ref":"book/getting-started/choosing-an-installation-option.md","articles":[]},{"title":"Installing with Docker","level":"4.2.2","depth":2,"path":"book/getting-started/installing-with-docker.md","ref":"book/getting-started/installing-with-docker.md","articles":[{"title":"Setting Up Your Environment","level":"4.2.2.1","depth":3,"path":"book/getting-started/docker-setup.md","ref":"book/getting-started/docker-setup.md","articles":[]},{"title":"Run a Wallaroo Application in Docker","level":"4.2.2.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-docker.md","ref":"book/getting-started/run-a-wallaroo-application-docker.md","articles":[]}]},{"title":"Installing From Source","level":"4.2.3","depth":2,"path":"book/getting-started/installing-from-source.md","ref":"book/getting-started/installing-from-source.md","articles":[{"title":"Setting up Your Environment","level":"4.2.3.1","depth":3,"path":"book/getting-started/setup.md","ref":"book/getting-started/setup.md","articles":[{"title":"MacOS Installation","level":"4.2.3.1.1","depth":4,"path":"book/getting-started/macos-setup.md","ref":"book/getting-started/macos-setup.md","articles":[]},{"title":"Ubuntu Installation","level":"4.2.3.1.2","depth":4,"path":"book/getting-started/linux-setup.md","ref":"book/getting-started/linux-setup.md","articles":[]}]},{"title":"Run a Wallaroo Application","level":"4.2.3.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application.md","ref":"book/getting-started/run-a-wallaroo-application.md","articles":[]}]},{"title":"Conclusion","level":"4.2.4","depth":2,"path":"book/getting-started/conclusion.md","ref":"book/getting-started/conclusion.md","articles":[]}]},"previous":{"title":"Wallaroo Languages Supported","level":"3.1","depth":1,"path":"book/language_support.md","ref":"book/language_support.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/intro.md","mtime":"2018-01-13T00:16:00.034Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-13T00:16:01.217Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
