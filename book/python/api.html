@@ -988,6 +988,7 @@
 <li><a href="#statecomputation">StateComputation</a></li>
 <li><a href="#tcpsourceconfig">TCPSourceConfig</a></li>
 <li><a href="#tcpsinkconfig">TCPSinkConfig</a></li>
+<li><a href="#inter-worker-serialization">Inter-worker serialization</a></li>
 </ul>
 <h3 id="application-setup">Application Setup</h3>
 <p>After Machida has loaded a Wallaroo Python application module, it executes its entry point function, <code>application_setup(args)</code>, which returns an application topology structure that tells Wallaroo how to connect the classes, functions, and objects behind the scenes. Therefore, any Wallaroo Python application must provide this function.</p>
@@ -1090,7 +1091,7 @@ Creates one copy of the computation per worker in the cluster allowing you to pa
 </code></pre>
 <h3 id="tcp-sink-encoder">TCP Sink Encoder</h3>
 <p>The TCP Sink Encoder is responsible for taking the output of the last computation in a pipeline and converting it into a <code>bytes</code> for Wallaroo to send out over a TCP connection.</p>
-<p>To do this, wrap your function in the <code>@encode</code> decorator.</p>
+<p>Your function must be decorated with <code>@encoder</code>.</p>
 <h5 id="encodedata"><code>encode(data)</code></h5>
 <p>Return a <code>bytes</code> that can be sent over the network. It is up to the developer to determine how to translate <code>data</code> into a <code>bytes</code>, and what information to keep or discard.</p>
 <h4 id="example-tcpsinkencoder">Example TCPSinkEncoder</h4>
@@ -1106,7 +1107,7 @@ Creates one copy of the computation per worker in the cluster allowing you to pa
 <li>Telling Wallaroo <em>how many bytes to read</em> from its input connection.</li>
 <li>Converting those bytes into an object that the rest of the application can process.</li>
 </ol>
-<p>To do this, wrap your function with the <code>@decoder(header_length, fmt)</code> decorator.</p>
+<p>Your function must be decorated with <code>@decoder(header_length, fmt)</code>.</p>
 <h5 id="headerlength"><code>header_length</code></h5>
 <p>An integer representing the number of bytes from the beginning of an incoming message to return to the function that reads the payload length.</p>
 <h5 id="fmt"><code>fmt</code></h5>
@@ -1125,6 +1126,7 @@ Creates one copy of the computation per worker in the cluster allowing you to pa
 <h3 id="kafka-sink-encoder">Kafka Sink Encoder</h3>
 <p>The Kafka Sink Encoder is responsible for taking the output of the last computation in a pipeline and converting it into a <code>bytes</code> for Wallaroo to send out to a Kafka sink, along with a <code>key</code> or <code>None</code>.</p>
 <p>To do this, create an encoder function, in the same way you would for a TCP Sink Encoder, but Return a tuple of <code>(bytes, key)</code> that can be sent over the network. It is up to the developer to determine how to translate <code>data</code> into a <code>bytes</code> and <code>key</code>, and what information to keep or discard.</p>
+<p>Your encoder function must be decorated with <code>@encoder</code>.</p>
 <h4 id="example-kafkasinkencoder">Example KafkaSinkEncoder</h4>
 <p>A complete <code>KafkaSinkEncoder</code> example that takes a word and sends it to the partition corresponding to the first letter of the word:</p>
 <pre><code class="lang-python"><span class="hljs-meta">@encoder</span>
@@ -1138,6 +1140,7 @@ Creates one copy of the computation per worker in the cluster allowing you to pa
 <h5 id="decodedata"><code>decode(data)</code></h5>
 <p>Return Python object of the type the next step in the pipeline expects.</p>
 <p><code>data</code> is a <code>bytes</code> object representing the incoming Kafka message, and it is up to the developer to translate that into a Python object.</p>
+<p>Your decoder function must be decorated with <code>@decoder</code>.</p>
 <h4 id="example-kafka-source-decoder">Example Kafka Source Decoder</h4>
 <p>A complete Kafka Source Decoder example that decodes messages with a 32-bit unsigned int in its <em>payload</em>:</p>
 <pre><code class="lang-python"><span class="hljs-meta">@decoder(header_length=4, length_fmt=&quot;&gt;L&quot;)</span>
@@ -1195,8 +1198,12 @@ AlphabetCounts(objects):
 </code></pre>
 <h3 id="tcpsourceconfig">TCPSourceConfig</h3>
 <p>A <code>TCPSourceConfig</code> object specifies the host, port, and encoder to use for a TCP source connection when creating an application. The host and port are both represented by strings. This object is provided as an argument to <code>new_pipeline</code>.</p>
+<p>The <code>decoder</code> argument must decorated as described in <a href="#tcp-source-decoder">TCP Source Decoder</a>.</p>
 <h3 id="tcpsinkconfig">TCPSinkConfig</h3>
 <p>A <code>TCPSinkConfig</code> object specifies the host, port, and decoder to use for the TCP sink connection when creating an application. The host and port are both represented by strings. This object is provided as an argument to <code>to_sink</code>.</p>
+<p>The <code>encoder</code> argument must decorated as described in <a href="#tcp-source-encoder">TCP Source Encoder</a>.</p>
+<h3 id="inter-worker-serialization">Inter-worker serialization</h3>
+<p>When Wallaroo runs with multiple workers, a built-in serializations and deserialization functions based on pickle take care of the encoding and decoding objects on the wire. The worker processes send each other these encoded objects. In some cases, you may wish to override this built-in serialization. If you wish to know more, please refer to the <a href="interworker-serialization-and-resilience.html">Inter-worker serialization and resilience</a> section of the manual.</p>
 
                                 
                                 </section>
@@ -1236,7 +1243,7 @@ AlphabetCounts(objects):
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Wallaroo Python API","level":"4.3.7","depth":2,"next":{"title":"Debugging Python Wallaroo Applications","level":"4.4","depth":1,"ref":"","articles":[{"title":"Debugging","level":"4.4.1","depth":2,"path":"book/python/debugging.md","ref":"book/python/debugging.md","articles":[]}]},"previous":{"title":"Interworker Serialization and Resilience","level":"4.3.6","depth":2,"path":"book/python/interworker-serialization-and-resilience.md","ref":"book/python/interworker-serialization-and-resilience.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/api.md","mtime":"2018-01-12T00:22:55.047Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-12T00:22:56.079Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Wallaroo Python API","level":"4.3.7","depth":2,"next":{"title":"Debugging Python Wallaroo Applications","level":"4.4","depth":1,"ref":"","articles":[{"title":"Debugging","level":"4.4.1","depth":2,"path":"book/python/debugging.md","ref":"book/python/debugging.md","articles":[]}]},"previous":{"title":"Interworker Serialization and Resilience","level":"4.3.6","depth":2,"path":"book/python/interworker-serialization-and-resilience.md","ref":"book/python/interworker-serialization-and-resilience.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/api.md","mtime":"2018-01-13T00:10:34.481Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-13T00:10:35.862Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
