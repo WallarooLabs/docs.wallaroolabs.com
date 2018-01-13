@@ -971,7 +971,7 @@
                                 
                                 <h1 id="bringing-it-all-together-with-word-count">Bringing it all together with word count</h1>
 <p>Word count is the canonical streaming data application. It&apos;s canonical not because everyone needs to count words but because it&apos;s a good platform for demonstrating how to do many of the everyday tasks in a streaming application.</p>
-<p>This section will take you through our <a href="https://github.com/WallarooLabs/wallaroo/tree/0.3.3/examples/python/word_count/" target="_blank">Wallaroo word count example</a>. Along the way, we will introduce you to a couple of new concepts: parallelizing stateless computations, and splitting one incoming message into several outgoing ones.</p>
+<p>This section will take you through our <a href="https://github.com/WallarooLabs/wallaroo/tree/0.4.0/examples/python/word_count/" target="_blank">Wallaroo word count example</a>. Along the way, we will introduce you to a couple of new concepts: parallelizing stateless computations, and splitting one incoming message into several outgoing ones.</p>
 <h2 id="word-count">Word count</h2>
 <p>Our word counting application receives text input in the form of chunks of text. It then splits those chunks into lines and from there into individual words. We then send those words to a stateful partition where we increment the running count and finally, after updating, send as output the word and its current count.</p>
 <h3 id="application-setup">Application Setup</h3>
@@ -997,8 +997,8 @@
 ab.new_pipeline(<span class="hljs-string">&quot;Split and Count&quot;</span>,
                 wallaroo.TCPSourceConfig(in_host, in_port, decoder))
 </code></pre>
-<p>Upon receiving some textual input, our word count application will route it to a stateless computation called <code>split</code>. <code>split</code> is responsible for breaking the text down into individual words. You might notice something a little different about how we set up this stateful computation. In our previous example, we called <code>to</code> on our application builder. In this case, we are calling <code>to_parallel</code>. What&apos;s the difference between <code>to</code> and <code>to_parallel</code>? The <code>to</code> method creates a single instance of the stateless computation. No matter how many workers we might run in our Wallaroo cluster, there will only be a single instance of the computation. Every message that is processed by the computation will need to be routed the worker running that computation. <code>to_parallel</code> is different. By doing <code>to_parallel(split)</code>, we are placing the <code>split</code> computation on every worker in our cluster.</p>
-<h3 id="a-to-vs-toparallel-digression"><code>A to</code> vs <code>to_parallel</code> digression</h3>
+<p>Upon receiving some textual input, our word count application will route it to a stateless computation called <code>split</code>. <code>split</code> is responsible for breaking the text down into individual words. You might notice something a little different about how we set up this stateless computation. In our previous example, we called <code>to</code> on our application builder. In this case, we are calling <code>to_parallel</code>. What&apos;s the difference between <code>to</code> and <code>to_parallel</code>? The <code>to</code> method creates a single instance of the stateless computation. No matter how many workers we might run in our Wallaroo cluster, there will only be a single instance of the computation. Every message that is processed by the computation will need to be routed the worker running that computation. <code>to_parallel</code> is different. By doing <code>to_parallel(split)</code>, we are placing the <code>split</code> computation on every worker in our cluster.</p>
+<h3 id="a-to-vs-toparallel-digression">A <code>to</code> vs <code>to_parallel</code> digression</h3>
 <p>Parallelizing a stateless computation seems like something you&apos;d always want to do. So why does <code>to</code> exist? Message ordering. Some applications require that all incoming messages maintain ordering. Some don&apos;t. If we don&apos;t care about message order, we probably want to use <code>to_parallel</code>.</p>
 <p>Imagine that our word splitting application has the following two blocks of text arrive:</p>
 <pre><code class="lang-text">BLOCK 1:
@@ -1012,7 +1012,7 @@ Fred needs help.
 <p>In the case of word count, it doesn&apos;t matter what order we count the messages. We just want to do it quickly. <code>to_parallel</code> is our friend. However, if all words starting with the letter &quot;h&quot; were going to be sent along to the same computation after splitting <strong>and</strong> the order they arrived was important than <code>to_parallel</code> would not be our friend. If the computation that deals with the letter &quot;h&quot; needs to see &quot;Hello&quot; then &quot;how&quot; and then &quot;help&quot;, you have to use <code>to</code>. It will maintain ordering by processing the incoming blocks sequentially rather than in parallel.</p>
 <p>In our current case, counting words, we don&apos;t care about the order of the words, so <code>to_parallel</code> is fine.</p>
 <h3 id="application-setup-the-return">Application setup, the return</h3>
-<p>Back to our application setup</p>
+<p>Back to our application setup:</p>
 <pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">application_setup</span><span class="hljs-params">(args)</span>:</span>
     in_host, in_port = wallaroo.tcp_parse_input_addrs(args)[<span class="hljs-number">0</span>]
     out_host, out_port = wallaroo.tcp_parse_output_addrs(args)[<span class="hljs-number">0</span>]
@@ -1033,7 +1033,7 @@ Fred needs help.
 <pre><code class="lang-python">    ab.to_state_partition(count_word, WordTotals, <span class="hljs-string">&quot;word totals&quot;</span>,
         partition, word_partitions)
 </code></pre>
-<p>Note we setup up 27 partitions to count our words, one for each letter plus one called &quot;!&quot; which will handle any &quot;word&quot; that doesn&apos;t start with a letter:</p>
+<p>Note we set up 27 partitions to count our words, one for each letter plus one called &quot;!&quot; which will handle any &quot;word&quot; that doesn&apos;t start with a letter:</p>
 <pre><code class="lang-python">word_partitions = list(string.ascii_lowercase)
 word_partitions.append(<span class="hljs-string">&quot;!&quot;</span>)
 
@@ -1043,7 +1043,7 @@ ab.to_state_partition(count_word, WordTotals, <span class="hljs-string">&quot;wo
     partition, word_partitions)
 </code></pre>
 <h3 id="splitting-words">Splitting words</h3>
-<p>Our word splitting is mostly uninteresting, except for one huge difference, our previous examples had one output for each input. When splitting text into words, we take one input and produce multiple outputs. Let&apos;s see how that is done.</p>
+<p>Our word splitting is mostly uninteresting, except for one huge difference: our previous examples had one output for each input. When splitting text into words, we take one input and produce multiple outputs. Let&apos;s see how that is done.</p>
 <pre><code class="lang-python"><span class="hljs-meta">@wallaroo.computation_multi(name=&quot;split into words&quot;)</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">split</span><span class="hljs-params">(data)</span>:</span>
     punctuation = <span class="hljs-string">&quot; !\&quot;#$%&amp;&apos;()*+,-./:;&lt;=&gt;?@[\]^_`{|}~&quot;</span>
@@ -1070,8 +1070,8 @@ ab.to_state_partition(count_word, WordTotals, <span class="hljs-string">&quot;wo
         <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;!&quot;</span>
 </code></pre>
 <h3 id="our-counting-guts">Our counting guts</h3>
-<p>The next three classes are the core of our word counting application. By this point, our messages has been split into individual words and run through our <code>partition</code> function and will arrive at a state computation based on the first letter of the word.</p>
-<p>Let&apos;s take a look at we have. <code>CountWord</code> is a State Computation. When it&apos;s run, we update our <code>word_totals</code> state to reflect the new incoming <code>word</code>. Then, it returns a tuple of the return value from <code>word_totals.get_count</code> and <code>True</code>. The return value of <code>get_count</code> is an instance of the <code>WordCount</code> class containing the word and its current count.</p>
+<p>The next three classes are the core of our word counting application. By this point, our messages have been split into individual words and run through our <code>partition</code> function and will arrive at a state computation based on the first letter of the word.</p>
+<p>Let&apos;s take a look at what we have. <code>CountWord</code> is a State Computation. When it&apos;s run, we update our <code>word_totals</code> state to reflect the new incoming <code>word</code>. Then, it returns a tuple of the return value from <code>word_totals.get_count</code> and <code>True</code>. The return value of <code>get_count</code> is an instance of the <code>WordCount</code> class containing the word and its current count.</p>
 <pre><code class="lang-python"><span class="hljs-meta">@wallaroo.state_computation(name=&quot;Count Word&quot;)</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">count_word</span><span class="hljs-params">(word, word_totals)</span>:</span>
     word_totals.update(word)
@@ -1104,9 +1104,9 @@ ab.to_state_partition(count_word, WordTotals, <span class="hljs-string">&quot;wo
     <span class="hljs-keyword">return</span> data.word + <span class="hljs-string">&quot; =&gt; &quot;</span> + str(data.count) + <span class="hljs-string">&quot;\n&quot;</span>
 </code></pre>
 <h3 id="running-wordcountpy">Running <code>word_count.py</code></h3>
-<p>The complete example is available <a href="https://github.com/WallarooLabs/wallaroo/tree/0.3.3/examples/python/word_count/" target="_blank">here</a>. To run it, follow the <a href="https://github.com/WallarooLabs/wallaroo/tree/0.3.3/examples/python/word_count/README.md" target="_blank">Word Count application instructions</a></p>
+<p>The complete example is available <a href="https://github.com/WallarooLabs/wallaroo/tree/0.4.0/examples/python/word_count/" target="_blank">here</a>. To run it, follow the <a href="https://github.com/WallarooLabs/wallaroo/tree/0.4.0/examples/python/word_count/README.md" target="_blank">Word Count application instructions</a></p>
 <h3 id="next-steps">Next Steps</h3>
-<p>To learn how to make your application resilient and able to work across multiple workers, please continue to <a href="interworker-serialization-and-resilience.html">Interworker Serialization and Resilience</a>.</p>
+<p>To learn how to make your application resilient and able to work across multiple workers, please continue to <a href="interworker-serialization-and-resilience.html">Inter-worker Serialization and Resilience</a>.</p>
 <p>For further reading, please refer to the <a href="api.html">Wallaroo Python API Classes</a>.</p>
 
                                 
@@ -1151,7 +1151,7 @@ ab.to_state_partition(count_word, WordTotals, <span class="hljs-string">&quot;wo
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Word Count","level":"4.3.5","depth":2,"next":{"title":"Interworker Serialization and Resilience","level":"4.3.6","depth":2,"path":"book/python/interworker-serialization-and-resilience.md","ref":"book/python/interworker-serialization-and-resilience.md","articles":[]},"previous":{"title":"Writing Your Own Partitioned Stateful Application","level":"4.3.4","depth":2,"path":"book/python/writing-your-own-partitioned-stateful-application.md","ref":"book/python/writing-your-own-partitioned-stateful-application.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/word-count.md","mtime":"2018-01-12T14:50:09.681Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-12T14:50:10.701Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Word Count","level":"4.3.5","depth":2,"next":{"title":"Interworker Serialization and Resilience","level":"4.3.6","depth":2,"path":"book/python/interworker-serialization-and-resilience.md","ref":"book/python/interworker-serialization-and-resilience.md","articles":[]},"previous":{"title":"Writing Your Own Partitioned Stateful Application","level":"4.3.4","depth":2,"path":"book/python/writing-your-own-partitioned-stateful-application.md","ref":"book/python/writing-your-own-partitioned-stateful-application.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/word-count.md","mtime":"2018-01-13T00:54:29.526Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-13T00:54:30.613Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

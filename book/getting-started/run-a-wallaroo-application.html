@@ -973,7 +973,7 @@
 <p>In this section, we&apos;re going to run an example Wallaroo application. By the time you are finished, you&apos;ll have validated that your environment is set up and working correctly.</p>
 <p>There are a few Wallaroo support applications that you&apos;ll be interacting with for the first time:</p>
 <ul>
-<li>Our Metrics UI that allows you to monitor the performance and health of your applications.</li>
+<li>Our Metrics UI allows you to monitor the performance and health of your applications.</li>
 <li>Giles receiver is designed to capture TCP output from Wallaroo applications.</li>
 <li>Giles sender is used to send test data into Wallaroo applications over TCP.</li>
 <li>Machida, our program for running Wallaroo Python applications.</li>
@@ -985,7 +985,7 @@
 <p>NOTE: You might need to run with sudo depending on how you set up Docker.</p>
 <p>To start the Metrics UI run:</p>
 <pre><code class="lang-bash">docker run <span class="hljs-_">-d</span> --name mui -p 0.0.0.0:4000:4000 -p 0.0.0.0:5001:5001 \
-  wallaroo-labs-docker-wallaroolabs.bintray.io/release/metrics_ui:0.3.3
+  wallaroo-labs-docker-wallaroolabs.bintray.io/release/metrics_ui:0.4.0
 </code></pre>
 <p>You can verify it started up correctly by visiting <a href="http://localhost:4000" target="_blank">http://localhost:4000</a>.</p>
 <p>If you need to restart the UI, run:</p>
@@ -1027,7 +1027,7 @@
 <p>If the sender is working correctly, you should see <code>Connected</code> printed to the screen. If you see that, you can be assured that we are now sending data into our example application.</p>
 <h2 id="check-out-some-metrics">Check Out Some Metrics</h2>
 <h3 id="first-look">First Look</h3>
-<p>Once the sender has successfully connected, if you <a href="http://localhost:4000" target="_blank">visit the Metrics UI</a> the landing page should show you that the &quot;Celsius to Fahrenheit&quot; application has successfully connected.</p>
+<p>Once the sender has successfully connected, if you <a href="http://localhost:4000" target="_blank">visit the Metrics UI</a>, the landing page should show you that the &quot;Celsius to Fahrenheit&quot; application has successfully connected.</p>
 <p><img src="../metrics/images/landing-page.png" alt="Landing Page"></p>
 <p>If your landing page resembles the one above, the &quot;Celsius to Fahrenheit&quot; application has successfully connected to the Metrics UI.</p>
 <p>Now, let&apos;s have a look at some metrics. By clicking on the &quot;Celsius to Fahrenheit&quot; link, you&apos;ll be taken to the &quot;Application Dashboard&quot; page. On this page you should see metric stats for the following:</p>
@@ -1038,12 +1038,12 @@
 </ul>
 <p><img src="../metrics/images/application-dashboard-page.png" alt="Application Dashboard Page"></p>
 <p>You&apos;ll see the metric stats update as data continues to be processed in our application.</p>
-<p>You can then click into one of the elements within a category, to get to a detailed metrics page for that element. If we were to click into the <code>Add32</code> computation, we&apos;ll be taken to this page:</p>
+<p>You can then click into one of the elements within a category to get to a detailed metrics page for that element. If we were to click into the <code>Add32</code> computation, we&apos;ll be taken to this page:</p>
 <p><img src="../metrics/images/computation-detailed-metrics-page.png" alt="Computation Detailed Metrics page"></p>
 <p>Feel free to click around and get a feel for how the Metrics UI is setup and how it is used to monitor a running Wallaroo application. If you&apos;d like a deeper dive into the Metrics UI, have a look at our <a href="../metrics/metrics-ui.html">Monitoring Metrics with the Monitoring Hub</a> section.</p>
 <h2 id="shutdown">Shutdown</h2>
 <h3 id="terminal-5-cluster-shutdown">Terminal 5, Cluster Shutdown</h3>
-<p>You can shut down the cluster with this command once processing has finished:</p>
+<p>You can shut down the cluster with this command at any time:</p>
 <pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo/utils/cluster_shutdown
 ./cluster_shutdown 127.0.0.1:5050
 </code></pre>
@@ -1094,7 +1094,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Run a Wallaroo Application","level":"4.2.3.2","depth":3,"next":{"title":"Conclusion","level":"4.2.4","depth":2,"path":"book/getting-started/conclusion.md","ref":"book/getting-started/conclusion.md","articles":[]},"previous":{"title":"Ubuntu Installation","level":"4.2.3.1.2","depth":4,"path":"book/getting-started/linux-setup.md","ref":"book/getting-started/linux-setup.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/getting-started/run-a-wallaroo-application.md","mtime":"2018-01-12T14:50:09.705Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-12T14:50:10.701Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Run a Wallaroo Application","level":"4.2.3.2","depth":3,"next":{"title":"Conclusion","level":"4.2.4","depth":2,"path":"book/getting-started/conclusion.md","ref":"book/getting-started/conclusion.md","articles":[]},"previous":{"title":"Ubuntu Installation","level":"4.2.3.1.2","depth":4,"path":"book/getting-started/linux-setup.md","ref":"book/getting-started/linux-setup.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/getting-started/run-a-wallaroo-application.md","mtime":"2018-01-13T00:54:29.550Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-13T00:54:30.613Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
