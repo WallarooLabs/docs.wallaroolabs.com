@@ -983,8 +983,8 @@
 <li>A list of keys that are valid for partitioning our state objects</li>
 <li>A partitioning function</li>
 </ul>
-<h3 id="computation">Computation</h3>
-<p>The computation here is fairly straightforward: given a data object and a state object, update the state with the new data, and return some data that tells Wallaroo what to do next.</p>
+<h3 id="state-computation">State Computation</h3>
+<p>The state computation here is fairly straightforward: given a data object and a state object, update the state with the new data, and return some data that tells Wallaroo what to do next.</p>
 <pre><code class="lang-go"><span class="hljs-keyword">type</span> AddVotes <span class="hljs-keyword">struct</span> {}
 
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(av *AddVotes)</span> <span class="hljs-title">Name</span><span class="hljs-params">()</span> <span class="hljs-title">string</span></span> {
@@ -1003,7 +1003,7 @@
 </code></pre>
 <p>The first element, <code>rvt.GetVotes()</code>, is a message that we will send on to our next step. In this case, we will be sending information about votes for this letter on to a sink. The second element, <code>true</code>, is to let Wallaroo know if we should store an update for our state. By returning <code>true</code>, we are instructing Wallaroo to save our updated state so that in the event of a crash, we can recover to this point. Being able to recover from a crash is a good thing, so why wouldn&apos;t we always return <code>true</code>? There are two answers:</p>
 <ol>
-<li>Your computation might not have updated the state, in which case saving its state for recovery is wasteful.</li>
+<li>Your state computation might not have updated the state, in which case saving its state for recovery is wasteful.</li>
 <li>You might only want to save after some changes. Saving your state can be expensive for large objects. There&apos;s a tradeoff that can be made between performance and safety.</li>
 </ol>
 <h3 id="state-and-statebuilder">State and StateBuilder</h3>
@@ -1100,7 +1100,7 @@
 <p>here we use:</p>
 <pre><code class="lang-go">ToStatePartition(&amp;AddVotes{}, &amp;RunningVotesTotalBuilder{}, <span class="hljs-string">&quot;running vote totals&quot;</span>, &amp;LetterPartitionFunction{}, MakeLetterPartitions()).
 </code></pre>
-<p>That is, while the stateless computation constructor <code>To</code> took only a computation class as its argument, the stateful computation constructor <code>ToStatePartition</code> takes a computation <em>instance</em>, as well as a state-builder <em>instance</em>, along with the name of that state. Additionally, it takes two arguments needed for partitioning our state.</p>
+<p>That is, while the stateless computation constructor <code>To</code> took only a computation class as its argument, the state computation constructor <code>ToStatePartition</code> takes a state computation <em>instance</em>, as well as a state-builder <em>instance</em>, along with the name of that state. Additionally, it takes two arguments needed for partitioning our state.</p>
 <h2 id="partitioning">Partitioning</h2>
 <p>Partitioning is a key aspect of how work is distributed in Wallaroo. From the application&apos;s point of view, what is required is:</p>
 <ul>
@@ -1179,7 +1179,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Writing Your Own Stateful Application","level":"5.3.2","depth":2,"next":{"title":"Word Count","level":"5.3.3","depth":2,"path":"book/go/api/word-count.md","ref":"book/go/api/word-count.md","articles":[]},"previous":{"title":"Writing Your Own Application","level":"5.3.1","depth":2,"path":"book/go/api/writing-your-own-application.md","ref":"book/go/api/writing-your-own-application.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/go/api/writing-your-own-stateful-application.md","mtime":"2018-01-13T00:54:29.562Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-13T00:54:30.613Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Writing Your Own Stateful Application","level":"5.3.2","depth":2,"next":{"title":"Word Count","level":"5.3.3","depth":2,"path":"book/go/api/word-count.md","ref":"book/go/api/word-count.md","articles":[]},"previous":{"title":"Writing Your Own Application","level":"5.3.1","depth":2,"path":"book/go/api/writing-your-own-application.md","ref":"book/go/api/writing-your-own-application.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/go/api/writing-your-own-stateful-application.md","mtime":"2018-01-15T12:48:11.180Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-01-15T12:48:12.444Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
