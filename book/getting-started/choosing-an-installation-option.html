@@ -331,20 +331,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="4.2.3.1.1" data-path="macos-setup.html">
-            
-                <a href="macos-setup.html">
-            
-                    
-                    MacOS Installation
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="4.2.3.1.2" data-path="linux-setup.html">
+        <li class="chapter " data-level="4.2.3.1.1" data-path="linux-setup.html">
             
                 <a href="linux-setup.html">
             
@@ -588,20 +575,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="5.2.1.1" data-path="../go/getting-started/macos-setup.html">
-            
-                <a href="../go/getting-started/macos-setup.html">
-            
-                    
-                    MacOS Installation
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="5.2.1.2" data-path="../go/getting-started/linux-setup.html">
+        <li class="chapter " data-level="5.2.1.1" data-path="../go/getting-started/linux-setup.html">
             
                 <a href="../go/getting-started/linux-setup.html">
             
@@ -970,11 +944,11 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="choosing-an-installation-option-for-wallaroo">Choosing an Installation Option for Wallaroo</h1>
-<p>We currently provide two different ways for a user to install Wallaroo: <a href="docker-setup.html">Installing with Docker</a> and installing from source on <a href="macos-setup.html">OSX</a> or <a href="linux-setup.html">Linux</a>. If you are unsure about which solution is right for you, we wanted to provide a breakdown of each approach.</p>
+<p>We currently provide two different ways for a user to install Wallaroo: <a href="docker-setup.html">Installing with Docker</a> and installing from source on <a href="linux-setup.html">Linux</a>. If you are unsure about which solution is right for you, we wanted to provide a breakdown of each approach.</p>
 <h2 id="installing-with-docker">Installing with Docker</h2>
 <p>Installing with Docker provides the benefit of needing to install only one system dependency: Docker itself. We decided to provide this option due to the isolated environment provided by Docker containers and the quick start time. You won&apos;t need to install the system dependencies needed by Wallaroo to test it out, a huge benefit we assumed many first time users might be interested in. Once Docker is set up, the user will only need to run a <code>docker pull</code> and they will have Wallaroo and all of its support tools available to them within the Wallaroo Docker image. The Docker environment has limited customizability due to the nature of a container&apos;s lifecycle but we have provided options to persist both code changes and Python modules for users. We recommend this process for users looking to get started quickly and who do not rely on a heavily customized environment for development.</p>
 <h2 id="installing-from-source">Installing from Source</h2>
-<p>Installing from source will allow our users to take full advantage of the development environment that they are used to. There is a bit of additional set up time due to the complexities of setting up a distributed data processing framework, but we believe that is outweighed by the user being able to use the tooling that they&apos;re most familiar with. We recommend this process for users who would prefer to use their development environment and do not mind the additional set up necessary for Wallaroo to be running on their machine. If you are on MacOS Sierra or High Sierra, we recommend installing via Docker due to a kernel panic caused by a few Wallaroo applications. The cause behind the kernel panics is currently under investigation.</p>
+<p>Installing from source will allow our users to take full advantage of the development environment that they are used to. There is a bit of additional set up time due to the complexities of setting up a distributed data processing framework, but we believe that is outweighed by the user being able to use the tooling that they&apos;re most familiar with. We recommend this process for users who would prefer to use their development environment and do not mind the additional set up necessary for Wallaroo to be running on their machine.</p>
 
                                 
                                 </section>
@@ -1018,7 +992,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Choosing an Installation Option","level":"4.2.1","depth":2,"next":{"title":"Installing with Docker","level":"4.2.2","depth":2,"path":"book/getting-started/installing-with-docker.md","ref":"book/getting-started/installing-with-docker.md","articles":[{"title":"Setting Up Your Environment","level":"4.2.2.1","depth":3,"path":"book/getting-started/docker-setup.md","ref":"book/getting-started/docker-setup.md","articles":[]},{"title":"Run a Wallaroo Application in Docker","level":"4.2.2.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-docker.md","ref":"book/getting-started/run-a-wallaroo-application-docker.md","articles":[]}]},"previous":{"title":"Setting up Your Environment","level":"4.2","depth":1,"path":"book/getting-started/setting-up-your-environment.md","ref":"book/getting-started/setting-up-your-environment.md","articles":[{"title":"Choosing an Installation Option","level":"4.2.1","depth":2,"path":"book/getting-started/choosing-an-installation-option.md","ref":"book/getting-started/choosing-an-installation-option.md","articles":[]},{"title":"Installing with Docker","level":"4.2.2","depth":2,"path":"book/getting-started/installing-with-docker.md","ref":"book/getting-started/installing-with-docker.md","articles":[{"title":"Setting Up Your Environment","level":"4.2.2.1","depth":3,"path":"book/getting-started/docker-setup.md","ref":"book/getting-started/docker-setup.md","articles":[]},{"title":"Run a Wallaroo Application in Docker","level":"4.2.2.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-docker.md","ref":"book/getting-started/run-a-wallaroo-application-docker.md","articles":[]}]},{"title":"Installing From Source","level":"4.2.3","depth":2,"path":"book/getting-started/installing-from-source.md","ref":"book/getting-started/installing-from-source.md","articles":[{"title":"Setting up Your Environment","level":"4.2.3.1","depth":3,"path":"book/getting-started/setup.md","ref":"book/getting-started/setup.md","articles":[{"title":"MacOS Installation","level":"4.2.3.1.1","depth":4,"path":"book/getting-started/macos-setup.md","ref":"book/getting-started/macos-setup.md","articles":[]},{"title":"Ubuntu Installation","level":"4.2.3.1.2","depth":4,"path":"book/getting-started/linux-setup.md","ref":"book/getting-started/linux-setup.md","articles":[]}]},{"title":"Run a Wallaroo Application","level":"4.2.3.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application.md","ref":"book/getting-started/run-a-wallaroo-application.md","articles":[]}]},{"title":"Conclusion","level":"4.2.4","depth":2,"path":"book/getting-started/conclusion.md","ref":"book/getting-started/conclusion.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/getting-started/choosing-an-installation-option.md","mtime":"2018-03-15T16:05:27.513Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-03-15T16:05:28.595Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Choosing an Installation Option","level":"4.2.1","depth":2,"next":{"title":"Installing with Docker","level":"4.2.2","depth":2,"path":"book/getting-started/installing-with-docker.md","ref":"book/getting-started/installing-with-docker.md","articles":[{"title":"Setting Up Your Environment","level":"4.2.2.1","depth":3,"path":"book/getting-started/docker-setup.md","ref":"book/getting-started/docker-setup.md","articles":[]},{"title":"Run a Wallaroo Application in Docker","level":"4.2.2.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-docker.md","ref":"book/getting-started/run-a-wallaroo-application-docker.md","articles":[]}]},"previous":{"title":"Setting up Your Environment","level":"4.2","depth":1,"path":"book/getting-started/setting-up-your-environment.md","ref":"book/getting-started/setting-up-your-environment.md","articles":[{"title":"Choosing an Installation Option","level":"4.2.1","depth":2,"path":"book/getting-started/choosing-an-installation-option.md","ref":"book/getting-started/choosing-an-installation-option.md","articles":[]},{"title":"Installing with Docker","level":"4.2.2","depth":2,"path":"book/getting-started/installing-with-docker.md","ref":"book/getting-started/installing-with-docker.md","articles":[{"title":"Setting Up Your Environment","level":"4.2.2.1","depth":3,"path":"book/getting-started/docker-setup.md","ref":"book/getting-started/docker-setup.md","articles":[]},{"title":"Run a Wallaroo Application in Docker","level":"4.2.2.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-docker.md","ref":"book/getting-started/run-a-wallaroo-application-docker.md","articles":[]}]},{"title":"Installing From Source","level":"4.2.3","depth":2,"path":"book/getting-started/installing-from-source.md","ref":"book/getting-started/installing-from-source.md","articles":[{"title":"Setting up Your Environment","level":"4.2.3.1","depth":3,"path":"book/getting-started/setup.md","ref":"book/getting-started/setup.md","articles":[{"title":"Ubuntu Installation","level":"4.2.3.1.1","depth":4,"path":"book/getting-started/linux-setup.md","ref":"book/getting-started/linux-setup.md","articles":[]}]},{"title":"Run a Wallaroo Application","level":"4.2.3.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application.md","ref":"book/getting-started/run-a-wallaroo-application.md","articles":[]}]},{"title":"Conclusion","level":"4.2.4","depth":2,"path":"book/getting-started/conclusion.md","ref":"book/getting-started/conclusion.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/getting-started/choosing-an-installation-option.md","mtime":"2018-04-24T18:21:37.190Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-04-24T18:21:38.250Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
