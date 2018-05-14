@@ -61,7 +61,7 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="installing-from-source.html" />
+    <link rel="next" href="installing-with-vagrant.html" />
     
     
     <link rel="prev" href="docker-setup.html" />
@@ -303,7 +303,52 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2.3" data-path="installing-from-source.html">
+        <li class="chapter " data-level="4.2.3" data-path="installing-with-vagrant.html">
+            
+                <a href="installing-with-vagrant.html">
+            
+                    
+                    Installing with Vagrant
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="4.2.3.1" data-path="vagrant-setup.html">
+            
+                <a href="vagrant-setup.html">
+            
+                    
+                    Setting Up Your Environment
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2.3.2" data-path="run-a-wallaroo-application-vagrant.html">
+            
+                <a href="run-a-wallaroo-application-vagrant.html">
+            
+                    
+                    Run a Wallaroo Application in Docker
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="4.2.4" data-path="installing-from-source.html">
             
                 <a href="installing-from-source.html">
             
@@ -317,7 +362,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="4.2.3.1" data-path="setup.html">
+        <li class="chapter " data-level="4.2.4.1" data-path="setup.html">
             
                 <a href="setup.html">
             
@@ -331,7 +376,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="4.2.3.1.1" data-path="linux-setup.html">
+        <li class="chapter " data-level="4.2.4.1.1" data-path="linux-setup.html">
             
                 <a href="linux-setup.html">
             
@@ -349,7 +394,7 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2.3.2" data-path="run-a-wallaroo-application.html">
+        <li class="chapter " data-level="4.2.4.2" data-path="run-a-wallaroo-application.html">
             
                 <a href="run-a-wallaroo-application.html">
             
@@ -367,7 +412,7 @@
             
         </li>
     
-        <li class="chapter " data-level="4.2.4" data-path="conclusion.html">
+        <li class="chapter " data-level="4.2.5" data-path="conclusion.html">
             
                 <a href="conclusion.html">
             
@@ -961,15 +1006,15 @@
 -v /tmp/wallaroo-docker/wallaroo-src:/src/wallaroo \
 -v /tmp/wallaroo-docker/python-virtualenv:/src/python-virtualenv \
 --name wally \
-wallaroo-labs-docker-wallaroolabs.bintray.io/release/wallaroo:0.4.1</code></pre></div><div class="tab" data-codetab="1"><pre><code class="lang-bash">docker run --rm -it --privileged -p 4000:4000 `
+wallaroo-labs-docker-wallaroolabs.bintray.io/release/wallaroo:0.4.2</code></pre></div><div class="tab" data-codetab="1"><pre><code class="lang-bash">docker run --rm -it --privileged -p 4000:4000 `
 -v c:/wallaroo-docker/wallaroo-src:/src/wallaroo `
 -v c:/wallaroo-docker/python-virtualenv:/src/python-virtualenv `
 --name wally `
-wallaroo-labs-docker-wallaroolabs.bintray.io/release/wallaroo:0.4.1</code></pre></div><div class="tab" data-codetab="2"><pre><code class="lang-bash">docker run --rm -it --privileged -p 4000:4000 ^
+wallaroo-labs-docker-wallaroolabs.bintray.io/release/wallaroo:0.4.2</code></pre></div><div class="tab" data-codetab="2"><pre><code class="lang-bash">docker run --rm -it --privileged -p 4000:4000 ^
 -v c:/wallaroo-docker/wallaroo-src:/src/wallaroo ^
 -v c:/wallaroo-docker/python-virtualenv:/src/python-virtualenv ^
 --name wally ^
-wallaroo-labs-docker-wallaroolabs.bintray.io/release/wallaroo:0.4.1</code></pre></div></div></div></p>
+wallaroo-labs-docker-wallaroolabs.bintray.io/release/wallaroo:0.4.2</code></pre></div></div></div></p>
 <h3 id="breaking-down-the-docker-command">Breaking down the Docker command</h3>
 <ul>
 <li><p><code>docker run</code>: The Docker command to start a new container.</p>
@@ -1107,7 +1152,7 @@ wallaroo-labs-docker-wallaroolabs.bintray.io/release/wallaroo:0.4.1</code></pre>
                 </a>
                 
                 
-                <a href="installing-from-source.html" class="navigation navigation-next " aria-label="Next page: Installing From Source">
+                <a href="installing-with-vagrant.html" class="navigation navigation-next " aria-label="Next page: Installing with Vagrant">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1118,7 +1163,7 @@ wallaroo-labs-docker-wallaroolabs.bintray.io/release/wallaroo:0.4.1</code></pre>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Run a Wallaroo Application in Docker","level":"4.2.2.2","depth":3,"next":{"title":"Installing From Source","level":"4.2.3","depth":2,"path":"book/getting-started/installing-from-source.md","ref":"book/getting-started/installing-from-source.md","articles":[{"title":"Setting up Your Environment","level":"4.2.3.1","depth":3,"path":"book/getting-started/setup.md","ref":"book/getting-started/setup.md","articles":[{"title":"Ubuntu Installation","level":"4.2.3.1.1","depth":4,"path":"book/getting-started/linux-setup.md","ref":"book/getting-started/linux-setup.md","articles":[]}]},{"title":"Run a Wallaroo Application","level":"4.2.3.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application.md","ref":"book/getting-started/run-a-wallaroo-application.md","articles":[]}]},"previous":{"title":"Setting Up Your Environment","level":"4.2.2.1","depth":3,"path":"book/getting-started/docker-setup.md","ref":"book/getting-started/docker-setup.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/getting-started/run-a-wallaroo-application-docker.md","mtime":"2018-05-03T00:28:02.471Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-03T00:28:03.591Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Run a Wallaroo Application in Docker","level":"4.2.2.2","depth":3,"next":{"title":"Installing with Vagrant","level":"4.2.3","depth":2,"path":"book/getting-started/installing-with-vagrant.md","ref":"book/getting-started/installing-with-vagrant.md","articles":[{"title":"Setting Up Your Environment","level":"4.2.3.1","depth":3,"path":"book/getting-started/vagrant-setup.md","ref":"book/getting-started/vagrant-setup.md","articles":[]},{"title":"Run a Wallaroo Application in Docker","level":"4.2.3.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-vagrant.md","ref":"book/getting-started/run-a-wallaroo-application-vagrant.md","articles":[]}]},"previous":{"title":"Setting Up Your Environment","level":"4.2.2.1","depth":3,"path":"book/getting-started/docker-setup.md","ref":"book/getting-started/docker-setup.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/getting-started/run-a-wallaroo-application-docker.md","mtime":"2018-05-14T20:12:49.113Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-14T20:12:53.853Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
