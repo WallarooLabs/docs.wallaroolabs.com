@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Choosing an Installation Option · GitBook</title>
+        <title>Setting Up Your Environment · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="installing-with-docker.html" />
+    <link rel="next" href="run-a-wallaroo-application-vagrant.html" />
     
     
-    <link rel="prev" href="setting-up-your-environment.html" />
+    <link rel="prev" href="installing-with-vagrant.html" />
     
 
     </head>
@@ -245,7 +245,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="4.2.1" data-path="choosing-an-installation-option.html">
+        <li class="chapter " data-level="4.2.1" data-path="choosing-an-installation-option.html">
             
                 <a href="choosing-an-installation-option.html">
             
@@ -317,7 +317,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="4.2.3.1" data-path="vagrant-setup.html">
+        <li class="chapter active" data-level="4.2.3.1" data-path="vagrant-setup.html">
             
                 <a href="vagrant-setup.html">
             
@@ -973,7 +973,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >Choosing an Installation Option</a>
+        <a href="../.." >Setting Up Your Environment</a>
     </h1>
 </div>
 
@@ -988,30 +988,74 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="choosing-an-installation-option-for-wallaroo">Choosing an Installation Option for Wallaroo</h1>
-<p>For MacOS and Windows users, we provide two different ways for you to install Wallaroo:</p>
+                                <h1 id="setting-up-your-environment-for-wallaroo-in-vagrant">Setting Up Your Environment for Wallaroo in Vagrant</h1>
+<p>To get you up and running quickly with Wallaroo, we have provided a Vagrantfile which includes Wallaroo and related tools needed to run and modify a few example applications. We should warn that this Vagrantfile was created with the intent of getting users started quickly with Wallaroo and is not intended to be suitable for production. Wallaroo in Vagrant runs on Ubuntu Linux Xenial.</p>
+<p><strong>Note:</strong> For Windows users, this section of the guide assumes you are using Powershell.</p>
+<h2 id="installing-git">Installing Git</h2>
+<h3 id="linux-ubuntu">Linux Ubuntu</h3>
+<p>If you do not already have Git installed, install it:</p>
+<pre><code class="lang-bash">sudo apt-get install git
+</code></pre>
+<h3 id="macos">MacOS</h3>
+<h4 id="installing-a-package-manager-homebrew">Installing a Package Manager, Homebrew</h4>
+<p>Homebrew is used for easy installation of certain packages needed by Wallaroo.</p>
+<p>Instructions for installing Homebrew can be found <a href="http://brew.sh/" target="_blank">on their website</a>.  This book assumes that you use the default installation directory, <code>/usr/local</code>.  If you choose an alternate installation directory, please configure your shell&apos;s <code>PATH</code> environment variable as needed.</p>
+<p>If you do not already have Git installed, install it via Homebrew:</p>
+<pre><code class="lang-bash">brew install git
+</code></pre>
+<h3 id="windows">Windows</h3>
+<p>Download git from <a href="https://gitforwindows.org/" target="_blank">Git for Windows</a> and install it.</p>
+<h2 id="set-up-environment-for-the-wallaroo-tutorial">Set up Environment for the Wallaroo Tutorial</h2>
+<h3 id="linux-ubuntu-macos-and-windows-via-powershell">Linux Ubuntu, MacOS, and Windows via Powershell</h3>
+<p>If you haven&apos;t already done so, create a directory called <code>~/wallaroo-tutorial</code> and navigate there by running:</p>
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/
+mkdir ~/wallaroo-tutorial
+<span class="hljs-built_in">cd</span> ~/wallaroo-tutorial
+</code></pre>
+<p>This will be our base directory in what follows. If you haven&apos;t already cloned the Wallaroo repo, do so now (this will create a subdirectory called <code>wallaroo</code>):</p>
+<pre><code class="lang-bash">git <span class="hljs-built_in">clone</span> https://github.com/WallarooLabs/wallaroo
+<span class="hljs-built_in">cd</span> wallaroo
+git checkout release-0.4.3
+</code></pre>
+<h2 id="installing-vagrant">Installing Vagrant</h2>
+<h3 id="linux-ubuntu-macos-and-windows">Linux Ubuntu, MacOS, and Windows</h3>
+<p>Download links for the appropriate installer or package for each supported OS can be found on the <a href="https://www.vagrantup.com/downloads.html" target="_blank">Vagrant downloads page</a>.</p>
+<h2 id="provision-the-vagrant-box">Provision the Vagrant Box</h2>
+<p>Provisioning should take about 10 to 15 minutes. When it finishes, you will have a complete Wallaroo development environment. You won&#x2019;t have to go through the provisioning process again unless you destroy the Wallaroo environment by running <code>vagrant destroy</code>.</p>
+<p>To provision, run the following commands:</p>
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo/vagrant
+vagrant up
+</code></pre>
+<h2 id="whats-included-in-the-wallaroo-vagrant-box">What&apos;s Included in the Wallaroo Vagrant Box</h2>
 <ul>
-<li><a href="docker-setup.html">Wallaroo in Docker</a></li>
-<li><a href="../getting-started-vagrant-setup.md">Wallaroo in Vagrant</a></li>
+<li><p><strong>Machida</strong>: runs Wallaroo Python applications.</p>
+</li>
+<li><p><strong>Giles Sender</strong>: supplies data to Wallaroo applications over TCP.</p>
+</li>
+<li><p><strong>Giles Receiver</strong>: receives data from Wallaroo over TCP.</p>
+</li>
+<li><p><strong>Cluster Shutdown tool</strong>: notifies the cluster to shut down cleanly.</p>
+</li>
+<li><p><strong>Metrics UI</strong>: receives and displays metrics for running Wallaroo applications.</p>
+</li>
+<li><p><strong>Wallaroo Source Code</strong>: full Wallaroo source code is provided, including Python example applications.</p>
+</li>
 </ul>
-<p>If you are unsure about which solution is right for you, a breakdown of each is provided below.</p>
-<p>For Linux users, we provide three different ways for you to install Wallaroo:</p>
-<ul>
-<li><a href="docker-setup.html">Wallaroo in Docker</a></li>
-<li><a href="../getting-started-vagrant-setup.md">Wallaroo in Vagrant</a></li>
-<li><a href="linux-setup.html">Installing from Source</a></li>
-</ul>
-<p>If you are unsure about which solution is right for you, we wanted to provide a breakdown of each approach.</p>
-<h2 id="installing-with-docker">Installing with Docker</h2>
-<p>We recommend this process if you&apos;re looking to get started quickly and do not rely on a heavily customized environment for development.</p>
-<p>Installing with Docker provides the benefit of needing to install only one system dependency: Docker itself. Once Docker is set up, you will only need to run a <code>docker pull</code> and you will have Wallaroo and all of its support tools available within the Wallaroo Docker image.</p>
-<p>The Docker environment has limited customizability due to the nature of a container&apos;s lifecycle but we have provided options to persist both code changes and Python modules for you.</p>
-<h2 id="installing-with-vagrant">Installing with Vagrant</h2>
-<p>We recommend this process if you&apos;re looking to get started quickly and want a more customizable and long living environment for development. This process is also recommended if you do not want to install or use Docker.</p>
-<p>Installing with Vagrant provides the benefit of needing to install only two system dependencies: git and Vagrant. Once Vagrant is set up and you have a copy of the Wallaroo repository, you will only need to run a <code>vagrant up</code> command from the <code>vagrant</code> directory and you will have Wallaroo and all of its support tools available within the Wallaroo Vagrant Box.</p>
-<h2 id="installing-from-source">Installing from Source</h2>
-<p>We recommend this process if you would prefer to use your development environment and do not mind the additional set up necessary for Wallaroo to be running on your machine.</p>
-<p>This process requires installing several system libraries which may conflict with requirements of other tools in your development environment. We recommmend reviewing the process before proceeding.</p>
+<h2 id="shutdown-the-vagrant-box">Shutdown the Vagrant Box</h2>
+<p>You can shut down the Vagrant Box by running the following on your host machine:</p>
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo/vagrant
+vagrant halt
+</code></pre>
+<h2 id="restart-the-vagrant-box">Restart the Vagrant Box</h2>
+<p>If you need to restart the Vagrant Box you can run the following command from the same directory:</p>
+<pre><code class="lang-bash">vagrant up
+</code></pre>
+<h2 id="register">Register</h2>
+<p>Register today and receive a Wallaroo T-shirt and a one-hour phone consultation with Sean, our V.P. of Engineering, to discuss your streaming data questions. Not sure if you have a streaming data problem? Not sure how to go about architecting a streaming data system? Looking to improve an existing system? Not sure how Wallaroo can help? Sean has extensive experience and is happy to help you work through your questions.</p>
+<p>Please register here: <a href="https://www.wallaroolabs.com/register" target="_blank">https://www.wallaroolabs.com/register</a>.</p>
+<p>Your email address will only be used to facilitate the above.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Awesome! All set. Time to try running your first Wallaroo application in Vagrant.</p>
 
                                 
                                 </section>
@@ -1039,12 +1083,12 @@
 
             
                 
-                <a href="setting-up-your-environment.html" class="navigation navigation-prev " aria-label="Previous page: Setting up Your Environment">
+                <a href="installing-with-vagrant.html" class="navigation navigation-prev " aria-label="Previous page: Installing with Vagrant">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="installing-with-docker.html" class="navigation navigation-next " aria-label="Next page: Installing with Docker">
+                <a href="run-a-wallaroo-application-vagrant.html" class="navigation navigation-next " aria-label="Next page: Run a Wallaroo Application in Docker">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1055,7 +1099,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Choosing an Installation Option","level":"4.2.1","depth":2,"next":{"title":"Installing with Docker","level":"4.2.2","depth":2,"path":"book/getting-started/installing-with-docker.md","ref":"book/getting-started/installing-with-docker.md","articles":[{"title":"Setting Up Your Environment","level":"4.2.2.1","depth":3,"path":"book/getting-started/docker-setup.md","ref":"book/getting-started/docker-setup.md","articles":[]},{"title":"Run a Wallaroo Application in Docker","level":"4.2.2.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-docker.md","ref":"book/getting-started/run-a-wallaroo-application-docker.md","articles":[]}]},"previous":{"title":"Setting up Your Environment","level":"4.2","depth":1,"path":"book/getting-started/setting-up-your-environment.md","ref":"book/getting-started/setting-up-your-environment.md","articles":[{"title":"Choosing an Installation Option","level":"4.2.1","depth":2,"path":"book/getting-started/choosing-an-installation-option.md","ref":"book/getting-started/choosing-an-installation-option.md","articles":[]},{"title":"Installing with Docker","level":"4.2.2","depth":2,"path":"book/getting-started/installing-with-docker.md","ref":"book/getting-started/installing-with-docker.md","articles":[{"title":"Setting Up Your Environment","level":"4.2.2.1","depth":3,"path":"book/getting-started/docker-setup.md","ref":"book/getting-started/docker-setup.md","articles":[]},{"title":"Run a Wallaroo Application in Docker","level":"4.2.2.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-docker.md","ref":"book/getting-started/run-a-wallaroo-application-docker.md","articles":[]}]},{"title":"Installing with Vagrant","level":"4.2.3","depth":2,"path":"book/getting-started/installing-with-vagrant.md","ref":"book/getting-started/installing-with-vagrant.md","articles":[{"title":"Setting Up Your Environment","level":"4.2.3.1","depth":3,"path":"book/getting-started/vagrant-setup.md","ref":"book/getting-started/vagrant-setup.md","articles":[]},{"title":"Run a Wallaroo Application in Docker","level":"4.2.3.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-vagrant.md","ref":"book/getting-started/run-a-wallaroo-application-vagrant.md","articles":[]}]},{"title":"Installing From Source","level":"4.2.4","depth":2,"path":"book/getting-started/installing-from-source.md","ref":"book/getting-started/installing-from-source.md","articles":[{"title":"Setting up Your Environment","level":"4.2.4.1","depth":3,"path":"book/getting-started/setup.md","ref":"book/getting-started/setup.md","articles":[{"title":"Ubuntu Installation","level":"4.2.4.1.1","depth":4,"path":"book/getting-started/linux-setup.md","ref":"book/getting-started/linux-setup.md","articles":[]}]},{"title":"Run a Wallaroo Application","level":"4.2.4.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application.md","ref":"book/getting-started/run-a-wallaroo-application.md","articles":[]}]},{"title":"Conclusion","level":"4.2.5","depth":2,"path":"book/getting-started/conclusion.md","ref":"book/getting-started/conclusion.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/getting-started/choosing-an-installation-option.md","mtime":"2018-05-17T17:36:27.480Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-17T17:36:31.572Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Setting Up Your Environment","level":"4.2.3.1","depth":3,"next":{"title":"Run a Wallaroo Application in Docker","level":"4.2.3.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-vagrant.md","ref":"book/getting-started/run-a-wallaroo-application-vagrant.md","articles":[]},"previous":{"title":"Installing with Vagrant","level":"4.2.3","depth":2,"path":"book/getting-started/installing-with-vagrant.md","ref":"book/getting-started/installing-with-vagrant.md","articles":[{"title":"Setting Up Your Environment","level":"4.2.3.1","depth":3,"path":"book/getting-started/vagrant-setup.md","ref":"book/getting-started/vagrant-setup.md","articles":[]},{"title":"Run a Wallaroo Application in Docker","level":"4.2.3.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-vagrant.md","ref":"book/getting-started/run-a-wallaroo-application-vagrant.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/getting-started/vagrant-setup.md","mtime":"2018-05-17T17:36:27.476Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-17T17:36:31.572Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
