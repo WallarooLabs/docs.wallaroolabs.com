@@ -11,7 +11,7 @@ You'll need Docker for Windows to run the Wallaroo metrics UI. There are [instru
 ## Install the Metrics UI
 
 ```bash
-docker pull wallaroo-labs-docker-wallaroolabs.bintray.io/release/metrics_ui:0.4.3-298-g85d1518
+docker pull dev/wallaroo:0.4.3-299-g6c94c3b
 ```
 
 ## Install Bash on Ubuntu on Windows
