@@ -5,7 +5,7 @@ we showed how you define an `Application` object and hook that into Wallaroo via
 the `Startup` object. We showed how to create an application with a single
 pipeline consisting of stateless computations. In this document, we'll cover
 creating a stateful application using partitioned state. All the code can be
-found in [`examples/alphabet/pony/alphabet.pony`](https://github.com/WallarooLabs/wallaroo-examples/tree/release-0.4.4/examples/alphabet/pony/alphabet.pony).
+found in [`examples/alphabet/pony/alphabet.pony`](https://github.com/WallarooLabs/wallaroo-examples/tree/release-0.5.0/examples/alphabet/pony/alphabet.pony).
 
 ## Defining a Stateful Application
 
@@ -226,8 +226,7 @@ primitive AddVotes is StateComputation[Votes val, LetterTotal val, LetterState]
 ```
 
 Here we define our primitive and pass in three type arguments. The first is
-the input type that we will be performing our computation on. The second is
-the output type of the computation (which would be `None` if all this
+the input type that we will be performing our state computation on. The second is the output type of the state computation (which would be `None` if all this
 did was update state). The third is the state type.
 
 Then we must define an apply method, just as we did with the `Computation`
@@ -245,8 +244,7 @@ The first argument is the input type. The second is a
 types for our state. The third is an instance of state, the one we'll
 actually be acting on.
 
-Our return type is a tuple containing the output of the computation, if any,
-and the state change, if any.
+Our return type is a tuple containing the output of the state computation, if any, and the state change, if any.
 
 Within the apply method, we first look up a state change template. In this
 case, we want to change our state by adding votes, so we have elsewhere

@@ -997,36 +997,27 @@
 </code></pre><p>An external data source sends data (say, over TCP) to an internal Wallaroo source. The Wallaroo source decodes that stream of bytes, transforming it into a stream of internal data types that are sent to a series of computations (C1, C2, and C3). Each computation takes an input and produces an output. Finally, C3 sends its output to a Wallaroo sink, which encodes that output as a series of bytes and sends it over TCP to an external system.</p>
 <p>A Wallaroo application can have multiple interacting pipelines. For example, an app could have one pipeline that takes data and updates state based on that data, and a second pipeline that takes data, does computations against the current state in the system, and produces output based on the state and data. The first of these has no sink, whereas the second does.</p>
 <h2 id="concepts">Concepts</h2>
-<h3 id="state">State</h3>
-<p>: Accumulated result of data stored over the course of time</p>
-<h3 id="computation">Computation</h3>
-<p>: Code that transforms an input of some type <code>In</code> to
+<ul>
+<li><em>State</em> -- Accumulated result of data stored over the course of time</li>
+<li><em>Computation</em> -- Code that transforms an input of some type <code>In</code> to
 an output of some type <code>Out</code> (or optionally <code>None</code> if the input should be
-filtered out).</p>
-<h3 id="state-computation">State Computation</h3>
-<p>: Code that takes an input type <code>In</code> and a state
+filtered out).</li>
+<li><em>State Computation</em> -- Code that takes an input type <code>In</code> and a state
 object of some type <code>State</code>, operates on that input and state (possibly
-making state updates), and optionally producing an output of some type <code>Out</code>.</p>
-<h3 id="source">Source</h3>
-<p>: Input point for data from external systems into an application.</p>
-<h3 id="sink">Sink</h3>
-<p>: Output point from an application to external systems.</p>
-<h3 id="decoder">Decoder</h3>
-<p>: Code that transforms a stream of bytes from an external system
-into a series of application input types.</p>
-<h3 id="encoder">Encoder</h3>
-<p>: Code that transforms an application output type into bytes for
-sending to an external system.</p>
-<h3 id="pipeline">Pipeline</h3>
-<p>: A sequence of computations and/or state computations originating
-from a source and optionally terminating in a sink.</p>
-<h3 id="application">Application</h3>
-<p>: A collection of pipelines.</p>
-<h3 id="topology">Topology</h3>
-<p>: A graph of how all sources, sinks, and computations are
-connected within an application.</p>
-<h3 id="api">API</h3>
-<p>Wallaroo provides APIs for implementing all of the above concepts.</p>
+making state updates), and optionally producing an output of some type <code>Out</code>.</li>
+<li><em>Source</em> -- Input point for data from external systems into an application.</li>
+<li><em>Sink</em> -- Output point from an application to external systems.</li>
+<li><em>Decoder</em> -- Code that transforms a stream of bytes from an external system
+into a series of application input types.</li>
+<li><em>Encoder</em> -- Code that transforms an application output type into bytes for
+sending to an external system.</li>
+<li><em>Pipeline</em> -- A sequence of computations and/or state computations originating
+from a source and optionally terminating in a sink.</li>
+<li><em>Application</em> -- A collection of pipelines.</li>
+<li><em>Topology</em> -- A graph of how all sources, sinks, and computations are
+connected within an application.</li>
+<li><em>API</em> -- Wallaroo provides APIs for implementing all of the above concepts.</li>
+</ul>
 
                                 
                                 </section>
@@ -1070,7 +1061,7 @@ connected within an application.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introducing Wallaroo Core Concepts","level":"2.2","depth":1,"next":{"title":"State","level":"2.3","depth":1,"path":"book/core-concepts/state.md","ref":"book/core-concepts/state.md","articles":[]},"previous":{"title":"Introduction","level":"2.1","depth":1,"path":"book/core-concepts/intro.md","ref":"book/core-concepts/intro.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/core-concepts/core-concepts.md","mtime":"2018-05-31T16:08:28.081Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-31T16:08:34.967Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Introducing Wallaroo Core Concepts","level":"2.2","depth":1,"next":{"title":"State","level":"2.3","depth":1,"path":"book/core-concepts/state.md","ref":"book/core-concepts/state.md","articles":[]},"previous":{"title":"Introduction","level":"2.1","depth":1,"path":"book/core-concepts/intro.md","ref":"book/core-concepts/intro.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/core-concepts/core-concepts.md","mtime":"2018-07-17T13:41:30.979Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-17T13:41:39.131Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
