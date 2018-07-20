@@ -335,7 +335,7 @@
                 <a href="../../getting-started/run-a-wallaroo-application-vagrant.html">
             
                     
-                    Run a Wallaroo Application in Docker
+                    Run a Wallaroo Application in Vagrant
             
                 </a>
             
@@ -1028,13 +1028,20 @@
 <p>Add a stateless computation that only returns one message to the current pipeline. The <code>computationBuilder</code> will create instances of the computation.</p>
 <h5 id="tomulticomputationbuilder-wallarooapicomputationmultibuilder-pipelinebuilder"><code>ToMulti(computationBuilder wallarooapi.ComputationMultiBuilder) *pipelineBuilder</code></h5>
 <p>Similar to <code>To</code>, but the computation can return more than one message.</p>
-<h5 id="tostatepartitionstatecomputation-wallarooapistatecomputation-statebuilder-wallarooapistatebuilder-statename-string-partitionfunction-wapartitionfunction-partitions-uint64-pipelinebuilder"><code>ToStatePartition(stateComputation wallarooapi.StateComputation, stateBuilder wallarooapi.StateBuilder, stateName string, partitionFunction wa.PartitionFunction, partitions []uint64) *pipelineBuilder</code></h5>
+<h5 id="tostatepartitionwithkeysstatecomputation-wallarooapistatecomputation-statebuilder-wallarooapistatebuilder-statename-string-partitionfunction-wapartitionfunction-partitions-byte-pipelinebuilder"><code>ToStatePartitionWithKeys(stateComputation wallarooapi.StateComputation, stateBuilder wallarooapi.StateBuilder, stateName string, partitionFunction wa.PartitionFunction, partitions [][]byte) *pipelineBuilder</code></h5>
 <p>Add a partitioned state computation that only returns one message to the pipeline.</p>
 <p><code>stateBuilder</code> builds the state.</p>
 <p><code>stateName</code> is a name that the application uses for this state object; any other state computations in the application that use the same <code>stateName</code> will use the same object.</p>
 <p><code>partitionFunction</code> defines the key to use when partitioning.</p>
 <p><code>partitions</code> is a list of all of the partitions for the partitioned state.</p>
-<h5 id="tostatepartitionmultistatecomputation-wallarooapistatecomputationmulti-statebuilder-wallarooapistatebuilder-statename-string-partitionfunction-wapartitionfunction-partitions-uint64-pipelinebuilder"><code>ToStatePartitionMulti(stateComputation wallarooapi.StateComputationMulti, stateBuilder wallarooapi.StateBuilder, stateName string, partitionFunction wa.PartitionFunction, partitions []uint64) *pipelineBuilder</code></h5>
+<h5 id="tostatepartitionmultiwithkeysstatecomputation-wallarooapistatecomputationmulti-statebuilder-wallarooapistatebuilder-statename-string-partitionfunction-wapartitionfunction-partitions-byte-pipelinebuilder"><code>ToStatePartitionMultiWithKeys(stateComputation wallarooapi.StateComputationMulti, stateBuilder wallarooapi.StateBuilder, stateName string, partitionFunction wa.PartitionFunction, partitions []byte) *pipelineBuilder</code></h5>
+<p>Similar to <code>ToStatePartitionWithKeys</code>, but the state computation can return more than one message.</p>
+<h5 id="tostatepartitionstatecomputation-wallarooapistatecomputation-statebuilder-wallarooapistatebuilder-statename-string-partitionfunction-wapartitionfunction-pipelinebuilder"><code>ToStatePartition(stateComputation wallarooapi.StateComputation, stateBuilder wallarooapi.StateBuilder, stateName string, partitionFunction wa.PartitionFunction) *pipelineBuilder</code></h5>
+<p>Add a partitioned state computation that only returns one message to the pipeline.</p>
+<p><code>stateBuilder</code> builds the state.</p>
+<p><code>stateName</code> is a name that the application uses for this state object; any other state computations in the application that use the same <code>stateName</code> will use the same object.</p>
+<p><code>partitionFunction</code> defines the key to use when partitioning.</p>
+<h5 id="tostatepartitionmultistatecomputation-wallarooapistatecomputationmulti-statebuilder-wallarooapistatebuilder-statename-string-partitionfunction-wapartitionfunction-pipelinebuilder"><code>ToStatePartitionMulti(stateComputation wallarooapi.StateComputationMulti, stateBuilder wallarooapi.StateBuilder, stateName string, partitionFunction wa.PartitionFunction) *pipelineBuilder</code></h5>
 <p>Similar to <code>ToStatePartition</code>, but the state computation can return more than one message.</p>
 <h5 id="tosinksinkconfig-sinkconfig"><code>ToSink(sinkConfig SinkConfig)</code></h5>
 <p>Add a sink to the end of a pipeline.</p>
@@ -1088,23 +1095,23 @@ func (d *Double) Compute(data interface{}) []interface{} {
 <p>Data is the object that is passed to a computation&apos;s <code>Compute</code> method. It is a plain Go object and can be as simple or as complex as you would like it to be.</p>
 <p>It is important to ensure that data returned is always immutable or unique to avoid any unexpected behavior due to the asynchronous execution nature of Wallaroo.</p>
 <h3 id="key">Key</h3>
-<p>Partition keys are <code>uint64</code> values.</p>
+<p>Partition keys are <code>[]byte</code> values.</p>
 <h3 id="wallarooapipartitionfunction">wallarooapi.PartitionFunction</h3>
 <p>A <code>PartitionFunction</code> is used to determine which partition should receive a message. The function is applied to the message and the key is returned.</p>
 <h3 id="wallarooapipartitionfunction-methods"><code>wallarooapi.PartitionFunction</code> Methods</h3>
-<h5 id="partitiondata-interface-uint64"><code>Partition(data interface{}) uint64</code></h5>
+<h5 id="partitiondata-interface-byte"><code>Partition(data interface{}) []byte</code></h5>
 <p>Return the appropriate <a href="#key">Key</a> for <code>data</code>.</p>
 <h4 id="example-partitionfunction">Example <code>PartitionFunction</code></h4>
 <p>An example that partitions words for a word-count based on their first character and buckets all other cases to the empty string key:</p>
-<pre><code class="lang-go"><span class="hljs-keyword">type</span> WordPartitionFunction <span class="hljs-keyword">struct</span> {}
+<pre><code class="lang-go"><span class="hljs-keyword">type</span> WordPartitionFunction <span class="hljs-keyword">struct</span>{}
 
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(wpf *WordPartitionFunction)</span> <span class="hljs-title">Partition</span> <span class="hljs-params">(data <span class="hljs-keyword">interface</span>{})</span> <span class="hljs-title">uint64</span></span> {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(wpf *WordPartitionFunction)</span> <span class="hljs-title">Partition</span><span class="hljs-params">(data <span class="hljs-keyword">interface</span>{})</span> []<span class="hljs-title">byte</span></span> {
     word := data.(*<span class="hljs-keyword">string</span>)
     firstLetter := (*word)[<span class="hljs-number">0</span>]
     <span class="hljs-keyword">if</span> (firstLetter &gt;= <span class="hljs-string">&apos;a&apos;</span>) &amp;&amp; (firstLetter &lt;= <span class="hljs-string">&apos;z&apos;</span>) {
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">uint64</span>(firstLetter)
+        <span class="hljs-keyword">return</span> []<span class="hljs-keyword">byte</span>{firstLetter}
     }
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">uint64</span>(<span class="hljs-string">&apos;!&apos;</span>)
+    <span class="hljs-keyword">return</span> []<span class="hljs-keyword">byte</span>{<span class="hljs-keyword">byte</span>(<span class="hljs-string">&apos;!&apos;</span>)}
 }
 </code></pre>
 <h3 id="wallarooapiencoder">wallarooapi.Encoder</h3>
@@ -1362,7 +1369,7 @@ ToSink(app.MakeKafkaSinkConfig(&quot;words-out&quot;, brokers, &quot;Warn&quot;,
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Wallaroo Go API","level":"5.3.6","depth":2,"next":{"title":"Running Wallaroo","level":"6.1","depth":1,"path":"book/running-wallaroo/running-wallaroo.md","ref":"book/running-wallaroo/running-wallaroo.md","articles":[]},"previous":{"title":"Start A Go Project","level":"5.3.5","depth":2,"path":"book/go/api/start-a-project.md","ref":"book/go/api/start-a-project.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/go/api/api.md","mtime":"2018-07-17T16:38:30.630Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-17T16:38:42.261Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Wallaroo Go API","level":"5.3.6","depth":2,"next":{"title":"Running Wallaroo","level":"6.1","depth":1,"path":"book/running-wallaroo/running-wallaroo.md","ref":"book/running-wallaroo/running-wallaroo.md","articles":[]},"previous":{"title":"Start A Go Project","level":"5.3.5","depth":2,"path":"book/go/api/start-a-project.md","ref":"book/go/api/start-a-project.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/go/api/api.md","mtime":"2018-07-20T16:00:08.580Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-20T16:00:17.585Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

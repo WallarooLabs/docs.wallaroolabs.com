@@ -333,7 +333,7 @@
                 <a href="../getting-started/run-a-wallaroo-application-vagrant.html">
             
                     
-                    Run a Wallaroo Application in Docker
+                    Run a Wallaroo Application in Vagrant
             
                 </a>
             
@@ -1059,14 +1059,7 @@ Creates one copy of the computation per worker in the cluster allowing you to pa
 <p><code>state</code> must be <a href="#state">State</a>.</p>
 <p><code>state_partition_name</code> must be a str. <code>state_partition_name</code> is the name of the collection of state object that we will run state computations against. You can share state partitions across pipelines by using the same name. Using different names for different partitions keeps them separate acting as a namespace.</p>
 <p><code>partition_function</code> must be a <a href="#partition">Partition</a>.</p>
-<p><code>partition_keys</code> must be a list of objects where all of the objects can be hashed with the <code>hash</code> function and be checked for equality with other objects.</p>
-<h5 id="tostatepartitionu64computation-statebuilder-statepartitionname-partitionfunction-partitionkeys"><code>to_state_partition_u64(computation, state_builder, state_partition_name, partition_function, partition_keys)</code></h5>
-<p>Add a partitioned state computation to the current pipeline.</p>
-<p><code>computation</code> must be a <a href="#statecomputation">StateComputation</a>.</p>
-<p><code>state</code> must be <a href="#state">State</a>.</p>
-<p><code>state_partition_name</code> must be a str. <code>state_partition_name</code> is the name of the collection of state object that we will run state computations against. You can share state partitions across pipelines by using the same name. Using different names for different partitions keeps them separate acting as a namespace.</p>
-<p><code>partition_function</code> must be a <a href="#partition">Partition</a>.</p>
-<p><code>partition_keys</code> must be a list of non-negative <code>int</code>.</p>
+<p><code>partition_keys</code> is an optional list of strings.</p>
 <h5 id="tosinksinkconfig"><code>to_sink(sink_config)</code></h5>
 <p>Add a sink to the end of a pipeline.</p>
 <p><code>sink_config</code> must be one of the <a href="#sink">SinkConfig</a> classes.</p>
@@ -1176,7 +1169,7 @@ AlphabetCounts(objects):
 <p>Data is the object that is passed to <a href="#computation">Computation</a>s and <a href="#statecomputation">StateComputation</a>s. It is a plain Python object and can be as simple or as complex as you would like it to be.</p>
 <p>It is important to ensure that data returned is always immutable or unique to avoid any unexpected behavior due to the asynchronous execution nature of Wallaroo.</p>
 <h3 id="key">Key</h3>
-<p>Partition Keys must correctly support the <code>__eq__</code> (<code>==</code>) and <code>__hash__</code> operators. Some built-in types, such as strings and numbers, already support these out of the box. If you are defining your own types, however, you must also implement the <code>__eq__</code> and <code>__hash__</code> methods.</p>
+<p>Partition keys are <code>string</code> values.</p>
 <h3 id="partition">Partition</h3>
 <p>A partition function must be decorated with the <code>@wallaroo.partition</code> decorator and return the appropriate <a href="#key">Key</a> for <code>data</code>.</p>
 <h4 id="example-partition">Example Partition</h4>
@@ -1317,7 +1310,7 @@ AlphabetCounts(objects):
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Wallaroo Python API","level":"4.3.7","depth":2,"next":{"title":"Debugging Python Wallaroo Applications","level":"4.4","depth":1,"ref":"","articles":[{"title":"Debugging","level":"4.4.1","depth":2,"path":"book/python/debugging.md","ref":"book/python/debugging.md","articles":[]}]},"previous":{"title":"Interworker Serialization and Resilience","level":"4.3.6","depth":2,"path":"book/python/interworker-serialization-and-resilience.md","ref":"book/python/interworker-serialization-and-resilience.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/api.md","mtime":"2018-07-17T16:38:30.646Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-17T16:38:42.261Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Wallaroo Python API","level":"4.3.7","depth":2,"next":{"title":"Debugging Python Wallaroo Applications","level":"4.4","depth":1,"ref":"","articles":[{"title":"Debugging","level":"4.4.1","depth":2,"path":"book/python/debugging.md","ref":"book/python/debugging.md","articles":[]}]},"previous":{"title":"Interworker Serialization and Resilience","level":"4.3.6","depth":2,"path":"book/python/interworker-serialization-and-resilience.md","ref":"book/python/interworker-serialization-and-resilience.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/api.md","mtime":"2018-07-20T16:00:08.592Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-20T16:00:17.585Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

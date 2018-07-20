@@ -335,7 +335,7 @@
                 <a href="../getting-started/run-a-wallaroo-application-vagrant.html">
             
                     
-                    Run a Wallaroo Application in Docker
+                    Run a Wallaroo Application in Vagrant
             
                 </a>
             
@@ -993,10 +993,10 @@
 <h2 id="partitioning">Partitioning</h2>
 <p>Partitioning is a key aspect of how work is distributed in Wallaroo. From the application&apos;s point of view, what is required are:</p>
 <ul>
-<li>a list of partition keys</li>
 <li>a partitioning function</li>
 <li>partition-compatible states - the state should be defined in such a way that each partition can have its own distinct state instance</li>
 </ul>
+<p>A list of partition keys is optional. If included, your application will use these keys to set up the initial state partitions in the system. As we encounter new keys derived from messages using the user-defined partition function, we will dynamically create new state partitions. There is a slight performance penalty to dynamically creating state partitions in this way, so if you know all your keys ahead of time, it can be a good idea to provide them here. </p>
 <h2 id="a-partitioned-stateful-application---alphabet-partitioned">A Partitioned Stateful Application - Alphabet (partitioned)</h2>
 <p>Our partitioned application is going to be very similar to the Alphabet application. The difference is that it is going to use partitioning to distribute the work, and the state classes will need to reflect that.</p>
 <p><strong>encode</strong>, <strong>decode</strong>, <strong>add_votes</strong>, and <strong>Votes</strong> are exactly the same as before, so we will not include them here.</p>
@@ -1030,8 +1030,8 @@
         <span class="hljs-keyword">return</span> Votes(self.letter, self.votes)
 </code></pre>
 <h3 id="application-setup">Application Setup</h3>
-<p>Finally, the application setup is a little different now that we use partitioning. A partition is an intrinsic part of a pipeline&apos;s definition, as it changes how Wallaroo connects elements behind the scenes, so we have to distinguish partitioned state from non-partitioned state. This is done with <code>to_state_partition</code> and <code>to_state_partition_u64</code> respectively (compared with <code>to_stateful</code> in the non-partitioned case, as in the previous section).</p>
-<p>As with <code>to_stateful</code>, <code>to_state_partition</code> takes a state computation <em>function</em>, a state <em>class</em> and its name. In addition, it takes a partition function and a partition keys list:</p>
+<p>Finally, the application setup is a little different now that we use partitioning. A partition is an intrinsic part of a pipeline&apos;s definition, as it changes how Wallaroo connects elements behind the scenes, so we have to distinguish partitioned state from non-partitioned state. This is done with <code>to_state_partition</code> (compared with <code>to_stateful</code> in the non-partitioned case, as in the previous section).</p>
+<p>As with <code>to_stateful</code>, <code>to_state_partition</code> takes a state computation <em>function</em>, a state <em>class</em> and its name. In addition, it takes a partition function and a list of partition key strings:</p>
 <pre><code class="lang-python">ab.to_state_partition(add_votes, TotalVotes, <span class="hljs-string">&quot;letter state&quot;</span>,
                       partition, letter_partitions)
 </code></pre>
@@ -1101,7 +1101,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Writing Your Own Partitioned Stateful Application","level":"4.3.4","depth":2,"next":{"title":"Word Count","level":"4.3.5","depth":2,"path":"book/python/word-count.md","ref":"book/python/word-count.md","articles":[]},"previous":{"title":"Writing Your Own Stateful Application","level":"4.3.3","depth":2,"path":"book/python/writing-your-own-stateful-application.md","ref":"book/python/writing-your-own-stateful-application.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/writing-your-own-partitioned-stateful-application.md","mtime":"2018-07-17T16:38:30.654Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-17T16:38:42.261Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Writing Your Own Partitioned Stateful Application","level":"4.3.4","depth":2,"next":{"title":"Word Count","level":"4.3.5","depth":2,"path":"book/python/word-count.md","ref":"book/python/word-count.md","articles":[]},"previous":{"title":"Writing Your Own Stateful Application","level":"4.3.3","depth":2,"path":"book/python/writing-your-own-stateful-application.md","ref":"book/python/writing-your-own-stateful-application.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/writing-your-own-partitioned-stateful-application.md","mtime":"2018-07-20T16:00:08.596Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-20T16:00:17.585Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
