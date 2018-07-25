@@ -335,7 +335,7 @@
                 <a href="../getting-started/run-a-wallaroo-application-vagrant.html">
             
                     
-                    Run a Wallaroo Application in Docker
+                    Run a Wallaroo Application in Vagrant
             
                 </a>
             
@@ -1020,7 +1020,7 @@
   --stop-world/u [Sets pause before state migration after the stop the
     world]
 </span></code></pre>
-<p>Wallaroo currently supports one source per pipeline, which is setup by the application code. Each pipeline may have at most one sink, which is also set up by the application code.</p>
+<p>Wallaroo currently supports one source per pipeline, which is setup by the application code. Each pipeline may have one or more sinks, each of which is also set up by the application code.</p>
 <p>In order to monitor metrics, the target address for metrics data should be defined via the <code>--metrics/-m</code> parameter, using a <code>host:port</code> format (e.g. <code>127.0.0.1:5002</code>).</p>
 <h2 id="machida-specific-parameters">Machida specific parameters</h2>
 <p>In addition to the Wallaroo command line paramters, Machida, the python-wallaroo interface, takes the additional argument</p>
@@ -1080,7 +1080,7 @@ argument:</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Command line options","level":"6.3","depth":1,"next":{"title":"Wallaroo and Virtualenv","level":"7.1","depth":1,"path":"book/appendix/virtualenv.md","ref":"book/appendix/virtualenv.md","articles":[]},"previous":{"title":"Autoscale","level":"6.2","depth":1,"path":"book/running-wallaroo/autoscale.md","ref":"book/running-wallaroo/autoscale.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/running-wallaroo/wallaroo-command-line-options.md","mtime":"2018-05-18T15:24:58.356Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-18T15:25:03.857Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Command line options","level":"6.3","depth":1,"next":{"title":"Wallaroo and Virtualenv","level":"7.1","depth":1,"path":"book/appendix/virtualenv.md","ref":"book/appendix/virtualenv.md","articles":[]},"previous":{"title":"Autoscale","level":"6.2","depth":1,"path":"book/running-wallaroo/autoscale.md","ref":"book/running-wallaroo/autoscale.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/running-wallaroo/wallaroo-command-line-options.md","mtime":"2018-07-25T20:51:20.751Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-25T20:51:28.068Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

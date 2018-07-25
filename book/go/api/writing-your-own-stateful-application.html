@@ -335,7 +335,7 @@
                 <a href="../../getting-started/run-a-wallaroo-application-vagrant.html">
             
                     
-                    Run a Wallaroo Application in Docker
+                    Run a Wallaroo Application in Vagrant
             
                 </a>
             
@@ -999,11 +999,11 @@
 <li>Computation for adding votes</li>
 <li>State objects</li>
 <li>State change management</li>
-<li>A list of keys that are valid for partitioning our state objects</li>
+<li>The keys to partition the state objects</li>
 <li>A partitioning function</li>
 </ul>
-<h3 id="computation">Computation</h3>
-<p>The computation here is fairly straightforward: given a data object and a state object, update the state with the new data, and return some data that tells Wallaroo what to do next.</p>
+<h3 id="state-computation">State Computation</h3>
+<p>The state computation here is fairly straightforward: given a data object and a state object, update the state with the new data, and return some data that tells Wallaroo what to do next.</p>
 <pre><code class="lang-go"><span class="hljs-keyword">type</span> AddVotes <span class="hljs-keyword">struct</span> {}
 
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(av *AddVotes)</span> <span class="hljs-title">Name</span><span class="hljs-params">()</span> <span class="hljs-title">string</span></span> {
@@ -1022,11 +1022,11 @@
 </code></pre>
 <p>The first element, <code>rvt.GetVotes()</code>, is a message that we will send on to our next step. In this case, we will be sending information about votes for this letter on to a sink. The second element, <code>true</code>, is to let Wallaroo know if we should store an update for our state. By returning <code>true</code>, we are instructing Wallaroo to save our updated state so that in the event of a crash, we can recover to this point. Being able to recover from a crash is a good thing, so why wouldn&apos;t we always return <code>true</code>? There are two answers:</p>
 <ol>
-<li>Your computation might not have updated the state, in which case saving its state for recovery is wasteful.</li>
+<li>Your state computation might not have updated the state, in which case saving its state for recovery is wasteful.</li>
 <li>You might only want to save after some changes. Saving your state can be expensive for large objects. There&apos;s a tradeoff that can be made between performance and safety.</li>
 </ol>
 <h3 id="state-and-statebuilder">State and StateBuilder</h3>
-<p>We are going to partition by letter. We&apos;ll have a separate state object for every letter.</p>
+<p>We are going to partition by letter. Since we know the full set of keys in advance, it&apos;s a good idea to create them up front. If the application dynamically creates state partitions for these keys instead, there will be a slight, but necessary, performance hit. We&apos;ll have a separate state object for every letter.</p>
 <pre><code class="lang-go"><span class="hljs-keyword">type</span> RunningVoteTotal <span class="hljs-keyword">struct</span> {
   Letter <span class="hljs-keyword">byte</span>
   Votes <span class="hljs-keyword">uint64</span>
@@ -1043,10 +1043,6 @@
 </code></pre>
 <p>Lastly, a stateful application&apos;s pipeline is going to need a <code>StateBuilder</code>, so let&apos;s create one:</p>
 <pre><code class="lang-go"><span class="hljs-keyword">type</span> RunningVotesTotalBuilder <span class="hljs-keyword">struct</span> {}
-
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(rvtb *RunningVotesTotalBuilder)</span> <span class="hljs-title">Name</span><span class="hljs-params">()</span> <span class="hljs-title">string</span></span> {
-  <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;running votes total builder&quot;</span>
-}
 
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(rvtb *RunningVotesTotalBuilder)</span> <span class="hljs-title">Build</span><span class="hljs-params">()</span> <span class="hljs-title">interface</span></span>{} {
   <span class="hljs-keyword">return</span> &amp;RunningVoteTotal{}
@@ -1119,40 +1115,42 @@
 <p>here we use:</p>
 <pre><code class="lang-go">ToStatePartition(&amp;AddVotes{}, &amp;RunningVotesTotalBuilder{}, <span class="hljs-string">&quot;running vote totals&quot;</span>, &amp;LetterPartitionFunction{}, MakeLetterPartitions()).
 </code></pre>
-<p>That is, while the stateless computation constructor <code>To</code> took only a computation class as its argument, the stateful computation constructor <code>ToStatePartition</code> takes a computation <em>instance</em>, as well as a state-builder <em>instance</em>, along with the name of that state. Additionally, it takes two arguments needed for partitioning our state.</p>
+<p>That is, while the stateless computation constructor <code>To</code> took only a computation class as its argument, the state computation constructor <code>ToStatePartition</code> takes a state computation <em>instance</em>, as well as a state-builder <em>instance</em>, along with the name of that state. Additionally, it takes two arguments needed for partitioning our state.</p>
 <h2 id="partitioning">Partitioning</h2>
 <p>Partitioning is a key aspect of how work is distributed in Wallaroo. From the application&apos;s point of view, what is required is:</p>
 <ul>
-<li>a list of partition keys</li>
 <li>a partitioning function</li>
 <li>partition-compatible states - the state should be defined in such a way that each partition can have its own distinct state instance</li>
 </ul>
+<p>The keys to partition the state objects are also important, but are optional here. A Wallaroo application uses the user-defined partition function to extract a key from every message that will be routed to state. If we haven&apos;t seen a key before, Wallaroo will dynamically create a new state partition corresponding to it.</p>
 <h3 id="partition">Partition</h3>
-<p>If we were to use partitioning in the alphabet application from the previous section and we wanted to partition by key, then one way we could go about it is to create a partition key list.</p>
-<p>To create a partition key list, we use the <code>MakeLetterPartitions()</code> function:</p>
-<pre><code class="lang-go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">MakeLetterPartitions</span><span class="hljs-params">()</span> []<span class="hljs-title">uint64</span></span> {
-  letterPartition := <span class="hljs-built_in">make</span>([]<span class="hljs-keyword">uint64</span>, <span class="hljs-number">26</span>)
+<p>If we were to use partitioning in the alphabet application from the previous section and we wanted to partition by key, then one way we could go about it is to create a partition key array.</p>
+<p>To create this, we use the <code>MakeLetterPartitions()</code> function:</p>
+<pre><code class="lang-go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">LetterPartition</span><span class="hljs-params">()</span> [][]<span class="hljs-title">byte</span></span> {
+        letterPartition := <span class="hljs-built_in">make</span>([][]<span class="hljs-keyword">byte</span>, <span class="hljs-number">27</span>)
 
-  <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">26</span>; i++ {
-    letterPartition[i] = <span class="hljs-keyword">uint64</span>(i + <span class="hljs-string">&apos;a&apos;</span>)
-  }
+        <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">26</span>; i++ {
+                letterPartition[i] = []<span class="hljs-keyword">byte</span>{<span class="hljs-keyword">byte</span>(i + <span class="hljs-string">&apos;a&apos;</span>)}
+        }
 
-  <span class="hljs-keyword">return</span> letterPartition
+        letterPartition[<span class="hljs-number">26</span>] = []<span class="hljs-keyword">byte</span>{<span class="hljs-keyword">byte</span>(<span class="hljs-string">&apos;!&apos;</span>)}
+
+        <span class="hljs-keyword">return</span> letterPartition
 }
 </code></pre>
 <p>And then we define a partitioning function which returns a key from the above list for input data:</p>
 <pre><code class="lang-go"><span class="hljs-keyword">type</span> LetterPartitionFunction <span class="hljs-keyword">struct</span> {}
 
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(lpf *LetterPartitionFunction)</span> <span class="hljs-title">Partition</span><span class="hljs-params">(data <span class="hljs-keyword">interface</span>{})</span> <span class="hljs-title">uint64</span></span> {
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(lpf *LetterPartitionFunction)</span> <span class="hljs-title">Partition</span><span class="hljs-params">(data <span class="hljs-keyword">interface</span>{})</span> []<span class="hljs-title">byte</span></span> {
   lav := data.(*LetterAndVotes)
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">uint64</span>(lav.Letter)
+  <span class="hljs-keyword">return</span> []<span class="hljs-keyword">byte</span>(lav.Letter)
 }
 </code></pre>
 <p>When we set up our state partition, we pass both functions above as arguments to <code>ToStatePartition</code> as we saw earlier:</p>
 <pre><code class="lang-go">ToStatePartition(&amp;AddVotes{}, &amp;RunningVotesTotalBuilder{}, <span class="hljs-string">&quot;running vote totals&quot;</span>, &amp;LetterPartitionFunction{}, MakeLetterPartitions()).
 </code></pre>
 <h2 id="next-steps">Next Steps</h2>
-<p>The complete alphabet example is available <a href="https://github.com/WallarooLabs/wallaroo/tree/0.4.3/examples/go/alphabet/" target="_blank">here</a>. To run it, follow the <a href="https://github.com/WallarooLabs/wallaroo/tree/0.4.3/examples/go/alphabet/README.md" target="_blank">Alphabet application instructions</a></p>
+<p>The complete alphabet example is available <a href="https://github.com/WallarooLabs/wallaroo/tree/0.5.0/examples/go/alphabet/" target="_blank">here</a>. To run it, follow the <a href="https://github.com/WallarooLabs/wallaroo/tree/0.5.0/examples/go/alphabet/README.md" target="_blank">Alphabet application instructions</a></p>
 <p>To see how everything we&apos;ve learned so far comes together, check out our <a href="word-count.html">Word Count walkthrough</a></p>
 <p>Our Alphabet application contains serialization and deserialization code that we didn&apos;t cover; to learn more, skip ahead to <a href="interworker-serialization-and-resilience.html">Interworker Serialization and Resilience</a>.</p>
 
@@ -1198,7 +1196,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Writing Your Own Stateful Application","level":"5.3.2","depth":2,"next":{"title":"Word Count","level":"5.3.3","depth":2,"path":"book/go/api/word-count.md","ref":"book/go/api/word-count.md","articles":[]},"previous":{"title":"Writing Your Own Application","level":"5.3.1","depth":2,"path":"book/go/api/writing-your-own-application.md","ref":"book/go/api/writing-your-own-application.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/go/api/writing-your-own-stateful-application.md","mtime":"2018-05-18T15:24:58.452Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-18T15:25:03.857Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Writing Your Own Stateful Application","level":"5.3.2","depth":2,"next":{"title":"Word Count","level":"5.3.3","depth":2,"path":"book/go/api/word-count.md","ref":"book/go/api/word-count.md","articles":[]},"previous":{"title":"Writing Your Own Application","level":"5.3.1","depth":2,"path":"book/go/api/writing-your-own-application.md","ref":"book/go/api/writing-your-own-application.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/go/api/writing-your-own-stateful-application.md","mtime":"2018-07-25T20:51:20.855Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-25T20:51:28.068Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

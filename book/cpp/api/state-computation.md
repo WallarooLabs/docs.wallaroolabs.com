@@ -22,7 +22,7 @@ used for logging and reporting.
 
 #### `virtual void *compute(Data *input_, StateChangeRepository *state_change_repository_, void* state_change_respository_helper_, State *state_, void *none)`
 
-This method performs a computation using a the `input_` message data
+This method performs a state computation using a the `input_` message data
 and state from the state object. The `state_change_repository_` and
 `state_change_repository_helper_` are used to look up state change
 objects.
@@ -30,12 +30,12 @@ objects.
 The method returns an object that is made up of the message data to
 pass along to the next step and a state change object handle that
 represents the change to apply to the state. For more information, see
-the example application in [`examples/cpp/alphabet-cpp`](https://github.com/WallarooLabs/wallaroo-examples/tree/0.4.3/examples/cpp/alphabet-cpp).
+the example application in [`examples/cpp/alphabet-cpp`](https://github.com/WallarooLabs/wallaroo-examples/tree/0.5.0/examples/cpp/alphabet-cpp).
 
 #### `virtual size_t get_number_of_state_change_builders()`
 
 This method returns the number of state change builders associated
-with this computation.
+with this state computation.
 
 #### `virtual StateChangeBuilder *get_state_change_builder(size_t idx_)`
 

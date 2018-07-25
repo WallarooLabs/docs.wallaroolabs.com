@@ -335,7 +335,7 @@
                 <a href="../../getting-started/run-a-wallaroo-application-vagrant.html">
             
                     
-                    Run a Wallaroo Application in Docker
+                    Run a Wallaroo Application in Vagrant
             
                 </a>
             
@@ -999,11 +999,12 @@
 <p>You&apos;re going to set up our &quot;Celsius to Fahrenheit&quot; example application. Giles sender will be used to pump data into the application. Data Receiver will receive the output, and our Metrics UI will be running so you can observe the overall performance.</p>
 <p>The Metrics UI process will be run in the background via Docker.  The other three processes (receiver, sender, and Wallaroo) will run in the foreground.  We recommend that you run each process in a separate terminal.</p>
 <p>Let&apos;s get started!</p>
-<h2 id="terminal-1-start-the-metrics-ui">Terminal 1, Start the Metrics UI</h2>
+<p>Since Wallaroo is a distributed application, its components need to run separately, and concurrently, so that they may connect to one another to form the application cluster. For this example, you will need 5 separate terminal shells to run the metrics UI, run a source, run a sink, run the Celsius application, and eventually, to send a cluster shutdown command.</p>
+<h2 id="shell-1-start-the-metrics-ui">Shell 1: Start the Metrics UI</h2>
 <p>NOTE: You might need to run with sudo depending on how you set up Docker.</p>
 <p>To start the Metrics UI run:</p>
 <pre><code class="lang-bash">docker run <span class="hljs-_">-d</span> --name mui -p 0.0.0.0:4000:4000 -p 0.0.0.0:5001:5001 \
-  wallaroo-labs-docker-wallaroolabs.bintray.io/release/metrics_ui:0.4.3
+  wallaroo-labs-docker-wallaroolabs.bintray.io/release/metrics_ui:0.5.0
 </code></pre>
 <p>You can verify it started up correctly by visiting <a href="http://localhost:4000" target="_blank">http://localhost:4000</a>.</p>
 <p>If you need to restart the UI, run:</p>
@@ -1015,13 +1016,13 @@
 <p>If you need to start the UI after stopping it, run:</p>
 <pre><code class="lang-bash">docker start mui
 </code></pre>
-<h2 id="terminal-2-run-data-receiver">Terminal 2, Run Data Receiver</h2>
+<h2 id="shell-2-run-the-data-receiver">Shell 2: Run the Data Receiver</h2>
 <p>We&apos;ll use Data Receiver to listen for data from our Wallaroo application.</p>
 <pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo/utils/data_receiver
 ./data_receiver --listen 127.0.0.1:5555 --no-write
 </code></pre>
 <p>Data Receiver will start up and receive data without creating any output. By default, it prints received data to standard out, but we are giving it the <code>--no-write</code> flag which results in no output.</p>
-<h2 id="terminal-3-run-the-celsius-to-fahrenheit-application">Terminal 3, Run the &quot;Celsius to Fahrenheit&quot; Application</h2>
+<h2 id="shell-3-run-the-celsius-to-fahrenheit-application">Shell 3: Run the &quot;Celsius to Fahrenheit&quot; Application</h2>
 <p>First, we need to build the application.</p>
 <pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo/examples/go/celsius
 make
@@ -1039,8 +1040,7 @@ make PONYCFLAGS=<span class="hljs-string">&quot;--pic&quot;</span>
   --cluster-initializer --ponythreads=1 --ponynoblock
 </code></pre>
 <p>This tells the &quot;Celsius to Fahrenheit&quot; application that it should listen on port <code>7000</code> for incoming data, write outgoing data to port <code>5555</code>, and send metrics data to port <code>5001</code>.</p>
-<h2 id="terminal-4">Terminal 4</h2>
-<h3 id="sending-data-with-giles-sender">Sending Data with Giles Sender</h3>
+<h2 id="shell-4-sending-data-with-giles-sender">Shell 4: Sending Data with Giles Sender</h2>
 <p>We will be sending in 25,000,000 messages using a pre-generated data file. The data file will be repeatedly sent via Giles Sender until we reach 25,000,000 messages.</p>
 <p>You will now be able to start the <code>sender</code> with the following command:</p>
 <pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo/giles/sender
@@ -1066,7 +1066,7 @@ make PONYCFLAGS=<span class="hljs-string">&quot;--pic&quot;</span>
 <p><img src="../../metrics/images/computation-detailed-metrics-page.png" alt="Computation Detailed Metrics page"></p>
 <p>Feel free to click around and get a feel for how the Metrics UI is setup and how it is used to monitor a running Wallaroo application. If you&apos;d like a deeper dive into the Metrics UI, have a look at our <a href="../../metrics/metrics-ui.html">Monitoring Metrics with the Monitoring Hub</a> section.</p>
 <h2 id="shutdown">Shutdown</h2>
-<h3 id="terminal-5-cluster-shutdown">Terminal 5, Cluster Shutdown</h3>
+<h3 id="shell-5-cluster-shutdown">Shell 5: Cluster Shutdown</h3>
 <p>You can shut down the cluster with this command at any time:</p>
 <pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo/utils/cluster_shutdown
 ./cluster_shutdown 127.0.0.1:5050
@@ -1120,7 +1120,7 @@ make PONYCFLAGS=<span class="hljs-string">&quot;--pic&quot;</span>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Run a Wallaroo Go Application","level":"5.2.2","depth":2,"next":{"title":"Conclusion","level":"5.2.3","depth":2,"path":"book/go/getting-started/conclusion.md","ref":"book/go/getting-started/conclusion.md","articles":[]},"previous":{"title":"Ubuntu Installation","level":"5.2.1.1","depth":3,"path":"book/go/getting-started/linux-setup.md","ref":"book/go/getting-started/linux-setup.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/go/getting-started/run-a-wallaroo-go-application.md","mtime":"2018-05-18T15:24:58.444Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-05-18T15:25:03.857Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Run a Wallaroo Go Application","level":"5.2.2","depth":2,"next":{"title":"Conclusion","level":"5.2.3","depth":2,"path":"book/go/getting-started/conclusion.md","ref":"book/go/getting-started/conclusion.md","articles":[]},"previous":{"title":"Ubuntu Installation","level":"5.2.1.1","depth":3,"path":"book/go/getting-started/linux-setup.md","ref":"book/go/getting-started/linux-setup.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/go/getting-started/run-a-wallaroo-go-application.md","mtime":"2018-07-25T20:51:20.847Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-25T20:51:28.068Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
