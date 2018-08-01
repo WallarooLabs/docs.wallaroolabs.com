@@ -1249,7 +1249,7 @@ AlphabetCounts(objects):
 <p>The Source Decoder is responsible for two tasks:</p>
 <ol>
 <li>Telling Wallaroo <em>how many bytes to read</em> from its input source.</li>
-<li>Converting those bytes into an object that the rest of the application can process.</li>
+<li>Converting those bytes into an object that the rest of the application can process. <code>None</code> can be returned to completely discard a message.</li>
 </ol>
 <p>To define a source decoder, use the <a href="#@wallaroo.decoder">@wallaroo.decoder</a> decorator to decorate a function that takes <code>bytes</code> and returns the correct data type for the next step in the pipeline.</p>
 <p>It is up to the developer to determine how to translate <code>bytes</code> into the next step&apos;s input data type, and what information to keep or discard.</p>
@@ -1258,16 +1258,22 @@ AlphabetCounts(objects):
 <p><code>header_length</code> is the integer number of bytes to read for the header. The default value is 4.</p>
 <p><code>length_fmt</code> is the <a href="https://docs.python.org/2/library/struct.html#format-strings" target="_blank">struct.unpack format string</a> to use when unpacking the header into an integer. This value is then used to determine how many bytes should be read for the <code>bytes</code> argument that will be passed to the decorated function. The default value is <code>&quot;&gt;I&quot;</code>.</p>
 <h5 id="example-decoder-for-a-tcpsource">Example decoder for a TCPSource</h5>
-<p>A complete <code>TCPSource</code> decoder example that decodes messages with a 32-bit unsigned integer <em>payload_length</em> and a character followed by a 32-bit unsigned int in its <em>payload</em>:</p>
+<p>A complete <code>TCPSource</code> decoder example that decodes messages with a 32-bit unsigned integer <em>payload_length</em> and a character followed by a 32-bit unsigned int in its <em>payload</em>. Filters out any input that raises a <code>struct.error</code> by returning <code>None</code>:</p>
 <pre><code class="lang-python"><span class="hljs-meta">@wallaroo.decoder(header_length=4, length_fmt=&quot;&gt;I&quot;)</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decoder</span><span class="hljs-params">(bs)</span>:</span>
-    <span class="hljs-keyword">return</span> struct.unpack(<span class="hljs-string">&apos;&gt;1sL&apos;</span>, bs)
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-keyword">return</span> struct.unpack(<span class="hljs-string">&apos;&gt;1sL&apos;</span>, bs)
+    <span class="hljs-keyword">except</span> struct.error:
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">None</span>
 </code></pre>
 <h4 id="example-decoder-for-a-kafkasource">Example decoder for a KafkaSource</h4>
-<p>A complete <code>KafkaSource</code> decoder example that decodes messages with a 32-bit unsigned int in its <em>payload</em>:</p>
+<p>A complete <code>KafkaSource</code> decoder example that decodes messages with a 32-bit unsigned int in its <em>payload</em>. Filters out any input that raises a <code>struct.error</code> by returning <code>None</code>:</p>
 <pre><code class="lang-python"><span class="hljs-meta">@wallaroo.decoder(header_length=4, length_fmt=&quot;&gt;I&quot;)</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decoder</span><span class="hljs-params">(bs)</span>:</span>
-    <span class="hljs-keyword">return</span> struct.unpack(<span class="hljs-string">&apos;&gt;1sL&apos;</span>, bs)
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-keyword">return</span> struct.unpack(<span class="hljs-string">&apos;&gt;1sL&apos;</span>, bs)
+    <span class="hljs-keyword">except</span> struct.error:
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">None</span>
 </code></pre>
 <h3 id="inter-worker-serialization">Inter-worker serialization</h3>
 <p>When Wallaroo runs with multiple workers, a built-in serializations and deserialization functions based on pickle take care of the encoding and decoding objects on the wire. The worker processes send each other these encoded objects. In some cases, you may wish to override this built-in serialization. If you wish to know more, please refer to the <a href="interworker-serialization-and-resilience.html">Inter-worker serialization and resilience</a> section of the manual.</p>
@@ -1310,7 +1316,7 @@ AlphabetCounts(objects):
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Wallaroo Python API","level":"4.3.7","depth":2,"next":{"title":"Debugging Python Wallaroo Applications","level":"4.4","depth":1,"ref":"","articles":[{"title":"Debugging","level":"4.4.1","depth":2,"path":"book/python/debugging.md","ref":"book/python/debugging.md","articles":[]}]},"previous":{"title":"Interworker Serialization and Resilience","level":"4.3.6","depth":2,"path":"book/python/interworker-serialization-and-resilience.md","ref":"book/python/interworker-serialization-and-resilience.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/api.md","mtime":"2018-07-25T20:51:20.863Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-07-25T20:51:28.068Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Wallaroo Python API","level":"4.3.7","depth":2,"next":{"title":"Debugging Python Wallaroo Applications","level":"4.4","depth":1,"ref":"","articles":[{"title":"Debugging","level":"4.4.1","depth":2,"path":"book/python/debugging.md","ref":"book/python/debugging.md","articles":[]}]},"previous":{"title":"Interworker Serialization and Resilience","level":"4.3.6","depth":2,"path":"book/python/interworker-serialization-and-resilience.md","ref":"book/python/interworker-serialization-and-resilience.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/api.md","mtime":"2018-08-01T14:46:56.779Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-01T14:47:02.763Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
