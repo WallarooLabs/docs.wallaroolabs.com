@@ -1216,7 +1216,7 @@ mkdir ~/wallaroo-tutorial
 <span class="hljs-built_in">cd</span> ~/wallaroo-tutorial
 </code></pre>
 <p>This will be our base directory in what follows. Download the Wallaroo sources (this will create a subdirectory called <code>wallaroo-release-0.5.2</code>):</p>
-<pre><code class="lang-bash">wget -q -O wallaroo-release-0.5.2.tar.gz <span class="hljs-string">&apos;https://wallaroo-labs.bintray.com/wallaroolabs-rc/wallaroo/release-0.5.2/release-0.5.2.tar.gz&apos;</span>
+<pre><code class="lang-bash">curl -L -o wallaroo-release-0.5.2.tar.gz <span class="hljs-string">&apos;https://wallaroo-labs.bintray.com/wallaroolabs-rc/wallaroo/release-0.5.2/wallaroo-release-0.5.2.tar.gz&apos;</span>
 mkdir wallaroo-release-0.5.2
 tar -C wallaroo-release-0.5.2 --strip-components=1 -xzf wallaroo-release-0.5.2.tar.gz
 rm wallaroo-release-0.5.2.tar.gz
@@ -1225,7 +1225,7 @@ rm wallaroo-release-0.5.2.tar.gz
 <h2 id="install-go">Install Go</h2>
 <p>You&apos;ll need a Go 1.9.x compiler. The following instructions will download a private Go compiler for use with Wallaroo:</p>
 <pre><code class="lang-bash">mkdir bin
-wget -q https://dl.google.com/go/go1.9.4.linux-amd64.tar.gz -O /tmp/go.tar.gz
+curl -L -o /tmp/go.tar.gz https://dl.google.com/go/go1.9.4.linux-amd64.tar.gz
 tar -C bin -xzf /tmp/go.tar.gz
 mv bin/go bin/go1.9.4
 rm /tmp/go.tar.gz
@@ -1258,7 +1258,7 @@ sudo apt-get install -y gcc-5 g++-5
 </code></pre>
 <h2 id="add-ponyc-and-pony-stable-apt-key-keyserver">Add ponyc and pony-stable apt-key keyserver</h2>
 <p>In order to install <code>ponyc</code> and <code>pony-stable</code> via <code>apt-get</code> the following keyserver must be added to the APT key management utility.</p>
-<pre><code class="lang-bash">sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys <span class="hljs-string">&quot;E04F0923 B3B48BDA&quot;</span>
+<pre><code class="lang-bash">sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys E04F0923 B3B48BDA
 </code></pre>
 <p>The following packages need to be installed to allow <code>apt</code> to use a repository over HTTPS:</p>
 <pre><code class="lang-bash">sudo apt-get install \
@@ -1291,7 +1291,7 @@ sudo apt-get -V install pony-stable
 </code></pre>
 <p>Trusty Ubuntu has an outdated <code>liblz4</code> package. You will need to install from source like this:</p>
 <pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/
-wget -O liblz4-1.7.5.tar.gz https://github.com/lz4/lz4/archive/v1.7.5.tar.gz
+curl -L -o liblz4-1.7.5.tar.gz https://github.com/lz4/lz4/archive/v1.7.5.tar.gz
 tar zxvf liblz4-1.7.5.tar.gz
 <span class="hljs-built_in">cd</span> lz4-1.7.5
 make
@@ -1300,7 +1300,7 @@ sudo make install
 <h2 id="download-and-configure-the-metrics-ui">Download and configure the Metrics UI</h2>
 <pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-release-0.5.2/
 mkdir bin
-wget -q -O Wallaroo_Metrics_UI-release-0.5.2-x86_64.AppImage <span class="hljs-string">&apos;https://wallaroo-labs.bintray.com/wallaroolabs-rc/wallaroo/release-0.5.2/Wallaroo_Metrics_UI-release-0.5.2-x86_64.AppImage&apos;</span>
+curl -L -o Wallaroo_Metrics_UI-release-0.5.2-x86_64.AppImage <span class="hljs-string">&apos;https://wallaroo-labs.bintray.com/wallaroolabs-rc/wallaroo/release-0.5.2/Wallaroo_Metrics_UI-release-0.5.2-x86_64.AppImage&apos;</span>
 chmod +x Wallaroo_Metrics_UI-release-0.5.2-x86_64.AppImage
 ./Wallaroo_Metrics_UI-release-0.5.2-x86_64.AppImage --appimage-extract
 mv squashfs-root bin/metrics_ui
@@ -1373,7 +1373,7 @@ cp giles/sender/sender bin
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Ubuntu Installation","level":"5.2.5.1.1","depth":4,"next":{"title":"Run a Wallaroo Go Application","level":"5.2.5.2","depth":3,"path":"book/go/getting-started/run-a-wallaroo-go-application.md","ref":"book/go/getting-started/run-a-wallaroo-go-application.md","articles":[]},"previous":{"title":"Setting up Your Environment","level":"5.2.5.1","depth":3,"path":"book/go/getting-started/setup.md","ref":"book/go/getting-started/setup.md","articles":[{"title":"Ubuntu Installation","level":"5.2.5.1.1","depth":4,"path":"book/go/getting-started/linux-setup.md","ref":"book/go/getting-started/linux-setup.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/go/getting-started/linux-setup.md","mtime":"2018-08-20T20:45:52.673Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-20T20:46:00.467Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Ubuntu Installation","level":"5.2.5.1.1","depth":4,"next":{"title":"Run a Wallaroo Go Application","level":"5.2.5.2","depth":3,"path":"book/go/getting-started/run-a-wallaroo-go-application.md","ref":"book/go/getting-started/run-a-wallaroo-go-application.md","articles":[]},"previous":{"title":"Setting up Your Environment","level":"5.2.5.1","depth":3,"path":"book/go/getting-started/setup.md","ref":"book/go/getting-started/setup.md","articles":[{"title":"Ubuntu Installation","level":"5.2.5.1.1","depth":4,"path":"book/go/getting-started/linux-setup.md","ref":"book/go/getting-started/linux-setup.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/go/getting-started/linux-setup.md","mtime":"2018-08-23T17:05:58.179Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-23T17:06:06.569Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
