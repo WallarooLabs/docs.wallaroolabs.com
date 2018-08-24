@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Setting up Your Environment · GitBook</title>
+        <title>Choosing an Installation Option · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="choosing-an-installation-option.html" />
+    <link rel="next" href="installing-with-docker.html" />
     
     
-    <link rel="prev" href="../intro.html" />
+    <link rel="prev" href="setting-up-your-environment.html" />
     
 
     </head>
@@ -637,7 +637,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="5.2" data-path="setting-up-your-environment.html">
+        <li class="chapter " data-level="5.2" data-path="setting-up-your-environment.html">
             
                 <a href="setting-up-your-environment.html">
             
@@ -651,7 +651,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="5.2.1" data-path="choosing-an-installation-option.html">
+        <li class="chapter active" data-level="5.2.1" data-path="choosing-an-installation-option.html">
             
                 <a href="choosing-an-installation-option.html">
             
@@ -1185,7 +1185,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../../.." >Setting up Your Environment</a>
+        <a href="../../.." >Choosing an Installation Option</a>
     </h1>
 </div>
 
@@ -1200,7 +1200,34 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="setting-up-your-wallaroo-go-environment">Setting up your Wallaroo Go environment</h1>
+                                <h1 id="choosing-an-installation-option-for-wallaroo">Choosing an Installation Option for Wallaroo</h1>
+<p>For 64-bit MacOS and Windows users, we provide two different ways for you to install Wallaroo:</p>
+<ul>
+<li><a href="docker-setup.html">Wallaroo in Docker</a></li>
+<li><a href="vagrant-setup.html">Wallaroo in Vagrant</a></li>
+</ul>
+<p>If you are unsure about which solution is right for you, a breakdown of each is provided below. (NOTE: Wallaroo does not support 32-bit platforms.)</p>
+<p>For 64-bit Linux users, we provide three different ways for you to install Wallaroo:</p>
+<ul>
+<li><a href="docker-setup.html">Wallaroo in Docker</a></li>
+<li><a href="vagrant-setup.html">Wallaroo in Vagrant</a></li>
+<li><a href="wallaroo-up.html">Wallaroo Up</a></li>
+<li><a href="linux-setup.html">Installing from Source</a></li>
+</ul>
+<p>If you are unsure about which solution is right for you, a breakdown of each is provided below. (NOTE: Wallaroo does not support 32-bit platforms.)</p>
+<h2 id="installing-with-docker">Installing with Docker</h2>
+<p>We recommend this process if you&apos;re looking to get started quickly and do not rely on a heavily customized environment for development.</p>
+<p>Installing with Docker provides the benefit of needing to install only one system dependency: Docker itself. Once Docker is set up, you will only need to run a <code>docker pull</code> and you will have Wallaroo and all of its support tools available within the Wallaroo Docker image.</p>
+<p>The Docker environment has limited customizability due to the nature of a container&apos;s lifecycle but we have provided options to persist code changes for you.</p>
+<h2 id="installing-with-vagrant">Installing with Vagrant</h2>
+<p>We recommend this process if you&apos;re looking to get started quickly and want a more customizable and long living environment for development. This process is also recommended if you do not want to install or use Docker.</p>
+<p>Installing with Vagrant provides the benefit of needing to install only two system dependencies: Virtualbox and Vagrant. Once Vagrant is set up and you have a copy of the Wallaroo codebase, you will only need to run a <code>vagrant up</code> command from the <code>vagrant</code> directory and you will have Wallaroo and all of its support tools available within the Wallaroo Vagrant Box.</p>
+<h2 id="wallaroo-up">Wallaroo Up</h2>
+<p>We recommend this process if you would prefer to use your development environment and do not mind the additional system requirements necessary for Wallaroo to be installed and running on your machine. The Wallaroo Up script automatically takes care of installing everything for setting up a Wallaroo development environment.</p>
+<p>This process requires installing several system libraries which may conflict with requirements of other tools in your development environment. We recommmend reviewing the process before proceeding.</p>
+<h2 id="installing-from-source">Installing from Source</h2>
+<p>We recommend this process if you would prefer to use your development environment and do not mind the additional set up necessary for Wallaroo to be running on your machine.</p>
+<p>This process requires installing several system libraries which may conflict with requirements of other tools in your development environment. We recommmend reviewing the process before proceeding.</p>
 
                                 
                                 </section>
@@ -1228,12 +1255,12 @@
 
             
                 
-                <a href="../intro.html" class="navigation navigation-prev " aria-label="Previous page: Go API Introduction">
+                <a href="setting-up-your-environment.html" class="navigation navigation-prev " aria-label="Previous page: Setting up Your Environment">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="choosing-an-installation-option.html" class="navigation navigation-next " aria-label="Next page: Choosing an Installation Option">
+                <a href="installing-with-docker.html" class="navigation navigation-next " aria-label="Next page: Installing with Docker">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1244,7 +1271,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Setting up Your Environment","level":"5.2","depth":1,"next":{"title":"Choosing an Installation Option","level":"5.2.1","depth":2,"path":"book/go/getting-started/choosing-an-installation-option.md","ref":"book/go/getting-started/choosing-an-installation-option.md","articles":[]},"previous":{"title":"Go API Introduction","level":"5.1","depth":1,"path":"book/go/intro.md","ref":"book/go/intro.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/go/getting-started/setting-up-your-environment.md","mtime":"2018-08-24T14:56:03.604Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-24T14:56:10.266Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Choosing an Installation Option","level":"5.2.1","depth":2,"next":{"title":"Installing with Docker","level":"5.2.2","depth":2,"path":"book/go/getting-started/installing-with-docker.md","ref":"book/go/getting-started/installing-with-docker.md","articles":[{"title":"Setting Up Your Environment","level":"5.2.2.1","depth":3,"path":"book/go/getting-started/docker-setup.md","ref":"book/go/getting-started/docker-setup.md","articles":[]},{"title":"Run a Wallaroo Application in Docker","level":"5.2.2.2","depth":3,"path":"book/go/getting-started/run-a-wallaroo-go-application-docker.md","ref":"book/go/getting-started/run-a-wallaroo-go-application-docker.md","articles":[]}]},"previous":{"title":"Setting up Your Environment","level":"5.2","depth":1,"path":"book/go/getting-started/setting-up-your-environment.md","ref":"book/go/getting-started/setting-up-your-environment.md","articles":[{"title":"Choosing an Installation Option","level":"5.2.1","depth":2,"path":"book/go/getting-started/choosing-an-installation-option.md","ref":"book/go/getting-started/choosing-an-installation-option.md","articles":[]},{"title":"Installing with Docker","level":"5.2.2","depth":2,"path":"book/go/getting-started/installing-with-docker.md","ref":"book/go/getting-started/installing-with-docker.md","articles":[{"title":"Setting Up Your Environment","level":"5.2.2.1","depth":3,"path":"book/go/getting-started/docker-setup.md","ref":"book/go/getting-started/docker-setup.md","articles":[]},{"title":"Run a Wallaroo Application in Docker","level":"5.2.2.2","depth":3,"path":"book/go/getting-started/run-a-wallaroo-go-application-docker.md","ref":"book/go/getting-started/run-a-wallaroo-go-application-docker.md","articles":[]}]},{"title":"Installing with Vagrant","level":"5.2.3","depth":2,"path":"book/go/getting-started/installing-with-vagrant.md","ref":"book/go/getting-started/installing-with-vagrant.md","articles":[{"title":"Setting Up Your Environment","level":"5.2.3.1","depth":3,"path":"book/go/getting-started/vagrant-setup.md","ref":"book/go/getting-started/vagrant-setup.md","articles":[]},{"title":"Run a Wallaroo Go Application in Vagrant","level":"5.2.3.2","depth":3,"path":"book/go/getting-started/run-a-wallaroo-go-application-vagrant.md","ref":"book/go/getting-started/run-a-wallaroo-go-application-vagrant.md","articles":[]}]},{"title":"Installing with Wallaroo Up","level":"5.2.4","depth":2,"path":"book/go/getting-started/wallaroo-up.md","ref":"book/go/getting-started/wallaroo-up.md","articles":[{"title":"Run a Wallaroo Go Application","level":"5.2.4.1","depth":3,"path":"book/go/getting-started/run-a-wallaroo-go-application-wallaroo-up.md","ref":"book/go/getting-started/run-a-wallaroo-go-application-wallaroo-up.md","articles":[]}]},{"title":"Installing From Source","level":"5.2.5","depth":2,"path":"book/go/getting-started/installing-from-source.md","ref":"book/go/getting-started/installing-from-source.md","articles":[{"title":"Setting up Your Environment","level":"5.2.5.1","depth":3,"path":"book/go/getting-started/setup.md","ref":"book/go/getting-started/setup.md","articles":[{"title":"Ubuntu Installation","level":"5.2.5.1.1","depth":4,"path":"book/go/getting-started/linux-setup.md","ref":"book/go/getting-started/linux-setup.md","articles":[]}]},{"title":"Run a Wallaroo Go Application","level":"5.2.5.2","depth":3,"path":"book/go/getting-started/run-a-wallaroo-go-application.md","ref":"book/go/getting-started/run-a-wallaroo-go-application.md","articles":[]}]},{"title":"Starting a new shell for Wallaroo","level":"5.2.6","depth":2,"path":"book/go/getting-started/starting-a-new-shell.md","ref":"book/go/getting-started/starting-a-new-shell.md","articles":[]},{"title":"Conclusion","level":"5.2.7","depth":2,"path":"book/go/getting-started/conclusion.md","ref":"book/go/getting-started/conclusion.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/go/getting-started/choosing-an-installation-option.md","mtime":"2018-08-24T14:56:03.600Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-24T14:56:10.266Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

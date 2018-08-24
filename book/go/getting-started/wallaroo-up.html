@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Setting up Your Environment · GitBook</title>
+        <title>Installing with Wallaroo Up · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="choosing-an-installation-option.html" />
+    <link rel="next" href="run-a-wallaroo-go-application-wallaroo-up.html" />
     
     
-    <link rel="prev" href="../intro.html" />
+    <link rel="prev" href="run-a-wallaroo-go-application-vagrant.html" />
     
 
     </head>
@@ -637,7 +637,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="5.2" data-path="setting-up-your-environment.html">
+        <li class="chapter " data-level="5.2" data-path="setting-up-your-environment.html">
             
                 <a href="setting-up-your-environment.html">
             
@@ -754,7 +754,7 @@
             
         </li>
     
-        <li class="chapter " data-level="5.2.4" data-path="wallaroo-up.html">
+        <li class="chapter active" data-level="5.2.4" data-path="wallaroo-up.html">
             
                 <a href="wallaroo-up.html">
             
@@ -1185,7 +1185,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../../.." >Setting up Your Environment</a>
+        <a href="../../.." >Installing with Wallaroo Up</a>
     </h1>
 </div>
 
@@ -1200,7 +1200,28 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="setting-up-your-wallaroo-go-environment">Setting up your Wallaroo Go environment</h1>
+                                <h1 id="setting-up-your-wallaroo-development-environment-using-wallaroo-up">Setting Up Your Wallaroo Development Environment using Wallaroo Up</h1>
+<p>These instructions have been tested on Ubuntu Bionic/Trusty/Xenial, Fedora 28, CentOS 7, and Debian Stretch releases. They should also work on Ubuntu Artful, Fedora 26/27, Red Hat Enterprise Linux 7, and Debian Jessie/Buster releases.</p>
+<h2 id="memory-requirements">Memory requirements</h2>
+<p>In order to compile the Wallaroo example applications, your system will need to have approximately 3 GB working memory (this can be RAM or swap). If you don&apos;t have enough memory, you are likely to see that the compile process is <code>Killed</code> by the OS.</p>
+<h2 id="download-wallaroo-up-script">Download Wallaroo Up script</h2>
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> /tmp
+curl https://raw.githubusercontent.com/WallarooLabs/wallaroo/0.5.2/misc/wallaroo-up.sh -o wallaroo-up.sh -J -L
+chmod +x wallaroo-up.sh
+</code></pre>
+<h2 id="run-the-wallaroo-up-script">Run the Wallaroo Up script</h2>
+<p>The <code>-t golang</code> argument is required for a Go environment installation. The <code>-p &lt;PATH&gt;</code> argument is optional and can be used to control where the Wallaroo tutorial is installed into (the default is <code>~/wallaroo-tutorial</code>).</p>
+<p>The script will require superuser privileges via <code>sudo</code> and will throw an error if <code>sudo</code> is not available. The script will prompt you prior to making any changes. It can optionally print out the commands it will run.</p>
+<pre><code class="lang-bash">./wallaroo-up.sh -t golang
+</code></pre>
+<p>Follow the prompts to have Wallaroo Up install and configure Wallaroo and its dependencies.</p>
+<p>Once Wallaroo Up has finished installing and configuring Wallaroo for your environment, it will also create an <code>activate</code> script that can be used to set up the appropriate environment variables.</p>
+<h2 id="register">Register</h2>
+<p>Register today and receive a Wallaroo T-shirt and a one-hour phone consultation with Sean, our V.P. of Engineering, to discuss your streaming data questions. Not sure if you have a streaming data problem? Not sure how to go about architecting a streaming data system? Looking to improve an existing system? Not sure how Wallaroo can help? Sean has extensive experience and is happy to help you work through your questions.</p>
+<p>Please register here: <a href="https://www.wallaroolabs.com/register" target="_blank">https://www.wallaroolabs.com/register</a>.</p>
+<p>Your email address will only be used to facilitate the above.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Awesome! All set. Time to try running your first application.</p>
 
                                 
                                 </section>
@@ -1228,12 +1249,12 @@
 
             
                 
-                <a href="../intro.html" class="navigation navigation-prev " aria-label="Previous page: Go API Introduction">
+                <a href="run-a-wallaroo-go-application-vagrant.html" class="navigation navigation-prev " aria-label="Previous page: Run a Wallaroo Go Application in Vagrant">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="choosing-an-installation-option.html" class="navigation navigation-next " aria-label="Next page: Choosing an Installation Option">
+                <a href="run-a-wallaroo-go-application-wallaroo-up.html" class="navigation navigation-next " aria-label="Next page: Run a Wallaroo Go Application">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -1244,7 +1265,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Setting up Your Environment","level":"5.2","depth":1,"next":{"title":"Choosing an Installation Option","level":"5.2.1","depth":2,"path":"book/go/getting-started/choosing-an-installation-option.md","ref":"book/go/getting-started/choosing-an-installation-option.md","articles":[]},"previous":{"title":"Go API Introduction","level":"5.1","depth":1,"path":"book/go/intro.md","ref":"book/go/intro.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/go/getting-started/setting-up-your-environment.md","mtime":"2018-08-24T14:56:03.604Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-24T14:56:10.266Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Installing with Wallaroo Up","level":"5.2.4","depth":2,"next":{"title":"Run a Wallaroo Go Application","level":"5.2.4.1","depth":3,"path":"book/go/getting-started/run-a-wallaroo-go-application-wallaroo-up.md","ref":"book/go/getting-started/run-a-wallaroo-go-application-wallaroo-up.md","articles":[]},"previous":{"title":"Run a Wallaroo Go Application in Vagrant","level":"5.2.3.2","depth":3,"path":"book/go/getting-started/run-a-wallaroo-go-application-vagrant.md","ref":"book/go/getting-started/run-a-wallaroo-go-application-vagrant.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/go/getting-started/wallaroo-up.md","mtime":"2018-08-24T14:56:03.608Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-24T14:56:10.266Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
