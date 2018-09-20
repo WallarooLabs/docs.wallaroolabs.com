@@ -1011,7 +1011,20 @@
             
         </li>
     
-        <li class="chapter " data-level="6.3" data-path="../running-wallaroo/wallaroo-command-line-options.html">
+        <li class="chapter " data-level="6.3" data-path="../running-wallaroo/resilience.html">
+            
+                <a href="../running-wallaroo/resilience.html">
+            
+                    
+                    Resilience
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="../running-wallaroo/wallaroo-command-line-options.html">
             
                 <a href="../running-wallaroo/wallaroo-command-line-options.html">
             
@@ -1142,18 +1155,12 @@
         
         
     
-        <li class="chapter " data-level="8.1" data-path="../legal/terms.html">
-            
-                <a href="../legal/terms.html">
-            
-                    
-                    Terms and Conditions
-            
-                </a>
-            
 
-            
-        </li>
+    
+        
+        <li class="header">* Terms and Conditions</li>
+        
+        
     
 
     
@@ -1219,12 +1226,12 @@
 mkdir ~/wallaroo-tutorial
 <span class="hljs-built_in">cd</span> ~/wallaroo-tutorial
 </code></pre>
-<p>This will be our base directory in what follows. Download the Wallaroo sources (this will create a subdirectory called <code>wallaroo-release-0.5.2</code>):</p>
-<pre><code class="lang-bash">curl -L -o wallaroo-release-0.5.2.tar.gz <span class="hljs-string">&apos;https://wallaroo-labs.bintray.com/wallaroolabs-rc/wallaroo/release-0.5.2/wallaroo-release-0.5.2.tar.gz&apos;</span>
-mkdir wallaroo-release-0.5.2
-tar -C wallaroo-release-0.5.2 --strip-components=1 -xzf wallaroo-release-0.5.2.tar.gz
-rm wallaroo-release-0.5.2.tar.gz
-<span class="hljs-built_in">cd</span> wallaroo-release-0.5.2
+<p>This will be our base directory in what follows. Download the Wallaroo sources (this will create a subdirectory called <code>wallaroo-release-0.5.3</code>):</p>
+<pre><code class="lang-bash">curl -L -o wallaroo-release-0.5.3.tar.gz <span class="hljs-string">&apos;https://wallaroo-labs.bintray.com/wallaroolabs-rc/wallaroo/release-0.5.3/wallaroo-release-0.5.3.tar.gz&apos;</span>
+mkdir wallaroo-release-0.5.3
+tar -C wallaroo-release-0.5.3 --strip-components=1 -xzf wallaroo-release-0.5.3.tar.gz
+rm wallaroo-release-0.5.3.tar.gz
+<span class="hljs-built_in">cd</span> wallaroo-release-0.5.3
 </code></pre>
 <h2 id="install-make">Install make</h2>
 <pre><code class="lang-bash">sudo apt-get update
@@ -1293,19 +1300,19 @@ sudo make install
 <pre><code class="lang-bash">sudo apt-get install -y python-dev
 </code></pre>
 <h2 id="download-and-configure-the-metrics-ui">Download and configure the Metrics UI</h2>
-<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-release-0.5.2/
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-release-0.5.3/
 mkdir bin
-curl -L -o Wallaroo_Metrics_UI-release-0.5.2-x86_64.AppImage <span class="hljs-string">&apos;https://wallaroo-labs.bintray.com/wallaroolabs-rc/wallaroo/release-0.5.2/Wallaroo_Metrics_UI-release-0.5.2-x86_64.AppImage&apos;</span>
-chmod +x Wallaroo_Metrics_UI-release-0.5.2-x86_64.AppImage
-./Wallaroo_Metrics_UI-release-0.5.2-x86_64.AppImage --appimage-extract
+curl -L -o Wallaroo_Metrics_UI-release-0.5.3-x86_64.AppImage <span class="hljs-string">&apos;https://wallaroo-labs.bintray.com/wallaroolabs-rc/wallaroo/release-0.5.3/Wallaroo_Metrics_UI-release-0.5.3-x86_64.AppImage&apos;</span>
+chmod +x Wallaroo_Metrics_UI-release-0.5.3-x86_64.AppImage
+./Wallaroo_Metrics_UI-release-0.5.3-x86_64.AppImage --appimage-extract
 mv squashfs-root bin/metrics_ui
 sed -i <span class="hljs-string">&apos;s/sleep 4/sleep 0/&apos;</span> bin/metrics_ui/AppRun
-rm Wallaroo_Metrics_UI-release-0.5.2-x86_64.AppImage
+rm Wallaroo_Metrics_UI-release-0.5.3-x86_64.AppImage
 ln <span class="hljs-_">-s</span> metrics_ui/AppRun bin/metrics_reporter_ui
 </code></pre>
 <h2 id="compiling-machida">Compiling Machida</h2>
 <p>Machida is the program that runs Wallaroo Python applications. Change to the Wallaroo directory:</p>
-<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-release-0.5.2/
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-release-0.5.3/
 make build-machida-all
 cp machida/build/machida bin
 cp machida/wallaroo.py bin
@@ -1315,7 +1322,7 @@ cp machida/wallaroo.py bin
 <p>The Cluster Shutdown tool is used to instruct the cluster to shutdown cleanly, clearing away any resilience and recovery files it may have created.</p>
 <p>The Cluster Shrinker tool is used to tell a running cluster to reduce the number of workers in the cluster and to query the cluster for information about how many workers are eligible for removal.</p>
 <p>To compile all of the tools, change to the root Wallaroo directory:</p>
-<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-release-0.5.2/
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-release-0.5.3/
 make build-giles-sender-all build-utils-all
 cp utils/data_receiver/data_receiver bin
 cp utils/cluster_shrinker/cluster_shrinker bin
@@ -1375,7 +1382,7 @@ cp giles/sender/sender bin
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Ubuntu Installation","level":"4.2.5.1.1","depth":4,"next":{"title":"Run a Wallaroo Application","level":"4.2.5.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application.md","ref":"book/getting-started/run-a-wallaroo-application.md","articles":[]},"previous":{"title":"Setting up Your Environment","level":"4.2.5.1","depth":3,"path":"book/getting-started/setup.md","ref":"book/getting-started/setup.md","articles":[{"title":"Ubuntu Installation","level":"4.2.5.1.1","depth":4,"path":"book/getting-started/linux-setup.md","ref":"book/getting-started/linux-setup.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/getting-started/linux-setup.md","mtime":"2018-08-23T17:05:58.131Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-23T17:06:06.569Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Ubuntu Installation","level":"4.2.5.1.1","depth":4,"next":{"title":"Run a Wallaroo Application","level":"4.2.5.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application.md","ref":"book/getting-started/run-a-wallaroo-application.md","articles":[]},"previous":{"title":"Setting up Your Environment","level":"4.2.5.1","depth":3,"path":"book/getting-started/setup.md","ref":"book/getting-started/setup.md","articles":[{"title":"Ubuntu Installation","level":"4.2.5.1.1","depth":4,"path":"book/getting-started/linux-setup.md","ref":"book/getting-started/linux-setup.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/getting-started/linux-setup.md","mtime":"2018-09-20T23:14:20.841Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-20T23:14:29.560Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

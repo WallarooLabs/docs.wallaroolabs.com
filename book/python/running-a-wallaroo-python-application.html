@@ -1011,7 +1011,20 @@
             
         </li>
     
-        <li class="chapter " data-level="6.3" data-path="../running-wallaroo/wallaroo-command-line-options.html">
+        <li class="chapter " data-level="6.3" data-path="../running-wallaroo/resilience.html">
+            
+                <a href="../running-wallaroo/resilience.html">
+            
+                    
+                    Resilience
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="../running-wallaroo/wallaroo-command-line-options.html">
             
                 <a href="../running-wallaroo/wallaroo-command-line-options.html">
             
@@ -1142,18 +1155,12 @@
         
         
     
-        <li class="chapter " data-level="8.1" data-path="../legal/terms.html">
-            
-                <a href="../legal/terms.html">
-            
-                    
-                    Terms and Conditions
-            
-                </a>
-            
 
-            
-        </li>
+    
+        
+        <li class="header">* Terms and Conditions</li>
+        
+        
     
 
     
@@ -1215,17 +1222,17 @@
 </ul>
 <p>Once loaded, Wallaroo executes <code>application_setup()</code>, constructs the appropriate topology, and enters a <code>ready</code> state where it awaits incoming data to process.</p>
 <h3 id="a-note-about-pythonpath">A Note About PYTHONPATH</h3>
-<p>Machida uses the <code>PYTHONPATH</code> environment variable to find modules that are imported by the application. You will have at least two modules in your <code>PYTHONPATH</code>: the application module and the <code>wallaroo</code> module. For example, if you have followed the directions for setting up the tutorial then the Wallaroo Python module is in <code>$HOME/wallaroo-tutorial/wallaroo-release-0.5.2/machida/wallaroo.py</code> and the &quot;Celsius to Fahrenheit&quot; application module is in <code>$HOME/wallaroo-tutorial/wallaroo-release-0.5.2/examples/python/celsius/celsius.py</code>, so you would export <code>PYTHONPATH</code> like this:</p>
-<pre><code class="lang-bash"><span class="hljs-built_in">export</span> PYTHONPATH=<span class="hljs-string">&quot;<span class="hljs-variable">$PYTHONPATH</span>:<span class="hljs-variable">$HOME</span>/wallaroo-tutorial/wallaroo-release-0.5.2/machida:<span class="hljs-variable">$HOME</span>/wallaroo-tutorial/wallaroo-release-0.5.2/examples/python/celsius&quot;</span>
+<p>Machida uses the <code>PYTHONPATH</code> environment variable to find modules that are imported by the application. You will have at least two modules in your <code>PYTHONPATH</code>: the application module and the <code>wallaroo</code> module. For example, if you have followed the directions for setting up the tutorial then the Wallaroo Python module is in <code>$HOME/wallaroo-tutorial/wallaroo-release-0.5.3/machida/wallaroo.py</code> and the &quot;Celsius to Fahrenheit&quot; application module is in <code>$HOME/wallaroo-tutorial/wallaroo-release-0.5.3/examples/python/celsius/celsius.py</code>, so you would export <code>PYTHONPATH</code> like this:</p>
+<pre><code class="lang-bash"><span class="hljs-built_in">export</span> PYTHONPATH=<span class="hljs-string">&quot;<span class="hljs-variable">$PYTHONPATH</span>:<span class="hljs-variable">$HOME</span>/wallaroo-tutorial/wallaroo-release-0.5.3/machida/lib:<span class="hljs-variable">$HOME</span>/wallaroo-tutorial/wallaroo-release-0.5.3/examples/python/celsius&quot;</span>
 </code></pre>
 <p>If you are working your way through the tutorial you might find it easier to set up <code>PYTHONPATH</code> to use whatever directory you are in as the search path so that you can run the application that is the current directory. To do this, you would export <code>PYTHONPATH</code> like this:</p>
-<pre><code class="lang-bash"><span class="hljs-built_in">export</span> PYTHONPATH=<span class="hljs-string">&quot;<span class="hljs-variable">$PYTHONPATH</span>:<span class="hljs-variable">$HOME</span>/wallaroo-tutorial/wallaroo-release-0.5.2/machida:.&quot;</span>
+<pre><code class="lang-bash"><span class="hljs-built_in">export</span> PYTHONPATH=<span class="hljs-string">&quot;<span class="hljs-variable">$PYTHONPATH</span>:<span class="hljs-variable">$HOME</span>/wallaroo-tutorial/wallaroo-release-0.5.3/machida/lib:.&quot;</span>
 </code></pre>
 <p>If you chose to do this while working through the tutorial, you might also find it useful to add the path to the <code>machida</code> executable to your <code>PATH</code>, which can be done like this:</p>
-<pre><code class="lang-bash"><span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$HOME</span>/wallaroo-tutorial/wallaroo-release-0.5.2/machida/build&quot;</span>
+<pre><code class="lang-bash"><span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$HOME</span>/wallaroo-tutorial/wallaroo-release-0.5.3/machida/build&quot;</span>
 </code></pre>
 <h2 id="next-steps">Next Steps</h2>
-<p>To try running an example, go to <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.5.2/examples/python/reverse/" target="_blank">the Reverse example application</a> and follow its <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.5.2/examples/python/reverse/README.md" target="_blank">instructions</a>.</p>
+<p>To try running an example, go to <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.5.3/examples/python/reverse/" target="_blank">the Reverse example application</a> and follow its <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.5.3/examples/python/reverse/README.md" target="_blank">instructions</a>.</p>
 <p>To learn how to write your own Wallaroo Python application, continue to <a href="writing-your-own-application.html">Writing Your Own Application</a></p>
 <p>To find out more detail on the command line arguments and other aspects of running Wallaroo application, see the <a href="../running-wallaroo/running-wallaroo.html">Running Wallaroo</a> section.</p>
 
@@ -1271,7 +1278,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Running a Wallaroo Python Application","level":"4.3.1","depth":2,"next":{"title":"Writing Your Own Application","level":"4.3.2","depth":2,"path":"book/python/writing-your-own-application.md","ref":"book/python/writing-your-own-application.md","articles":[]},"previous":{"title":"Wallaroo Python API","level":"4.3","depth":1,"path":"book/python/wallaroo-python-api.md","ref":"book/python/wallaroo-python-api.md","articles":[{"title":"Running a Wallaroo Python Application","level":"4.3.1","depth":2,"path":"book/python/running-a-wallaroo-python-application.md","ref":"book/python/running-a-wallaroo-python-application.md","articles":[]},{"title":"Writing Your Own Application","level":"4.3.2","depth":2,"path":"book/python/writing-your-own-application.md","ref":"book/python/writing-your-own-application.md","articles":[]},{"title":"Writing Your Own Stateful Application","level":"4.3.3","depth":2,"path":"book/python/writing-your-own-stateful-application.md","ref":"book/python/writing-your-own-stateful-application.md","articles":[]},{"title":"Writing Your Own Partitioned Stateful Application","level":"4.3.4","depth":2,"path":"book/python/writing-your-own-partitioned-stateful-application.md","ref":"book/python/writing-your-own-partitioned-stateful-application.md","articles":[]},{"title":"Word Count","level":"4.3.5","depth":2,"path":"book/python/word-count.md","ref":"book/python/word-count.md","articles":[]},{"title":"Interworker Serialization and Resilience","level":"4.3.6","depth":2,"path":"book/python/interworker-serialization-and-resilience.md","ref":"book/python/interworker-serialization-and-resilience.md","articles":[]},{"title":"Wallaroo Python API","level":"4.3.7","depth":2,"path":"book/python/api.md","ref":"book/python/api.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/running-a-wallaroo-python-application.md","mtime":"2018-08-23T17:05:58.211Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-23T17:06:06.569Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Running a Wallaroo Python Application","level":"4.3.1","depth":2,"next":{"title":"Writing Your Own Application","level":"4.3.2","depth":2,"path":"book/python/writing-your-own-application.md","ref":"book/python/writing-your-own-application.md","articles":[]},"previous":{"title":"Wallaroo Python API","level":"4.3","depth":1,"path":"book/python/wallaroo-python-api.md","ref":"book/python/wallaroo-python-api.md","articles":[{"title":"Running a Wallaroo Python Application","level":"4.3.1","depth":2,"path":"book/python/running-a-wallaroo-python-application.md","ref":"book/python/running-a-wallaroo-python-application.md","articles":[]},{"title":"Writing Your Own Application","level":"4.3.2","depth":2,"path":"book/python/writing-your-own-application.md","ref":"book/python/writing-your-own-application.md","articles":[]},{"title":"Writing Your Own Stateful Application","level":"4.3.3","depth":2,"path":"book/python/writing-your-own-stateful-application.md","ref":"book/python/writing-your-own-stateful-application.md","articles":[]},{"title":"Writing Your Own Partitioned Stateful Application","level":"4.3.4","depth":2,"path":"book/python/writing-your-own-partitioned-stateful-application.md","ref":"book/python/writing-your-own-partitioned-stateful-application.md","articles":[]},{"title":"Word Count","level":"4.3.5","depth":2,"path":"book/python/word-count.md","ref":"book/python/word-count.md","articles":[]},{"title":"Interworker Serialization and Resilience","level":"4.3.6","depth":2,"path":"book/python/interworker-serialization-and-resilience.md","ref":"book/python/interworker-serialization-and-resilience.md","articles":[]},{"title":"Wallaroo Python API","level":"4.3.7","depth":2,"path":"book/python/api.md","ref":"book/python/api.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/running-a-wallaroo-python-application.md","mtime":"2018-09-20T23:14:20.745Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-20T23:14:29.560Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
