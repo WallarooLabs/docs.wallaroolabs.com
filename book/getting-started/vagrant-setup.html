@@ -567,7 +567,20 @@
             
         </li>
     
-        <li class="chapter " data-level="4.3.7" data-path="../python/api.html">
+        <li class="chapter " data-level="4.3.7" data-path="../python/using-connectors.html">
+            
+                <a href="../python/using-connectors.html">
+            
+                    
+                    Using Connectors
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3.8" data-path="../python/api.html">
             
                 <a href="../python/api.html">
             
@@ -1209,9 +1222,8 @@
                                 
                                 <h1 id="setting-up-your-environment-for-wallaroo-in-vagrant">Setting Up Your Environment for Wallaroo in Vagrant</h1>
 <p>To get you up and running quickly with Wallaroo, we have provided a Vagrantfile which includes Wallaroo and related tools needed to run and modify a few example applications. We should warn that this Vagrantfile was created with the intent of getting users started quickly with Wallaroo and is not intended to be suitable for production. Wallaroo in Vagrant runs on Ubuntu Linux Xenial.</p>
-<p><strong>Note:</strong> For Windows users, this section of the guide assumes you are using Powershell.</p>
 <h2 id="set-up-environment-for-the-wallaroo-tutorial">Set up Environment for the Wallaroo Tutorial</h2>
-<h3 id="linux-ubuntu-macos-and-windows-via-powershell">Linux Ubuntu, MacOS, and Windows via Powershell</h3>
+<h3 id="linux-ubuntu-and-macos">Linux Ubuntu and MacOS</h3>
 <p>If you haven&apos;t already done so, create a directory called <code>~/wallaroo-tutorial</code> and navigate there by running:</p>
 <pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/
 mkdir ~/wallaroo-tutorial
@@ -1223,6 +1235,19 @@ mkdir wallaroo-release-0.5.3
 tar -C wallaroo-release-0.5.3 --strip-components=1 -xzf wallaroo-release-0.5.3.tar.gz
 rm wallaroo-release-0.5.3.tar.gz
 <span class="hljs-built_in">cd</span> wallaroo-release-0.5.3
+</code></pre>
+<h3 id="windows-via-powershell">Windows via Powershell</h3>
+<p><strong>Note:</strong> This section of the guide assumes you are using Powershell.</p>
+<p>Download and install git from <a href="https://gitforwindows.org/" target="_blank">Git for Windows</a> and install it.</p>
+<p>If you haven&apos;t already done so, create a directory called <code>~/wallaroo-tutorial</code> and navigate there by running:</p>
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/
+mkdir ~/wallaroo-tutorial
+<span class="hljs-built_in">cd</span> ~/wallaroo-tutorial
+</code></pre>
+<p>This will be our base directory in what follows. If you haven&apos;t already cloned the Wallaroo repo, do so now (this will create a subdirectory called <code>wallaroo-release-0.5.3</code>):</p>
+<pre><code class="lang-bash">git <span class="hljs-built_in">clone</span> https://github.com/WallarooLabs/wallaroo wallaroo-release-0.5.3
+<span class="hljs-built_in">cd</span> wallaroo-release-0.5.3
+git checkout release-0.5.3
 </code></pre>
 <h2 id="installing-virtualbox">Installing VirtualBox</h2>
 <p>The Wallaroo Vagrant environment is dependent on the default provider,<a href="https://www.vagrantup.com/docs/virtualbox/" target="_blank">VirtualBox</a>. To install VirtualBox, download a installer or package for your OS <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank">here</a>. Linux users can also use <code>apt-get</code> as documented below.</p>
@@ -1311,7 +1336,7 @@ vagrant halt
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Setting Up Your Environment","level":"4.2.3.1","depth":3,"next":{"title":"Run a Wallaroo Application in Vagrant","level":"4.2.3.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-vagrant.md","ref":"book/getting-started/run-a-wallaroo-application-vagrant.md","articles":[]},"previous":{"title":"Installing with Vagrant","level":"4.2.3","depth":2,"path":"book/getting-started/installing-with-vagrant.md","ref":"book/getting-started/installing-with-vagrant.md","articles":[{"title":"Setting Up Your Environment","level":"4.2.3.1","depth":3,"path":"book/getting-started/vagrant-setup.md","ref":"book/getting-started/vagrant-setup.md","articles":[]},{"title":"Run a Wallaroo Application in Vagrant","level":"4.2.3.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-vagrant.md","ref":"book/getting-started/run-a-wallaroo-application-vagrant.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/getting-started/vagrant-setup.md","mtime":"2018-09-20T23:14:20.841Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-20T23:14:29.560Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Setting Up Your Environment","level":"4.2.3.1","depth":3,"next":{"title":"Run a Wallaroo Application in Vagrant","level":"4.2.3.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-vagrant.md","ref":"book/getting-started/run-a-wallaroo-application-vagrant.md","articles":[]},"previous":{"title":"Installing with Vagrant","level":"4.2.3","depth":2,"path":"book/getting-started/installing-with-vagrant.md","ref":"book/getting-started/installing-with-vagrant.md","articles":[{"title":"Setting Up Your Environment","level":"4.2.3.1","depth":3,"path":"book/getting-started/vagrant-setup.md","ref":"book/getting-started/vagrant-setup.md","articles":[]},{"title":"Run a Wallaroo Application in Vagrant","level":"4.2.3.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-vagrant.md","ref":"book/getting-started/run-a-wallaroo-application-vagrant.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/getting-started/vagrant-setup.md","mtime":"2018-09-27T00:03:11.335Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-27T00:03:18.349Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

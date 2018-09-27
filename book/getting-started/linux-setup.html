@@ -567,7 +567,20 @@
             
         </li>
     
-        <li class="chapter " data-level="4.3.7" data-path="../python/api.html">
+        <li class="chapter " data-level="4.3.7" data-path="../python/using-connectors.html">
+            
+                <a href="../python/using-connectors.html">
+            
+                    
+                    Using Connectors
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3.8" data-path="../python/api.html">
             
                 <a href="../python/api.html">
             
@@ -1240,11 +1253,14 @@ sudo apt-get install -y build-essential
 <h2 id="install-libssl-dev">Install libssl-dev</h2>
 <pre><code class="lang-bash">sudo apt-get install -y libssl-dev
 </code></pre>
-<h3 id="install-gcc-5-or-higher">Install GCC 5 or Higher</h3>
-<p> If you have at least GCC 5 installed on your machine, you don&apos;t need to do anything. If you have gcc 4.9 or lower, you&apos;ll need to upgrade. You can check your <code>gcc</code> version by running:</p>
+<h3 id="install-gcc-47-or-higher">Install GCC 4.7 or Higher</h3>
+<p> If you have at least GCC 4.7 installed on your machine, you don&apos;t need to do anything. If you have gcc 4.6 or lower, you&apos;ll need to upgrade. You can check your <code>gcc</code> version by running:</p>
 <pre><code class="lang-bash">gcc --version
 </code></pre>
-<p>To upgrade to GCC 5:</p>
+<p>To upgrade to GCC 5 if you don&apos;t have at least GCC 4.7:</p>
+<pre><code class="lang-bash">sudo apt-get install software-properties-common
+</code></pre>
+<p>then</p>
 <pre><code class="lang-bash">sudo add-apt-repository -y ppa:ubuntu-toolchain-r/<span class="hljs-built_in">test</span>
 </code></pre>
 <p>then</p>
@@ -1313,9 +1329,12 @@ ln <span class="hljs-_">-s</span> metrics_ui/AppRun bin/metrics_reporter_ui
 <h2 id="compiling-machida">Compiling Machida</h2>
 <p>Machida is the program that runs Wallaroo Python applications. Change to the Wallaroo directory:</p>
 <pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-release-0.5.3/
+make build-machida-all resilience=on
+cp machida/build/machida bin/machida-resilience
+make clean-machida-all
 make build-machida-all
 cp machida/build/machida bin
-cp machida/wallaroo.py bin
+cp -r machida/lib/ bin/pylib
 </code></pre>
 <h2 id="compiling-giles-sender-data-receiver-cluster-shutdown-and-cluster-shrinker-tools">Compiling Giles Sender, Data Receiver, Cluster Shutdown, and Cluster Shrinker tools</h2>
 <p>Giles Sender is used to supply data to Wallaroo applications over TCP, and Data Receiver is used as a fast TCP Sink that optionally writes the messages it receives to the console. The two together are useful when developing and testing applications that use TCP Sources and a TCP Sink.</p>
@@ -1382,7 +1401,7 @@ cp giles/sender/sender bin
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Ubuntu Installation","level":"4.2.5.1.1","depth":4,"next":{"title":"Run a Wallaroo Application","level":"4.2.5.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application.md","ref":"book/getting-started/run-a-wallaroo-application.md","articles":[]},"previous":{"title":"Setting up Your Environment","level":"4.2.5.1","depth":3,"path":"book/getting-started/setup.md","ref":"book/getting-started/setup.md","articles":[{"title":"Ubuntu Installation","level":"4.2.5.1.1","depth":4,"path":"book/getting-started/linux-setup.md","ref":"book/getting-started/linux-setup.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/getting-started/linux-setup.md","mtime":"2018-09-20T23:14:20.841Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-20T23:14:29.560Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Ubuntu Installation","level":"4.2.5.1.1","depth":4,"next":{"title":"Run a Wallaroo Application","level":"4.2.5.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application.md","ref":"book/getting-started/run-a-wallaroo-application.md","articles":[]},"previous":{"title":"Setting up Your Environment","level":"4.2.5.1","depth":3,"path":"book/getting-started/setup.md","ref":"book/getting-started/setup.md","articles":[{"title":"Ubuntu Installation","level":"4.2.5.1.1","depth":4,"path":"book/getting-started/linux-setup.md","ref":"book/getting-started/linux-setup.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/getting-started/linux-setup.md","mtime":"2018-09-27T00:03:11.331Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-27T00:03:18.349Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
