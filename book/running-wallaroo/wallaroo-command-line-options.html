@@ -64,7 +64,7 @@
     <link rel="next" href="../appendix/virtualenv.html" />
     
     
-    <link rel="prev" href="autoscale.html" />
+    <link rel="prev" href="resilience.html" />
     
 
     </head>
@@ -567,7 +567,20 @@
             
         </li>
     
-        <li class="chapter " data-level="4.3.7" data-path="../python/api.html">
+        <li class="chapter " data-level="4.3.7" data-path="../python/using-connectors.html">
+            
+                <a href="../python/using-connectors.html">
+            
+                    
+                    Using Connectors
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3.8" data-path="../python/api.html">
             
                 <a href="../python/api.html">
             
@@ -1011,7 +1024,20 @@
             
         </li>
     
-        <li class="chapter active" data-level="6.3" data-path="wallaroo-command-line-options.html">
+        <li class="chapter " data-level="6.3" data-path="resilience.html">
+            
+                <a href="resilience.html">
+            
+                    
+                    Resilience
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="6.4" data-path="wallaroo-command-line-options.html">
             
                 <a href="wallaroo-command-line-options.html">
             
@@ -1142,18 +1168,12 @@
         
         
     
-        <li class="chapter " data-level="8.1" data-path="../legal/terms.html">
-            
-                <a href="../legal/terms.html">
-            
-                    
-                    Terms and Conditions
-            
-                </a>
-            
 
-            
-        </li>
+    
+        
+        <li class="header">* Terms and Conditions</li>
+        
+        
     
 
     
@@ -1229,8 +1249,10 @@
   --join/j [When a new worker is joining a running cluster, pass the
     control channel address of any worker as the value for this
     parameter]
-  --stop-world/u [Sets pause before state migration after the stop the
+  --stop-pause/u [Sets pause before state migration after the stop the
     world]
+  --time-between-checkpoints [Sets the interval between checkpoints for
+    resilience (in nanoseconds)]
 </span></code></pre>
 <p>Wallaroo currently supports one source per pipeline, which is setup by the application code. Each pipeline may have one or more sinks, each of which is also set up by the application code.</p>
 <p>In order to monitor metrics, the target address for metrics data should be defined via the <code>--metrics/-m</code> parameter, using a <code>host:port</code> format (e.g. <code>127.0.0.1:5002</code>).</p>
@@ -1276,7 +1298,7 @@ argument:</p>
 
             
                 
-                <a href="autoscale.html" class="navigation navigation-prev " aria-label="Previous page: Autoscale">
+                <a href="resilience.html" class="navigation navigation-prev " aria-label="Previous page: Resilience">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -1292,7 +1314,7 @@ argument:</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Command line options","level":"6.3","depth":1,"next":{"title":"Wallaroo and Virtualenv","level":"7.1","depth":1,"path":"book/appendix/virtualenv.md","ref":"book/appendix/virtualenv.md","articles":[]},"previous":{"title":"Autoscale","level":"6.2","depth":1,"path":"book/running-wallaroo/autoscale.md","ref":"book/running-wallaroo/autoscale.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/running-wallaroo/wallaroo-command-line-options.md","mtime":"2018-08-24T14:56:03.504Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-24T14:56:10.266Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Command line options","level":"6.4","depth":1,"next":{"title":"Wallaroo and Virtualenv","level":"7.1","depth":1,"path":"book/appendix/virtualenv.md","ref":"book/appendix/virtualenv.md","articles":[]},"previous":{"title":"Resilience","level":"6.3","depth":1,"path":"book/running-wallaroo/resilience.md","ref":"book/running-wallaroo/resilience.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/running-wallaroo/wallaroo-command-line-options.md","mtime":"2018-09-28T18:10:20.924Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-28T18:10:27.612Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

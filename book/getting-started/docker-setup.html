@@ -567,7 +567,20 @@
             
         </li>
     
-        <li class="chapter " data-level="4.3.7" data-path="../python/api.html">
+        <li class="chapter " data-level="4.3.7" data-path="../python/using-connectors.html">
+            
+                <a href="../python/using-connectors.html">
+            
+                    
+                    Using Connectors
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="4.3.8" data-path="../python/api.html">
             
                 <a href="../python/api.html">
             
@@ -1011,7 +1024,20 @@
             
         </li>
     
-        <li class="chapter " data-level="6.3" data-path="../running-wallaroo/wallaroo-command-line-options.html">
+        <li class="chapter " data-level="6.3" data-path="../running-wallaroo/resilience.html">
+            
+                <a href="../running-wallaroo/resilience.html">
+            
+                    
+                    Resilience
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="6.4" data-path="../running-wallaroo/wallaroo-command-line-options.html">
             
                 <a href="../running-wallaroo/wallaroo-command-line-options.html">
             
@@ -1142,18 +1168,12 @@
         
         
     
-        <li class="chapter " data-level="8.1" data-path="../legal/terms.html">
-            
-                <a href="../legal/terms.html">
-            
-                    
-                    Terms and Conditions
-            
-                </a>
-            
 
-            
-        </li>
+    
+        
+        <li class="header">* Terms and Conditions</li>
+        
+        
     
 
     
@@ -1214,7 +1234,7 @@
 <p>Installing Docker will result in it running on your machine. After you reboot your machine, that will no longer be the case. In the future, you&apos;ll need to have Docker running in order to use a variety of commands in this book. We suggest that you <a href="https://docs.docker.com/engine/installation/linux/linux-postinstall/#configure-docker-to-start-on-boot" target="_blank">set up Docker to boot automatically</a>.</p>
 <p>All of the Docker commands throughout the rest of this manual assume that you have permission to run Docker commands as a non-root user. Follow the <a href="https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user" target="_blank">Manage Docker as a non-root user</a> instructions to set that up. If you don&apos;t want to allow a non-root user to run Docker commands, you&apos;ll need to run <code>sudo docker</code> anywhere you see <code>docker</code> for a command.</p>
 <h2 id="get-the-official-wallaroo-image">Get the official Wallaroo image:</h2>
-<pre><code class="lang-bash">docker pull wallaroo-labs-docker-wallaroolabs.bintray.io/release/wallaroo:0.5.2
+<pre><code class="lang-bash">docker pull wallaroo-labs-docker-wallaroolabs.bintray.io/release/wallaroo:0.5.3
 </code></pre>
 <h2 id="whats-included-in-the-wallaroo-docker-image">What&apos;s Included in the Wallaroo Docker image</h2>
 <ul>
@@ -1230,7 +1250,7 @@
 </li>
 <li><p><strong>Wallaroo Source Code</strong>: full Wallaroo source code is provided, including Python example applications.</p>
 </li>
-<li><p><strong>Machida with Resilience</strong>: runs Wallaroo Python applications and writes state to disk for recovery. This version of Machida can be used via the <code>machida-resilience</code> binary. Note that this is an Enterprise feature and requires a paid user agreement for use in production. See the <a href="../python/interworker-serialization-and-resilience.html">Interworker Serialization and Resilience</a> documentation for general information and the <a href="../running-wallaroo/wallaroo-command-line-options.html#resilience">Resilience</a> section of our <a href="../running-wallaroo/wallaroo-command-line-options.html">Command Line Options</a> documentation for information on its usage.</p>
+<li><p><strong>Machida with Resilience</strong>: runs Wallaroo Python applications and writes state to disk for recovery. This version of Machida can be used via the <code>machida-resilience</code> binary. See the <a href="../python/interworker-serialization-and-resilience.html">Interworker Serialization and Resilience</a> documentation for general information and the <a href="../running-wallaroo/wallaroo-command-line-options.html#resilience">Resilience</a> section of our <a href="../running-wallaroo/wallaroo-command-line-options.html">Command Line Options</a> documentation for information on its usage.</p>
 </li>
 </ul>
 <h2 id="additional-windows-setup">Additional Windows Setup</h2>
@@ -1297,7 +1317,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Setting Up Your Environment","level":"4.2.2.1","depth":3,"next":{"title":"Run a Wallaroo Application in Docker","level":"4.2.2.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-docker.md","ref":"book/getting-started/run-a-wallaroo-application-docker.md","articles":[]},"previous":{"title":"Installing with Docker","level":"4.2.2","depth":2,"path":"book/getting-started/installing-with-docker.md","ref":"book/getting-started/installing-with-docker.md","articles":[{"title":"Setting Up Your Environment","level":"4.2.2.1","depth":3,"path":"book/getting-started/docker-setup.md","ref":"book/getting-started/docker-setup.md","articles":[]},{"title":"Run a Wallaroo Application in Docker","level":"4.2.2.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-docker.md","ref":"book/getting-started/run-a-wallaroo-application-docker.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/getting-started/docker-setup.md","mtime":"2018-08-24T14:56:03.552Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-08-24T14:56:10.266Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Setting Up Your Environment","level":"4.2.2.1","depth":3,"next":{"title":"Run a Wallaroo Application in Docker","level":"4.2.2.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-docker.md","ref":"book/getting-started/run-a-wallaroo-application-docker.md","articles":[]},"previous":{"title":"Installing with Docker","level":"4.2.2","depth":2,"path":"book/getting-started/installing-with-docker.md","ref":"book/getting-started/installing-with-docker.md","articles":[{"title":"Setting Up Your Environment","level":"4.2.2.1","depth":3,"path":"book/getting-started/docker-setup.md","ref":"book/getting-started/docker-setup.md","articles":[]},{"title":"Run a Wallaroo Application in Docker","level":"4.2.2.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-docker.md","ref":"book/getting-started/run-a-wallaroo-application-docker.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/getting-started/docker-setup.md","mtime":"2018-09-28T18:10:20.904Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-28T18:10:27.612Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
