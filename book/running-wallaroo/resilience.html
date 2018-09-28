@@ -1221,7 +1221,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="resilience">Resilience</h1>
-<p>Wallaroo is designed with built-in resilience. However, since the operations involved with maintaining resilience can impact performance, this mode is off by default. To enable resilience in a Wallaroo application, the binary needs to be built with <code>-D resilience</code> if using the <code>ponyc</code> compiler directly, or with <code>resilience=on</code> if using our Makefile build system (as with <code>Machida</code>).</p>
+<p>Wallaroo is designed with built-in resilience. However, since the operations involved with maintaining resilience can impact performance, this mode is off by default. For python users, we provide a separate binary with resilience enabled: <code>machida-resilience</code> as part of the default installation. For Go and Ponyc users, To enable resilience in a Wallaroo application, the binary needs to be built with <code>-D resilience</code> if using the <code>ponyc</code> compiler directly, or with <code>resilience=on</code> if using our Makefile build system (as is the case with <code>Machida</code>).</p>
 <h2 id="how-does-wallaroo-implement-resilience">How Does Wallaroo Implement Resilience</h2>
 <p>Wallaroo&apos;s resilience is based on the Chandy-Lamport snapshotting algorithm that minimizes the impact of checkpointing on processing in-flight messages. Each worker maintains a resilience file, where it periodically saves a snapshot of its latest state. A checkpoint represents a consistent recovery line&#x2014;a specific generation of individual worker snapshots. This means that when a failed worker recovers, we can roll back the states in the cluster to the last checkpoint and begin processing again with the guarantee that all state in the system reflects a causally consistent history. The interval between checkpoints is configurable with the <code>--time-between-checkpoints</code> command line parameter (in nanoseconds).</p>
 <p>Since recovery involves a rollback to the last successful checkpoint, any data that was processed <em>after</em> that checkpoint will have to be resent by the sources.</p>
@@ -1230,20 +1230,38 @@
 <p>For example, if we were running the bundled Python example <a href="https://github.com/WallarooLabs/wallaroo/tree/master/examples/python/word_count_with_dynamic_keys/" target="_blank">word_count_with_dynamic_keys</a>, this might look something like:</p>
 <h3 id="running-the-resilience-example">Running the resilience example</h3>
 <p>In order to run the example you will need Machida with resilience enabled, Giles Sender, Data Receiver, and the Cluster Shutdown tool. If you haven&apos;t yet set up wallaroo, please visit our <a href="https://docs.wallaroolabs.com/book/getting-started/choosing-an-installation-option.html" target="_blank">setup</a> instructions to get started.</p>
-<h3 id="running-the-example">Running the example</h3>
-<p>The rest of the example should be run in the <code>examples/python/word_count_with_dynamic_keys</code> directory in the Wallaroo repository.
-You will need 4 shells to run this example.</p>
+<h4 id="starting-new-shells">Starting new shells</h4>
+<p>You will need 4 shells to run this example.
+For each shell you&apos;re expected to setup, you&apos;d have to run the following to configure the Wallaroo environment:</p>
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-release-0.5.3
+<span class="hljs-built_in">source</span> bin/activate
+<span class="hljs-built_in">cd</span> examples/python/word_count_with_dynamic_keys
+</code></pre>
 <ol>
 <li><p>Create the path where the workers will save their resilience snapshots.</p>
 <pre><code> mkdir -p /tmp/resilience-dir
 </code></pre></li>
+<li><p>Shell 1: Start the Metrics UI</p>
+<p> To start the Metrics UI run:</p>
+<pre><code class="lang-bash"> metrics_reporter_ui start
+</code></pre>
+<p> You can verify it started up correctly by visiting <a href="http://localhost:4000" target="_blank">http://localhost:4000</a>.</p>
+<p> If you need to restart the UI, run:</p>
+<pre><code class="lang-bash"> metrics_reporter_ui restart
+</code></pre>
+<p> When it&apos;s time to stop the UI, run:</p>
+<pre><code class="lang-bash"> metrics_reporter_ui stop
+</code></pre>
+<p> If you need to start the UI after stopping it, run:</p>
+<pre><code class="lang-bash"> metrics_reporter_ui start
+</code></pre>
+</li>
 <li><p>Shell 1: Start a data receiver</p>
-<pre><code> cd ~/wallaroo-tutorial/wallaroo-release-0.5.3/examples/python/word_count_with_dynamic_keys
- data_receiver --listen 127.0.0.1:7002 | tee received.txt
-</code></pre></li>
+<pre><code class="lang-bash"> data_receiver --listen 127.0.0.1:7002 | tee received.txt
+</code></pre>
+</li>
 <li><p>Shell 2: Start initializer</p>
-<pre><code> cd ~/wallaroo-tutorial/wallaroo-release-0.5.3/examples/python/word_count_with_dynamic_keys
- machida-resilience --application-module word_count_with_dynamic_keys \
+<pre><code class="lang-bash"> machida-resilience --application-module word_count_with_dynamic_keys \
    --in 127.0.0.1:7010 --out 127.0.0.1:7002 \
    --metrics 127.0.0.1:5001 --control 127.0.0.1:6000 \
    --data 127.0.0.1:6001 --external 127.0.0.1:5050 \
@@ -1251,10 +1269,10 @@ You will need 4 shells to run this example.</p>
    --resilience-dir /tmp/resilience-dir \
    --ponythreads=1 --ponynoblock \
    | tee initializer.log
-</code></pre></li>
+</code></pre>
+</li>
 <li><p>Shell 3: Start worker</p>
-<pre><code> cd ~/wallaroo-tutorial/wallaroo-release-0.5.3/examples/python/word_count_with_dynamic_keys
- machida-resilience --application-module word_count_with_dynamic_keys \
+<pre><code class="lang-bash"> machida-resilience --application-module word_count_with_dynamic_keys \
    --in 127.0.0.1:7010 --out 127.0.0.1:7002 \
    --metrics 127.0.0.1:5001 --control 127.0.0.1:6000 \
    --my-data 127.0.0.1:6003 --my-control 127.0.0.1:6002 \
@@ -1263,24 +1281,27 @@ You will need 4 shells to run this example.</p>
    --resilience-dir /tmp/resilience-dir \
    --ponythreads=1 --ponynoblock \
    | tee worker1.log
-</code></pre></li>
+</code></pre>
+</li>
 <li><p>Shell 4: Start sender</p>
-<pre><code> cd ~/wallaroo-tutorial/wallaroo-release-0.5.3/examples/python/word_count_with_dynamic_keys
- sender --host 127.0.0.1:7010 --file count_this.txt --batch-size 5 \
+<pre><code class="lang-bash"> sender --host 127.0.0.1:7010 --file count_this.txt --batch-size 5 \
    --interval 1_000_000_000 --messages 10000000 --ponythreads=1 \
    --ponynoblock --repeat --no-write
-</code></pre></li>
+</code></pre>
+</li>
 <li><p>Wait a few seconds for the internal states to update and for some checkpoints to complete</p>
 </li>
 <li>Shell 4: Stop the sender (<code>Ctrl-C</code>)</li>
 <li><p>Shell 4: Kill the worker to simulate a crash (using SIGKILL)</p>
-<pre><code> pkill -f -KILL machida.*worker1
-</code></pre></li>
+<pre><code class="lang-bash"> pkill <span class="hljs-_">-f</span> -KILL machida.*worker1
+</code></pre>
+</li>
 <li><p>Shell 4: Send some data directly to our data receiver to mark in the sink where the crash occurred (for demonstration purposes)</p>
-<pre><code> echo &apos;&lt;&lt;CRASH-and-RECOVER&gt;&gt;&apos; | nc -q1 127.0.0.1 7002
-</code></pre></li>
+<pre><code class="lang-bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&apos;&lt;&lt;CRASH-and-RECOVER&gt;&gt;&apos;</span> | nc -q1 127.0.0.1 7002
+</code></pre>
+</li>
 <li><p>Shell 3: Restart worker1 with the same command we used above, but save its log output to a new file</p>
-<pre><code>machida-resilience --application-module word_count_with_dynamic_keys \
+<pre><code class="lang-bash">machida-resilience --application-module word_count_with_dynamic_keys \
   --in 127.0.0.1:7010 --out 127.0.0.1:7002 \
   --metrics 127.0.0.1:5001 --control 127.0.0.1:6000 \
   --my-data 127.0.0.1:6003 --my-control 127.0.0.1:6002 \
@@ -1289,33 +1310,42 @@ You will need 4 shells to run this example.</p>
   --resilience-dir /tmp/resilience-dir \
   --ponythreads=1 --ponynoblock \
   | tee worker1.recovered.log
-</code></pre></li>
+</code></pre>
+</li>
 <li><p>Shell 4: Restart the sender</p>
-<pre><code>sender --host 127.0.0.1:7010 --file count_this.txt --batch-size 5 \
+<pre><code class="lang-bash">sender --host 127.0.0.1:7010 --file count_this.txt --batch-size 5 \
   --interval 1_000_000_000 --messages 10000000 --ponythreads=1 \
   --ponynoblock --repeat --no-write
-</code></pre></li>
+</code></pre>
+</li>
 <li><p>Shell 4: Let things run for a few more seconds before shutting down the sender (<code>Ctrl-C</code>), and then shut down the cluster with the <code>cluster_shutdown</code> tool.</p>
-<pre><code>cluster_shutdown 127.0.0.1:5050
-</code></pre></li>
+<pre><code class="lang-bash">cluster_shutdown 127.0.0.1:5050
+</code></pre>
+</li>
 </ol>
 <h3 id="verifying-that-recovery-was-successful">Verifying that recovery was successful</h3>
 <p>To verify that recovery was successful, we turn first to the recovering worker&apos;s log file, and look for the text</p>
-<pre><code>  Recovering from recovery files!
-  Attempting to recover...
+<pre><code>```
+Recovering from recovery files!
+Attempting to recover...
+```
 </code></pre><p>immediately after the license notifications.
 To see that recovery was successful, we next look for the text</p>
-<pre><code>    |~~ - Recovery COMPLETE - ~~|
-    ~~~Resuming message processing.~~~
-    |~~ INIT PHASE III: Application is ready to work! ~~|
+<pre><code>```
+|~~ - Recovery COMPLETE - ~~|
+~~~Resuming message processing.~~~
+|~~ INIT PHASE III: Application is ready to work! ~~|
+```
 </code></pre><p>This informs us that the worker has recovered successfully and that the cluster is now ready to process incoming data again.</p>
 <p>To further see that the state was indeed recovered, we can look at the data received by the sink, in <code>received.txt</code>. In this case, we will look at a particular key, <code>amendment</code>, but you can do the same with any of the other keys:</p>
-<pre><code>    amendment =&gt; 11
-    ...
-    &lt;&lt;CRASH-and-RECOVER&gt;&gt;
-    ...
-    amendment =&gt; 12
-    ...
+<pre><code>```
+amendment =&gt; 11
+...
+&lt;&lt;CRASH-and-RECOVER&gt;&gt;
+...
+amendment =&gt; 12
+...
+```
 </code></pre>
                                 
                                 </section>
@@ -1359,7 +1389,7 @@ To see that recovery was successful, we next look for the text</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Resilience","level":"6.3","depth":1,"next":{"title":"Command line options","level":"6.4","depth":1,"path":"book/running-wallaroo/wallaroo-command-line-options.md","ref":"book/running-wallaroo/wallaroo-command-line-options.md","articles":[]},"previous":{"title":"Autoscale","level":"6.2","depth":1,"path":"book/running-wallaroo/autoscale.md","ref":"book/running-wallaroo/autoscale.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/running-wallaroo/resilience.md","mtime":"2018-09-27T03:33:31.448Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-27T03:33:37.112Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Resilience","level":"6.3","depth":1,"next":{"title":"Command line options","level":"6.4","depth":1,"path":"book/running-wallaroo/wallaroo-command-line-options.md","ref":"book/running-wallaroo/wallaroo-command-line-options.md","articles":[]},"previous":{"title":"Autoscale","level":"6.2","depth":1,"path":"book/running-wallaroo/autoscale.md","ref":"book/running-wallaroo/autoscale.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/running-wallaroo/resilience.md","mtime":"2018-09-28T04:18:46.083Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-28T04:18:52.576Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
