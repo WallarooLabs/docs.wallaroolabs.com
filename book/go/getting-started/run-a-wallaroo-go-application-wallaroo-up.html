@@ -1096,20 +1096,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.4" data-path="../../wallaroo-tools/giles-receiver.html">
-            
-                <a href="../../wallaroo-tools/giles-receiver.html">
-            
-                    
-                    Receiving Data over TCP with Giles Receiver
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.5" data-path="../../metrics/metrics-ui.html">
+        <li class="chapter " data-level="7.4" data-path="../../metrics/metrics-ui.html">
             
                 <a href="../../metrics/metrics-ui.html">
             
@@ -1122,20 +1109,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.6" data-path="../../appendix/decoding-giles-receiver-output.html">
-            
-                <a href="../../appendix/decoding-giles-receiver-output.html">
-            
-                    
-                    Decoding Giles Receiver Output
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.7" data-path="../../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
+        <li class="chapter " data-level="7.5" data-path="../../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
             
                 <a href="../../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
             
@@ -1148,7 +1122,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.8" data-path="../../appendix/wallaroo-in-docker-tips.html">
+        <li class="chapter " data-level="7.6" data-path="../../appendix/wallaroo-in-docker-tips.html">
             
                 <a href="../../appendix/wallaroo-in-docker-tips.html">
             
@@ -1232,7 +1206,7 @@
 <p>The Metrics UI process will be run in the background. The other three processes (data_receiver, sender, and Wallaroo) will run in the foreground. We recommend that you run each process in a separate terminal.</p>
 <h2 id="starting-new-shells">Starting new shells</h2>
 <p>For each Shell you&apos;re expected to setup, you&apos;d have to run the following to configure the Wallaroo environment:</p>
-<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-release-0.5.3
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-release-0.5.4
 <span class="hljs-built_in">source</span> bin/activate
 </code></pre>
 <p>This command will set up the environment variables for running Wallaroo Applications.</p>
@@ -1259,11 +1233,11 @@
 <p>Data Receiver will start up and receive data without creating any output. By default, it prints received data to standard out, but we are giving it the <code>--no-write</code> flag which results in no output.</p>
 <h2 id="shell-3-run-the-celsius-to-fahrenheit-application">Shell 3: Run the &quot;Celsius to Fahrenheit&quot; Application</h2>
 <p>First, we need to build the application.</p>
-<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-release-0.5.3/examples/go/celsius
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-release-0.5.4/examples/go/celsius
 make
 </code></pre>
 <p>Now that we have set up the &quot;Celsius to Fahrenheit&quot; application, and the metrics UI and something it can send output to up and running, we can run the application itself by executing the following command:</p>
-<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-release-0.5.3/examples/go/celsius
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-release-0.5.4/examples/go/celsius
 ./celsius --in 127.0.0.1:7000 \
   --out 127.0.0.1:5555 --metrics 127.0.0.1:5001 --control 127.0.0.1:6000 \
   --data 127.0.0.1:6001 --name worker-name --external 127.0.0.1:5050 \
@@ -1275,7 +1249,7 @@ make
 <p>You will now be able to start the <code>sender</code> with the following command:</p>
 <pre><code class="lang-bash">sender --host 127.0.0.1:7000 --messages 25000000 --binary --batch-size 300 \
   --repeat --no-write --msg-size 8 --ponythreads=1 --ponynoblock \
-  --file ~/wallaroo-tutorial/wallaroo-release-0.5.3/examples/go/celsius/celsius.msg
+  --file ~/wallaroo-tutorial/wallaroo-release-0.5.4/examples/go/celsius/celsius.msg
 </code></pre>
 <p>If the sender is working correctly, you should see <code>Connected</code> printed to the screen. If you see that, you can be assured that we are now sending data into our example application.</p>
 <h2 id="check-out-some-metrics">Check Out Some Metrics</h2>
@@ -1346,7 +1320,7 @@ make
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Run a Wallaroo Go Application","level":"5.2.4.1","depth":3,"next":{"title":"Installing From Source","level":"5.2.5","depth":2,"path":"book/go/getting-started/installing-from-source.md","ref":"book/go/getting-started/installing-from-source.md","articles":[{"title":"Setting up Your Environment","level":"5.2.5.1","depth":3,"path":"book/go/getting-started/setup.md","ref":"book/go/getting-started/setup.md","articles":[{"title":"Ubuntu Installation","level":"5.2.5.1.1","depth":4,"path":"book/go/getting-started/linux-setup.md","ref":"book/go/getting-started/linux-setup.md","articles":[]}]},{"title":"Run a Wallaroo Go Application","level":"5.2.5.2","depth":3,"path":"book/go/getting-started/run-a-wallaroo-go-application.md","ref":"book/go/getting-started/run-a-wallaroo-go-application.md","articles":[]}]},"previous":{"title":"Installing with Wallaroo Up","level":"5.2.4","depth":2,"path":"book/go/getting-started/wallaroo-up.md","ref":"book/go/getting-started/wallaroo-up.md","articles":[{"title":"Run a Wallaroo Go Application","level":"5.2.4.1","depth":3,"path":"book/go/getting-started/run-a-wallaroo-go-application-wallaroo-up.md","ref":"book/go/getting-started/run-a-wallaroo-go-application-wallaroo-up.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/go/getting-started/run-a-wallaroo-go-application-wallaroo-up.md","mtime":"2018-09-28T05:19:55.494Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-28T05:20:01.323Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Run a Wallaroo Go Application","level":"5.2.4.1","depth":3,"next":{"title":"Installing From Source","level":"5.2.5","depth":2,"path":"book/go/getting-started/installing-from-source.md","ref":"book/go/getting-started/installing-from-source.md","articles":[{"title":"Setting up Your Environment","level":"5.2.5.1","depth":3,"path":"book/go/getting-started/setup.md","ref":"book/go/getting-started/setup.md","articles":[{"title":"Ubuntu Installation","level":"5.2.5.1.1","depth":4,"path":"book/go/getting-started/linux-setup.md","ref":"book/go/getting-started/linux-setup.md","articles":[]}]},{"title":"Run a Wallaroo Go Application","level":"5.2.5.2","depth":3,"path":"book/go/getting-started/run-a-wallaroo-go-application.md","ref":"book/go/getting-started/run-a-wallaroo-go-application.md","articles":[]}]},"previous":{"title":"Installing with Wallaroo Up","level":"5.2.4","depth":2,"path":"book/go/getting-started/wallaroo-up.md","ref":"book/go/getting-started/wallaroo-up.md","articles":[{"title":"Run a Wallaroo Go Application","level":"5.2.4.1","depth":3,"path":"book/go/getting-started/run-a-wallaroo-go-application-wallaroo-up.md","ref":"book/go/getting-started/run-a-wallaroo-go-application-wallaroo-up.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/go/getting-started/run-a-wallaroo-go-application-wallaroo-up.md","mtime":"2018-10-24T17:45:24.319Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-10-24T17:45:32.565Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>

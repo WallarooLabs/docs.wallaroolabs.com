@@ -1096,20 +1096,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.4" data-path="../wallaroo-tools/giles-receiver.html">
-            
-                <a href="../wallaroo-tools/giles-receiver.html">
-            
-                    
-                    Receiving Data over TCP with Giles Receiver
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.5" data-path="../metrics/metrics-ui.html">
+        <li class="chapter " data-level="7.4" data-path="../metrics/metrics-ui.html">
             
                 <a href="../metrics/metrics-ui.html">
             
@@ -1122,20 +1109,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.6" data-path="../appendix/decoding-giles-receiver-output.html">
-            
-                <a href="../appendix/decoding-giles-receiver-output.html">
-            
-                    
-                    Decoding Giles Receiver Output
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.7" data-path="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
+        <li class="chapter " data-level="7.5" data-path="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
             
                 <a href="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
             
@@ -1148,7 +1122,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.8" data-path="../appendix/wallaroo-in-docker-tips.html">
+        <li class="chapter " data-level="7.6" data-path="../appendix/wallaroo-in-docker-tips.html">
             
                 <a href="../appendix/wallaroo-in-docker-tips.html">
             
@@ -1221,6 +1195,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="using-connectors-as-sources--sinks">Using Connectors as Sources &amp; Sinks</h1>
+<p><em>Python 3: At this point, Connectors are not supported in our Python3 API. We expect support will be added in the next release.</em></p>
 <p>This is a preview release of Wallaroo&apos;s connectors feature that allows full customization of sources and sinks. These sources and sinks can be integrated into Wallaroo using libraries you&apos;re already familiar with in Python. A number of built-in connectors offer a quick way to get started and hook up common stream types and they&apos;re all available for easy customization.</p>
 <p>Care has been taken to keep the API simple and the runtime assumptions unobtrusive so it&apos;s easy to hook up the library to existing code. Read down below for more information on how this works. As this is still a preview release, we are looking for early feedback and would love to hear from you. You can connect with us by emailing <a href="mailto:hello@wallaroolabs.com" target="_blank">hello@wallaroolabs.com</a>.</p>
 <p>Connectors are comprised of two parts. First is the entry in your application builder which explains how encoding and decoding of the content works as well as giving each connector instance a name and direction of flow (source or sink). Second is the script which is a local process which runs side-by-side with Wallaroo. We&apos;ll look at each part in turn in the sections below.</p>
@@ -1244,7 +1219,7 @@
     ab.to_sink(<span class="hljs-string">&quot;fahrenheit_conversion&quot;</span>)
     <span class="hljs-keyword">return</span> ab.build()
 </code></pre>
-<p>You can follow along in this example by going to <a href="https://github.com/WallarooLabs/wallaroo/tree//examples/python/celsius_connectors/" target="_blank">github</a>.</p>
+<p>You can follow along in this example by going to <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.5.4/examples/python/celsius_connectors/" target="_blank">github</a>.</p>
 <p>We have introduced two new application builder methods for declaring connectors: <code>source_connector</code> and <code>sink_connector</code>. These allow you to describe both ends of the connection so the connector script can encode or decode data in a way that&apos;s compatible with your application&apos;s worker code. Keeping these in one place helps ensure that it&apos;s easy to keep them in sync.</p>
 <p>In this example we can look at the celsius feed&apos;s encoder and decoder functions:</p>
 <pre><code class="lang-python"><span class="hljs-meta">@wallaroo.experimental.stream_message_encoder</span>
@@ -1267,7 +1242,7 @@
 <p>This matches up with our call to <code>sink_connector</code> and it has its own encoder and decoder functions as well.</p>
 <p>Notice how we don&apos;t couple the specifics of the medium used by the connector and instead focus on how we interpret incoming messages in terms of their serialization. This allows applications to evolve and mix their infrastructure over time.</p>
 <h2 id="running-connector-scripts">Running Connector Scripts</h2>
-<p>To run an application that makes use of these connectors we&apos;ll need to understand how the connector scripts work. Wallaroo includes a <a href="https://github.com/WallarooLabs/wallaroo/tree//connectors/" target="_blank">library of connectors</a> to help get you started. We&apos;ll look at <code>udp_source</code> and <code>udp_sink</code> as used in the example introduced above.</p>
+<p>To run an application that makes use of these connectors we&apos;ll need to understand how the connector scripts work. Wallaroo includes a <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.5.4/connectors/" target="_blank">library of connectors</a> to help get you started. We&apos;ll look at <code>udp_source</code> and <code>udp_sink</code> as used in the example introduced above.</p>
 <p>These included connectors are self-contained Python scripts. Some of them may expect a related Python library to be installed and available for import but our example uses the UDP facilities provided for by Python&apos;s standard library. Be sure that the Python path is set up to include the Wallaroo library.</p>
 <p>If we run one of these scripts we&apos;ll see there are some required arguments listed. The first one should be familiar. <code>--application-module</code> is the same as the one seen when running a Wallaroo worker (you can review these command line parameters in the <a href="../running-wallaroo/running-wallaroo.html">Running Wallaroo</a> section). Providing this argument allows the script to autodetect most of the connector settings by reading the same application description that the Wallaroo application worker runs with.</p>
 <p>The application module is not quite enough for the script to know what settings to use when connecting to Wallaroo. Since the application may have more than one connector, the <code>--connector</code> argument is required for disambiguating which connector in the application setup this script is running as. With this passed as an argument, we can autodetect the most common settings.</p>
@@ -1281,7 +1256,7 @@
 <p>In this example, we are running a UDP source for our application which listens to a UDP socket on 127.0.0.1 port 6789 and forwards the data in each packet to Wallaroo as a message.</p>
 <p>Since the included connector scripts are self-contained, feel free to copy it over to your application tree to use them directly and make path management a little easier.</p>
 <h2 id="starting-with-prebuilt-connectors">Starting with Prebuilt Connectors</h2>
-<p>We have a number of <a href="https://github.com/WallarooLabs/wallaroo/tree//connectors/" target="_blank">prebuilt connectors</a>. Here is a short description of each one. These are all written so they can be copied and customized in your application source tree. You&apos;re still welcome to run them in place as well.</p>
+<p>We have a number of <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.5.4/connectors/" target="_blank">prebuilt connectors</a>. Here is a short description of each one. These are all written so they can be copied and customized in your application source tree. You&apos;re still welcome to run them in place as well.</p>
 <h3 id="kafka">Kafka</h3>
 <p>This connector provides Kafka source and sink support. This uses the <a href="https://pypi.org/project/kafka/" target="_blank">kafka library</a>. Consumer group based sources are supported to allow easier management of your source&apos;s progress through a topic.</p>
 <p>While Wallaroo already has built-in Kafka support, using the connector allows you to support the use of consumer groups and reuse any logic you might already have around offset management and consumer lifecycles. We&apos;re looking for feedback, so if your Kafka use case doesn&apos;t seem to fit either option, please let us know at <a href="mailto:hello@wallaroolabs.com" target="_blank">hello@wallaroolabs.com</a>.</p>
@@ -1289,16 +1264,16 @@
 <p>AWS Kinesis is supported via the <a href="https://pypi.org/project/boto3/" target="_blank">boto3 library</a>. This script will expect AWS credentials to be setup as described in their documentation.</p>
 <h3 id="redis">Redis</h3>
 <p>Redis has many ways to be used as a source and a sink. We&apos;ve provided two starting points to show how a source and sink can work. The script is very easy to modify and uses the well maintained <a href="https://pypi.org/project/redis/" target="_blank">redis library</a>.</p>
-<p>For the source, we show an example using the subscription support offered by Redis pubsub and it&apos;s a natural fit for many stream processing applications. Check out <code>redis_subscriber_source</code> for <a href="https://github.com/WallarooLabs/wallaroo/tree//connectors/redis_subscriber_source" target="_blank">details</a>.</p>
-<p>For the sink, we show that not everything needs to look exactly like a stream to be used with Wallaroo. We use the given hash key in redis and set key-value pairs on that target hash for each key-value pair passed to the sink. This is very handy for those cases that want to keep track of the latest value. See <code>redis_hash_sink</code> for <a href="https://github.com/WallarooLabs/wallaroo/tree//connectors/redis_hash_sink" target="_blank">details</a>.</p>
+<p>For the source, we show an example using the subscription support offered by Redis pubsub and it&apos;s a natural fit for many stream processing applications. Check out <code>redis_subscriber_source</code> for <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.5.4/connectors/redis_subscriber_source" target="_blank">details</a>.</p>
+<p>For the sink, we show that not everything needs to look exactly like a stream to be used with Wallaroo. We use the given hash key in redis and set key-value pairs on that target hash for each key-value pair passed to the sink. This is very handy for those cases that want to keep track of the latest value. See <code>redis_hash_sink</code> for <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.5.4/connectors/redis_hash_sink" target="_blank">details</a>.</p>
 <h3 id="rabbitmq">RabbitMQ</h3>
 <p>Our RabbitMQ source uses the <a href="https://pypi.org/project/pika/" target="_blank">pika library</a>. We support automatic provisioning of missing queues in our setup code but it&apos;s advised that users ensure they provision their broker&apos;s exchange with the appropriate type beforehand.</p>
 <h3 id="udp">UDP</h3>
-<p>Our UDP support uses the Python standard library. To see an example of it in action, check out the <a href="https://github.com/Wallaroo/wallaroo/tree//examples/python/celsius_connectors/" target="_blank">celsius_connectors example</a>.</p>
+<p>Our UDP support uses the Python standard library. To see an example of it in action, check out the <a href="https://github.com/Wallaroo/wallaroo/tree/release-0.5.4/examples/python/celsius_connectors/" target="_blank">celsius_connectors example</a>.</p>
 <h3 id="aws-s3">AWS S3</h3>
 <p>This sink is powered by the <a href="https://pypi.org/project/boto3/" target="_blank">boto3 library</a> and allows key value pairs to be uploaded as named blobs to an S3 bucket.</p>
 <h3 id="postgres">Postgres</h3>
-<p>We offer some starting templates for Postgres integration. These depend on your database schema and so we&apos;ve left them in the <a href="https://github.com/WallarooLabs/wallaroo/tree//connectors/templates" target="_blank">connectors/templates directory</a>.</p>
+<p>We offer some starting templates for Postgres integration. These depend on your database schema and so we&apos;ve left them in the <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.5.4/connectors/templates" target="_blank">connectors/templates directory</a>.</p>
 <p>As a source we have a very interesting example of how notifiers can turn a regular table into a stream. If you&apos;re struggling with finding an efficient way to stream relational data, this might be a good place to start.</p>
 <p>On the sink side, we support inserting new records for each sink output. This should be easy to modify to allow more complex database interactions.</p>
 <p>If you have a use-case with Postgres and don&apos;t feel like our template addresses it. Please let us know at <a href="mailto:hello@wallaroolabs.com" target="_blank">hello@wallaroolabs.com</a>.</p>
@@ -1376,7 +1351,7 @@ connector instance type. In this case we&apos;d like to build a source connector
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Using Connectors","level":"4.3.7","depth":2,"next":{"title":"Wallaroo Python API","level":"4.3.8","depth":2,"path":"book/python/api.md","ref":"book/python/api.md","articles":[]},"previous":{"title":"Interworker Serialization and Resilience","level":"4.3.6","depth":2,"path":"book/python/interworker-serialization-and-resilience.md","ref":"book/python/interworker-serialization-and-resilience.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/using-connectors.md","mtime":"2018-09-28T05:19:55.438Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-28T05:20:01.323Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Using Connectors","level":"4.3.7","depth":2,"next":{"title":"Wallaroo Python API","level":"4.3.8","depth":2,"path":"book/python/api.md","ref":"book/python/api.md","articles":[]},"previous":{"title":"Interworker Serialization and Resilience","level":"4.3.6","depth":2,"path":"book/python/interworker-serialization-and-resilience.md","ref":"book/python/interworker-serialization-and-resilience.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/using-connectors.md","mtime":"2018-10-24T17:45:24.347Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-10-24T17:45:32.565Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

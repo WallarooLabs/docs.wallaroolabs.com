@@ -1096,20 +1096,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.4" data-path="../wallaroo-tools/giles-receiver.html">
-            
-                <a href="../wallaroo-tools/giles-receiver.html">
-            
-                    
-                    Receiving Data over TCP with Giles Receiver
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.5" data-path="../metrics/metrics-ui.html">
+        <li class="chapter " data-level="7.4" data-path="../metrics/metrics-ui.html">
             
                 <a href="../metrics/metrics-ui.html">
             
@@ -1122,20 +1109,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.6" data-path="../appendix/decoding-giles-receiver-output.html">
-            
-                <a href="../appendix/decoding-giles-receiver-output.html">
-            
-                    
-                    Decoding Giles Receiver Output
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.7" data-path="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
+        <li class="chapter " data-level="7.5" data-path="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
             
                 <a href="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
             
@@ -1148,7 +1122,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.8" data-path="../appendix/wallaroo-in-docker-tips.html">
+        <li class="chapter " data-level="7.6" data-path="../appendix/wallaroo-in-docker-tips.html">
             
                 <a href="../appendix/wallaroo-in-docker-tips.html">
             
@@ -1229,25 +1203,28 @@
 mkdir ~/wallaroo-tutorial
 <span class="hljs-built_in">cd</span> ~/wallaroo-tutorial
 </code></pre>
-<p>This will be our base directory in what follows. Download the Wallaroo sources (this will create a subdirectory called <code>wallaroo-release-0.5.3</code>):</p>
-<pre><code class="lang-bash">curl -L -o wallaroo-release-0.5.3.tar.gz <span class="hljs-string">&apos;https://wallaroo-labs.bintray.com/wallaroolabs-rc/wallaroo/release-0.5.3/wallaroo-release-0.5.3.tar.gz&apos;</span>
-mkdir wallaroo-release-0.5.3
-tar -C wallaroo-release-0.5.3 --strip-components=1 -xzf wallaroo-release-0.5.3.tar.gz
-rm wallaroo-release-0.5.3.tar.gz
-<span class="hljs-built_in">cd</span> wallaroo-release-0.5.3
+<p>This will be our base directory in what follows. Create a directory for the current Wallaroo version and download the Wallaroo Vagrantfile:</p>
+<pre><code class="lang-bash">mkdir wallaroo-release-0.5.4
+<span class="hljs-built_in">cd</span> wallaroo-release-0.5.4
+mkdir vagrant
+<span class="hljs-built_in">cd</span> vagrant
+curl -o Vagrantfile -J -L \
+  https://raw.githubusercontent.com/WallarooLabs/wallaroo/release-0.5.4/vagrant/Vagrantfile
 </code></pre>
 <h3 id="windows-via-powershell">Windows via Powershell</h3>
 <p><strong>Note:</strong> This section of the guide assumes you are using Powershell.</p>
-<p>Download and install git from <a href="https://gitforwindows.org/" target="_blank">Git for Windows</a> and install it.</p>
 <p>If you haven&apos;t already done so, create a directory called <code>~/wallaroo-tutorial</code> and navigate there by running:</p>
 <pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/
 mkdir ~/wallaroo-tutorial
 <span class="hljs-built_in">cd</span> ~/wallaroo-tutorial
 </code></pre>
-<p>This will be our base directory in what follows. If you haven&apos;t already cloned the Wallaroo repo, do so now (this will create a subdirectory called <code>wallaroo-release-0.5.3</code>):</p>
-<pre><code class="lang-bash">git <span class="hljs-built_in">clone</span> https://github.com/WallarooLabs/wallaroo wallaroo-release-0.5.3
-<span class="hljs-built_in">cd</span> wallaroo-release-0.5.3
-git checkout release-0.5.3
+<p>This will be our base directory in what follows. Create a directory for the current Wallaroo version and download the Wallaroo Vagrantfile:</p>
+<pre><code class="lang-bash">mkdir wallaroo-release-0.5.4
+<span class="hljs-built_in">cd</span> wallaroo-release-0.5.4
+mkdir vagrant
+<span class="hljs-built_in">cd</span> vagrant
+Invoke-WebRequest -OutFile Vagrantfile `
+  https://raw.githubusercontent.com/WallarooLabs/wallaroo/release-0.5.4/vagrant/Vagrantfile
 </code></pre>
 <h2 id="installing-virtualbox">Installing VirtualBox</h2>
 <p>The Wallaroo Vagrant environment is dependent on the default provider,<a href="https://www.vagrantup.com/docs/virtualbox/" target="_blank">VirtualBox</a>. To install VirtualBox, download a installer or package for your OS <a href="https://www.virtualbox.org/wiki/Downloads" target="_blank">here</a>. Linux users can also use <code>apt-get</code> as documented below.</p>
@@ -1260,16 +1237,16 @@ git checkout release-0.5.3
 <h2 id="provision-the-vagrant-box">Provision the Vagrant Box</h2>
 <p>Provisioning should take about 10 to 15 minutes. When it finishes, you will have a complete Wallaroo development environment. You won&#x2019;t have to go through the provisioning process again unless you destroy the Wallaroo environment by running <code>vagrant destroy</code>.</p>
 <p>To provision, run the following commands:</p>
-<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-release-0.5.3/vagrant
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-release-0.5.4/vagrant
 vagrant up
 </code></pre>
 <h2 id="whats-included-in-the-wallaroo-vagrant-box">What&apos;s Included in the Wallaroo Vagrant Box</h2>
 <ul>
-<li><p><strong>Machida</strong>: runs Wallaroo Python applications.</p>
+<li><p><strong>Machida</strong>: runs Wallaroo Python applications for Python 2.7.</p>
+</li>
+<li><p><strong>Machida3</strong>: runs Wallaroo Python applications for Python 3.5+.</p>
 </li>
 <li><p><strong>Giles Sender</strong>: supplies data to Wallaroo applications over TCP.</p>
-</li>
-<li><p><strong>Giles Receiver</strong>: receives data from Wallaroo over TCP.</p>
 </li>
 <li><p><strong>Cluster Shutdown tool</strong>: notifies the cluster to shut down cleanly.</p>
 </li>
@@ -1280,7 +1257,7 @@ vagrant up
 </ul>
 <h2 id="shutdown-the-vagrant-box">Shutdown the Vagrant Box</h2>
 <p>You can shut down the Vagrant Box by running the following on your host machine:</p>
-<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-release-0.5.3/vagrant
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-release-0.5.4/vagrant
 vagrant halt
 </code></pre>
 <h2 id="restart-the-vagrant-box">Restart the Vagrant Box</h2>
@@ -1336,7 +1313,7 @@ vagrant halt
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Setting Up Your Environment","level":"4.2.3.1","depth":3,"next":{"title":"Run a Wallaroo Application in Vagrant","level":"4.2.3.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-vagrant.md","ref":"book/getting-started/run-a-wallaroo-application-vagrant.md","articles":[]},"previous":{"title":"Installing with Vagrant","level":"4.2.3","depth":2,"path":"book/getting-started/installing-with-vagrant.md","ref":"book/getting-started/installing-with-vagrant.md","articles":[{"title":"Setting Up Your Environment","level":"4.2.3.1","depth":3,"path":"book/getting-started/vagrant-setup.md","ref":"book/getting-started/vagrant-setup.md","articles":[]},{"title":"Run a Wallaroo Application in Vagrant","level":"4.2.3.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-vagrant.md","ref":"book/getting-started/run-a-wallaroo-application-vagrant.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/getting-started/vagrant-setup.md","mtime":"2018-09-28T05:19:55.542Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-28T05:20:01.323Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Setting Up Your Environment","level":"4.2.3.1","depth":3,"next":{"title":"Run a Wallaroo Application in Vagrant","level":"4.2.3.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-vagrant.md","ref":"book/getting-started/run-a-wallaroo-application-vagrant.md","articles":[]},"previous":{"title":"Installing with Vagrant","level":"4.2.3","depth":2,"path":"book/getting-started/installing-with-vagrant.md","ref":"book/getting-started/installing-with-vagrant.md","articles":[{"title":"Setting Up Your Environment","level":"4.2.3.1","depth":3,"path":"book/getting-started/vagrant-setup.md","ref":"book/getting-started/vagrant-setup.md","articles":[]},{"title":"Run a Wallaroo Application in Vagrant","level":"4.2.3.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-vagrant.md","ref":"book/getting-started/run-a-wallaroo-application-vagrant.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/getting-started/vagrant-setup.md","mtime":"2018-10-24T17:45:24.255Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-10-24T17:45:32.565Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
