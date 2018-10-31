@@ -1096,20 +1096,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.4" data-path="../wallaroo-tools/giles-receiver.html">
-            
-                <a href="../wallaroo-tools/giles-receiver.html">
-            
-                    
-                    Receiving Data over TCP with Giles Receiver
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.5" data-path="../metrics/metrics-ui.html">
+        <li class="chapter " data-level="7.4" data-path="../metrics/metrics-ui.html">
             
                 <a href="../metrics/metrics-ui.html">
             
@@ -1122,20 +1109,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.6" data-path="../appendix/decoding-giles-receiver-output.html">
-            
-                <a href="../appendix/decoding-giles-receiver-output.html">
-            
-                    
-                    Decoding Giles Receiver Output
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.7" data-path="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
+        <li class="chapter " data-level="7.5" data-path="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
             
                 <a href="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
             
@@ -1148,7 +1122,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.8" data-path="../appendix/wallaroo-in-docker-tips.html">
+        <li class="chapter " data-level="7.6" data-path="../appendix/wallaroo-in-docker-tips.html">
             
                 <a href="../appendix/wallaroo-in-docker-tips.html">
             
@@ -1221,7 +1195,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="resilience">Resilience</h1>
-<p>Wallaroo is designed with built-in resilience. However, since the operations involved with maintaining resilience can impact performance, this mode is off by default. For python users, we provide a separate binary with resilience enabled: <code>machida-resilience</code> as part of the default installation. For Go and Ponyc users, To enable resilience in a Wallaroo application, the binary needs to be built with <code>-D resilience</code> if using the <code>ponyc</code> compiler directly, or with <code>resilience=on</code> if using our Makefile build system (as is the case with <code>Machida</code>).</p>
+<p>Wallaroo is designed with built-in resilience. However, since the operations involved with maintaining resilience can impact performance, this mode is off by default. For python users, we provide a separate binary with resilience enabled: <code>machida-resilience</code> (and <code>machida3-resilience</code> for Python 3) as part of the default installation. For Go and Ponyc users, to enable resilience in a Wallaroo application, the binary needs to be built with <code>-D resilience</code> if using the <code>ponyc</code> compiler directly, or with <code>resilience=on</code> if using our Makefile build system (as is the case with <code>Machida</code>).</p>
 <h2 id="how-does-wallaroo-implement-resilience">How Does Wallaroo Implement Resilience</h2>
 <p>Wallaroo&apos;s resilience is based on the Chandy-Lamport snapshotting algorithm that minimizes the impact of checkpointing on processing in-flight messages. Each worker maintains a resilience file, where it periodically saves a snapshot of its latest state. A checkpoint represents a consistent recovery line&#x2014;a specific generation of individual worker snapshots. This means that when a failed worker recovers, we can roll back the states in the cluster to the last checkpoint and begin processing again with the guarantee that all state in the system reflects a causally consistent history. The interval between checkpoints is configurable with the <code>--time-between-checkpoints</code> command line parameter (in nanoseconds).</p>
 <p>Since recovery involves a rollback to the last successful checkpoint, any data that was processed <em>after</em> that checkpoint will have to be resent by the sources.</p>
@@ -1233,7 +1207,7 @@
 <h4 id="starting-new-shells">Starting new shells</h4>
 <p>You will need 4 shells to run this example.
 For each shell you&apos;re expected to setup, you&apos;d have to run the following to configure the Wallaroo environment:</p>
-<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-0.5.3
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-0.5.4
 <span class="hljs-built_in">source</span> bin/activate
 <span class="hljs-built_in">cd</span> examples/python/word_count_with_dynamic_keys
 </code></pre>
@@ -1260,18 +1234,18 @@ For each shell you&apos;re expected to setup, you&apos;d have to run the followi
 <pre><code class="lang-bash"> data_receiver --listen 127.0.0.1:7002 | tee received.txt
 </code></pre>
 </li>
-<li><p>Shell 2: Start initializer</p>
+<li><p>Shell 2: Start initializer (remember to use <code>machida3-resilience</code> if using Python 3)</p>
 <pre><code class="lang-bash"> machida-resilience --application-module word_count_with_dynamic_keys \
    --in 127.0.0.1:7010 --out 127.0.0.1:7002 \
    --metrics 127.0.0.1:5001 --control 127.0.0.1:6000 \
    --data 127.0.0.1:6001 --external 127.0.0.1:5050 \
    --name initializer --cluster-initializer --worker-count 2 \
    --resilience-dir /tmp/resilience-dir \
-   --ponythreads=1 --ponynoblock \
+   --ponythreads=1 --ponynoblock --run-with-resilience \
    | tee initializer.log
 </code></pre>
 </li>
-<li><p>Shell 3: Start worker</p>
+<li><p>Shell 3: Start worker (remember to use <code>machida3-resilience</code> if using Python 3)</p>
 <pre><code class="lang-bash"> machida-resilience --application-module word_count_with_dynamic_keys \
    --in 127.0.0.1:7010 --out 127.0.0.1:7002 \
    --metrics 127.0.0.1:5001 --control 127.0.0.1:6000 \
@@ -1279,7 +1253,7 @@ For each shell you&apos;re expected to setup, you&apos;d have to run the followi
    --external 127.0.0.1:5051 \
    --name worker1 \
    --resilience-dir /tmp/resilience-dir \
-   --ponythreads=1 --ponynoblock \
+   --ponythreads=1 --ponynoblock --run-with-resilience \
    | tee worker1.log
 </code></pre>
 </li>
@@ -1300,7 +1274,7 @@ For each shell you&apos;re expected to setup, you&apos;d have to run the followi
 <pre><code class="lang-bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&apos;&lt;&lt;CRASH-and-RECOVER&gt;&gt;&apos;</span> | nc -q1 127.0.0.1 7002
 </code></pre>
 </li>
-<li><p>Shell 3: Restart worker1 with the same command we used above, but save its log output to a new file</p>
+<li><p>Shell 3: Restart worker1 with the same command we used above, but save its log output to a new file (remember to use <code>machida3-resilience</code> if using Python 3)</p>
 <pre><code class="lang-bash">machida-resilience --application-module word_count_with_dynamic_keys \
   --in 127.0.0.1:7010 --out 127.0.0.1:7002 \
   --metrics 127.0.0.1:5001 --control 127.0.0.1:6000 \
@@ -1308,7 +1282,7 @@ For each shell you&apos;re expected to setup, you&apos;d have to run the followi
   --external 127.0.0.1:5051 \
   --name worker1 \
   --resilience-dir /tmp/resilience-dir \
-  --ponythreads=1 --ponynoblock \
+  --ponythreads=1 --ponynoblock --run-with-resilience \
   | tee worker1.recovered.log
 </code></pre>
 </li>
@@ -1389,7 +1363,7 @@ amendment =&gt; 12
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Resilience","level":"6.3","depth":1,"next":{"title":"Command line options","level":"6.4","depth":1,"path":"book/running-wallaroo/wallaroo-command-line-options.md","ref":"book/running-wallaroo/wallaroo-command-line-options.md","articles":[]},"previous":{"title":"Autoscale","level":"6.2","depth":1,"path":"book/running-wallaroo/autoscale.md","ref":"book/running-wallaroo/autoscale.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/running-wallaroo/resilience.md","mtime":"2018-09-28T18:10:20.928Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-28T18:10:27.612Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Resilience","level":"6.3","depth":1,"next":{"title":"Command line options","level":"6.4","depth":1,"path":"book/running-wallaroo/wallaroo-command-line-options.md","ref":"book/running-wallaroo/wallaroo-command-line-options.md","articles":[]},"previous":{"title":"Autoscale","level":"6.2","depth":1,"path":"book/running-wallaroo/autoscale.md","ref":"book/running-wallaroo/autoscale.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/running-wallaroo/resilience.md","mtime":"2018-10-31T14:58:14.181Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-10-31T14:58:22.586Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

@@ -1096,20 +1096,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.4" data-path="../wallaroo-tools/giles-receiver.html">
-            
-                <a href="../wallaroo-tools/giles-receiver.html">
-            
-                    
-                    Receiving Data over TCP with Giles Receiver
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.5" data-path="../metrics/metrics-ui.html">
+        <li class="chapter " data-level="7.4" data-path="../metrics/metrics-ui.html">
             
                 <a href="../metrics/metrics-ui.html">
             
@@ -1122,20 +1109,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.6" data-path="../appendix/decoding-giles-receiver-output.html">
-            
-                <a href="../appendix/decoding-giles-receiver-output.html">
-            
-                    
-                    Decoding Giles Receiver Output
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.7" data-path="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
+        <li class="chapter " data-level="7.5" data-path="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
             
                 <a href="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
             
@@ -1148,7 +1122,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.8" data-path="../appendix/wallaroo-in-docker-tips.html">
+        <li class="chapter " data-level="7.6" data-path="../appendix/wallaroo-in-docker-tips.html">
             
                 <a href="../appendix/wallaroo-in-docker-tips.html">
             
@@ -1239,7 +1213,7 @@
 <p>And then we define a partitioning function which returns a key from the above list for input data:</p>
 <pre><code class="lang-python"><span class="hljs-meta">@wallaroo.partition</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">partition</span><span class="hljs-params">(data)</span>:</span>
-    <span class="hljs-keyword">return</span> data.letter[<span class="hljs-number">0</span>]
+    <span class="hljs-keyword">return</span> data.letter
 </code></pre>
 <p>Later when we build the application topology, we will pass both the keys and the function to the builder.</p>
 <h3 id="state-and-statebuilder">State and StateBuilder</h3>
@@ -1288,7 +1262,7 @@
 <span class="hljs-keyword">import</span> wallaroo
 </code></pre>
 <h2 id="next-steps">Next Steps</h2>
-<p>The complete alphabet example is available <a href="https://github.com/WallarooLabs/wallaroo/tree/0.5.3/examples/python/alphabet_partitioned/" target="_blank">here</a>. To run it, follow the <a href="https://github.com/WallarooLabs/wallaroo/tree/0.5.3/examples/python/alphabet_partitioned/README.md" target="_blank">Alphabet_partitioned application instructions</a></p>
+<p>The complete alphabet example is available <a href="https://github.com/WallarooLabs/wallaroo/tree/0.5.4/examples/python/alphabet_partitioned/" target="_blank">here</a>. To run it, follow the <a href="https://github.com/WallarooLabs/wallaroo/tree/0.5.4/examples/python/alphabet_partitioned/README.md" target="_blank">Alphabet_partitioned application instructions</a></p>
 <p>To see how everything we&apos;ve learned so far comes together, check out our <a href="word-count.html">Word Count walk-through</a></p>
 
                                 
@@ -1333,7 +1307,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Writing Your Own Partitioned Stateful Application","level":"4.3.4","depth":2,"next":{"title":"Word Count","level":"4.3.5","depth":2,"path":"book/python/word-count.md","ref":"book/python/word-count.md","articles":[]},"previous":{"title":"Writing Your Own Stateful Application","level":"4.3.3","depth":2,"path":"book/python/writing-your-own-stateful-application.md","ref":"book/python/writing-your-own-stateful-application.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/writing-your-own-partitioned-stateful-application.md","mtime":"2018-09-28T18:10:20.832Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-28T18:10:27.612Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Writing Your Own Partitioned Stateful Application","level":"4.3.4","depth":2,"next":{"title":"Word Count","level":"4.3.5","depth":2,"path":"book/python/word-count.md","ref":"book/python/word-count.md","articles":[]},"previous":{"title":"Writing Your Own Stateful Application","level":"4.3.3","depth":2,"path":"book/python/writing-your-own-stateful-application.md","ref":"book/python/writing-your-own-stateful-application.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/writing-your-own-partitioned-stateful-application.md","mtime":"2018-10-31T14:58:14.281Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-10-31T14:58:22.586Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

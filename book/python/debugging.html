@@ -1094,20 +1094,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.4" data-path="../wallaroo-tools/giles-receiver.html">
-            
-                <a href="../wallaroo-tools/giles-receiver.html">
-            
-                    
-                    Receiving Data over TCP with Giles Receiver
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.5" data-path="../metrics/metrics-ui.html">
+        <li class="chapter " data-level="7.4" data-path="../metrics/metrics-ui.html">
             
                 <a href="../metrics/metrics-ui.html">
             
@@ -1120,20 +1107,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.6" data-path="../appendix/decoding-giles-receiver-output.html">
-            
-                <a href="../appendix/decoding-giles-receiver-output.html">
-            
-                    
-                    Decoding Giles Receiver Output
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.7" data-path="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
+        <li class="chapter " data-level="7.5" data-path="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
             
                 <a href="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
             
@@ -1146,7 +1120,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.8" data-path="../appendix/wallaroo-in-docker-tips.html">
+        <li class="chapter " data-level="7.6" data-path="../appendix/wallaroo-in-docker-tips.html">
             
                 <a href="../appendix/wallaroo-in-docker-tips.html">
             
@@ -1221,16 +1195,16 @@
                                 <h1 id="debugging-python-wallaroo-applications">Debugging Python Wallaroo Applications</h1>
 <p>As you&apos;re developing Python Wallaroo applications, there will come a time where you will need to do some debugging during your development process. Debugging can be as simple as inserting a <code>print</code> statement in your code (we even do it in our examples) or a bit more involved by using a debugger to get backtraces and such. In this section we&apos;ll cover how to debug using <code>print</code>, an interactive debugger, and a remote debugger. It will help if you&apos;ve gone through the <a href="intro.html">Python API Introduction</a>, <a href="../getting-started/setup.html">Setting Up Your Environment for Wallaroo</a>, and <a href="writing-your-own-application.html">Writing Your Own Wallaroo Python Application</a> sections prior to continuing so you&apos;re aware of the components that make up a Python Wallaroo application and how they interact with each other.</p>
 <h2 id="debugging-using-print-and-repr">Debugging Using <code>print</code> and <code>repr</code></h2>
-<p>The simplest way to do some debugging would be to include a <code>print</code> statement in your code to analyze data. You can see several examples of this in our reverse <a href="https://github.com/WallarooLabs/wallaroo/tree/0.5.3/examples/python/reverse/reverse.py" target="_blank">example</a> where we have <code>print</code> statements in our <code>Encoder</code>, <code>Decoder</code>, and <code>Reverse</code> classes. Here&apos;s an example in our <code>compute</code> function in our <code>Reverse</code> class:</p>
+<p>The simplest way to do some debugging would be to include a <code>print</code> statement in your code to analyze data. You can see several examples of this in our reverse <a href="https://github.com/WallarooLabs/wallaroo/tree/0.5.4/examples/python/reverse/reverse.py" target="_blank">example</a> where we have <code>print</code> statements in our <code>Encoder</code>, <code>Decoder</code>, and <code>Reverse</code> classes. Here&apos;s an example in our <code>compute</code> function in our <code>Reverse</code> class:</p>
 <pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compute</span><span class="hljs-params">(self, data)</span>:</span>
-    <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;compute&quot;</span>, data
+    print(<span class="hljs-string">&quot;compute&quot;</span>, data)
     <span class="hljs-keyword">return</span> data[::<span class="hljs-number">-1</span>]
 </code></pre>
 <p>In this example, we&apos;ll be printing the incoming data before we reverse it.</p>
 <p>Using <code>print</code> is a very useful way to get logged output that you can return to and analyze after your program has completed running. However, there are some downsides when using <code>print</code> to debug: you&apos;ll need to add a <code>print</code> statement everywhere you predict you might need it, you can&apos;t get a &quot;state of the world&quot; look at your application, etc.</p>
 <p>Using <code>print</code> in Python is not without risks. If you try to print a Unicode string, and your locale does not support Unicode, you may encounter an error like the following:</p>
 <pre><code class="lang-python">&gt;&gt;&gt; u = u&apos;\ua000abcd\u07b4&apos;
-&gt;&gt;&gt; print u
+&gt;&gt;&gt; print(u)
 Traceback (most recent call last):
   File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
 UnicodeEncodeError: &apos;ascii&apos; codec can&apos;t encode character u&apos;\ua000&apos; in position 0: ordinal not in range(128)
@@ -1241,7 +1215,7 @@ UnicodeEncodeError: &apos;ascii&apos; codec can&apos;t encode character u&apos;\
 <span class="hljs-string">u&apos;\ua000abcd\u07b4&apos;</span>
 </code></pre>
 <h2 id="debugging-using-pdb">Debugging Using PDB</h2>
-<p> If you need a more robust tool to do debugging, the Python standard library provides <code>pdb</code>. <code>pdb</code> is an interactive debugger which gives you the option to set breakpoints, inspect the stack frames, and other features expected from an interactive debugger. A quick example of using <code>pdb</code> in your application would be importing the <code>pdb</code> module and then calling its <code>set_trace()</code> function. The <code>import pdb</code> command goes in the module you pass to <code>--application-module</code> when running <code>machida</code>. Usage example:</p>
+<p> If you need a more robust tool to do debugging, the Python standard library provides <code>pdb</code>. <code>pdb</code> is an interactive debugger which gives you the option to set breakpoints, inspect the stack frames, and other features expected from an interactive debugger. A quick example of using <code>pdb</code> in your application would be importing the <code>pdb</code> module and then calling its <code>set_trace()</code> function. The <code>import pdb</code> command goes in the module you pass to <code>--application-module</code> when running <code>machida</code> or <code>machida3</code>. Usage example:</p>
 <pre><code class="lang-python"><span class="hljs-keyword">import</span> pdb
 <span class="hljs-comment"># ...</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">application_setup</span><span class="hljs-params">(arg)</span>:</span>
@@ -1290,7 +1264,7 @@ UnicodeEncodeError: &apos;ascii&apos; codec can&apos;t encode character u&apos;\
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Debugging","level":"4.4.1","depth":2,"next":{"title":"Go API Introduction","level":"5.1","depth":1,"path":"book/go/intro.md","ref":"book/go/intro.md","articles":[]},"previous":{"title":"Debugging Python Wallaroo Applications","level":"4.4","depth":1,"ref":"","articles":[{"title":"Debugging","level":"4.4.1","depth":2,"path":"book/python/debugging.md","ref":"book/python/debugging.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/debugging.md","mtime":"2018-09-28T18:10:20.828Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-28T18:10:27.612Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Debugging","level":"4.4.1","depth":2,"next":{"title":"Go API Introduction","level":"5.1","depth":1,"path":"book/go/intro.md","ref":"book/go/intro.md","articles":[]},"previous":{"title":"Debugging Python Wallaroo Applications","level":"4.4","depth":1,"ref":"","articles":[{"title":"Debugging","level":"4.4.1","depth":2,"path":"book/python/debugging.md","ref":"book/python/debugging.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/debugging.md","mtime":"2018-10-31T14:58:14.277Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-10-31T14:58:22.586Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

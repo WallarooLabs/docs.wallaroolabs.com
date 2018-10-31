@@ -1096,20 +1096,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.4" data-path="../wallaroo-tools/giles-receiver.html">
-            
-                <a href="../wallaroo-tools/giles-receiver.html">
-            
-                    
-                    Receiving Data over TCP with Giles Receiver
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.5" data-path="../metrics/metrics-ui.html">
+        <li class="chapter " data-level="7.4" data-path="../metrics/metrics-ui.html">
             
                 <a href="../metrics/metrics-ui.html">
             
@@ -1122,20 +1109,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.6" data-path="decoding-giles-receiver-output.html">
-            
-                <a href="decoding-giles-receiver-output.html">
-            
-                    
-                    Decoding Giles Receiver Output
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.7" data-path="wallaroo-and-long-running-data-processing-and-other-workflows.html">
+        <li class="chapter " data-level="7.5" data-path="wallaroo-and-long-running-data-processing-and-other-workflows.html">
             
                 <a href="wallaroo-and-long-running-data-processing-and-other-workflows.html">
             
@@ -1148,7 +1122,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.8" data-path="wallaroo-in-docker-tips.html">
+        <li class="chapter " data-level="7.6" data-path="wallaroo-in-docker-tips.html">
             
                 <a href="wallaroo-in-docker-tips.html">
             
@@ -1227,15 +1201,15 @@
 <p>Follow the instructions on <a href="https://virtualenv.pypa.io/en/stable/installation/" target="_blank">the virtualenv website</a>.</p>
 <h2 id="setting-up-virtualenv-for-your-application">Setting up Virtualenv for your Application</h2>
 <p>To create a virtualenv for your application, run the following command</p>
-<pre><code class="lang-bash">virtualenv --python=python2 ENV
-</code></pre>
+<p><div class="codetabs"><div class="codetabs-header"><div class="tab active" data-codetab="0">Python 2.7</div><div class="tab" data-codetab="1">Python 3</div></div><div class="codetabs-body"><div class="tab active" data-codetab="0"><pre><code class="lang-py">virtualenv --python=python2 ENV
+</code></pre></div><div class="tab" data-codetab="1"><pre><code class="lang-py">virtualenv --python=python3 ENV</code></pre></div></div></div></p>
 <p>This will create a directory named <code>ENV</code> and set up all of the scripts and dependencies required to run an isolated Python2 virtual environment, located in <code>ENV</code>.</p>
 <h3 id="import-errors-when-loading-your-application">Import Errors when Loading your Application</h3>
 <p>If you have more than one Python version installed, virtualenv may set up the import paths incorrectly, or an alias may result in the wrong Python version being run. In that case, you may encounter errors such as</p>
 <pre><code class="lang-python">Traceback (most recent call last):
-  File <span class="hljs-string">&quot;wallaroo-0.5.3/examples/python/celsius/celsius.py&quot;</span>, line <span class="hljs-number">18</span>, <span class="hljs-keyword">in</span> &lt;module&gt;
+  File <span class="hljs-string">&quot;wallaroo-0.5.4/examples/python/celsius/celsius.py&quot;</span>, line <span class="hljs-number">18</span>, <span class="hljs-keyword">in</span> &lt;module&gt;
     <span class="hljs-keyword">import</span> wallaroo
-  File <span class="hljs-string">&quot;wallaroo-0.5.3/machida/wallaroo.py&quot;</span>, line <span class="hljs-number">16</span>, <span class="hljs-keyword">in</span> &lt;module&gt;
+  File <span class="hljs-string">&quot;wallaroo-0.5.4/machida/wallaroo.py&quot;</span>, line <span class="hljs-number">16</span>, <span class="hljs-keyword">in</span> &lt;module&gt;
     <span class="hljs-keyword">import</span> argparse
   File <span class="hljs-string">&quot;/usr/local/Cellar/python/2.7.14/Frameworks/Python.framework/Versions/2.7/lib/python2.7/argparse.py&quot;</span>, line <span class="hljs-number">86</span>, <span class="hljs-keyword">in</span> &lt;module&gt;
     <span class="hljs-keyword">import</span> copy <span class="hljs-keyword">as</span> _copy
@@ -1249,15 +1223,17 @@ Could <span class="hljs-keyword">not</span> load module <span class="hljs-string
 <p>In order to work correctly, virtualenv needs to be set up with the correct Python path. To do this, use <code>which</code> to get the absolute path of your intended Python version:</p>
 <pre><code class="lang-bash">virtualenv --python=`<span class="hljs-built_in">which</span> python` ENV
 </code></pre>
-<p>If you use a different Python, such as <code>python2</code> or <code>python2.7</code>, then substitute that into the <code>which</code> command:</p>
-<pre><code class="lang-bash">virtualenv --python=`<span class="hljs-built_in">which</span> python2.7` ENV
+<p>If you use a different Python, such as <code>python2</code> or <code>python3.5</code>, then substitute that into the <code>which</code> command:</p>
+<pre><code class="lang-bash">virtualenv --python=`<span class="hljs-built_in">which</span> python3.5` ENV
 </code></pre>
+<p><strong>Note</strong>: it is critical that the Python version in the virtualenv is compatible with the version of Machida. For example, if you&apos;re using machida3, you need to setup your virtualenv for Python 3, and if you are using machida, you need to set up the virtualenv for Python 2.</p>
 <h2 id="cleaning-up-a-virtualenv">Cleaning up a Virtualenv</h2>
 <p>To clean up or remove an installed virtualenv, all you need to do is delete the directory you created.</p>
 <p>For the <code>ENV</code> virtualenv set up above, the following will remove it entirely:</p>
 <pre><code class="lang-bash">rm -fr ENV
 </code></pre>
 <h2 id="using-virtualenv">Using Virtualenv</h2>
+<p>It is assumed that every shell you start for Wallaroo was set up by following <a href="../getting-started/starting-a-new-shell.html">Starting a new shell for Wallaroo</a> for your environment.</p>
 <p>To use the virtualenv, activate it in your shell. In the bash shell, this command is</p>
 <pre><code class="lang-bash">$ <span class="hljs-built_in">source</span> ENV/bin/activate
 (env) $
@@ -1270,20 +1246,27 @@ Could <span class="hljs-keyword">not</span> load module <span class="hljs-string
 <p>To exit the virtualenv, use the <code>deactivate</code> command.</p>
 <h2 id="running-a-wallaroo-application-with-virtualenv">Running a Wallaroo Application with Virtualenv</h2>
 <p>To run a Wallaroo application with virtualenv, run it within an activated shell:</p>
-<pre><code class="lang-bash"><span class="hljs-built_in">source</span> ENV/bin/activate
-<span class="hljs-built_in">export</span> PYTHONPATH=<span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>/wallaroo-tutorial/wallaroo-0.5.3/machida/lib:<span class="hljs-variable">$HOME</span>/wallaroo-tutorial/wallaroo-0.5.3/examples/python/celsius&quot;</span>
-<span class="hljs-variable">$HOME</span>/wallaroo-tutorial/wallaroo-0.5.3/machida/build/machida --application-module celsius \
-  --in 127.0.0.1:7000 --out 127.0.0.1:5555 --metrics 127.0.0.1:5001 \
-  --control 127.0.0.1:6000 --data 127.0.0.1:6001 --name worker-name \
-  --external 127.0.0.1:5050 --cluster-initializer --ponythreads=1 \
+<p><div class="codetabs"><div class="codetabs-header"><div class="tab active" data-codetab="0">Python 2.7</div><div class="tab" data-codetab="1">Python 3</div></div><div class="codetabs-body"><div class="tab active" data-codetab="0"><pre><code class="lang-py">source ENV/bin/activate
+export PYTHONPATH=<span class="hljs-string">&quot;$HOME/wallaroo-tutorial/wallaroo-0.5.4/machida/lib:$HOME/wallaroo-tutorial/wallaroo-0.5.4/examples/python/celsius&quot;</span>
+machida --application-module celsius \
+  --<span class="hljs-keyword">in</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">7000</span> --out <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">5555</span> --metrics <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">5001</span> \
+  --control <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">6000</span> --data <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">6001</span> --name worker-name \
+  --external <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">5050</span> --cluster-initializer --ponythreads=<span class="hljs-number">1</span> \
   --ponynoblock
+</code></pre></div><div class="tab" data-codetab="1"><pre><code class="lang-py">source ENV/bin/activate
+export PYTHONPATH=<span class="hljs-string">&quot;$HOME/wallaroo-tutorial/wallaroo-0.5.4/machida/lib:$HOME/wallaroo-tutorial/wallaroo-0.5.4/examples/python/celsius&quot;</span>
+machida3 --application-module celsius \
+  --<span class="hljs-keyword">in</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">7000</span> --out <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">5555</span> --metrics <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">5001</span> \
+  --control <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">6000</span> --data <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">6001</span> --name worker-name \
+  --external <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">5050</span> --cluster-initializer --ponythreads=<span class="hljs-number">1</span> \
+  --ponynoblock</code></pre></div></div></div></p>
+<p>Please be aware that you&apos;ll still need to setup a source and sink as well. To learn more you can look at <a href="../wallaroo-tools/giles-sender.html">Giles Sender</a> for more detailed instructions on building and running Giles.</p>
+<p>To run a sink for our example with Data Receiver, run</p>
+<pre><code class="lang-bash">data_receiver --framed --listen 127.0.0.1:5555 --ponythreads=1 --ponynoblock
 </code></pre>
-<p>Please be aware that you&apos;ll still need to setup a source and sink as well. We include a toolkit named Giles to assist in this. To learn more you can look at <a href="../wallaroo-tools/giles-receiver.html">Giles Receiver</a> and <a href="../wallaroo-tools/giles-sender.html">Giles Sender</a> for more detailed instructions on building and running Giles.</p>
-<p>To run a sink for our example with Giles, run</p>
-<pre><code class="lang-bash"><span class="hljs-variable">$HOME</span>/wallaroo-tutorial/wallaroo-0.5.3/giles/receiver/receiver --listen 127.0.0.1:5555 --ponythreads=1 --ponynoblock
-</code></pre>
-<p>or if you prefer to log the output into a file, you may use the netcat utility like so</p>
-<pre><code class="lang-bash">nc <span class="hljs-_">-l</span> 127.0.0.1 5555 &gt; output
+<p>or if you prefer to log the output into a file:</p>
+<pre><code class="lang-bash">data_receiver \
+--framed --listen 127.0.0.1:5555 --ponythreads=1 --ponynoblock &gt; output
 </code></pre>
 <p>The contents of your pipeline&apos;s decoder will be added to a file named output in the directory from which this is run.</p>
 
@@ -1329,7 +1312,7 @@ Could <span class="hljs-keyword">not</span> load module <span class="hljs-string
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Wallaroo and Virtualenv","level":"7.1","depth":1,"next":{"title":"TCP Decoders and Encoders","level":"7.2","depth":1,"path":"book/appendix/tcp-decoders-and-encoders.md","ref":"book/appendix/tcp-decoders-and-encoders.md","articles":[]},"previous":{"title":"Command line options","level":"6.4","depth":1,"path":"book/running-wallaroo/wallaroo-command-line-options.md","ref":"book/running-wallaroo/wallaroo-command-line-options.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/appendix/virtualenv.md","mtime":"2018-09-28T18:10:20.936Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-28T18:10:27.612Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Wallaroo and Virtualenv","level":"7.1","depth":1,"next":{"title":"TCP Decoders and Encoders","level":"7.2","depth":1,"path":"book/appendix/tcp-decoders-and-encoders.md","ref":"book/appendix/tcp-decoders-and-encoders.md","articles":[]},"previous":{"title":"Command line options","level":"6.4","depth":1,"path":"book/running-wallaroo/wallaroo-command-line-options.md","ref":"book/running-wallaroo/wallaroo-command-line-options.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/appendix/virtualenv.md","mtime":"2018-10-31T14:58:14.185Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-10-31T14:58:22.586Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

@@ -1096,20 +1096,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.4" data-path="../wallaroo-tools/giles-receiver.html">
-            
-                <a href="../wallaroo-tools/giles-receiver.html">
-            
-                    
-                    Receiving Data over TCP with Giles Receiver
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.5" data-path="../metrics/metrics-ui.html">
+        <li class="chapter " data-level="7.4" data-path="../metrics/metrics-ui.html">
             
                 <a href="../metrics/metrics-ui.html">
             
@@ -1122,20 +1109,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.6" data-path="../appendix/decoding-giles-receiver-output.html">
-            
-                <a href="../appendix/decoding-giles-receiver-output.html">
-            
-                    
-                    Decoding Giles Receiver Output
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="7.7" data-path="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
+        <li class="chapter " data-level="7.5" data-path="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
             
                 <a href="../appendix/wallaroo-and-long-running-data-processing-and-other-workflows.html">
             
@@ -1148,7 +1122,7 @@
             
         </li>
     
-        <li class="chapter " data-level="7.8" data-path="../appendix/wallaroo-in-docker-tips.html">
+        <li class="chapter " data-level="7.6" data-path="../appendix/wallaroo-in-docker-tips.html">
             
                 <a href="../appendix/wallaroo-in-docker-tips.html">
             
@@ -1239,12 +1213,12 @@
 mkdir ~/wallaroo-tutorial
 <span class="hljs-built_in">cd</span> ~/wallaroo-tutorial
 </code></pre>
-<p>This will be our base directory in what follows. Download the Wallaroo sources (this will create a subdirectory called <code>wallaroo-0.5.3</code>):</p>
-<pre><code class="lang-bash">curl -L -o wallaroo-0.5.3.tar.gz <span class="hljs-string">&apos;https://wallaroo-labs.bintray.com/wallaroolabs-ftp/wallaroo/0.5.3/wallaroo-0.5.3.tar.gz&apos;</span>
-mkdir wallaroo-0.5.3
-tar -C wallaroo-0.5.3 --strip-components=1 -xzf wallaroo-0.5.3.tar.gz
-rm wallaroo-0.5.3.tar.gz
-<span class="hljs-built_in">cd</span> wallaroo-0.5.3
+<p>This will be our base directory in what follows. Download the Wallaroo sources (this will create a subdirectory called <code>wallaroo-0.5.4</code>):</p>
+<pre><code class="lang-bash">curl -L -o wallaroo-0.5.4.tar.gz <span class="hljs-string">&apos;https://wallaroo-labs.bintray.com/wallaroolabs-ftp/wallaroo/0.5.4/wallaroo-0.5.4.tar.gz&apos;</span>
+mkdir wallaroo-0.5.4
+tar -C wallaroo-0.5.4 --strip-components=1 -xzf wallaroo-0.5.4.tar.gz
+rm wallaroo-0.5.4.tar.gz
+<span class="hljs-built_in">cd</span> wallaroo-0.5.4
 </code></pre>
 <h2 id="install-make">Install make</h2>
 <pre><code class="lang-bash">sudo apt-get update
@@ -1287,7 +1261,7 @@ sudo apt-get install -y gcc-5 g++-5
 <p>Now you need to install Pony compiler <code>ponyc</code>. Run:</p>
 <pre><code class="lang-bash">sudo add-apt-repository <span class="hljs-string">&quot;deb https://dl.bintray.com/pony-language/ponylang-debian  <span class="hljs-variable">$(lsb_release -cs)</span> main&quot;</span>
 sudo apt-get update
-sudo apt-get -V install ponyc=0.24.4
+sudo apt-get -V install ponyc=0.25.0
 </code></pre>
 <h2 id="installing-pony-stable">Installing pony-stable</h2>
 <p>Next, you need to install <code>pony-stable</code>, a Pony dependency management library. Navigate to a directory where you will put the <code>pony-stable</code> repo and execute the following commands:</p>
@@ -1313,22 +1287,26 @@ make
 sudo make install
 </code></pre>
 <h2 id="install-python-development-libraries">Install Python Development Libraries</h2>
-<pre><code class="lang-bash">sudo apt-get install -y python-dev
+<h3 id="python-27">Python 2.7</h3>
+<pre><code class="lang-bash">sudo apt-get install -y python python-dev
+</code></pre>
+<h3 id="python-3">Python 3</h3>
+<pre><code class="lang-bash">sudo apt-get install -y python3 python3-dev
 </code></pre>
 <h2 id="download-and-configure-the-metrics-ui">Download and configure the Metrics UI</h2>
-<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-0.5.3/
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-0.5.4/
 mkdir bin
-curl -L -o Wallaroo_Metrics_UI-0.5.3-x86_64.AppImage <span class="hljs-string">&apos;https://wallaroo-labs.bintray.com/wallaroolabs-ftp/wallaroo/0.5.3/Wallaroo_Metrics_UI-0.5.3-x86_64.AppImage&apos;</span>
-chmod +x Wallaroo_Metrics_UI-0.5.3-x86_64.AppImage
-./Wallaroo_Metrics_UI-0.5.3-x86_64.AppImage --appimage-extract
+curl -L -o Wallaroo_Metrics_UI-0.5.4-x86_64.AppImage <span class="hljs-string">&apos;https://wallaroo-labs.bintray.com/wallaroolabs-ftp/wallaroo/0.5.4/Wallaroo_Metrics_UI-0.5.4-x86_64.AppImage&apos;</span>
+chmod +x Wallaroo_Metrics_UI-0.5.4-x86_64.AppImage
+./Wallaroo_Metrics_UI-0.5.4-x86_64.AppImage --appimage-extract
 mv squashfs-root bin/metrics_ui
 sed -i <span class="hljs-string">&apos;s/sleep 4/sleep 0/&apos;</span> bin/metrics_ui/AppRun
-rm Wallaroo_Metrics_UI-0.5.3-x86_64.AppImage
+rm Wallaroo_Metrics_UI-0.5.4-x86_64.AppImage
 ln <span class="hljs-_">-s</span> metrics_ui/AppRun bin/metrics_reporter_ui
 </code></pre>
 <h2 id="compiling-machida">Compiling Machida</h2>
-<p>Machida is the program that runs Wallaroo Python applications. Machida supports resiliency, but it comes with a performance hit. If you don&apos;t need resiliency then we recommend to build Machida without the flag. Here we build Machida once with resiliency and once without resiliency. Change to the Wallaroo directory:</p>
-<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-0.5.3/
+<p>Machida is the program that runs Wallaroo Python applications. Machida supports resiliency, but it comes with a performance hit. If you don&apos;t need resiliency then we recommend to build Machida without the flag. Here we build Machida once with resiliency and once without resiliency. Change to the Wallaroo directory. If you are using Python 2.7 you should run the following commands:</p>
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-0.5.4/
 make build-machida-all resilience=on
 cp machida/build/machida bin/machida-resilience
 make clean-machida-all
@@ -1336,12 +1314,21 @@ make build-machida-all
 cp machida/build/machida bin
 cp -r machida/lib/ bin/pylib
 </code></pre>
+<p>If you are using Python 3.X you should run the following commands:</p>
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-0.5.4/
+make build-machida3-all resilience=on
+cp machida3/build/machida3 bin/machida3-resilience
+make clean-machida3-all
+make build-machida3-all
+cp machida3/build/machida3 bin
+cp -r machida/lib/ bin/pylib
+</code></pre>
 <h2 id="compiling-giles-sender-data-receiver-cluster-shutdown-and-cluster-shrinker-tools">Compiling Giles Sender, Data Receiver, Cluster Shutdown, and Cluster Shrinker tools</h2>
 <p>Giles Sender is used to supply data to Wallaroo applications over TCP, and Data Receiver is used as a fast TCP Sink that optionally writes the messages it receives to the console. The two together are useful when developing and testing applications that use TCP Sources and a TCP Sink.</p>
 <p>The Cluster Shutdown tool is used to instruct the cluster to shutdown cleanly, clearing away any resilience and recovery files it may have created.</p>
 <p>The Cluster Shrinker tool is used to tell a running cluster to reduce the number of workers in the cluster and to query the cluster for information about how many workers are eligible for removal.</p>
 <p>To compile all of the tools, change to the root Wallaroo directory:</p>
-<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-0.5.3/
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> ~/wallaroo-tutorial/wallaroo-0.5.4/
 make build-giles-sender-all build-utils-all
 cp utils/data_receiver/data_receiver bin
 cp utils/cluster_shrinker/cluster_shrinker bin
@@ -1352,11 +1339,7 @@ cp giles/sender/sender bin
 <p>The <code>activate</code> file sets up the environment for running Wallaroo examples when it is sourced</p>
 <p>The following command copies it into the correct location:</p>
 <pre><code>cp misc/activate bin/
-</code></pre><h2 id="register">Register</h2>
-<p>Register today and receive a Wallaroo T-shirt and a one-hour phone consultation with Sean, our V.P. of Engineering, to discuss your streaming data questions. Not sure if you have a streaming data problem? Not sure how to go about architecting a streaming data system? Looking to improve an existing system? Not sure how Wallaroo can help? Sean has extensive experience and is happy to help you work through your questions.</p>
-<p>Please register here: <a href="https://www.wallaroolabs.com/register" target="_blank">https://www.wallaroolabs.com/register</a>.</p>
-<p>Your email address will only be used to facilitate the above.</p>
-<h2 id="conclusion">Conclusion</h2>
+</code></pre><h2 id="conclusion">Conclusion</h2>
 <p>Awesome! All set. Time to try running your first application.</p>
 
                                 
@@ -1401,7 +1384,7 @@ cp giles/sender/sender bin
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Ubuntu Installation","level":"4.2.5.1.1","depth":4,"next":{"title":"Run a Wallaroo Application","level":"4.2.5.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application.md","ref":"book/getting-started/run-a-wallaroo-application.md","articles":[]},"previous":{"title":"Setting up Your Environment","level":"4.2.5.1","depth":3,"path":"book/getting-started/setup.md","ref":"book/getting-started/setup.md","articles":[{"title":"Ubuntu Installation","level":"4.2.5.1.1","depth":4,"path":"book/getting-started/linux-setup.md","ref":"book/getting-started/linux-setup.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/getting-started/linux-setup.md","mtime":"2018-09-28T18:10:20.920Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-09-28T18:10:27.612Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Ubuntu Installation","level":"4.2.5.1.1","depth":4,"next":{"title":"Run a Wallaroo Application","level":"4.2.5.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application.md","ref":"book/getting-started/run-a-wallaroo-application.md","articles":[]},"previous":{"title":"Setting up Your Environment","level":"4.2.5.1","depth":3,"path":"book/getting-started/setup.md","ref":"book/getting-started/setup.md","articles":[{"title":"Ubuntu Installation","level":"4.2.5.1.1","depth":4,"path":"book/getting-started/linux-setup.md","ref":"book/getting-started/linux-setup.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/getting-started/linux-setup.md","mtime":"2018-10-31T14:58:14.197Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-10-31T14:58:22.586Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
