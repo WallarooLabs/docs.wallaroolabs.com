@@ -1188,8 +1188,19 @@
 <p>Since recovery involves a rollback to the last successful checkpoint, any data that was processed <em>after</em> that checkpoint will have to be resent by the sources.</p>
 <h2 id="recovery-in-practice">Recovery in Practice</h2>
 <p>When a crashed worker is restarted, if it can find its resilience files in the path specified by <code>--resilience-dir</code>, it will automatically start the recovery process. The simplest way to do this is to rerun the worker using the same command it was originally run with.</p>
-<p>For example, if we were running the bundled Python example <a href="https://github.com/WallarooLabs/wallaroo/tree/master/examples/python/word_count/" target="_blank">word_count_with_dynamic_keys</a>, this might look something like:</p>
-<h3 id="running-the-resilience-example">Running the resilience example</h3>
+<p>For example, if we were running the bundled Python example <a href="https://github.com/WallarooLabs/wallaroo/tree/master/examples/python/word_count/" target="_blank">word_count</a>, this might look something like:</p>
+<pre><code>```bash
+machida-resilience --application-module word_count \
+  --in 127.0.0.1:7010 --out 127.0.0.1:7002 \
+  --metrics 127.0.0.1:5001 --control 127.0.0.1:6000 \
+  --my-data 127.0.0.1:6003 --my-control 127.0.0.1:6002 \
+  --external 127.0.0.1:5051 \
+  --name worker1 \
+  --resilience-dir /tmp/resilience-dir \
+  --ponythreads=1 --ponynoblock --run-with-resilience \
+  | tee worker1.log
+```
+</code></pre><h3 id="running-the-resilience-example">Running the resilience example</h3>
 <p>In order to run the example you will need Machida with resilience enabled, Giles Sender, Data Receiver, and the Cluster Shutdown tool. If you haven&apos;t yet set up wallaroo, please visit our <a href="https://docs.wallaroolabs.com/book/getting-started/choosing-an-installation-option.html" target="_blank">setup</a> instructions to get started.</p>
 <h4 id="starting-new-shells">Starting new shells</h4>
 <p>You will need 4 shells to run this example.
@@ -1350,7 +1361,7 @@ amendment =&gt; 12
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Resilience","level":"5.3","depth":1,"next":{"title":"Command line options","level":"5.4","depth":1,"path":"book/running-wallaroo/wallaroo-command-line-options.md","ref":"book/running-wallaroo/wallaroo-command-line-options.md","articles":[]},"previous":{"title":"Autoscale","level":"5.2","depth":1,"path":"book/running-wallaroo/autoscale.md","ref":"book/running-wallaroo/autoscale.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/running-wallaroo/resilience.md","mtime":"2018-11-19T16:19:45.371Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-19T16:19:54.725Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Resilience","level":"5.3","depth":1,"next":{"title":"Command line options","level":"5.4","depth":1,"path":"book/running-wallaroo/wallaroo-command-line-options.md","ref":"book/running-wallaroo/wallaroo-command-line-options.md","articles":[]},"previous":{"title":"Autoscale","level":"5.2","depth":1,"path":"book/running-wallaroo/autoscale.md","ref":"book/running-wallaroo/autoscale.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/running-wallaroo/resilience.md","mtime":"2018-11-27T16:16:09.696Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-27T16:16:16.890Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

@@ -1199,29 +1199,29 @@
 -v /tmp/wallaroo-docker/wallaroo-release-0.6.0/wallaroo-src:/src/wallaroo \
 -v /tmp/wallaroo-docker/wallaroo-release-0.6.0/python-virtualenv-machida:/src/python-virtualenv \
 --name wally \
-wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-0.6.0-dd4e226</code></pre></div><div class="tab" data-codetab="1"><pre><code class="lang-bash">docker run --rm -it --privileged -p 4000:4000 `
+wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-0.6.0-5e420be</code></pre></div><div class="tab" data-codetab="1"><pre><code class="lang-bash">docker run --rm -it --privileged -p 4000:4000 `
 -v c:/wallaroo-docker/wallaroo--release-0.6.0/wallaroo-src:/src/wallaroo `
 -v c:/wallaroo-docker/wallaroo-release-0.6.0/python-virtualenv-machida:/src/python-virtualenv `
 --name wally `
-wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-0.6.0-dd4e226</code></pre></div><div class="tab" data-codetab="2"><pre><code class="lang-bash">docker run --rm -it --privileged -p 4000:4000 ^
+wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-0.6.0-5e420be</code></pre></div><div class="tab" data-codetab="2"><pre><code class="lang-bash">docker run --rm -it --privileged -p 4000:4000 ^
 -v c:/wallaroo-docker/wallaroo-release-0.6.0/wallaroo-src:/src/wallaroo ^
 -v c:/wallaroo-docker/wallaroo-release-0.6.0/python-virtualenv-machida:/src/python-virtualenv ^
 --name wally ^
-wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-0.6.0-dd4e226</code></pre></div></div></div></p>
+wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-0.6.0-5e420be</code></pre></div></div></div></p>
 <h2 id="shell-1-start-the-wallaroo-docker-container-for-machida3">Shell 1: Start the Wallaroo Docker container for Machida3</h2>
 <p><div class="codetabs"><div class="codetabs-header"><div class="tab active" data-codetab="0">UNIX Bash</div><div class="tab" data-codetab="1">Windows Powershell</div><div class="tab" data-codetab="2">Windows Command Prompt</div></div><div class="codetabs-body"><div class="tab active" data-codetab="0"><pre><code class="lang-bash">docker run --rm -it --privileged -p 4000:4000 \
 -v /tmp/wallaroo-docker/wallaroo-release-0.6.0/wallaroo-src:/src/wallaroo \
 -v /tmp/wallaroo-docker/wallaroo-release-0.6.0/python-virtualenv-machida3:/src/python-virtualenv \
 --name wally \
-wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-0.6.0-dd4e226 -p python3</code></pre></div><div class="tab" data-codetab="1"><pre><code class="lang-bash">docker run --rm -it --privileged -p 4000:4000 `
+wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-0.6.0-5e420be -p python3</code></pre></div><div class="tab" data-codetab="1"><pre><code class="lang-bash">docker run --rm -it --privileged -p 4000:4000 `
 -v c:/wallaroo-docker/wallaroo--release-0.6.0/wallaroo-src:/src/wallaroo `
 -v c:/wallaroo-docker/wallaroo-release-0.6.0/python-virtualenv-machida3:/src/python-virtualenv `
 --name wally `
-wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-0.6.0-dd4e226 -p python3</code></pre></div><div class="tab" data-codetab="2"><pre><code class="lang-bash">docker run --rm -it --privileged -p 4000:4000 ^
+wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-0.6.0-5e420be -p python3</code></pre></div><div class="tab" data-codetab="2"><pre><code class="lang-bash">docker run --rm -it --privileged -p 4000:4000 ^
 -v c:/wallaroo-docker/wallaroo-release-0.6.0/wallaroo-src:/src/wallaroo ^
 -v c:/wallaroo-docker/wallaroo-release-0.6.0/python-virtualenv-machida3:/src/python-virtualenv ^
 --name wally ^
-wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-0.6.0-dd4e226 -p python3</code></pre></div></div></div></p>
+wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-0.6.0-5e420be -p python3</code></pre></div></div></div></p>
 <h3 id="breaking-down-the-docker-command">Breaking down the Docker command</h3>
 <ul>
 <li><p><code>docker run</code>: The Docker command to start a new container.</p>
@@ -1299,7 +1299,7 @@ wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-0.6.0-dd4e226 
 <p>You can shut down the cluster with this command at any time:</p>
 <pre><code class="lang-bash">cluster_shutdown 127.0.0.1:5050
 </code></pre>
-<p>You can shut down Giles Sender and Data Receiver by pressing Ctrl-c from their respective shells.</p>
+<p>You can shut down Data Receiver by pressing Ctrl-c from its shell.</p>
 <p>You can shut down the Metrics UI with the following command:</p>
 <pre><code class="lang-bash">metrics_reporter_ui stop
 </code></pre>
@@ -1352,7 +1352,7 @@ wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-0.6.0-dd4e226 
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Run a Wallaroo Application in Docker","level":"4.2.2.2","depth":3,"next":{"title":"Installing with Vagrant","level":"4.2.3","depth":2,"path":"book/getting-started/installing-with-vagrant.md","ref":"book/getting-started/installing-with-vagrant.md","articles":[{"title":"Setting Up Your Environment","level":"4.2.3.1","depth":3,"path":"book/getting-started/vagrant-setup.md","ref":"book/getting-started/vagrant-setup.md","articles":[]},{"title":"Run a Wallaroo Application in Vagrant","level":"4.2.3.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-vagrant.md","ref":"book/getting-started/run-a-wallaroo-application-vagrant.md","articles":[]}]},"previous":{"title":"Setting Up Your Environment","level":"4.2.2.1","depth":3,"path":"book/getting-started/docker-setup.md","ref":"book/getting-started/docker-setup.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/getting-started/run-a-wallaroo-application-docker.md","mtime":"2018-11-19T16:19:45.391Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-19T16:19:54.725Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Run a Wallaroo Application in Docker","level":"4.2.2.2","depth":3,"next":{"title":"Installing with Vagrant","level":"4.2.3","depth":2,"path":"book/getting-started/installing-with-vagrant.md","ref":"book/getting-started/installing-with-vagrant.md","articles":[{"title":"Setting Up Your Environment","level":"4.2.3.1","depth":3,"path":"book/getting-started/vagrant-setup.md","ref":"book/getting-started/vagrant-setup.md","articles":[]},{"title":"Run a Wallaroo Application in Vagrant","level":"4.2.3.2","depth":3,"path":"book/getting-started/run-a-wallaroo-application-vagrant.md","ref":"book/getting-started/run-a-wallaroo-application-vagrant.md","articles":[]}]},"previous":{"title":"Setting Up Your Environment","level":"4.2.2.1","depth":3,"path":"book/getting-started/docker-setup.md","ref":"book/getting-started/docker-setup.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/getting-started/run-a-wallaroo-application-docker.md","mtime":"2018-11-27T16:16:09.708Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-27T16:16:16.890Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

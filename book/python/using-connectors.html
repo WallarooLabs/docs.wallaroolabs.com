@@ -1189,24 +1189,26 @@
 <p>In your application module&apos;s <code>application_setup</code> function, the application builder returns a description of your application in terms of pipelines. Connectors tap into this by allowing the declaration of source and sink connectors and wiring these up by name in your pipeline definitions.</p>
 <p>Here is an example of what this looks like:</p>
 <pre><code class="lang-python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">application_setup</span><span class="hljs-params">(args)</span>:</span>
-    ab = wallaroo.ApplicationBuilder(<span class="hljs-string">&quot;Celsius to Fahrenheit&quot;</span>)
-
-    ab.source_connector(<span class="hljs-string">&quot;celsius_feed&quot;</span>,
+celsius_feed = wallaroo.experimental.SourceConnectorConfig(
+        <span class="hljs-string">&quot;celsius_feed&quot;</span>,
         encoder=encode_feed,
-        decoder=decode_feed)
-
-    ab.sink_connector(<span class="hljs-string">&quot;fahrenheit_conversion&quot;</span>,
+        decoder=decode_feed,
+        port=<span class="hljs-number">7100</span>)
+    fahrenheit_conversion = wallaroo.experimental.SinkConnectorConfig(
+        <span class="hljs-string">&quot;fahrenheit_conversion&quot;</span>,
         encoder=encode_conversion,
-        decoder=decode_conversion)
-
-    ab.new_pipeline(<span class="hljs-string">&quot;Celsius Conversion&quot;</span>, <span class="hljs-string">&quot;celsius_feed&quot;</span>)
-    ab.to(multiply)
-    ab.to(add)
-    ab.to_sink(<span class="hljs-string">&quot;fahrenheit_conversion&quot;</span>)
-    <span class="hljs-keyword">return</span> ab.build()
+        decoder=decode_conversion,
+        port=<span class="hljs-number">7200</span>)
+    pipeline = (
+        wallaroo.source(<span class="hljs-string">&quot;convert temperature readings&quot;</span>, celsius_feed)
+        .to(multiply)
+        .to(add)
+        .to_sink(fahrenheit_conversion)
+    )
+    <span class="hljs-keyword">return</span> wallaroo.build_application(<span class="hljs-string">&quot;Celsius to Fahrenheit&quot;</span>, pipeline)
 </code></pre>
 <p>You can follow along in this example by going to <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.6.0/examples/python/celsius_connectors/" target="_blank">github</a>.</p>
-<p>We have introduced two new application builder methods for declaring connectors: <code>source_connector</code> and <code>sink_connector</code>. These allow you to describe both ends of the connection so the connector script can encode or decode data in a way that&apos;s compatible with your application&apos;s worker code. Keeping these in one place helps ensure that it&apos;s easy to keep them in sync.</p>
+<p>We have introduced two new application builder methods for declaring connectors: <code>source_connector</code> and <code>sink_connector</code>. These allow you to describe both ends of the connection so the connector script can encode or decode data in a way that&apos;s compatible with your application&apos;s worker code. Keeping these in one place helps ensure that it&apos;s easy to keep them in sync. The port specified here is what the connector script will automatically use when connecting to the initializing worker.</p>
 <p>In this example we can look at the celsius feed&apos;s encoder and decoder functions:</p>
 <pre><code class="lang-python"><span class="hljs-meta">@wallaroo.experimental.stream_message_encoder</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">encode_feed</span><span class="hljs-params">(data)</span>:</span>
@@ -1218,21 +1220,24 @@
 </code></pre>
 <p>Here we&apos;ve defined two functions and use <code>wallaroo.experimental.stream_message_encoder</code> and <code>wallaroo.experimental.stream_message_decoder</code> as decorators. These decorators will handle framing and delivery of your data, so all you need to ensure is that the bytes represent the single message you want to deliver.</p>
 <p>You might ask why the example&apos;s encoder function definition is only returning the data. In this case, the example is receiving data that&apos;s already a packed floating point number so there is no need to reencode it. This allows the encoder to pass along data as-is when it&apos;s already in the correct format.</p>
-<p>Returning to the application setup code, we should look at the pipeline definition to understand how all of this comes together. First is the <code>new_pipeline</code> call:</p>
-<pre><code class="lang-python">ab.new_pipeline(<span class="hljs-string">&quot;Celsius Conversion&quot;</span>, <span class="hljs-string">&quot;celsius_feed&quot;</span>)
+<p>Returning to the application setup code, we should look at the pipeline definition to understand how all of this comes together. First is the pipeline construction:</p>
+<pre><code class="lang-python">pipeline = (
+        wallaroo.source(<span class="hljs-string">&quot;convert temperature readings&quot;</span>, celsius_feed)
+        <span class="hljs-comment"># ...</span>
 </code></pre>
-<p>Instead of using something like the <code>wallaroo.TCPSourceConfig</code> instance that we might have used before (if not, we explain about how this works in the <a href="api.html#tcpsource">details</a> chapter) for a basic TCP source stream, we now use the name of the connector. This must match the type of connector; in this case, new_pipeline expects a source, so we should declare <code>&quot;celsius_feed&quot;</code> using <code>source_connector</code>.</p>
+<p>The code sample constructs a source using the celsius_feed connector configuration object defined above. This must match the type of connector; in this case, new_pipeline expects a source, so we should declare <code>&quot;celsius_feed&quot;</code> using <code>SourceConnectorConfig</code>.</p>
 <p>Likewise, our sink has adopted a named connector:</p>
-<pre><code class="lang-python">ab.to_sink(<span class="hljs-string">&quot;fahrenheit_conversion&quot;</span>)
+<pre><code class="lang-python">    <span class="hljs-comment"># ...</span>
+    .to_sink(fahrenheit_conversion)
 </code></pre>
-<p>This matches up with our call to <code>sink_connector</code> and it has its own encoder and decoder functions as well.</p>
+<p>This matches up with our call to <code>SinkConnectorConfig</code> and it has its own encoder and decoder functions as well.</p>
 <p>Notice how we don&apos;t couple the specifics of the medium used by the connector and instead focus on how we interpret incoming messages in terms of their serialization. This allows applications to evolve and mix their infrastructure over time.</p>
 <h2 id="running-connector-scripts">Running Connector Scripts</h2>
 <p>To run an application that makes use of these connectors we&apos;ll need to understand how the connector scripts work. Wallaroo includes a <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.6.0/connectors/" target="_blank">library of connectors</a> to help get you started. We&apos;ll look at <code>udp_source</code> and <code>udp_sink</code> as used in the example introduced above.</p>
 <p>These included connectors are self-contained Python scripts. Some of them may expect a related Python library to be installed and available for import but our example uses the UDP facilities provided for by Python&apos;s standard library. Be sure that the Python path is set up to include the Wallaroo library.</p>
 <p>If we run one of these scripts we&apos;ll see there are some required arguments listed. The first one should be familiar. <code>--application-module</code> is the same as the one seen when running a Wallaroo worker (you can review these command line parameters in the <a href="../running-wallaroo/running-wallaroo.html">Running Wallaroo</a> section). Providing this argument allows the script to autodetect most of the connector settings by reading the same application description that the Wallaroo application worker runs with.</p>
 <p>The application module is not quite enough for the script to know what settings to use when connecting to Wallaroo. Since the application may have more than one connector, the <code>--connector</code> argument is required for disambiguating which connector in the application setup this script is running as. With this passed as an argument, we can autodetect the most common settings.</p>
-<p>Many connector scripts will have their own additional arguments, some may be required and others may be optional. In this case we have two, the host and port. These argument names prefix the connector name to ensure that conflicting argument names do not cause problems. For example, you should be able to pass all your Wallaroo arguments in without conflict.</p>
+<p>Many connector scripts will have their own additional arguments, some may be required and others may be optional. In this case we have two, the host and port (not to be confused with the port that the connector script uses to communicate with the Wallaroo initializer). These argument names prefix the connector name to ensure that conflicting argument names do not cause problems. For example, you should be able to pass all your Wallaroo arguments in without conflict.</p>
 <p>To illustrate this, let&apos;s look at what the <code>udp_source</code> command line parameters might look like:</p>
 <pre><code class="lang-bash">./wallaroo/connectors/udp_source --application-module celsius \
     --connector celsius_feed \
@@ -1275,7 +1280,7 @@ connector instance type. In this case we&apos;d like to build a source connector
 <p>Once we&apos;ve constructed this and we&apos;re ready to connect to Wallaroo to allow data to flow we call <code>connect</code>:</p>
 <pre><code class="lang-python">connector.connect()
 </code></pre>
-<p>We can pass custom <code>host</code> and <code>port</code> parameters here if the automatically resolved information needs to change. Since we recommend that you run your connector scripts next to the Wallaroo process, the defaults work just fine.</p>
+<p>The connectors library will automatically resolve the port to use for connecting to the Wallaroo initializer. By default the connector runtime assumes you&apos;re co-locating the connector and the worker on the same host so the loopback address is used (127.0.0.1). The script can pass custom <code>host</code> and <code>port</code> parameters here if the automatically resolved information needs to change. Since we recommend that you run your connector scripts next to the Wallaroo process, the defaults work just fine.</p>
 <p>Your script can do any other initialization but once it&apos;s running, all you need is a call to <code>write</code>:</p>
 <pre><code class="lang-python">connector.write(<span class="hljs-string">&quot;hello world&quot;</span>)
 </code></pre>
@@ -1337,7 +1342,7 @@ connector instance type. In this case we&apos;d like to build a source connector
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Using Connectors","level":"4.3.6","depth":2,"next":{"title":"Wallaroo Python API","level":"4.3.7","depth":2,"path":"book/python/api.md","ref":"book/python/api.md","articles":[]},"previous":{"title":"Interworker Serialization and Resilience","level":"4.3.5","depth":2,"path":"book/python/interworker-serialization-and-resilience.md","ref":"book/python/interworker-serialization-and-resilience.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/using-connectors.md","mtime":"2018-11-19T16:19:45.487Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-19T16:19:54.725Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Using Connectors","level":"4.3.6","depth":2,"next":{"title":"Wallaroo Python API","level":"4.3.7","depth":2,"path":"book/python/api.md","ref":"book/python/api.md","articles":[]},"previous":{"title":"Interworker Serialization and Resilience","level":"4.3.5","depth":2,"path":"book/python/interworker-serialization-and-resilience.md","ref":"book/python/interworker-serialization-and-resilience.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/using-connectors.md","mtime":"2018-11-27T16:16:09.800Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-27T16:16:16.890Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

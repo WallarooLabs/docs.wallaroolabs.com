@@ -1238,7 +1238,7 @@ partial_pipeline2 = inputs2.to(computation2)
 
 partial_pipeline = inputs1.merge(inputs2)
 </code></pre>
-<p>The resulting partial pipeline could be </p>
+<p>The resulting partial pipeline could be</p>
 <pre><code>Source1 -&gt; computation1 -&gt;\
                            \
                             -&gt;
@@ -1271,12 +1271,12 @@ Source2 -&gt; computation2 -&gt;/
 <h4 id="args"><code>args</code></h4>
 <p>Since the application is run in an embedded Python runtime, it does not have standard access to <code>sys.argv</code> from which various options parsers could be used. Instead, Wallaroo provides <code>application_setup</code> with <code>args</code>: a list of the string command-line arguments it has received.</p>
 <h3 id="wallaroo"><code>wallaroo</code></h3>
-<p>The <code>wallaroo</code> library provides two functions that are needed to define a Wallaroo application, <code>source</code> and <code>build_application</code>.  </p>
+<p>The <code>wallaroo</code> library provides two functions that are needed to define a Wallaroo application, <code>source</code> and <code>build_application</code>.</p>
 <h4 id="wallaroosourcename-sourceconfig"><code>wallaroo.source(name, source_config)</code></h4>
 <p>Create a partial pipeline originating at a source.</p>
 <p><code>name</code> must be a string.</p>
 <p><code>source_config</code> must be one of the <a href="#source">SourceConfig</a> classes.</p>
-<p>There are number of methods you can call on a partial pipeline object (such as the one returned by <code>source</code>). </p>
+<p>There are number of methods you can call on a partial pipeline object (such as the one returned by <code>source</code>).</p>
 <h5 id="tocomputation"><code>to(computation)</code></h5>
 <p>Add a computation <em>function</em> to the partial pipeline. This will either be a <a href="#computation">stateless</a> or a <a href="#statecomputation">state</a> computation. A call to <code>to</code> returns a new partial pipeline object.</p>
 <h5 id="keybykeyextractor"><code>key_by(key_extractor)</code></h5>
@@ -1290,7 +1290,7 @@ Source2 -&gt; computation2 -&gt;/
 <p><code>sink_config</code> must be a list of <a href="#sink">SinkConfig</a> classes.</p>
 <p>At the moment, the same pipeline output is sent via all sinks. The ability to determine what output should be sent to which sinks will be added in a future version of Wallaroo.</p>
 <h4 id="wallaroobuildapplicationapplicationname-pipeline"><code>wallaroo.build_application(application_name, pipeline)</code></h4>
-<p>Returns the topology structure Wallaroo requires in order to construct the topology connecting all of the application components. </p>
+<p>Returns the topology structure Wallaroo requires in order to construct the topology connecting all of the application components.</p>
 <p><code>application_name</code> must be a string.</p>
 <p><code>pipeline</code> must be a complete pipeline object returned from either <code>to_sink</code> or <code>to_sinks</code>.</p>
 <h3 id="computation">Computation</h3>
@@ -1389,7 +1389,7 @@ An example StateComputation that keeps track of the longest sentence it has seen
         if v &gt; max:
             max = v
 
-@wallaroo.state_computation(name=&apos;Longest Sentence and Split Words&apos;, 
+@wallaroo.state_computation(name=&apos;Longest Sentence and Split Words&apos;,
     state=MaxLength):
 def longest_sentence_and_split_words(data, state):
     before = state.max
@@ -1455,7 +1455,8 @@ def longest_sentence_and_split_words(data, state):
 <pre><code class="lang-python"><span class="hljs-meta">@wallaroo.encoder</span>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">kafka_encode</span><span class="hljs-params">(data)</span>:</span>
     word = data[:]
-    letter_key = data[<span class="hljs-number">0</span>]
+    <span class="hljs-comment"># explicitly get a substring because `[0]` in Python 3 returns an int</span>
+    letter_key = data[<span class="hljs-number">0</span>:<span class="hljs-number">1</span>]
     <span class="hljs-keyword">return</span> (word, letter_key)
 </code></pre>
 <h3 id="source">Source</h3>
@@ -1550,7 +1551,7 @@ def longest_sentence_and_split_words(data, state):
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Wallaroo Python API","level":"4.3.7","depth":2,"next":{"title":"Debugging Python Wallaroo Applications","level":"4.4","depth":1,"ref":"","articles":[{"title":"Debugging","level":"4.4.1","depth":2,"path":"book/python/debugging.md","ref":"book/python/debugging.md","articles":[]}]},"previous":{"title":"Using Connectors","level":"4.3.6","depth":2,"path":"book/python/using-connectors.md","ref":"book/python/using-connectors.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/api.md","mtime":"2018-11-19T16:19:45.483Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-19T16:19:54.725Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Wallaroo Python API","level":"4.3.7","depth":2,"next":{"title":"Debugging Python Wallaroo Applications","level":"4.4","depth":1,"ref":"","articles":[{"title":"Debugging","level":"4.4.1","depth":2,"path":"book/python/debugging.md","ref":"book/python/debugging.md","articles":[]}]},"previous":{"title":"Using Connectors","level":"4.3.6","depth":2,"path":"book/python/using-connectors.md","ref":"book/python/using-connectors.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["highlight","footnote-string-to-number","ga","codetabs"],"pluginsConfig":{"search":{},"codetabs":{},"footnote-string-to-number":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"ga":{"configuration":"auto","token":"UA-59652249-3"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"intro.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"footerTemplate":"©2017 All Rights Reserved, Wallaroo Labs"},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"book/python/api.md","mtime":"2018-11-27T16:16:09.792Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-11-27T16:16:16.890Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
