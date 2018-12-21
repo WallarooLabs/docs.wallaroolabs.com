@@ -11,6 +11,16 @@
     
     
     <item>
+      <title>Aggregations</title>
+      <link>https://docs.wallaroolabs.com/core-concepts/aggregations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.wallaroolabs.com/core-concepts/aggregations/</guid>
+      <description>Aggregations are an alternative to state computations that trade some of the freedom provided by state computations for the ability to efficiently compute results in windows.
+An aggregation consists of four parts: 1) The initial accumulator state. 2) An update function that takes an input and the accumulator state and optionally updates the accumulator. 3) A combine function that takes two accumulators and returns an accumulator that represents the combine of both of them.</description>
+    </item>
+    
+    <item>
       <title>Partitioning</title>
       <link>https://docs.wallaroolabs.com/core-concepts/partitioning/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -28,6 +38,17 @@ For example, in an application that keeps track of stock prices, the naïve appl
       <guid>https://docs.wallaroolabs.com/core-concepts/state/</guid>
       <description>The expectation with Wallaroo is that most applications will be stateful. Understanding how Wallaroo handles state is key to being able to design effective Wallaroo applications. In this section, we&amp;rsquo;re going to take you through how state works in Wallaroo and what advantages this brings.
 Transactions in Wallaroo Transactions are awesome. Using a data management system that features transactions makes our lives as programmers much easier. Transactions provide certain guarantees about how data will be updated that make it easier to reason about our code, easier to understand what our code will do.</description>
+    </item>
+    
+    <item>
+      <title>Windows</title>
+      <link>https://docs.wallaroolabs.com/core-concepts/windows/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.wallaroolabs.com/core-concepts/windows/</guid>
+      <description>Wallaroo supports windowing over aggregations. This allows you to break an infinite stream into manageable chunks and also allows you to see how your inputs evolve over time.
+There are two broad categories of windows currently supported: count-based and range-based. Range-based windows can be further divided into tumbling and sliding varieties. We&amp;rsquo;ll look at each of these in turn.
+If you are not familiar with aggregations in Wallaroo, it might be helpful to read this section before proceeding.</description>
     </item>
     
     <item>

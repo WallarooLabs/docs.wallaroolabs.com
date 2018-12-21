@@ -3,7 +3,7 @@
 /book/getting-started/docker-setup.html /python-installation/python-docker-installation-guide/ 301
 /book/getting-started/vagrant-setup.html /python-installation/python-vagrant-installation-guide/ 301
 /book/getting-started/run-a-wallaroo-application-wallaroo-up.html /python-installation/python-vagrant-installation-guide/#validate-your-installation 301
-/getting-started/run-a-wallaroo-application-docker.html /python-installation/python-docker-installation-guide/#validate-your-installation 301
+/book/getting-started/run-a-wallaroo-application-docker.html /python-installation/python-docker-installation-guide/#validate-your-installation 301
 
 /book/python/api.html /python-tutorial/api/ 301
 /book/python/wallaroo-python-api.html /python-tutorial/ 301
@@ -18,7 +18,6 @@
 
 /book/running-wallaroo/running-wallaroo.html /operators-manual/running-wallaroo/ 301
 /book/metrics/metrics-ui.html /operators-manual/metrics-ui/ 301
-/book/go/getting-started/setup.html ??? 301
-/book/go/api/start-a-project.html ??? 301
-/book/go/api/interworker-serialization-and-resilience.html ??? 301
 /book/core-concepts/clustering.html /operators-manual/running-wallaroo/ 301
+
+/book/go/* /go 301

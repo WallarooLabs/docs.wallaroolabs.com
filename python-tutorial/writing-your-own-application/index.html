@@ -161,6 +161,16 @@ A Stateless Application - Alerts The alerts.py application is going to receive t
               Partitioning
             </a>
           </li>
+          <li class="f6 fw4">
+            <a href="/core-concepts/aggregations/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Aggregations
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/core-concepts/windows/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Windows
+            </a>
+          </li>
         </ul>
       </li>
       
@@ -275,8 +285,13 @@ A Stateless Application - Alerts The alerts.py application is going to receive t
             </a>
           </li>
           <li class="f6 fw4">
-            <a href="/operators-manual/resilience/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
-              Resilience
+            <a href="/operators-manual/resilience-crash/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Crash Resilience
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/operators-manual/resilience-data-redundancy/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Data Redundancy
             </a>
           </li>
           <li class="f6 fw4">
@@ -350,7 +365,7 @@ A Stateless Application - Alerts The alerts.py application is going to receive t
 
           <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l">
 
-<p>In this section, we will go over the components that are required in order to write a Wallaroo Python application. We will start with the <a href="https://github.com/WallarooLabs/wallaroo/tree/release-doc-test2/examples/python/alerts_stateless/">stateless <code>alerts.py</code> application</a> from the <a href="https://github.com/WallarooLabs/wallaroo/tree/release-doc-test2/examples/">examples</a> section, then move on to an application that maintains and modifies state and uses partitioning to divide its work.</p>
+<p>In this section, we will go over the components that are required in order to write a Wallaroo Python application. We will start with the <a href="https://github.com/WallarooLabs/wallaroo/tree/release-doc-test1/examples/python/alerts_stateless/">stateless <code>alerts.py</code> application</a> from the <a href="https://github.com/WallarooLabs/wallaroo/tree/release-doc-test1/examples/">examples</a> section, then move on to an application that maintains and modifies state and uses partitioning to divide its work.</p>
 
 <h2 id="a-stateless-application-alerts">A Stateless Application - Alerts</h2>
 
@@ -461,7 +476,7 @@ def constant_key(input):
 
 <h2 id="running-alerts-py">Running <code>alerts.py</code></h2>
 
-<p>The complete example is available <a href="https://github.com/WallarooLabs/wallaroo/tree/release-doc-test2/examples/python/alerts_stateless/">here</a>. To run it, follow the <a href="https://github.com/WallarooLabs/wallaroo/tree/release-doc-test2/examples/python/alerts_stateless/README.md">instructions</a></p>
+<p>The complete example is available <a href="https://github.com/WallarooLabs/wallaroo/tree/release-doc-test1/examples/python/alerts_stateless/">here</a>. To run it, follow the <a href="https://github.com/WallarooLabs/wallaroo/tree/release-doc-test1/examples/python/alerts_stateless/README.md">instructions</a></p>
 
 <h2 id="next-steps">Next Steps</h2>
 

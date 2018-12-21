@@ -48,7 +48,7 @@ Overview In order to create a Wallaroo application in Python, you need to create
 
 
 
-<meta itemprop="wordCount" content="2855">
+<meta itemprop="wordCount" content="3489">
 
 
 
@@ -159,6 +159,16 @@ Overview In order to create a Wallaroo application in Python, you need to create
           <li class="f6 fw4">
             <a href="/core-concepts/partitioning/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
               Partitioning
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/core-concepts/aggregations/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Aggregations
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/core-concepts/windows/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Windows
             </a>
           </li>
         </ul>
@@ -275,8 +285,13 @@ Overview In order to create a Wallaroo application in Python, you need to create
             </a>
           </li>
           <li class="f6 fw4">
-            <a href="/operators-manual/resilience/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
-              Resilience
+            <a href="/operators-manual/resilience-crash/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Crash Resilience
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/operators-manual/resilience-data-redundancy/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Data Redundancy
             </a>
           </li>
           <li class="f6 fw4">
@@ -334,6 +349,7 @@ Overview In order to create a Wallaroo application in Python, you need to create
 <ul>
 <li><a href="#to-computation"><code>to(computation)</code></a></li>
 <li><a href="#key-by-key-extractor"><code>key_by(key_extractor)</code></a></li>
+<li><a href="#collect"><code>collect()</code></a></li>
 <li><a href="#to-sink-sink-config"><code>to_sink(sink_config)</code></a></li>
 <li><a href="#to-sinks-sink-configs"><code>to_sinks(sink_configs)</code></a></li>
 </ul></li>
@@ -368,11 +384,29 @@ Overview In order to create a Wallaroo application in Python, you need to create
 <li><a href="#example-3">Example</a></li>
 </ul></li>
 </ul></li>
+<li><a href="#aggregation">Aggregation</a>
+<ul>
+<li>
+<ul>
+<li><a href="#example-4">Example</a></li>
+</ul></li>
+</ul></li>
 <li><a href="#data">Data</a></li>
 <li><a href="#key">Key</a></li>
 <li><a href="#keyextractor">KeyExtractor</a>
 <ul>
 <li><a href="#example-key-extractor">Example Key Extractor</a></li>
+</ul></li>
+<li><a href="#windows">Windows</a>
+<ul>
+<li><a href="#count-based">Count-based</a>
+<ul>
+<li><a href="#example-5">Example</a></li>
+</ul></li>
+<li><a href="#range-based">Range-based</a>
+<ul>
+<li><a href="#example-6">Example</a></li>
+</ul></li>
 </ul></li>
 <li><a href="#sink">Sink</a>
 <ul>
@@ -445,8 +479,10 @@ Overview In order to create a Wallaroo application in Python, you need to create
 <li><a href="#state">State</a></li>
 <li><a href="#statecomputation">StateComputation</a></li>
 <li><a href="#data">Data</a></li>
+<li><a href="#aggregation">Aggregation</a></li>
 <li><a href="#key">Key</a></li>
 <li><a href="#keyextractor">KeyExtractor</a></li>
+<li><a href="#windows">Windows</a></li>
 <li><a href="#sink">Sink</a></li>
 <li><a href="#tcpsink">TCPSink</a></li>
 <li><a href="#kafkasink">KafkaSink</a></li>
@@ -464,15 +500,15 @@ Overview In order to create a Wallaroo application in Python, you need to create
 
 <h4 id="partial-pipelines">Partial Pipelines</h4>
 
-<p>A pipeline includes one or more sources. You use <code>wallaroo.source(...)</code> to define a stream originating from a source. Each source stream can be followed by one or more computation stages. A linear sequence from a source through zero or more computations constitutes a partial pipeline. For example:</p>
+<p>A pipeline includes one or more sources. You use <code>wallaroo.source(...)</code> to define a stream originating from a source. Each source stream can be followed by one or more computation stages. A linear sequence from a source through zero or more computations constitutes a partial pipeline. Here&rsquo;s an example using a stateless computation:</p>
 
 <pre><code class="language-python">inputs = wallaroo.source(&quot;Source Name&quot;, source_config)
-partial_pipeline = inputs.to(my_computation)
+partial_pipeline = inputs.to(my_stateless_computation)
 </code></pre>
 
 <p>This defines a partial pipeline that could be diagrammed as followed:</p>
 
-<pre><code>Source -&gt; my_computation -&gt;
+<pre><code>Source -&gt; my_stateless_computation -&gt;
 </code></pre>
 
 <p>The hanging arrow at the end indicates that the pipeline is partial. We can still add more stages, and to complete the pipeline we need one or more sinks.
@@ -480,13 +516,13 @@ You create complete pipeline by terminating a partial pipeline with a call to <c
 
 <pre><code class="language-python">inputs = wallaroo.source(&quot;Source Name&quot;, source_config)
 complete_pipeline = (inputs
-    .to(my_computation)
+    .to(my_stateless_computation)
     .to_sink(sink_config))
 </code></pre>
 
 <p>Our pipeline is now complete:</p>
 
-<pre><code>Source -&gt; my_computation -&gt; Sink
+<pre><code>Source -&gt; my_stateless_computation -&gt; Sink
 </code></pre>
 
 <p>Unless a call to <code>to</code> using a stateless computation is preceded by a call to <code>key_by</code> (which partitions messages by key), there are no guarantees around the order in which messages will be processed. That&rsquo;s because Wallaroo might parallelize a stateless computation if that is beneficial for scaling. That means the execution graph for the above pipeline could look like this:</p>
@@ -500,9 +536,23 @@ Source ----&gt; my_stateless_computation ----&gt; Sink
 
 <p>Some messages will be routed to each of the parallel computation instances. When they merge again at the sink, these messages will be interleaved in a non-deterministic fashion.</p>
 
+<p>If you want to ensure that all messages are sent to the same target, then use the <code>collect()</code> API call. For example,</p>
+
+<pre><code class="language-python">inputs = wallaroo.source(&quot;Source Name&quot;, source_config)
+complete_pipeline = (inputs
+    .collect()
+    .to(my_stateless_computation)
+    .to_sink(sink_config))
+</code></pre>
+
+<p>will cause all messages from the source to be sent to the same stateless computation instance:</p>
+
+<pre><code>Source -&gt; my_stateless_computation -&gt; Sink
+</code></pre>
+
 <h4 id="merging-partial-pipelines">Merging Partial Pipelines</h4>
 
-<p>You can merge two partial pipelines to form a new partial pipline. For example:</p>
+<p>You can merge two partial pipelines to form a new partial pipeline. For example:</p>
 
 <pre><code class="language-python">inputs1 = wallaroo.source(&quot;Source 1&quot;, source_config)
 partial_pipeline1 = inputs1.to(computation1)
@@ -583,6 +633,47 @@ Source2 -&gt; computation2 -&gt;/
 <p>Partition messages at this point based on the key extracted using the key_extractor function. A call to <code>key_by</code> returns a new partial pipeline object.</p>
 
 <p><code>key_extractor</code> must be a <a href="#keyextractor">KeyExtractor</a>.</p>
+
+<h5 id="collect"><code>collect()</code></h5>
+
+<p>Interleave all partitions from the previous stage into one partition for all subsequent computations. This can be overridden later with key_by. The effect of collect() is similar to using a key_by that returns a constant key.</p>
+
+<p>This code:</p>
+
+<pre><code class="language-python">(inputs
+    .key_by(extract_key)
+    .to(f)
+    .to(g)
+    .to_sink(sink_config))
+</code></pre>
+
+<p>will partition the inputs into one partition per key. This scheme will apply to both f and g, which would look something like this:</p>
+
+<pre><code>         /-&gt; f -&gt; g -\
+        /             \
+Source ----&gt; f -&gt; g ----&gt; Sink
+        \             /
+         \-&gt; f -&gt; g -/
+</code></pre>
+
+<p>If we want to ensure that all the results from every instance of f are sent to a single instance of g (perhaps g is used to keep track of some information about all the outputs), we would write:</p>
+
+<pre><code class="language-python">(inputs
+    .key_by(extract_key)
+    .to(f)
+    .collect()
+    .to(g)
+    .to_sink(sink_config))
+</code></pre>
+
+<p>which would look something like:</p>
+
+<pre><code>         /-&gt; f -\
+        /        \
+Source ----&gt; f ----&gt; g -&gt; Sink
+        \        /
+         \-&gt; f -/
+</code></pre>
 
 <h5 id="to-sink-sink-config"><code>to_sink(sink_config)</code></h5>
 
@@ -761,6 +852,47 @@ def longest_sentence_and_split_words(data, state):
     return outputs
 </code></pre>
 
+<h3 id="aggregation">Aggregation</h3>
+
+<p>For an overview of what aggregations are and how they must be implemented, see <a href="/core-concepts/aggregations">here</a>.</p>
+
+<p>In order to implement an aggregation, you must create a class that extends <code>wallaroo.Aggregation</code>, and you must implement four methods:</p>
+
+<p><code>initial_accumulator(self)</code>: returns the initial accumulator that is used by the aggregation. This must act as an identity element for <code>combine</code>.</p>
+
+<p><code>update(self, input, acc)</code>: uses <code>input</code> to update the accumulator <code>acc</code>.</p>
+
+<p><code>combine(self, acc1, acc2)</code>: returns an accumulator created by combining <code>acc1</code> and <code>acc2</code>. This operation must be associative, and it must not mutate <code>acc1</code> or <code>acc2</code>.</p>
+
+<p><code>output(self, key, acc)</code>: produces an output based on the accumulator <code>acc</code>. The <code>key</code> is passed in from the context in case it is needed when creating the output. This operation must not mutate <code>acc</code>.</p>
+
+<p>You can optionally implement:</p>
+
+<p><code>name(self)</code>: returns the name of the aggregation. If this method is not implemented, the class name is used instead.</p>
+
+<h5 id="example-4">Example</h5>
+
+<pre><code class="language-python">class _MySum():
+    def __init__(self, initial_total):
+        self.total = initial_total
+
+    def add(self, value):
+        self.total = self.total + value
+
+class MySumAgg(wallaroo.Aggregation):
+    def initial_accumulator(self):
+        return _MySum(0)
+
+    def update(self, input, sum):
+        sum.add(sum.total + input.value)
+
+    def combine(self, sum1, sum2):
+        return Sum(sum1.total + sum2.total)
+
+    def output(self, key, sum):
+        return MyOutputType(key, sum.total)
+</code></pre>
+
 <h3 id="data">Data</h3>
 
 <p>Data is the object that is passed to <a href="#computation">Computations</a> and <a href="#statecomputation">StateComputations</a>. It is a plain Python object and can be as simple or as complex as you would like it to be.</p>
@@ -783,6 +915,50 @@ def longest_sentence_and_split_words(data, state):
 def extract_user(transaction):
     return transaction.user
 </code></pre>
+
+<h3 id="windows">Windows</h3>
+
+<p>For an in-depth overview of windows, see <a href="/core-concepts/windows">here</a>. Windows are either count-based or range-based.</p>
+
+<h4 id="count-based">Count-based</h4>
+
+<p><code>wallaroo.count_windows(count)</code>: defines count-based windows that trigger an output every <code>count</code> messages.</p>
+
+<p><code>over(aggregation)</code>: specifies the aggregation used for these windows.</p>
+
+<h5 id="example-5">Example</h5>
+
+<p>This defines count windows with a count of 5 over a user-defined <a href="#aggregation">aggregation</a> class <code>MySumAgg</code>:</p>
+
+<pre><code class="language-python">    (inputs
+        .to(wallaroo.count_windows(5)
+            .over(MySumAgg))
+        .to_sink(sink_config))
+</code></pre>
+
+<h4 id="range-based">Range-based</h4>
+
+<p><code>wallaroo.range_windows(range)</code>: defines range-based windows with the specified <code>range</code>.</p>
+
+<p><code>with_slide(slide)</code>: optionally specifies a slide for these windows, resulting in sliding (overlapping) windows. For example, if the slide is 3 seconds, then a new window of length <code>range</code> (specified via <code>wallaroo.range_windows(range)</code>) will be started every 3 seconds. The default slide is equal to the range (resulting in tumbling windows).</p>
+
+<p><code>with_delay(delay)</code>: optionally specifies a delay on triggering a window. This is either (1) an estimation of the maximum lateness expected for messages or (2) the lateness threshold beyond which you no longer care about messages. The default delay is 0.</p>
+
+<p><code>over(aggregation)</code>: specifies the aggregation used for these windows.</p>
+
+<h5 id="example-6">Example</h5>
+
+<p>This defines range-based sliding windows with a range of 6 seconds, a slide of 3 seconds, and a delay of 10 seconds:</p>
+
+<pre><code class="language-python">    (inputs
+        .to(wallaroo.range_windows(wallaroo.seconds(6))
+            .with_slide(wallaroo.seconds(3))
+            .with_delay(wallaroo.seconds(10))
+            .over(MySumAgg))
+        .to_sink(sink_config))
+</code></pre>
+
+<p>This means windows of length 6 seconds will be started every 3 seconds. Each of these windows will be triggered 10 seconds after we have past the end of its range in event time.</p>
 
 <h3 id="sink">Sink</h3>
 

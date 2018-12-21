@@ -11,6 +11,16 @@
     
     
     <item>
+      <title>Aggregations</title>
+      <link>https://docs.wallaroolabs.com/core-concepts/aggregations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.wallaroolabs.com/core-concepts/aggregations/</guid>
+      <description>Aggregations are an alternative to state computations that trade some of the freedom provided by state computations for the ability to efficiently compute results in windows.
+An aggregation consists of four parts: 1) The initial accumulator state. 2) An update function that takes an input and the accumulator state and optionally updates the accumulator. 3) A combine function that takes two accumulators and returns an accumulator that represents the combine of both of them.</description>
+    </item>
+    
+    <item>
       <title>Autoscale</title>
       <link>https://docs.wallaroolabs.com/operators-manual/autoscale/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -29,6 +39,26 @@ With autoscale enabled, you can add or remove workers from a running cluster. We
       <description>Every Wallaroo option exposes a set of command-line options that are used to configure it. This document gives an overview of each of those options.
 Command-Line Parameters When running a Wallaroo application, we use some of the following command line parameters (a star indicates it is required, a plus that it is required for multi-worker runs):
 --control/-c *[Sets address for initializer control channel; sets control address to connect to for non-initializers] --data/-d *[Sets address for initializer data channel] --my-control [Optionally sets address for my data channel] --my-data [Optionally sets address for my data channel] --external/-e [Sets address for external message channel] --worker-count/-w +[Sets cluster initializers total number of workers, including cluster initializer itself] --name/-n +[Sets name for this worker.</description>
+    </item>
+    
+    <item>
+      <title>Crash Resilience</title>
+      <link>https://docs.wallaroolabs.com/operators-manual/resilience-crash/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.wallaroolabs.com/operators-manual/resilience-crash/</guid>
+      <description>Wallaroo is designed with built-in resilience. However, since the operations involved with maintaining resilience can impact performance, this mode is off by default. For python users, we provide a separate binary with resilience enabled: machida-resilience (and machida3-resilience for Python 3) as part of the default installation. For Go and Ponyc users, to enable resilience in a Wallaroo application, the binary needs to be built with -D resilience if using the ponyc compiler directly, or with resilience=on if using our Makefile build system (as is the case with Machida).</description>
+    </item>
+    
+    <item>
+      <title>Data Redundancy</title>
+      <link>https://docs.wallaroolabs.com/operators-manual/resilience-data-redundancy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.wallaroolabs.com/operators-manual/resilience-data-redundancy/</guid>
+      <description>Wallaroo&amp;rsquo;s resilience data directory As described in the crash resilience chapter, Wallaroo requires a compile-time flag to enable crash resilience features. In addition to the --run-with-resilience flag, the --resilience-dir flag specifies the path to Wallaroo&amp;rsquo;s crash resilience data directory. The resilience data directory contains worker-specific information for:
+ Hostnames/IP addresses and TCP ports for other Wallaroo workers in the cluster
+ Source, sink, and pipeline topology information for the cluster&amp;rsquo;s application</description>
     </item>
     
     <item>
@@ -101,15 +131,6 @@ For example, in an application that keeps track of stock prices, the naïve appl
     </item>
     
     <item>
-      <title>Resilience</title>
-      <link>https://docs.wallaroolabs.com/operators-manual/resilience/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://docs.wallaroolabs.com/operators-manual/resilience/</guid>
-      <description>Wallaroo is designed with built-in resilience. However, since the operations involved with maintaining resilience can impact performance, this mode is off by default. For python users, we provide a separate binary with resilience enabled: machida-resilience (and machida3-resilience for Python 3) as part of the default installation. For Go and Ponyc users, to enable resilience in a Wallaroo application, the binary needs to be built with -D resilience if using the ponyc compiler directly, or with resilience=on if using our Makefile build system (as is the case with Machida).</description>
-    </item>
-    
-    <item>
       <title>Running A Wallaroo Application</title>
       <link>https://docs.wallaroolabs.com/python-tutorial/running-a-wallaroo-application/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -170,7 +191,7 @@ Decoder Code that transforms a stream of bytes from an external system into a se
       
       <guid>https://docs.wallaroolabs.com/appendix/wallaroo-docker-tips/</guid>
       <description>In this section, we will cover some tips that can help facilitate the development process for users of the Wallaroo Docker image.
-Editing Wallaroo files within the Wallaroo Docker container When we start the Wallaroo Docker image with the -v /tmp/wallaroo-docker/wallaroo-release-doc-test2/wallaroo-src:/src/wallaroo option, as described in the Python Docker Installation Guide section, we will be creating a new directory locally at /tmp/wallaroo-docker/wallaroo-release-doc-test2/wallaroo-src if it does not exist. This directory will be populated with the Wallaroo source code when we start the container for the first time.</description>
+Editing Wallaroo files within the Wallaroo Docker container When we start the Wallaroo Docker image with the -v /tmp/wallaroo-docker/wallaroo-release-doc-test1/wallaroo-src:/src/wallaroo option, as described in the Python Docker Installation Guide section, we will be creating a new directory locally at /tmp/wallaroo-docker/wallaroo-release-doc-test1/wallaroo-src if it does not exist. This directory will be populated with the Wallaroo source code when we start the container for the first time.</description>
     </item>
     
     <item>
@@ -213,6 +234,17 @@ Overview In order to create a Wallaroo application in Python, you need to create
 While not required to run Wallaroo applications, virtualenv will ensure that your application and development environment are isolated from the rest of your Python installation(s) on your computer. In addition, virtualenv will ensure that Machida uses the correct version of Python if you have multiple versions installed on your computer.
 Installing Virtualenv Follow the instructions on the virtualenv website.
 Setting up Virtualenv for your Application To create a virtualenv for your application, run the following command</description>
+    </item>
+    
+    <item>
+      <title>Windows</title>
+      <link>https://docs.wallaroolabs.com/core-concepts/windows/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.wallaroolabs.com/core-concepts/windows/</guid>
+      <description>Wallaroo supports windowing over aggregations. This allows you to break an infinite stream into manageable chunks and also allows you to see how your inputs evolve over time.
+There are two broad categories of windows currently supported: count-based and range-based. Range-based windows can be further divided into tumbling and sliding varieties. We&amp;rsquo;ll look at each of these in turn.
+If you are not familiar with aggregations in Wallaroo, it might be helpful to read this section before proceeding.</description>
     </item>
     
     <item>

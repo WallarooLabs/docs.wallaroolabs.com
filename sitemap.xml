@@ -3,6 +3,10 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://docs.wallaroolabs.com/core-concepts/aggregations/</loc>
+  </url>
+  
+  <url>
     <loc>https://docs.wallaroolabs.com/appendix/</loc>
     <priority>0</priority>
   </url>
@@ -22,6 +26,14 @@
   
   <url>
     <loc>https://docs.wallaroolabs.com/operators-manual/command-line-options/</loc>
+  </url>
+  
+  <url>
+    <loc>https://docs.wallaroolabs.com/operators-manual/resilience-crash/</loc>
+  </url>
+  
+  <url>
+    <loc>https://docs.wallaroolabs.com/operators-manual/resilience-data-redundancy/</loc>
   </url>
   
   <url>
@@ -61,10 +73,6 @@
   </url>
   
   <url>
-    <loc>https://docs.wallaroolabs.com/operators-manual/resilience/</loc>
-  </url>
-  
-  <url>
     <loc>https://docs.wallaroolabs.com/python-tutorial/running-a-wallaroo-application/</loc>
   </url>
   
@@ -98,6 +106,10 @@
   </url>
   
   <url>
+    <loc>https://docs.wallaroolabs.com/go/</loc>
+  </url>
+  
+  <url>
     <loc>https://docs.wallaroolabs.com/core-concepts/</loc>
   </url>
   
@@ -115,6 +127,10 @@
   
   <url>
     <loc>https://docs.wallaroolabs.com/</loc>
+  </url>
+  
+  <url>
+    <loc>https://docs.wallaroolabs.com/core-concepts/windows/</loc>
   </url>
   
   <url>

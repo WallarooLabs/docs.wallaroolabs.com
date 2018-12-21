@@ -161,6 +161,16 @@
               Partitioning
             </a>
           </li>
+          <li class="f6 fw4">
+            <a href="/core-concepts/aggregations/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Aggregations
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/core-concepts/windows/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Windows
+            </a>
+          </li>
         </ul>
       </li>
       
@@ -275,8 +285,13 @@
             </a>
           </li>
           <li class="f6 fw4">
-            <a href="/operators-manual/resilience/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
-              Resilience
+            <a href="/operators-manual/resilience-crash/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Crash Resilience
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/operators-manual/resilience-data-redundancy/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Data Redundancy
             </a>
           </li>
           <li class="f6 fw4">
@@ -345,7 +360,7 @@
           <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l">
 
 <aside class="admonition note">
-  <div class="admonition-content"><p>You should have already completed the <a href="https://docs.wallaroolabs.com/python-installation/">setup instructions</a> in the &ldquo;Python Installation&rdquo; guide.</p>
+  <div class="admonition-content"><p>You should have already completed the <a href="/python-installation/">setup instructions</a> in the &ldquo;Python Installation&rdquo; guide.</p>
 </div>
 </aside>
 
@@ -370,14 +385,14 @@
 
 <p>Machida uses the <code>PYTHONPATH</code> environment variable to find modules that are imported by the application. You will have at least two modules in your <code>PYTHONPATH</code>: the application module and the <code>wallaroo</code> module. If you have installed Wallaroo as instructed and follow the <a href="/python-tutorial/starting-a-new-shell/">Starting a new shell for Wallaroo</a> instructions each time you start a new shell, the <code>wallaroo</code> module and any application modules in your current directory will be automatically added to the <code>PYTHONPATH</code>.</p>
 
-<p>If the Python module you want is in a different directory than your current, like: <code>$HOME/wallaroo-tutorial/wallaroo-release-doc-test2/examples/python/alerts_stateless/alerts.py</code>, in order to use the module you would export the <code>PYTHONPATH</code> like this:</p>
+<p>If the Python module you want is in a different directory than your current, like: <code>$HOME/wallaroo-tutorial/wallaroo-release-doc-test1/examples/python/alerts_stateless/alerts.py</code>, in order to use the module you would export the <code>PYTHONPATH</code> like this:</p>
 
-<pre><code class="language-bash">export PYTHONPATH=&quot;$HOME/wallaroo-tutorial/wallaroo-release-doc-test2/examples/python/alerts_stateless:$PYTHONPATH&quot;
+<pre><code class="language-bash">export PYTHONPATH=&quot;$HOME/wallaroo-tutorial/wallaroo-release-doc-test1/examples/python/alerts_stateless:$PYTHONPATH&quot;
 </code></pre>
 
 <h2 id="next-steps">Next Steps</h2>
 
-<p>To try running an example, go to <a href="https://github.com/WallarooLabs/wallaroo/tree/release-doc-test2/examples/python/alerts_stateless/">the Alerts example application</a> and follow its <a href="https://github.com/WallarooLabs/wallaroo/tree/release-doc-test2/examples/python/alerts_stateless/README.md">instructions</a>.</p>
+<p>To try running an example, go to <a href="https://github.com/WallarooLabs/wallaroo/tree/release-doc-test1/examples/python/alerts_stateless/">the Alerts example application</a> and follow its <a href="https://github.com/WallarooLabs/wallaroo/tree/release-doc-test1/examples/python/alerts_stateless/README.md">instructions</a>.</p>
 
 <p>To learn how to write your own Wallaroo Python application, continue to <a href="/python-tutorial/writing-your-own-application/">Writing Your Own Application</a></p>
 

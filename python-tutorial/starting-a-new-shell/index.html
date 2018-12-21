@@ -167,6 +167,16 @@ Enter the Wallaroo Docker container:
               Partitioning
             </a>
           </li>
+          <li class="f6 fw4">
+            <a href="/core-concepts/aggregations/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Aggregations
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/core-concepts/windows/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Windows
+            </a>
+          </li>
         </ul>
       </li>
       
@@ -281,8 +291,13 @@ Enter the Wallaroo Docker container:
             </a>
           </li>
           <li class="f6 fw4">
-            <a href="/operators-manual/resilience/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
-              Resilience
+            <a href="/operators-manual/resilience-crash/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Crash Resilience
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/operators-manual/resilience-data-redundancy/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Data Redundancy
             </a>
           </li>
           <li class="f6 fw4">
@@ -402,7 +417,7 @@ docker exec -it wally env-setup -p python3
 
 <p>For each Shell you&rsquo;re expected to setup, you&rsquo;d have to run the following to access the Vagrant Box:</p>
 
-<pre><code class="language-bash">cd ~/wallaroo-tutorial/wallaroo-release-doc-test2/vagrant
+<pre><code class="language-bash">cd ~/wallaroo-tutorial/wallaroo-release-doc-test1/vagrant
 vagrant ssh
 </code></pre>
 
@@ -412,7 +427,7 @@ vagrant ssh
 
 <p>For each Shell you&rsquo;re expected to setup, you&rsquo;d have to run the following to configure the Wallaroo environment:</p>
 
-<pre><code class="language-bash">cd ~/wallaroo-tutorial/wallaroo-release-doc-test2
+<pre><code class="language-bash">cd ~/wallaroo-tutorial/wallaroo-release-doc-test1
 source bin/activate
 </code></pre>
 

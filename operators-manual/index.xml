@@ -32,12 +32,23 @@ Command-Line Parameters When running a Wallaroo application, we use some of the 
     </item>
     
     <item>
-      <title>Resilience</title>
-      <link>https://docs.wallaroolabs.com/operators-manual/resilience/</link>
+      <title>Crash Resilience</title>
+      <link>https://docs.wallaroolabs.com/operators-manual/resilience-crash/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://docs.wallaroolabs.com/operators-manual/resilience/</guid>
+      <guid>https://docs.wallaroolabs.com/operators-manual/resilience-crash/</guid>
       <description>Wallaroo is designed with built-in resilience. However, since the operations involved with maintaining resilience can impact performance, this mode is off by default. For python users, we provide a separate binary with resilience enabled: machida-resilience (and machida3-resilience for Python 3) as part of the default installation. For Go and Ponyc users, to enable resilience in a Wallaroo application, the binary needs to be built with -D resilience if using the ponyc compiler directly, or with resilience=on if using our Makefile build system (as is the case with Machida).</description>
+    </item>
+    
+    <item>
+      <title>Data Redundancy</title>
+      <link>https://docs.wallaroolabs.com/operators-manual/resilience-data-redundancy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.wallaroolabs.com/operators-manual/resilience-data-redundancy/</guid>
+      <description>Wallaroo&amp;rsquo;s resilience data directory As described in the crash resilience chapter, Wallaroo requires a compile-time flag to enable crash resilience features. In addition to the --run-with-resilience flag, the --resilience-dir flag specifies the path to Wallaroo&amp;rsquo;s crash resilience data directory. The resilience data directory contains worker-specific information for:
+ Hostnames/IP addresses and TCP ports for other Wallaroo workers in the cluster
+ Source, sink, and pipeline topology information for the cluster&amp;rsquo;s application</description>
     </item>
     
     <item>
