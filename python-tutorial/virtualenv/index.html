@@ -425,9 +425,9 @@ virtualenv --python<span style="color:#f92672">=</span>python3 ENV
 <p>If you have more than one Python version installed, virtualenv may set up the import paths incorrectly, or an alias may result in the wrong Python version being run. In that case, you may encounter errors such as</p>
 
 <pre><code class="language-python">Traceback (most recent call last):
-  File &quot;wallaroo-{{ release-doc-test1 }}/examples/python/alerts_stateful/alerts.py&quot;, line 18, in &lt;module&gt;
+  File &quot;wallaroo-{{ release-0.6.1 }}/examples/python/alerts_stateful/alerts.py&quot;, line 18, in &lt;module&gt;
     import wallaroo
-  File &quot;wallaroo-{{ release-doc-test1 }}/machida/wallaroo.py&quot;, line 16, in &lt;module&gt;
+  File &quot;wallaroo-{{ release-0.6.1 }}/machida/wallaroo.py&quot;, line 16, in &lt;module&gt;
     import argparse
   File &quot;/usr/local/Cellar/python/2.7.14/Frameworks/Python.framework/Versions/2.7/lib/python2.7/argparse.py&quot;, line 86, in &lt;module&gt;
     import copy as _copy
@@ -509,7 +509,7 @@ Could not load module 'alerts'
   
     <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
 source ENV/bin/activate
-export PYTHONPATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/wallaroo-tutorial/wallaroo-{{ release-doc-test1 }}/machida/lib:</span>$HOME<span style="color:#e6db74">/wallaroo-tutorial/wallaroo-{{ release-doc-test1 }}/examples/python/alerts_stateful&#34;</span>
+export PYTHONPATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/wallaroo-tutorial/wallaroo-{{ release-0.6.1 }}/machida/lib:</span>$HOME<span style="color:#e6db74">/wallaroo-tutorial/wallaroo-{{ release-0.6.1 }}/examples/python/alerts_stateful&#34;</span>
 machida --application-module alerts <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --out <span style="color:#ae81ff">127</span>.0.0.1:5555 --metrics <span style="color:#ae81ff">127</span>.0.0.1:5001 <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --control <span style="color:#ae81ff">127</span>.0.0.1:6000 --data <span style="color:#ae81ff">127</span>.0.0.1:6001 --name worker-name <span style="color:#ae81ff">\
@@ -524,7 +524,7 @@ machida --application-module alerts <span style="color:#ae81ff">\
   
     <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
 source ENV/bin/activate
-export PYTHONPATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/wallaroo-tutorial/wallaroo-{{ release-doc-test1 }}/machida/lib:</span>$HOME<span style="color:#e6db74">/wallaroo-tutorial/wallaroo-{{ release-doc-test1 }}/examples/python/alerts_stateful&#34;</span>
+export PYTHONPATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/wallaroo-tutorial/wallaroo-{{ release-0.6.1 }}/machida/lib:</span>$HOME<span style="color:#e6db74">/wallaroo-tutorial/wallaroo-{{ release-0.6.1 }}/examples/python/alerts_stateful&#34;</span>
 machida3 --application-module alerts <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --out <span style="color:#ae81ff">127</span>.0.0.1:5555 --metrics <span style="color:#ae81ff">127</span>.0.0.1:5001 <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --control <span style="color:#ae81ff">127</span>.0.0.1:6000 --data <span style="color:#ae81ff">127</span>.0.0.1:6001 --name worker-name <span style="color:#ae81ff">\

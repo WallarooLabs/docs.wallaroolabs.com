@@ -372,7 +372,7 @@
 
 <p>When a crashed worker is restarted, if it can find its resilience files in the path specified by <code>--resilience-dir</code>, it will automatically start the recovery process. The simplest way to do this is to rerun the worker using the same command it was originally run with.</p>
 
-<p>For example, if we were running the bundled Python example <a href="https://github.com/WallarooLabs/wallaroo/tree/release-doc-test1/examples/python/word_count/">word_count</a>, this might look something like:</p>
+<p>For example, if we were running the bundled Python example <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.6.1/examples/python/word_count/">word_count</a>, this might look something like:</p>
 
 <pre><code>```bash
 machida-resilience --application-module word_count \
@@ -396,7 +396,7 @@ machida-resilience --application-module word_count \
 <p>You will need 4 shells to run this example.
 For each shell you&rsquo;re expected to setup, you&rsquo;d have to run the following to configure the Wallaroo environment:</p>
 
-<pre><code class="language-bash">cd ~/wallaroo-tutorial/wallaroo-release-doc-test1
+<pre><code class="language-bash">cd ~/wallaroo-tutorial/wallaroo-release-0.6.1
 source bin/activate
 cd examples/python/word_count
 </code></pre>

@@ -442,7 +442,7 @@ def decode_lines(bs):
 
 <p><code>decode_lines</code> takes a series of bytes that represent your payload and turns it into an application message. In this case, our application message is a string, so we take the incoming byte stream <code>bs</code> and convert it to UTF-8 Python string.</p>
 
-<p>Here&rsquo;s a slightly more complicated example taken from our <a href="https://github.com/WallarooLabs/wallaroo/tree/release-doc-test1/examples/python/alphabet">Alphabet Popularity Contest example</a>.</p>
+<p>Here&rsquo;s a slightly more complicated example taken from our <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.6.1/examples/python/alphabet">Alphabet Popularity Contest example</a>.</p>
 
 <pre><code class="language-python">@wallaroo.decoder(header_length=4, length_fmt=&quot;&gt;I&quot;)
 def decode_votes(bs):
@@ -472,7 +472,7 @@ def encode_data(data):
 
 <p>It takes a string that we want to send to an external system as an input, adds a newline at the end and returns it for sending.</p>
 
-<p>Here&rsquo;s a more complicated example taken from our <a href="https://github.com/WallarooLabs/wallaroo/tree/release-doc-test1/examples/python/alphabet">Alphabet Popularity Contest example</a>:</p>
+<p>Here&rsquo;s a more complicated example taken from our <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.6.1/examples/python/alphabet">Alphabet Popularity Contest example</a>:</p>
 
 <pre><code class="language-python">class Votes(object):
     def __init__(self, letter, votes):

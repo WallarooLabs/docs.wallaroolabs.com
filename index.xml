@@ -191,7 +191,7 @@ Decoder Code that transforms a stream of bytes from an external system into a se
       
       <guid>https://docs.wallaroolabs.com/appendix/wallaroo-docker-tips/</guid>
       <description>In this section, we will cover some tips that can help facilitate the development process for users of the Wallaroo Docker image.
-Editing Wallaroo files within the Wallaroo Docker container When we start the Wallaroo Docker image with the -v /tmp/wallaroo-docker/wallaroo-release-doc-test1/wallaroo-src:/src/wallaroo option, as described in the Python Docker Installation Guide section, we will be creating a new directory locally at /tmp/wallaroo-docker/wallaroo-release-doc-test1/wallaroo-src if it does not exist. This directory will be populated with the Wallaroo source code when we start the container for the first time.</description>
+Editing Wallaroo files within the Wallaroo Docker container When we start the Wallaroo Docker image with the -v /tmp/wallaroo-docker/wallaroo-release-0.6.1/wallaroo-src:/src/wallaroo option, as described in the Python Docker Installation Guide section, we will be creating a new directory locally at /tmp/wallaroo-docker/wallaroo-release-0.6.1/wallaroo-src if it does not exist. This directory will be populated with the Wallaroo source code when we start the container for the first time.</description>
     </item>
     
     <item>

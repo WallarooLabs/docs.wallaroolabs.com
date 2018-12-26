@@ -396,12 +396,12 @@ cd ~/wallaroo-tutorial
 
 <p>This will be our base directory in what follows. Create a directory for the current Wallaroo version and download the Wallaroo Vagrantfile:</p>
 
-<pre><code class="language-bash">mkdir wallaroo-release-doc-test1
-cd wallaroo-release-doc-test1
+<pre><code class="language-bash">mkdir wallaroo-release-0.6.1
+cd wallaroo-release-0.6.1
 mkdir vagrant
 cd vagrant
 curl -o Vagrantfile -J -L \
-  https://raw.githubusercontent.com/WallarooLabs/wallaroo/release-doc-test1/vagrant/Vagrantfile
+  https://raw.githubusercontent.com/WallarooLabs/wallaroo/release-0.6.1/vagrant/Vagrantfile
 </code></pre>
 
 <h3 id="windows-via-powershell">Windows via Powershell</h3>
@@ -417,12 +417,12 @@ cd ~/wallaroo-tutorial
 
 <p>This will be our base directory in what follows. Create a directory for the current Wallaroo version and download the Wallaroo Vagrantfile:</p>
 
-<pre><code class="language-bash">mkdir wallaroo-release-doc-test1
-cd wallaroo-release-doc-test1
+<pre><code class="language-bash">mkdir wallaroo-release-0.6.1
+cd wallaroo-release-0.6.1
 mkdir vagrant
 cd vagrant
 Invoke-WebRequest -OutFile Vagrantfile `
-  https://raw.githubusercontent.com/WallarooLabs/wallaroo/release-doc-test1/vagrant/Vagrantfile
+  https://raw.githubusercontent.com/WallarooLabs/wallaroo/release-0.6.1/vagrant/Vagrantfile
 </code></pre>
 
 <h2 id="installing-virtualbox">Installing VirtualBox</h2>
@@ -446,7 +446,7 @@ Invoke-WebRequest -OutFile Vagrantfile `
 
 <p>To provision, run the following commands:</p>
 
-<pre><code class="language-bash">cd ~/wallaroo-tutorial/wallaroo-release-doc-test1/vagrant
+<pre><code class="language-bash">cd ~/wallaroo-tutorial/wallaroo-release-0.6.1/vagrant
 vagrant up
 </code></pre>
 
@@ -470,7 +470,7 @@ vagrant up
 
 <p>You can shut down the Vagrant Box by running the following on your host machine:</p>
 
-<pre><code class="language-bash">cd ~/wallaroo-tutorial/wallaroo-release-doc-test1/vagrant
+<pre><code class="language-bash">cd ~/wallaroo-tutorial/wallaroo-release-0.6.1/vagrant
 vagrant halt
 </code></pre>
 
@@ -501,7 +501,7 @@ vagrant halt
 
 <p>For each shell you&rsquo;re expected to setup, you&rsquo;d have to run the following to access the Vagrant box:</p>
 
-<pre><code class="language-bash">cd ~/wallaroo-tutorial/wallaroo-release-doc-test1/vagrant
+<pre><code class="language-bash">cd ~/wallaroo-tutorial/wallaroo-release-0.6.1/vagrant
 vagrant ssh
 </code></pre>
 
@@ -546,7 +546,7 @@ vagrant ssh
 
 <p>First, we will need to set up the <code>PYTHONPATH</code> environment variable. Machida needs to be able to find the the module that defines the application. In order to do that, set and export the <code>PYTHONPATH</code> environment variable like this:</p>
 
-<pre><code class="language-bash">export PYTHONPATH=&quot;$HOME/wallaroo-tutorial/wallaroo-release-doc-test1/examples/python/alerts_stateless:$PYTHONPATH&quot;
+<pre><code class="language-bash">export PYTHONPATH=&quot;$HOME/wallaroo-tutorial/wallaroo-release-0.6.1/examples/python/alerts_stateless:$PYTHONPATH&quot;
 </code></pre>
 
 <p>Now that we have Machida set up to run the &ldquo;Alerts&rdquo; application, and the metrics UI and something it can send output to up and running, we can run the application itself by executing the following command (remember to use the <code>machida3</code> executable instead of <code>machida</code> if you are using Python 3.X):</p>

@@ -409,7 +409,7 @@ Installing Docker MacOS There are instructions for getting Docker up and running
 
 <h3 id="get-the-official-wallaroo-image">Get the official Wallaroo image</h3>
 
-<pre><code class="language-bash">docker pull wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-doc-test1-a408ecf
+<pre><code class="language-bash">docker pull wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-0.6.1-272f49a
 </code></pre>
 
 <h3 id="what-s-included-in-the-wallaroo-docker-image">What&rsquo;s Included in the Wallaroo Docker image</h3>
@@ -452,12 +452,12 @@ Installing Docker MacOS There are instructions for getting Docker up and running
 
 <p>To create the Wallaroo source code directory run the following command in Powershell or Command Prompt:</p>
 
-<pre><code class="language-bash">mkdir c:\wallaroo-docker\wallaroo-release-doc-test1\wallaroo-src
+<pre><code class="language-bash">mkdir c:\wallaroo-docker\wallaroo-release-0.6.1\wallaroo-src
 </code></pre>
 
 <p>To create the Wallaroo Python virtual environment directory run the following command in Powershell or Command Prompt:</p>
 
-<pre><code class="language-bash">mkdir c:\wallaroo-docker\wallaroo-release-doc-test1\python-virtualenv
+<pre><code class="language-bash">mkdir c:\wallaroo-docker\wallaroo-release-0.6.1\python-virtualenv
 </code></pre>
 
 <p>Your Windows machine is now all set to continue!</p>
@@ -515,10 +515,10 @@ Installing Docker MacOS There are instructions for getting Docker up and running
   
     <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
 docker run --rm -it --privileged -p <span style="color:#ae81ff">4000</span>:4000 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>-v /tmp/wallaroo-docker/wallaroo-release-doc-test1/wallaroo-src:/src/wallaroo <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>-v /tmp/wallaroo-docker/wallaroo-release-doc-test1/python-virtualenv-machida:/src/python-virtualenv <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>-v /tmp/wallaroo-docker/wallaroo-release-0.6.1/wallaroo-src:/src/wallaroo <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>-v /tmp/wallaroo-docker/wallaroo-release-0.6.1/python-virtualenv-machida:/src/python-virtualenv <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>--name wally <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-doc-test1-a408ecf
+</span><span style="color:#ae81ff"></span>wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-0.6.1-272f49a
 </code></pre></div>
   
 </div>
@@ -528,10 +528,10 @@ docker run --rm -it --privileged -p <span style="color:#ae81ff">4000</span>:4000
   
     <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
 docker run --rm -it --privileged -p <span style="color:#ae81ff">4000</span>:4000 <span style="color:#e6db74">`</span>
--v c:/wallaroo-docker/wallaroo--release-doc-test1/wallaroo-src:/src/wallaroo <span style="color:#e6db74">`</span>
--v c:/wallaroo-docker/wallaroo-release-doc-test1/python-virtualenv-machida:/src/python-virtualenv <span style="color:#e6db74">`</span>
+-v c:/wallaroo-docker/wallaroo--release-0.6.1/wallaroo-src:/src/wallaroo <span style="color:#e6db74">`</span>
+-v c:/wallaroo-docker/wallaroo-release-0.6.1/python-virtualenv-machida:/src/python-virtualenv <span style="color:#e6db74">`</span>
 --name wally <span style="color:#e6db74">`</span>
-wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-doc-test1-a408ecf
+wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-0.6.1-272f49a
 </code></pre></div>
   
 </div>
@@ -541,10 +541,10 @@ wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-doc-test1-a408
   
     <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
 docker run --rm -it --privileged -p <span style="color:#ae81ff">4000</span>:4000 ^
--v c:/wallaroo-docker/wallaroo-release-doc-test1/wallaroo-src:/src/wallaroo ^
--v c:/wallaroo-docker/wallaroo-release-doc-test1/python-virtualenv-machida:/src/python-virtualenv ^
+-v c:/wallaroo-docker/wallaroo-release-0.6.1/wallaroo-src:/src/wallaroo ^
+-v c:/wallaroo-docker/wallaroo-release-0.6.1/python-virtualenv-machida:/src/python-virtualenv ^
 --name wally ^
-wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-doc-test1-a408ecf
+wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-0.6.1-272f49a
 </code></pre></div>
   
 </div>
@@ -579,10 +579,10 @@ wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-doc-test1-a408
   
     <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
 docker run --rm -it --privileged -p <span style="color:#ae81ff">4000</span>:4000 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>-v /tmp/wallaroo-docker/wallaroo-release-doc-test1/wallaroo-src:/src/wallaroo <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>-v /tmp/wallaroo-docker/wallaroo-release-doc-test1/python-virtualenv-machida3:/src/python-virtualenv <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>-v /tmp/wallaroo-docker/wallaroo-release-0.6.1/wallaroo-src:/src/wallaroo <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>-v /tmp/wallaroo-docker/wallaroo-release-0.6.1/python-virtualenv-machida3:/src/python-virtualenv <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>--name wally <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-doc-test1-a408ecf -p python3
+</span><span style="color:#ae81ff"></span>wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-0.6.1-272f49a -p python3
 </code></pre></div>
   
 </div>
@@ -591,10 +591,10 @@ docker run --rm -it --privileged -p <span style="color:#ae81ff">4000</span>:4000
 <div id="tabset-python-installation-python-docker-installation-guide-2-1">
   
     <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --rm -it --privileged -p <span style="color:#ae81ff">4000</span>:4000 <span style="color:#e6db74">`</span>
--v c:/wallaroo-docker/wallaroo--release-doc-test1/wallaroo-src:/src/wallaroo <span style="color:#e6db74">`</span>
--v c:/wallaroo-docker/wallaroo-release-doc-test1/python-virtualenv-machida3:/src/python-virtualenv <span style="color:#e6db74">`</span>
+-v c:/wallaroo-docker/wallaroo--release-0.6.1/wallaroo-src:/src/wallaroo <span style="color:#e6db74">`</span>
+-v c:/wallaroo-docker/wallaroo-release-0.6.1/python-virtualenv-machida3:/src/python-virtualenv <span style="color:#e6db74">`</span>
 --name wally <span style="color:#e6db74">`</span>
-wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-doc-test1-a408ecf -p python3
+wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-0.6.1-272f49a -p python3
 </code></pre></div>
   
 </div>
@@ -603,10 +603,10 @@ wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-doc-test1-a408
 <div id="tabset-python-installation-python-docker-installation-guide-2-2">
   
     <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker run --rm -it --privileged -p <span style="color:#ae81ff">4000</span>:4000 ^
--v c:/wallaroo-docker/wallaroo-release-doc-test1/wallaroo-src:/src/wallaroo ^
--v c:/wallaroo-docker/wallaroo-release-doc-test1/python-virtualenv-machida3:/src/python-virtualenv ^
+-v c:/wallaroo-docker/wallaroo-release-0.6.1/wallaroo-src:/src/wallaroo ^
+-v c:/wallaroo-docker/wallaroo-release-0.6.1/python-virtualenv-machida3:/src/python-virtualenv ^
 --name wally ^
-wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-doc-test1-a408ecf -p python3
+wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-0.6.1-272f49a -p python3
 </code></pre></div>
   
 </div>
@@ -629,9 +629,9 @@ wallaroo-labs-docker-wallaroolabs.bintray.io/dev/wallaroo:release-doc-test1-a408
 
 <li><p><code>-p 4000:4000</code>: Maps the default port for HTTP requests for the Metrics UI from the container to the host. This makes it possible to call up the Metrics UI from a browser on the host.</p></li>
 
-<li><p><code>-v /tmp/wallaroo-docker/wallaroo-release-doc-test1/wallaroo-src:/src/wallaroo</code>: Mounts a host directory as a data volume within the container. The first time you run this, an empty directory needs to be used in order for the Docker container to copy the Wallaroo source code to your host. If an empty directory is not used, we are assuming it is prepopulated with the Wallaroo source code from this point forward. This allows you to open and modify the Wallaroo source code with the editor of your choice on your host. The Wallaroo source code will persist on your machine after the container is stopped or deleted. This setting is optional, but without it you would need to use an editor within the container to view or modify the Wallaroo source code.</p></li>
+<li><p><code>-v /tmp/wallaroo-docker/wallaroo-release-0.6.1/wallaroo-src:/src/wallaroo</code>: Mounts a host directory as a data volume within the container. The first time you run this, an empty directory needs to be used in order for the Docker container to copy the Wallaroo source code to your host. If an empty directory is not used, we are assuming it is prepopulated with the Wallaroo source code from this point forward. This allows you to open and modify the Wallaroo source code with the editor of your choice on your host. The Wallaroo source code will persist on your machine after the container is stopped or deleted. This setting is optional, but without it you would need to use an editor within the container to view or modify the Wallaroo source code.</p></li>
 
-<li><p><code>-v /tmp/wallaroo-docker/wallaroo-release-doc-test1/python-virtualenv-machida(machida3):/src/python-virtualenv</code>: Mounts a host directory as a data volume within the container. The first time this is run for the provided directory, this command will setup a persistent Python virtual environment using <a href="https://virtualenv.pypa.io/en/stable/">virtualenv</a> for the container on your host. Thus, if you need to install any python modules using <code>pip</code> or <code>easy_install</code> they will persist after the container is stopped or deleted. This setting is optional, but without it, you will not have a persistent <code>virtualenv</code> for the container. We ask you to mount to <code>/tmp/wallaroo-docker/wallaroo-release-doc-test1/python-virtualenv-machida</code> when using <code>machida</code> and <code>/tmp/wallaroo-docker/wallaroo-release-doc-test1/python-virtualenv-machida3</code> when using <code>machida3</code> to avoid having conflicting <code>virtualenv</code> environments.</p></li>
+<li><p><code>-v /tmp/wallaroo-docker/wallaroo-release-0.6.1/python-virtualenv-machida(machida3):/src/python-virtualenv</code>: Mounts a host directory as a data volume within the container. The first time this is run for the provided directory, this command will setup a persistent Python virtual environment using <a href="https://virtualenv.pypa.io/en/stable/">virtualenv</a> for the container on your host. Thus, if you need to install any python modules using <code>pip</code> or <code>easy_install</code> they will persist after the container is stopped or deleted. This setting is optional, but without it, you will not have a persistent <code>virtualenv</code> for the container. We ask you to mount to <code>/tmp/wallaroo-docker/wallaroo-release-0.6.1/python-virtualenv-machida</code> when using <code>machida</code> and <code>/tmp/wallaroo-docker/wallaroo-release-0.6.1/python-virtualenv-machida3</code> when using <code>machida3</code> to avoid having conflicting <code>virtualenv</code> environments.</p></li>
 
 <li><p><code>--name wally</code>: The name for the container. This setting is optional but makes it easier to reference the container in later commands.</p></li>
 

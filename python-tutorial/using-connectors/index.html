@@ -403,7 +403,7 @@ celsius_feed = wallaroo.experimental.SourceConnectorConfig(
     return wallaroo.build_application(&quot;Celsius to Fahrenheit&quot;, pipeline)
 </code></pre>
 
-<p>You can follow along in this example by going to <a href="https://github.com/WallarooLabs/wallaroo/tree/release-doc-test1/examples/python/celsius_connectors/">GitHub</a>.</p>
+<p>You can follow along in this example by going to <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.6.1/examples/python/celsius_connectors/">GitHub</a>.</p>
 
 <p>We have introduced two new application builder methods for declaring connectors: <code>source_connector</code> and <code>sink_connector</code>. These allow you to describe both ends of the connection so the connector script can encode or decode data in a way that&rsquo;s compatible with your application&rsquo;s worker code. Keeping these in one place helps ensure that it&rsquo;s easy to keep them in sync. The port specified here is what the connector script will automatically use when connecting to the initializing worker.</p>
 
@@ -443,7 +443,7 @@ def decode_feed(data):
 
 <h2 id="running-connector-scripts">Running Connector Scripts</h2>
 
-<p>To run an application that makes use of these connectors we&rsquo;ll need to understand how the connector scripts work. Wallaroo includes a <a href="https://github.com/WallarooLabs/wallaroo/tree/release-doc-test1/connectors/">library of connectors</a> to help get you started. We&rsquo;ll look at <code>udp_source</code> and <code>udp_sink</code> as used in the example introduced above.</p>
+<p>To run an application that makes use of these connectors we&rsquo;ll need to understand how the connector scripts work. Wallaroo includes a <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.6.1/connectors/">library of connectors</a> to help get you started. We&rsquo;ll look at <code>udp_source</code> and <code>udp_sink</code> as used in the example introduced above.</p>
 
 <p>These included connectors are self-contained Python scripts. Some of them may expect a related Python library to be installed and available for import but our example uses the UDP facilities provided for by Python&rsquo;s standard library. Be sure that the Python path is set up to include the Wallaroo library.</p>
 
@@ -467,7 +467,7 @@ def decode_feed(data):
 
 <h2 id="starting-with-prebuilt-connectors">Starting with Prebuilt Connectors</h2>
 
-<p>We have a number of <a href="https://github.com/WallarooLabs/wallaroo/tree/release-doc-test1/connectors/">prebuilt connectors</a>. Here is a short description of each one. These are all written so they can be copied and customized in your application source tree. You&rsquo;re still welcome to run them in place as well.</p>
+<p>We have a number of <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.6.1/connectors/">prebuilt connectors</a>. Here is a short description of each one. These are all written so they can be copied and customized in your application source tree. You&rsquo;re still welcome to run them in place as well.</p>
 
 <h3 id="kafka">Kafka</h3>
 
@@ -483,9 +483,9 @@ def decode_feed(data):
 
 <p>Redis has many ways to be used as a source and a sink. We&rsquo;ve provided two starting points to show how a source and sink can work. The script is very easy to modify and uses the well maintained <a href="https://pypi.org/project/redis/">redis library</a>.</p>
 
-<p>For the source, we show an example using the subscription support offered by Redis pubsub and it&rsquo;s a natural fit for many stream processing applications. Check out <code>redis_subscriber_source</code> for <a href="https://github.com/WallarooLabs/wallaroo/tree/release-doc-test1/connectors/redis_subscriber_source">details</a>.</p>
+<p>For the source, we show an example using the subscription support offered by Redis pubsub and it&rsquo;s a natural fit for many stream processing applications. Check out <code>redis_subscriber_source</code> for <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.6.1/connectors/redis_subscriber_source">details</a>.</p>
 
-<p>For the sink, we show that not everything needs to look exactly like a stream to be used with Wallaroo. We use the given hash key in redis and set key-value pairs on that target hash for each key-value pair passed to the sink. This is very handy for those cases that want to keep track of the latest value. See <code>redis_hash_sink</code> for <a href="https://github.com/WallarooLabs/wallaroo/tree/release-doc-test1/connectors/redis_hash_sink">details</a>.</p>
+<p>For the sink, we show that not everything needs to look exactly like a stream to be used with Wallaroo. We use the given hash key in redis and set key-value pairs on that target hash for each key-value pair passed to the sink. This is very handy for those cases that want to keep track of the latest value. See <code>redis_hash_sink</code> for <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.6.1/connectors/redis_hash_sink">details</a>.</p>
 
 <h3 id="rabbitmq">RabbitMQ</h3>
 
@@ -493,7 +493,7 @@ def decode_feed(data):
 
 <h3 id="udp">UDP</h3>
 
-<p>Our UDP support uses the Python standard library. To see an example of it in action, check out the <a href="https://github.com/WallarooLabs/wallaroo/tree/release-doc-test1/examples/python/celsius_connectors/">celsius_connectors example</a>.</p>
+<p>Our UDP support uses the Python standard library. To see an example of it in action, check out the <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.6.1/examples/python/celsius_connectors/">celsius_connectors example</a>.</p>
 
 <h3 id="aws-s3">AWS S3</h3>
 
@@ -501,7 +501,7 @@ def decode_feed(data):
 
 <h3 id="postgres">Postgres</h3>
 
-<p>We offer some starting templates for Postgres integration. These depend on your database schema and so we&rsquo;ve left them in the <a href="https://github.com/WallarooLabs/wallaroo/tree/release-doc-test1/connectors/templates">connectors/templates directory</a>.</p>
+<p>We offer some starting templates for Postgres integration. These depend on your database schema and so we&rsquo;ve left them in the <a href="https://github.com/WallarooLabs/wallaroo/tree/release-0.6.1/connectors/templates">connectors/templates directory</a>.</p>
 
 <p>As a source we have a very interesting example of how notifiers can turn a regular table into a stream. If you&rsquo;re struggling with finding an efficient way to stream relational data, this might be a good place to start.</p>
 
