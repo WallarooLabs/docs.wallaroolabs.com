@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>Wallaroo  | What is Wallaroo?</title>
+    <title>Wallaroo  | Crash Resilience</title>
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
 
@@ -52,21 +52,25 @@
     
 
     
-      <link href="https://docs.wallaroolabs.com/index.xml" rel="alternate" type="application/rss+xml" title="Wallaroo" />
-      <link href="https://docs.wallaroolabs.com/index.xml" rel="feed" type="application/rss+xml" title="Wallaroo" />
-    
 
-    <meta property="og:title" content="What is Wallaroo?" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://docs.wallaroolabs.com/" />
+    <meta property="og:title" content="Crash Resilience" />
+<meta property="og:description" content="Wallaroo is designed with built-in resilience. However, since the operations involved with maintaining resilience can impact performance, this mode is off by default. For python users, we provide a separate binary with resilience enabled: machida-resilience (and machida3-resilience for Python 3) as part of the default installation. For Go and Ponyc users, to enable resilience in a Wallaroo application, the binary needs to be built with -D resilience if using the ponyc compiler directly, or with resilience=on if using our Makefile build system (as is the case with Machida)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://docs.wallaroolabs.com/operators-manual/resilience-crash/" />
 
-<meta itemprop="name" content="What is Wallaroo?">
-<meta itemprop="description" content="">
+<meta itemprop="name" content="Crash Resilience">
+<meta itemprop="description" content="Wallaroo is designed with built-in resilience. However, since the operations involved with maintaining resilience can impact performance, this mode is off by default. For python users, we provide a separate binary with resilience enabled: machida-resilience (and machida3-resilience for Python 3) as part of the default installation. For Go and Ponyc users, to enable resilience in a Wallaroo application, the binary needs to be built with -D resilience if using the ponyc compiler directly, or with resilience=on if using our Makefile build system (as is the case with Machida).">
 
+
+
+<meta itemprop="wordCount" content="925">
+
+
+
+<meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="What is Wallaroo?"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="Crash Resilience"/>
+<meta name="twitter:description" content="Wallaroo is designed with built-in resilience. However, since the operations involved with maintaining resilience can impact performance, this mode is off by default. For python users, we provide a separate binary with resilience enabled: machida-resilience (and machida3-resilience for Python 3) as part of the default installation. For Go and Ponyc users, to enable resilience in a Wallaroo application, the binary needs to be built with -D resilience if using the ponyc compiler directly, or with resilience=on if using our Makefile build system (as is the case with Machida)."/>
 
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -275,8 +279,8 @@
       </li>
       
       <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".operators-manual">Operators Manual</a>
-        <ul class="operators-manual desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2  primary-color" data-target=".operators-manual">Operators Manual</a>
+        <ul class="operators-manual desktopmenu animated fadeIn list pl0 bg-light-gray db">
           <li class="f6 fw4">
             <a href="/operators-manual/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
               Operators Manual
@@ -293,7 +297,7 @@
             </a>
           </li>
           <li class="f6 fw4">
-            <a href="/operators-manual/resilience-crash/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+            <a href="/operators-manual/resilience-crash/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 primary-color ">
               Crash Resilience
             </a>
           </li>
@@ -334,9 +338,32 @@
 </nav>
 
       </div>
-    <div class="flex-l" id="the-body"><div class="order-1 w-60-l mw9 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style="flex-grow:1;">
+    <div class="flex-l" id="the-body"><div class="order-2 w-100 w-20-l ph5-m ph0-l mb4 sticky dn db-l" id="context-menu"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">What's in this document</p>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#how-does-wallaroo-implement-resilience">How Does Wallaroo Implement Resilience</a></li>
+<li><a href="#recovery-in-practice">Recovery in Practice</a>
+<ul>
+<li><a href="#running-the-resilience-example">Running the resilience example</a>
+<ul>
+<li><a href="#starting-new-shells">Starting new shells</a></li>
+</ul></li>
+<li><a href="#verifying-that-recovery-was-successful">Verifying that recovery was successful</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+
+
+
+
+</div><div class="order-1 w-60-l mw9 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style="flex-grow:1;">
         <div class="order-0 mt4 w-100 center mw7" style="clear: both;">
-          <a id="doc-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowDM()"></a></div>
+          <a id="doc-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowDM()"></a><a id="context-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowCM()"></a></div>
 
         <div class="documentation-copy center mw7">
           <header class="mt4 w-100">
@@ -344,125 +371,192 @@
                 
               
             </p>
-            <h1 class="f1 athelas mb1">What is Wallaroo?</h1>
+            <h1 class="f1 athelas mb1">Crash Resilience</h1>
           </header>
 
           <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l">
 
-<p>Wallaroo is an ultrafast and scalable data processing engine that rapidly takes you from prototype to production by eliminating infrastructure complexity. It&rsquo;s designed for writing distributed data processing applications, especially demanding high-throughput, low-latency tasks where the accuracy of results is important. If you are familiar with the “big data” landscape, Wallaroo includes the “streaming data” category along with tools like Storm, Heron, and Samza. However, the core engine also supports long-running analysis such as might be used for large-scale analysis and model training.</p>
+<p>Wallaroo is designed with built-in resilience. However, since the operations involved with maintaining resilience can impact performance, this mode is off by default. For python users, we provide a separate binary with resilience enabled: <code>machida-resilience</code> (and <code>machida3-resilience</code> for Python 3) as part of the default installation. For Go and Ponyc users, to enable resilience in a Wallaroo application, the binary needs to be built with <code>-D resilience</code> if using the <code>ponyc</code> compiler directly, or with <code>resilience=on</code> if using our Makefile build system (as is the case with <code>Machida</code>).</p>
 
-<p>When we set out to build Wallaroo, we had a few goals in mind. We wanted to improve the state of the art for distributed data processing by providing better per-worker throughput, dramatically lower latencies, easier state management, and an easier operational experience. In this introduction, we&rsquo;re going to touch on some of these points but not all of them. Over the course of this guide, we will explore Wallaroo more in-depth. To that end, this introduction will:</p>
+<h2 id="how-does-wallaroo-implement-resilience">How Does Wallaroo Implement Resilience</h2>
 
-<ul>
-<li>Take you through what Wallaroo is</li>
-<li>Describe the problems Wallaroo is solving</li>
-<li>Discuss some of the key features including integrated state management and resilience</li>
-</ul>
+<p>Wallaroo&rsquo;s resilience is based on the Chandy-Lamport snapshotting algorithm that minimizes the impact of checkpointing on processing in-flight messages. Each worker maintains a resilience file, where it periodically saves a snapshot of its latest state. A checkpoint represents a consistent recovery line—a specific generation of individual worker snapshots. This means that when a failed worker recovers, we can roll back the states in the cluster to the last checkpoint and begin processing again with the guarantee that all state in the system reflects a causally consistent history. The interval between checkpoints is configurable with the <code>--time-between-checkpoints</code> command line parameter (in nanoseconds).</p>
 
-<h2 id="wallaroo-by-example-market-spread">Wallaroo by example: Market Spread</h2>
+<p>Since recovery involves a rollback to the last successful checkpoint, any data that was processed <em>after</em> that checkpoint will have to be resent by the sources.</p>
 
-<p>Let’s start talking about what Wallaroo can do by way of an example. One demo application is called “Market Spread.” It’s based on a proof-of-concept we did for a large bank that was looking at ways to modernize their infrastructure. Market Spread is an application designed to run alongside a trading system. Its goal is to monitor market data for irregularities around different symbols and potentially withdraw some trades that have been sent to market should certain anomalies occur.</p>
+<h2 id="recovery-in-practice">Recovery in Practice</h2>
 
-<p>When we break the application down into its key components we get:</p>
+<p>When a crashed worker is restarted, if it can find its resilience files in the path specified by <code>--resilience-dir</code>, it will automatically start the recovery process. The simplest way to do this is to rerun the worker using the same command it was originally run with.</p>
 
-<ul>
-<li>A stream of market data, aka “NBBO Stream”</li>
-<li>A stream of trades, aka “Order Stream”</li>
-<li>State in the form of latest market conditions for various symbols</li>
-<li>A calculation to possibly withdraw the trade based on state for that symbol</li>
-</ul>
+<p>For example, if we were running the bundled Python example <a href="https://github.com/WallarooLabs/wallaroo/tree/0.6.1/examples/python/word_count/">word_count</a>, this might look something like:</p>
 
-<p><img src="images/market-spread-overview.png" alt="Market Spread Diagram" /></p>
+<pre><code>```bash
+machida-resilience --application-module word_count \
+  --in 127.0.0.1:7010 --out 127.0.0.1:7002 \
+  --metrics 127.0.0.1:5001 --control 127.0.0.1:6000 \
+  --my-data 127.0.0.1:6003 --my-control 127.0.0.1:6002 \
+  --external 127.0.0.1:5051 \
+  --name worker1 \
+  --resilience-dir /tmp/resilience-dir \
+  --ponythreads=1 --ponynoblock --run-with-resilience \
+  | tee worker1.log
+```
+</code></pre>
 
-<p>For the proof of concept, our client was looking to handle hundreds of thousands of messages a second with median latencies measured in microseconds. Further, they needed flat, predictable tail latencies that were measured in single-digit milliseconds. While the proof of concept was only run on a single machine, the goal was to have an application that would be able to respond to ever-increasing rates of data and seamlessly scale to run on multiple machines while handling millions of messages a second.</p>
+<h3 id="running-the-resilience-example">Running the resilience example</h3>
 
-<p>Distributed data processing applications are hard. We know. Over the course of our careers, we’ve been involved in building a lot of them. Here’s a quick checklist of things we’d need to worry about for an application like Market Spread if we were to start from scratch:</p>
+<p>In order to run the example you will need Machida with resilience enabled, Giles Sender, Data Receiver, and the Cluster Shutdown tool. If you haven&rsquo;t yet set up Wallaroo, please visit our <a href="/python-installation/">setup</a> instructions to get started.</p>
 
-<ul>
-<li>Creating a robust communication layer between communicating processes</li>
-<li>Ensuring message replay occurs when a message fails to process.</li>
-<li>Ensuring messages aren’t processed twice on message replay</li>
-<li>Efficient sharding of data across multiple machines</li>
-<li>Optimizing computations for performance</li>
-<li>Minimizing administrative messages</li>
-<li>Minimizing data movement</li>
-<li>Handling message source back-pressure</li>
-<li>Metrics, monitoring, and telemetry</li>
-<li>Implementing our domain logic</li>
-</ul>
+<h4 id="starting-new-shells">Starting new shells</h4>
 
-<p>That’s a lot to tackle and a lot of code to introduce bugs in. Wallaroo is, in part, an answer to that problem. It creates a robust platform that handles sharding and partitioning data across many machines. By leveraging Wallaroo, you can build demanding high-performance applications like Market Spread without having to worry about replaying messages when failures occur or deduplicating data on message replay. At-least-once message processing and idempotence come as a core part of the platform. We focus on the hard infrastructure problems, so you don’t have to. By building Market Spread using Wallaroo, the checklist becomes:</p>
+<p>You will need 4 shells to run this example.
+For each shell you&rsquo;re expected to setup, you&rsquo;d have to run the following to configure the Wallaroo environment:</p>
 
-<ul>
-<li>Implementing our domain logic</li>
-</ul>
+<pre><code class="language-bash">cd ~/wallaroo-tutorial/wallaroo-0.6.1
+source bin/activate
+cd examples/python/word_count
+</code></pre>
 
-<h2 id="core-wallaroo-abstractions">Core Wallaroo abstractions</h2>
+<ol>
+<li><p>Create the path where the workers will save their resilience snapshots.</p>
 
-<p>How does one go about building a Wallaroo application? Via our developer framework and its APIs which are the focus of this guide. The core abstractions from our API that we&rsquo;ll touch on in this introduction are:</p>
+<pre><code>mkdir -p /tmp/resilience-dir
+</code></pre></li>
 
-<ul>
-<li>Stateless Computation</li>
-<li>State Computation</li>
-<li>Pipeline</li>
-<li>Source</li>
-<li>Sink</li>
-</ul>
+<li><p>Shell 1: Start the Metrics UI</p>
 
-<p>The most important of these is a <code>computation</code>. Computations come in two varieties: stateless computation and state computation. A stateless computation takes some data as an input and creates some new data as an output. For example, a “double computation” might take in an integer such as 2 and output 4. A state computation is similar to a stateless computation except it takes an additional input: the state it will operate on. An example of a state computation would be a counter that keeps track of the running total of all numbers it has processed.</p>
+<p>To start the Metrics UI run:</p>
 
-<p>You can combine computations together using another abstraction we provide: <code>Pipeline</code>. A pipeline allows you to say, for example, that the output from computation A will be processed by computation B. A pipeline begins with a <code>Source</code> stage, which is responsible for receiving and decoding incoming external messages. Likewise, the pipeline may end at a <code>Sink</code>, if it has anything to output, which encodes data and sends it to an external receiver. In this way, you can take individual computations and start turning them into applications that take in data from various external sources and ultimately produce outputs that are sent to external systems via sinks.</p>
+<pre><code class="language-bash">metrics_reporter_ui start
+</code></pre>
 
-<h2 id="market-spread-in-wallaroo">Market Spread in Wallaroo</h2>
+<p>You can verify it started up correctly by visiting <a href="http://localhost:4000">http://localhost:4000</a>.</p>
 
-<p>Given these abstractions, what does our Market Spread application look like?</p>
+<p>If you need to restart the UI, run:</p>
 
-<p><img src="images/market-spread-in-wallaroo.png" alt="Market Spread in Wallaroo" /></p>
+<pre><code class="language-bash">metrics_reporter_ui restart
+</code></pre>
 
-<p>You can see we end up with two pipelines, one for our <code>NBBO Feed</code> and another for the <code>Order Feed,</code> each with its own corresponding source. We have a single type of state that we are storing (<code>NBBO State</code> by symbol), a state computation&ndash;to update state and check orders against it&ndash;and finally a <code>Sink</code> that we send our outputs to.</p>
+<p>When it&rsquo;s time to stop the UI, run:</p>
 
-<h2 id="market-spread-performance">Market Spread Performance</h2>
+<pre><code class="language-bash">metrics_reporter_ui stop
+</code></pre>
 
-<p>Wallaroo has been developed to provide correct results quickly. What does quickly mean? Wallaroo is designed to process millions of events on a single machine, with median latencies that are measured in microseconds and tail latencies that are measured in single digit milliseconds. Low latencies are all well and good, but what does that mean in practice?</p>
+<p>If you need to start the UI after stopping it, run:</p>
 
-<p>Performance is, in the end, highly dependent on the type of data, the computations being performed, etc.  This guide isn&rsquo;t the place to present detailed benchmarks so let&rsquo;s give a quick idea of what the performance of a Wallaroo application can look like.</p>
+<pre><code class="language-bash">metrics_reporter_ui start
+</code></pre></li>
 
-<p>Let’s talk about the aforementioned Market Spread application and some recent performance numbers we’ve gotten with it. First, though, let’s highlight some key points:</p>
+<li><p>Shell 1: Start a data receiver</p>
 
-<ul>
-<li>The logic is reasonably straightforward.</li>
-<li>The state it stores in memory remains constant in size.</li>
-<li>It has two streams of data, only one of which occasionally produces output that results in network traffic (1 out of 70,000).</li>
-<li>Messages are 50 to 60 bytes in size.</li>
-</ul>
+<pre><code class="language-bash">data_receiver --listen 127.0.0.1:7002 | tee received.txt
+</code></pre></li>
 
-<p>During a recent performance testing run using 16 cores on an AWS m4 class machine, we were able to run each stream of data at around 1.5 million messages per second for a total of 3 million messages per second across the two streams. Our processing latencies were:</p>
+<li><p>Shell 2: Start initializer (remember to use <code>machida3-resilience</code> if using Python 3)</p>
 
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">50%</th>
-<th align="center">95%</th>
-<th align="center">99%</th>
-<th align="center">99.9%</th>
-<th align="center">99.99%</th>
-</tr>
-</thead>
+<pre><code class="language-bash">machida-resilience --application-module word_count \
+  --in 127.0.0.1:7010 --out 127.0.0.1:7002 \
+  --metrics 127.0.0.1:5001 --control 127.0.0.1:6000 \
+  --data 127.0.0.1:6001 --external 127.0.0.1:5050 \
+  --name initializer --cluster-initializer --worker-count 2 \
+  --resilience-dir /tmp/resilience-dir \
+  --ponythreads=1 --ponynoblock --run-with-resilience \
+  | tee initializer.log
+</code></pre></li>
 
-<tbody>
-<tr>
-<td align="center">&lt;=</td>
-<td align="center">66µs</td>
-<td align="center">0.5ms</td>
-<td align="center">0.5ms</td>
-<td align="center">0.5ms</td>
-<td align="center">1 ms</td>
-</tr>
-</tbody>
-</table>
+<li><p>Shell 3: Start worker (remember to use <code>machida3-resilience</code> if using Python 3)</p>
 
-<p>Even with the application caveats that we laid out, we think that is some pretty impressive performance. Performance that we are committed to maintaining as we continue to add functionality to Wallaroo.</p>
+<pre><code class="language-bash">machida-resilience --application-module word_count \
+  --in 127.0.0.1:7010 --out 127.0.0.1:7002 \
+  --metrics 127.0.0.1:5001 --control 127.0.0.1:6000 \
+  --my-data 127.0.0.1:6003 --my-control 127.0.0.1:6002 \
+  --external 127.0.0.1:5051 \
+  --name worker1 \
+  --resilience-dir /tmp/resilience-dir \
+  --ponythreads=1 --ponynoblock --run-with-resilience \
+  | tee worker1.log
+</code></pre></li>
+
+<li><p>Shell 4: Start sender</p>
+
+<pre><code class="language-bash">sender --host 127.0.0.1:7010 --file count_this.txt --batch-size 5 \
+  --interval 1_000_000_000 --messages 10000000 --ponythreads=1 \
+  --ponynoblock --repeat --no-write
+</code></pre></li>
+
+<li><p>Wait a few seconds for the internal states to update and for some checkpoints to complete</p></li>
+
+<li><p>Shell 4: Stop the sender (<code>Ctrl-C</code>)</p></li>
+
+<li><p>Shell 4: Kill the worker to simulate a crash (using SIGKILL)</p>
+
+<pre><code class="language-bash">pkill -f -KILL machida.*worker1
+</code></pre></li>
+
+<li><p>Shell 4: Send some data directly to our data receiver to mark in the sink where the crash occurred (for demonstration purposes)</p>
+
+<pre><code class="language-bash">echo '&lt;&lt;CRASH-and-RECOVER&gt;&gt;' | nc -q1 127.0.0.1 7002
+</code></pre></li>
+
+<li><p>Shell 3: Restart worker1 with the same command we used above, but save its log output to a new file (remember to use <code>machida3-resilience</code> if using Python 3)</p>
+
+<pre><code class="language-bash">machida-resilience --application-module word_count \
+  --in 127.0.0.1:7010 --out 127.0.0.1:7002 \
+  --metrics 127.0.0.1:5001 --control 127.0.0.1:6000 \
+  --my-data 127.0.0.1:6003 --my-control 127.0.0.1:6002 \
+  --external 127.0.0.1:5051 \
+  --name worker1 \
+  --resilience-dir /tmp/resilience-dir \
+  --ponythreads=1 --ponynoblock --run-with-resilience \
+  | tee worker1.recovered.log
+</code></pre></li>
+
+<li><p>Shell 4: Restart the sender</p>
+
+<pre><code class="language-bash">sender --host 127.0.0.1:7010 --file count_this.txt --batch-size 5 \
+  --interval 1_000_000_000 --messages 10000000 --ponythreads=1 \
+  --ponynoblock --repeat --no-write
+</code></pre></li>
+
+<li><p>Shell 4: Let things run for a few more seconds before shutting down the sender (<code>Ctrl-C</code>), and then shut down the cluster with the <code>cluster_shutdown</code> tool.</p>
+
+<pre><code class="language-bash">cluster_shutdown 127.0.0.1:5050
+</code></pre></li>
+</ol>
+
+<h3 id="verifying-that-recovery-was-successful">Verifying that recovery was successful</h3>
+
+<p>To verify that recovery was successful, we turn first to the recovering worker&rsquo;s log file, and look for the text</p>
+
+<pre><code>```
+Recovering from recovery files!
+Attempting to recover...
+```
+</code></pre>
+
+<p>immediately after the license notifications.
+To see that recovery was successful, we next look for the text</p>
+
+<pre><code>```
+|~~ - Recovery COMPLETE - ~~|
+~~~Resuming message processing.~~~
+|~~ INIT PHASE III: Application is ready to work! ~~|
+```
+</code></pre>
+
+<p>This informs us that the worker has recovered successfully and that the cluster is now ready to process incoming data again.</p>
+
+<p>To further see that the state was indeed recovered, we can look at the data received by the sink, in <code>received.txt</code>. In this case, we will look at a particular key, <code>amendment</code>, but you can do the same with any of the other keys:</p>
+
+<pre><code>```
+amendment =&gt; 11
+...
+&lt;&lt;CRASH-and-RECOVER&gt;&gt;
+...
+amendment =&gt; 12
+...
+```
+</code></pre>
 </main>
         </div>
       </div>

@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Wallaroo  | Data Redundancy</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.52" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    <style>
+      @font-face {
+        font-family: 'Icon';
+        src: url('/dist/fonts/icon.eot?52m981');
+        src: url('/dist/fonts/icon.eot?#iefix52m981')
+               format('embedded-opentype'),
+             url('/dist/fonts/icon.woff?52m981')
+               format('woff'),
+             url('/dist/fonts/icon.ttf?52m981')
+               format('truetype'),
+             url('/dist/fonts/icon.svg?52m981#icon')
+               format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
+
+    <link href="/dist/css/app.css" rel="stylesheet">
+    <link href="/dist/css/highlight.css" rel="stylesheet">
+    <link href="/dist/css/icon.css" rel="stylesheet">
+    <link href="/dist/css/wallaroo.css" rel="stylesheet">
+
+    
+      <link rel="stylesheet" href="/css/jquery-ui.min.css">
+    
+      <link rel="stylesheet" href="/css/jquery-ui.theme.min.css">
+    
+      <link rel="stylesheet" href="/css/highlight.css">
+    
+      <link rel="stylesheet" href="/css/my.css">
+    
+
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="Data Redundancy" />
+<meta property="og:description" content="Wallaroo&rsquo;s resilience data directory As described in the crash resilience chapter, Wallaroo requires a compile-time flag to enable crash resilience features. In addition to the --run-with-resilience flag, the --resilience-dir flag specifies the path to Wallaroo&rsquo;s crash resilience data directory. The resilience data directory contains worker-specific information for:
+ Hostnames/IP addresses and TCP ports for other Wallaroo workers in the cluster
+ Source, sink, and pipeline topology information for the cluster&rsquo;s application" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://docs.wallaroolabs.com/operators-manual/resilience-data-redundancy/" />
+
+<meta itemprop="name" content="Data Redundancy">
+<meta itemprop="description" content="Wallaroo&rsquo;s resilience data directory As described in the crash resilience chapter, Wallaroo requires a compile-time flag to enable crash resilience features. In addition to the --run-with-resilience flag, the --resilience-dir flag specifies the path to Wallaroo&rsquo;s crash resilience data directory. The resilience data directory contains worker-specific information for:
+ Hostnames/IP addresses and TCP ports for other Wallaroo workers in the cluster
+ Source, sink, and pipeline topology information for the cluster&rsquo;s application">
+
+
+
+<meta itemprop="wordCount" content="1347">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Data Redundancy"/>
+<meta name="twitter:description" content="Wallaroo&rsquo;s resilience data directory As described in the crash resilience chapter, Wallaroo requires a compile-time flag to enable crash resilience features. In addition to the --run-with-resilience flag, the --resilience-dir flag specifies the path to Wallaroo&rsquo;s crash resilience data directory. The resilience data directory contains worker-specific information for:
+ Hostnames/IP addresses and TCP ports for other Wallaroo workers in the cluster
+ Source, sink, and pipeline topology information for the cluster&rsquo;s application"/>
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+
+  <header>
+    <div class="bg-green">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="https://docs.wallaroolabs.com/" class="f3 fw2 hover-white no-underline white-90 dib">
+      Wallaroo
+    </a>
+    <div class="flex-l items-center">
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/core-concepts/" title="Core Concepts page">
+              Core Concepts
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/python-installation/" title="Installation page">
+              Installation
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/python-tutorial/" title="Tutorial page">
+              Tutorial
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/operators-manual/" title="Operators Manual page">
+              Operators Manual
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+<div hidden>
+  <span id="new-window-0">Opens in a new window</span>
+  <span id="new-window-1">Opens an external site</span>
+  <span id="new-window-2">Opens an external site in a new window</span>
+</div>
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+    <main role="main">
+      
+  <article class="w-100 ph4 pb5 pb6-ns pt1 pt3-ns">
+      <div class="order-0 w-20 dn db-l doc-menu" id="doc-menu">
+        
+<nav role="navigation">
+  <ul class="list pa0 nl2">
+    
+      
+      <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".core-concepts">Core Concepts</a>
+        <ul class="core-concepts desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+          <li class="f6 fw4">
+            <a href="/core-concepts/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Wallaroo Core Concepts
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/core-concepts/state/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              State
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/core-concepts/working-with-state/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Working with State
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/core-concepts/partitioning/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Partitioning
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/core-concepts/aggregations/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Aggregations
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/core-concepts/windows/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Windows
+            </a>
+          </li>
+        </ul>
+      </li>
+      
+      <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".pyinstallation">Python Installation Guide</a>
+        <ul class="pyinstallation desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+          <li class="f6 fw4">
+            <a href="/python-installation/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Choosing an Installation Option
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/python-installation/python-docker-installation-guide/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Installing with Docker
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/python-installation/python-vagrant-installation-guide/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Installing with Vagrant
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/python-installation/python-wallaroo-up-installation-guide/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Installing with Wallaroo Up
+            </a>
+          </li>
+        </ul>
+      </li>
+      
+      <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".pytutorial">Python Tutorial</a>
+        <ul class="pytutorial desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+          <li class="f6 fw4">
+            <a href="/python-tutorial/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Python API Introduction
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/python-tutorial/running-a-wallaroo-application/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Running A Wallaroo Application
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/python-tutorial/writing-your-own-application/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Writing Your Own Application
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/python-tutorial/writing-your-own-stateful-application/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Writing Your Own Stateful Application
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/python-tutorial/word-count/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Word Count
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/python-tutorial/interworker-serialization-and-resilience/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Inter-worker Serialization and Resilience
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/python-tutorial/using-connectors/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Using Connectors as Sources &amp; Sinks
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/python-tutorial/api/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Wallaroo Python API Classes
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/python-tutorial/debugging/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Debugging
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/python-tutorial/tcp-decoders-and-encoders/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              TCP Decoders and Encoders
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/python-tutorial/virtualenv/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Wallaroo and Virtualenv
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/python-tutorial/starting-a-new-shell/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Starting a new shell
+            </a>
+          </li>
+        </ul>
+      </li>
+      
+      <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2  primary-color" data-target=".operators-manual">Operators Manual</a>
+        <ul class="operators-manual desktopmenu animated fadeIn list pl0 bg-light-gray db">
+          <li class="f6 fw4">
+            <a href="/operators-manual/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Operators Manual
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/operators-manual/running-wallaroo/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Running Wallaroo
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/operators-manual/autoscale/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Autoscale
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/operators-manual/resilience-crash/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Crash Resilience
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/operators-manual/resilience-data-redundancy/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 primary-color ">
+              Data Redundancy
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/operators-manual/command-line-options/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Command-Line Options
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/operators-manual/metrics-ui/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Wallaroo Metrics UI
+            </a>
+          </li>
+        </ul>
+      </li>
+      
+      <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".appendix">Appendix</a>
+        <ul class="appendix desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+          <li class="f6 fw4">
+            <a href="/appendix/giles-sender/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Giles sender
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/appendix/wallaroo-docker-tips/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Tips for using Wallaroo in Docker
+            </a>
+          </li>
+        </ul>
+      </li>
+  </ul>
+</nav>
+
+      </div>
+    <div class="flex-l" id="the-body"><div class="order-2 w-100 w-20-l ph5-m ph0-l mb4 sticky dn db-l" id="context-menu"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">What's in this document</p>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#wallaroo-s-resilience-data-directory">Wallaroo&rsquo;s resilience data directory</a></li>
+<li><a href="#loss-of-the-resilience-data-directory-crash-recovery-is-impossible">Loss of the resilience data directory -&gt; crash recovery is impossible</a></li>
+<li><a href="#catastrophic-failure-resilience-requires-data-replication">Catastrophic failure resilience requires data replication</a></li>
+<li><a href="#i-o-journals-the-foundation-for-data-replication">I/O journals: the foundation for data replication</a></li>
+<li><a href="#planning-for-catastrophic-failure">Planning for catastrophic failure</a></li>
+<li><a href="#asynchronous-journal-file-replication">Asynchronous journal file replication</a></li>
+<li><a href="#running-a-dos-file-server">Running a DOS file server</a></li>
+<li><a href="#running-wallaroo-to-use-a-remote-dos-file-server-thus-enabling-data-redundancy">Running Wallaroo to use a remote DOS file server (thus enabling data redundancy)</a></li>
+<li><a href="#procedure-for-recovering-for-a-worker-crash">Procedure for recovering for a worker crash</a></li>
+<li><a href="#scripted-examples-of-wallaroo-worker-start-stop-crash-and-restart-after-catastrophic-failure">Scripted examples of Wallaroo worker start, stop, crash, and restart after catastrophic failure</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+
+
+
+
+</div><div class="order-1 w-60-l mw9 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style="flex-grow:1;">
+        <div class="order-0 mt4 w-100 center mw7" style="clear: both;">
+          <a id="doc-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowDM()"></a><a id="context-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowCM()"></a></div>
+
+        <div class="documentation-copy center mw7">
+          <header class="mt4 w-100">
+            <p class="f6 b helvetica tracked">
+                
+              
+            </p>
+            <h1 class="f1 athelas mb1">Data Redundancy</h1>
+          </header>
+
+          <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l">
+
+<h2 id="wallaroo-s-resilience-data-directory">Wallaroo&rsquo;s resilience data directory</h2>
+
+<p>As described in the <a href="../resilience-crash/">crash resilience chapter</a>, Wallaroo requires a compile-time flag to enable crash resilience features.  In addition to the <code>--run-with-resilience</code> flag, the <code>--resilience-dir</code> flag specifies the path to Wallaroo&rsquo;s crash resilience data directory.  The resilience data directory contains worker-specific information for:</p>
+
+<ul>
+<li><p>Hostnames/IP addresses and TCP ports for other Wallaroo workers in the cluster</p></li>
+
+<li><p>Source, sink, and pipeline topology information for the cluster&rsquo;s application</p></li>
+
+<li><p>State information for state computations: dynamic keys processed by this worker and user-specified Python/Go/Pony data structures for state computations.</p></li>
+</ul>
+
+<p>If a Wallaroo worker process crashes and restarts, the files in the resilience data directory provide the necessary information to:</p>
+
+<ul>
+<li><p>reconnect to the surviving cluster worker processes,</p></li>
+
+<li><p>participate in the Chandy-Lamport snapshot algorithm&rsquo;s recovery procedure to, which rolls back the global cluster state to a well-defined state, and</p></li>
+
+<li><p>reconfigure local state computation actors to restore the app&rsquo;s user-specified Python/Go/Pony data structures to match the global cluster state snapshot</p></li>
+</ul>
+
+<h2 id="loss-of-the-resilience-data-directory-crash-recovery-is-impossible">Loss of the resilience data directory -&gt; crash recovery is impossible</h2>
+
+<p>As outlined in the previous section, the resilience data directory on each Wallaroo worker plays a vital role in the crash recovery process.  Wallaroo can recover from worker crashes as long as the resilience data directory&rsquo;s files are available.</p>
+
+<p>However, not all system failures can leave the resilience data directory&rsquo;s files intact.  Disk drives crash.  Operating system bugs can corrupt the file system.  Entire machines fail, for example, due to a power supply failure.  Virtual machines can be accidentally damaged or destroyed by administrator error.</p>
+
+<h2 id="catastrophic-failure-resilience-requires-data-replication">Catastrophic failure resilience requires data replication</h2>
+
+<p>To protect against catastrophic data loss of the resilience data directory, Wallaroo can replicate the directory&rsquo;s data to remote machines.  If a Wallaroo worker fails catastrophically and loses its local copy of the resilience data directory, the directory can be reconstructed from a remote replica.  The overall outline of events is:</p>
+
+<ol>
+<li><p>A Wallaroo cluster is created and operating normally.  The cluster is configured to replicate its resilience data to a remote server <em>R</em>.</p></li>
+
+<li><p>One of the cluster workers (let&rsquo;s call it <em>W</em>) fails catastrophically.  Its resilience data directory is not recoverable.  Let&rsquo;s call the failed physical machine/virtual machine/container <em>W_f</em>.</p></li>
+
+<li><p>A replacement cluster worker must be chosen by a human administrator or external cluster management framework.  Let&rsquo;s call this new machine or container <em>W_r</em>.</p></li>
+
+<li><p>The Wallaroo software is installed on the <em>W_r</em> machine.</p></li>
+
+<li><p>The journal data files belonging to worker <em>W</em> are copied from the remote server <em>R</em> to the replacement machine <em>W_r</em>.</p></li>
+
+<li><p>Run the journal replay utility to reconstruct <em>W</em>&rsquo;s resilience data directory files.</p></li>
+
+<li><p>Restart worker <em>W</em> on the replacement machine <em>W_r</em>, using the same command line arguments as the original <em>W</em> worker was run on the original machine <em>W_f</em>.</p></li>
+</ol>
+
+<h2 id="i-o-journals-the-foundation-for-data-replication">I/O journals: the foundation for data replication</h2>
+
+<p>When Wallaroo is run with the <code>--resilience-enable-io-journal</code> flag, then all file-altering I/O to the resilience data directory&rsquo;s files are written to a journal, or write-ahead log.  Wallaroo currently uses two different journal files, based on the type of file I/O generated internally by Wallaroo.  The two journal files can be replicated to a remote file server, to protect against catastrophic worker failure.</p>
+
+<p>Resilience journal files are also stored in the <code>--resilience-dir</code> directory.  Journal files&rsquo; names always use the suffix <code>.journal</code>.</p>
+
+<h2 id="planning-for-catastrophic-failure">Planning for catastrophic failure</h2>
+
+<p>Recovery from catastrophic failure requires multiple copies of the resilience directory data.  One copy of this data is maintained on the worker itself.  Any additional copies, via the I/O journal files, must be stored on a remote server.</p>
+
+<p>Wallaroo is bundled with a file service, called DOS, that can store many workers&rsquo; I/O journal files to guard against catastrophe.  One or more DOS servers should be installed on machines or virtual machines that are physically separate from the Wallaroo workers&rsquo; machines/VMs.</p>
+
+<p>The DOS server program is separate from the Wallaroo worker executable, such as <code>machida</code> or <code>machida3</code>.  When run, the DOS server listens to TCP port 9999.  The DOS server is capable of managing the I/O journals from several Wallaroo workers.</p>
+
+<p>Each Wallaroo worker must be compiled with the <code>resilience=on</code> option and must use the <code>--run-with-resilience</code> flag, the <code>--resilience-enable-io-journal</code> flag, and the <code>--resilience-dos-server hostnameOrIpAddress:9999</code> flag.</p>
+
+<h2 id="asynchronous-journal-file-replication">Asynchronous journal file replication</h2>
+
+<p>Wallaroo&rsquo;s I/O journal file replication uses the primary/secondary replication technique: the worker&rsquo;s local journal file is always the primary copy, and all remote DOS server replicas are secondary copies.  Each secondary copy is replicated asynchronously.  When the TCP connection to a remote DOS server is interrupted, a new connection is automatically reestablished when feasible.  Any data written to the primary file while disconnected from a remote DOS server is copied after a new connection is made.</p>
+
+<p>If more than one remote DOS servers are used by a single Wallaroo worker, then it is quite likely that the secondary copies will not be exactly the same size.  All secondary copies will lag behind the primary copy by some number of milliseconds or even full seconds.</p>
+
+<p>We know that Wallaroo a worker creates I/O journal files in strictly append-only fashion.  This append-only property makes it easy to calculate which secondary copy is the most recent or &ldquo;most up-to-date&rdquo; copy: the largest copy (i.e., total file size) is the most recent copy.</p>
+
+<h2 id="running-a-dos-file-server">Running a DOS file server</h2>
+
+<p>The DOS server is run with a single mandatory command line argument: a path to the local file system where the DOS server&rsquo;s files will be stored.  The server listens to TCP port 9999 on all network interfaces.</p>
+
+<p>Example command line usage is:</p>
+
+<pre><code>mkdir -p /var/lib/dos-server
+testing/tools/dos-dumb-object-service/dos-server.py /var/lib/dos-server
+</code></pre>
+
+<p>A DOS server may be used by multiple Wallaroo workers.  Each worker will store its I/O journal files in a separate subdirectory.  For example, the <code>initializer</code> worker&rsquo;s I/O journal files will be stored in the <code>/var/lib/dos-server/initializer</code> subdirectory.</p>
+
+<h2 id="running-wallaroo-to-use-a-remote-dos-file-server-thus-enabling-data-redundancy">Running Wallaroo to use a remote DOS file server (thus enabling data redundancy)</h2>
+
+<p>NOTE: The Wallaroo executable (e.g., <code>machida</code> or <code>machida3</code>) compiled with the <code>resilience=on</code> option.</p>
+
+<p>The following command line flags are recommended to enable data redundancy.</p>
+
+<ol>
+<li><p><code>--run-with-resilience</code> to enable crash &amp; restart resiliency.</p></li>
+
+<li><p><code>--resilience-dir /path/to/dir</code> to specify where the local I/O journal files will be stored.</p></li>
+
+<li><p><code>--resilience-enable-io-journal</code> to enable I/O journalling of Wallaroo&rsquo;s crash resilience data.</p></li>
+
+<li><p><code>--resilience-no-local-file-io</code>, which disables the creation of non-I/O journal files.</p></li>
+
+<li><p><code>--resilience-dos-server host:9999</code> to specify where the DOS server can be contacted.  The <code>host</code> string may be a DNS hostname or IPv4 address.</p></li>
+</ol>
+
+<h2 id="procedure-for-recovering-for-a-worker-crash">Procedure for recovering for a worker crash</h2>
+
+<p>See also: the <a href="../resilience-crash/#recovery-in-practice">Crash Recovery in Practice section of the Crash Redundancy chapter</a></p>
+
+<p>This example assumes that each Wallaroo worker uses the argument <code>--resilience-dir /var/lib/wallaroo</code> to store its resilience data files.</p>
+
+<ol>
+<li><p>If the worker failure was catastrophic, then (by definition) the Wallaroo worker cannot be restarted.  A replacement worker machine (or virtual machine/VM or container) must be chosen.  It is out of scope for this document to specify how a new machine, VM, or container is allocated.</p></li>
+
+<li><p>If the worker failure was catastrophic, then copy the failed worker&rsquo;s I/O journal files from the DOS server&rsquo;s data directory, e.g., <code>/var/lib/dos-server/WORKER-NAME/*.journal</code> to a directory on the new machine/VM/container with sufficient free disk space.</p></li>
+
+<li><p>If the Wallaroo command line flag <code>--resilience-no-local-file-io</code> was used, <em>or</em> if the worker failure was catastrophic, then the original crash resilience files must be recreated.</p>
+
+<ul>
+<li><p>For the <code>app-workerName.journal</code> file, run the <code>journal-dump.py</code> utility.  For example, for each I/O journal file: <code>./testing/tools/dos-dumb-object-service/journal-dump.py /path/to/app-workerName.journal</code></p></li>
+
+<li><p>For the <code>app-workerName.evlog.journal</code> file, simply rename (or move) the file to the full path <code>/var/lib/wallaroo/app-workerName.evlog</code></p></li>
+
+<li><p>The <code>journal-dump.py</code> file may or may not create a <code>my-app.local-keys</code> file.  Use the <code>touch</code> utility to create the file if it does not already exist, for example, <code>touch /var/lib/wallaroo/app-workerName.local-keys</code></p></li>
+
+<li><p>Verify that all files in the <code>/var/lib/wallaroo</code> directory are owned by the UNIX user and group that run the Wallaroo worker processes.  Adjust using <code>chown</code>, <code>chgrp</code>, and/or <code>chmod</code> utilities as appropriate.</p></li>
+</ul></li>
+
+<li><p>Restart the failed Wallaroo worker on the new machine/VM/container with the same command line arguments as the old-and-now-crashed Wallaroo worker.</p></li>
+</ol>
+
+<h2 id="scripted-examples-of-wallaroo-worker-start-stop-crash-and-restart-after-catastrophic-failure">Scripted examples of Wallaroo worker start, stop, crash, and restart after catastrophic failure</h2>
+
+<p>The <a href="https://github.com/WallarooLabs/wallaroo/tree/0.6.1/demos/resilience-demo">resilience demos directory</a> contains a number of shell scripts to demonstrate Wallaroo worker starting, stopping, crashing, and restarting after a catastrophic failure.  Please see the <a href="https://github.com/WallarooLabs/wallaroo/tree/0.6.1/demos/resilience-demo/README.md">resilience demos directory README file</a> file for details.</p>
+</main>
+        </div>
+      </div>
+    </div>
+  </article>
+
+    </main>
+    
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/languages/pony.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<script>
+  var toggleBtns = document.getElementsByClassName('js-toggle')
+  for (var i = 0; i < toggleBtns.length; i++) {
+    toggleBtns[i].addEventListener('click', toggleClass, false)
+  }
+
+  var myToggleBtns = document.getElementsByClassName('hide-show-toggle')
+  for (var i = 0; i < myToggleBtns.length; i++) {
+    myToggleBtns[i].addEventListener('click', hideShow, false)
+  }
+
+function hideShowDM() {
+  var menu = document.getElementById("doc-menu")
+  var thebody = document.getElementById("the-body")
+  if (window.getComputedStyle(menu).display == "none") {
+    menu.style.display = "block";
+    thebody.style.left = "300px";
+  } else {
+    menu.style.display = "none";
+    thebody.style.left = "0px";
+  }
+}
+
+function hideShowCM() {
+  var menu = document.getElementById("context-menu")
+  if (window.getComputedStyle(menu).display == "none") {
+    menu.style.display = "block";
+  } else {
+    menu.style.display = "none";
+  }
+}
+
+function toggleClass() {
+  
+  var content = this.dataset.target.split(' ')
+  
+  var mobileCurrentlyOpen = document.querySelector('.mobilemenu:not(.dn)')
+  var desktopCurrentlyOpen = document.querySelector('.desktopmenu:not(.dn)')
+  var desktopActive = document.querySelector('.desktopmenu:not(.dn)')
+
+  
+  for (var i = 0; i < content.length; i++) {
+    var matches = document.querySelectorAll(content[i]);
+    
+    [].forEach.call(matches, function(dom) {
+        dom.classList.contains('dn') ?
+        dom.classList.remove('dn') :
+        dom.classList.add('dn');
+         return false;
+       });
+        
+      if (mobileCurrentlyOpen) mobileCurrentlyOpen.classList.add('dn')
+      if (desktopCurrentlyOpen) desktopCurrentlyOpen.classList.add('dn')
+      if (desktopActive) desktopActive.classList.remove('db')
+
+    }
+  }
+
+  let codeBlocks = document.getElementsByTagName('code')
+  for (let [key, codeBlock] of Object.entries(codeBlocks)){
+  var widthDif = codeBlock.scrollWidth - codeBlock.clientWidth
+  if (widthDif > 0)
+    codeBlock.parentNode.classList.add('expand')
+  }
+</script>
+
+  </body>
+</html>

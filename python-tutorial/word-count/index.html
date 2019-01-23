@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>Wallaroo  | What is Wallaroo?</title>
+    <title>Wallaroo  | Word Count</title>
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
 
@@ -52,21 +52,28 @@
     
 
     
-      <link href="https://docs.wallaroolabs.com/index.xml" rel="alternate" type="application/rss+xml" title="Wallaroo" />
-      <link href="https://docs.wallaroolabs.com/index.xml" rel="feed" type="application/rss+xml" title="Wallaroo" />
-    
 
-    <meta property="og:title" content="What is Wallaroo?" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://docs.wallaroolabs.com/" />
+    <meta property="og:title" content="Word Count" />
+<meta property="og:description" content="Word count is the canonical streaming data application. It&rsquo;s canonical not because everyone needs to count words but because it&rsquo;s a good platform for demonstrating how to do many of the everyday tasks in a streaming application.
+This section will take you through our Wallaroo word count example. Along the way, we will introduce you to two new concepts: receiving and decoding data on a TCPSource, and splitting one incoming message into several outgoing ones." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://docs.wallaroolabs.com/python-tutorial/word-count/" />
 
-<meta itemprop="name" content="What is Wallaroo?">
-<meta itemprop="description" content="">
+<meta itemprop="name" content="Word Count">
+<meta itemprop="description" content="Word count is the canonical streaming data application. It&rsquo;s canonical not because everyone needs to count words but because it&rsquo;s a good platform for demonstrating how to do many of the everyday tasks in a streaming application.
+This section will take you through our Wallaroo word count example. Along the way, we will introduce you to two new concepts: receiving and decoding data on a TCPSource, and splitting one incoming message into several outgoing ones.">
 
+
+
+<meta itemprop="wordCount" content="878">
+
+
+
+<meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="What is Wallaroo?"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="Word Count"/>
+<meta name="twitter:description" content="Word count is the canonical streaming data application. It&rsquo;s canonical not because everyone needs to count words but because it&rsquo;s a good platform for demonstrating how to do many of the everyday tasks in a streaming application.
+This section will take you through our Wallaroo word count example. Along the way, we will introduce you to two new concepts: receiving and decoding data on a TCPSource, and splitting one incoming message into several outgoing ones."/>
 
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -209,8 +216,8 @@
       </li>
       
       <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".pytutorial">Python Tutorial</a>
-        <ul class="pytutorial desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2  primary-color" data-target=".pytutorial">Python Tutorial</a>
+        <ul class="pytutorial desktopmenu animated fadeIn list pl0 bg-light-gray db">
           <li class="f6 fw4">
             <a href="/python-tutorial/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
               Python API Introduction
@@ -232,7 +239,7 @@
             </a>
           </li>
           <li class="f6 fw4">
-            <a href="/python-tutorial/word-count/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+            <a href="/python-tutorial/word-count/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 primary-color ">
               Word Count
             </a>
           </li>
@@ -334,9 +341,34 @@
 </nav>
 
       </div>
-    <div class="flex-l" id="the-body"><div class="order-1 w-60-l mw9 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style="flex-grow:1;">
+    <div class="flex-l" id="the-body"><div class="order-2 w-100 w-20-l ph5-m ph0-l mb4 sticky dn db-l" id="context-menu"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">What's in this document</p>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#word-count">Word count</a>
+<ul>
+<li><a href="#application-setup">Application Setup</a></li>
+<li><a href="#decoding-inputs">Decoding Inputs</a></li>
+<li><a href="#splitting-words">Splitting words</a></li>
+<li><a href="#computation-vs-computation-multi"><code>computation</code> vs <code>computation_multi</code></a></li>
+<li><a href="#our-counting-guts">Our counting guts</a></li>
+<li><a href="#hello-world-i-m-a-wordcount">Hello world! I&rsquo;m a <code>WordCount</code>.</a></li>
+<li><a href="#running-word-count-py">Running <code>word_count.py</code></a></li>
+</ul></li>
+<li><a href="#next-steps">Next Steps</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+
+
+
+
+</div><div class="order-1 w-60-l mw9 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style="flex-grow:1;">
         <div class="order-0 mt4 w-100 center mw7" style="clear: both;">
-          <a id="doc-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowDM()"></a></div>
+          <a id="doc-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowDM()"></a><a id="context-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowCM()"></a></div>
 
         <div class="documentation-copy center mw7">
           <header class="mt4 w-100">
@@ -344,125 +376,126 @@
                 
               
             </p>
-            <h1 class="f1 athelas mb1">What is Wallaroo?</h1>
+            <h1 class="f1 athelas mb1">Word Count</h1>
           </header>
 
           <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l">
 
-<p>Wallaroo is an ultrafast and scalable data processing engine that rapidly takes you from prototype to production by eliminating infrastructure complexity. It&rsquo;s designed for writing distributed data processing applications, especially demanding high-throughput, low-latency tasks where the accuracy of results is important. If you are familiar with the “big data” landscape, Wallaroo includes the “streaming data” category along with tools like Storm, Heron, and Samza. However, the core engine also supports long-running analysis such as might be used for large-scale analysis and model training.</p>
+<p>Word count is the canonical streaming data application. It&rsquo;s canonical not because everyone needs to count words but because it&rsquo;s a good platform for demonstrating how to do many of the everyday tasks in a streaming application.</p>
 
-<p>When we set out to build Wallaroo, we had a few goals in mind. We wanted to improve the state of the art for distributed data processing by providing better per-worker throughput, dramatically lower latencies, easier state management, and an easier operational experience. In this introduction, we&rsquo;re going to touch on some of these points but not all of them. Over the course of this guide, we will explore Wallaroo more in-depth. To that end, this introduction will:</p>
+<p>This section will take you through our <a href="https://github.com/WallarooLabs/wallaroo/tree/0.6.1/examples/python/word_count/">Wallaroo word count example</a>. Along the way, we will introduce you to two new concepts: receiving and decoding data on a TCPSource, and splitting one incoming message into several outgoing ones.</p>
 
-<ul>
-<li>Take you through what Wallaroo is</li>
-<li>Describe the problems Wallaroo is solving</li>
-<li>Discuss some of the key features including integrated state management and resilience</li>
-</ul>
+<h2 id="word-count">Word count</h2>
 
-<h2 id="wallaroo-by-example-market-spread">Wallaroo by example: Market Spread</h2>
+<p>Our word counting application receives text input in the form of chunks of text. It then splits those chunks into lines and from there into individual words. We then send those words to a stateful partition where we increment the running count and finally, after updating, send as output the word and its current count.</p>
 
-<p>Let’s start talking about what Wallaroo can do by way of an example. One demo application is called “Market Spread.” It’s based on a proof-of-concept we did for a large bank that was looking at ways to modernize their infrastructure. Market Spread is an application designed to run alongside a trading system. Its goal is to monitor market data for irregularities around different symbols and potentially withdraw some trades that have been sent to market should certain anomalies occur.</p>
+<h3 id="application-setup">Application Setup</h3>
 
-<p>When we break the application down into its key components we get:</p>
+<p>Let&rsquo;s dive in and take a look at our application setup:</p>
 
-<ul>
-<li>A stream of market data, aka “NBBO Stream”</li>
-<li>A stream of trades, aka “Order Stream”</li>
-<li>State in the form of latest market conditions for various symbols</li>
-<li>A calculation to possibly withdraw the trade based on state for that symbol</li>
-</ul>
+<pre><code class="language-python">def application_setup(args):
+    in_host, in_port = wallaroo.tcp_parse_input_addrs(args)[0]
+    out_host, out_port = wallaroo.tcp_parse_output_addrs(args)[0]
 
-<p><img src="images/market-spread-overview.png" alt="Market Spread Diagram" /></p>
+    lines = wallaroo.source(&quot;Split and Count&quot;,
+                        wallaroo.TCPSourceConfig(in_host, in_port, 
+                            decode_lines))
+    pipeline = lines\
+        .to(split)\
+        .key_by(extract_word)\
+        .to(count_word)\
+        .to_sink(wallaroo.TCPSinkConfig(out_host, out_port, encode_word_count))
 
-<p>For the proof of concept, our client was looking to handle hundreds of thousands of messages a second with median latencies measured in microseconds. Further, they needed flat, predictable tail latencies that were measured in single-digit milliseconds. While the proof of concept was only run on a single machine, the goal was to have an application that would be able to respond to ever-increasing rates of data and seamlessly scale to run on multiple machines while handling millions of messages a second.</p>
+    return wallaroo.build_application(&quot;Word Count Application&quot;, pipeline)
+</code></pre>
 
-<p>Distributed data processing applications are hard. We know. Over the course of our careers, we’ve been involved in building a lot of them. Here’s a quick checklist of things we’d need to worry about for an application like Market Spread if we were to start from scratch:</p>
+<p>By now, hopefully, most of this looks somewhat familiar. We&rsquo;re building on concepts we&rsquo;ve seen in our previous example applications. But instead of using an internal generator source to simulate inputs, we&rsquo;re listening on a TCPSource for lines of text from an external system:</p>
 
-<ul>
-<li>Creating a robust communication layer between communicating processes</li>
-<li>Ensuring message replay occurs when a message fails to process.</li>
-<li>Ensuring messages aren’t processed twice on message replay</li>
-<li>Efficient sharding of data across multiple machines</li>
-<li>Optimizing computations for performance</li>
-<li>Minimizing administrative messages</li>
-<li>Minimizing data movement</li>
-<li>Handling message source back-pressure</li>
-<li>Metrics, monitoring, and telemetry</li>
-<li>Implementing our domain logic</li>
-</ul>
+<pre><code class="language-python">lines = wallaroo.source(&quot;Split and Count&quot;,
+                    wallaroo.TCPSourceConfig(in_host, in_port, 
+                        decode_line))
+</code></pre>
 
-<p>That’s a lot to tackle and a lot of code to introduce bugs in. Wallaroo is, in part, an answer to that problem. It creates a robust platform that handles sharding and partitioning data across many machines. By leveraging Wallaroo, you can build demanding high-performance applications like Market Spread without having to worry about replaying messages when failures occur or deduplicating data on message replay. At-least-once message processing and idempotence come as a core part of the platform. We focus on the hard infrastructure problems, so you don’t have to. By building Market Spread using Wallaroo, the checklist becomes:</p>
+<h3 id="decoding-inputs">Decoding Inputs</h3>
 
-<ul>
-<li>Implementing our domain logic</li>
-</ul>
+<p>We have to supply a decoder for decoding the bytes received over TCP. We are going to be receiving framed TCP messages, each with a 4-byte header representing the payload length:</p>
 
-<h2 id="core-wallaroo-abstractions">Core Wallaroo abstractions</h2>
+<pre><code class="language-python">@wallaroo.decoder(header_length=4, length_fmt=&quot;&gt;I&quot;)
+def decode_lines(bs):
+    return bs.decode(&quot;utf-8&quot;)
+</code></pre>
 
-<p>How does one go about building a Wallaroo application? Via our developer framework and its APIs which are the focus of this guide. The core abstractions from our API that we&rsquo;ll touch on in this introduction are:</p>
+<p><code>length_fmt</code> is used internally to decode our message header to determine how long the payload is going to be. We rely on the Python <code>struct</code> package to decode the bytes. If you aren&rsquo;t familiar with <code>struct</code>, you can check out <a href="https://docs.python.org/2/library/struct.html">the documentation</a> to learn more. Remember, when using <code>struct</code>, don&rsquo;t forget to import it!</p>
 
-<ul>
-<li>Stateless Computation</li>
-<li>State Computation</li>
-<li>Pipeline</li>
-<li>Source</li>
-<li>Sink</li>
-</ul>
+<p><code>decode_word_count</code> takes a series of bytes that represent your payload and turns it into an application message. In this case, our application message is a string, so we take the incoming byte stream <code>bs</code> and convert it to UTF-8 Python string.</p>
 
-<p>The most important of these is a <code>computation</code>. Computations come in two varieties: stateless computation and state computation. A stateless computation takes some data as an input and creates some new data as an output. For example, a “double computation” might take in an integer such as 2 and output 4. A state computation is similar to a stateless computation except it takes an additional input: the state it will operate on. An example of a state computation would be a counter that keeps track of the running total of all numbers it has processed.</p>
+<h3 id="splitting-words">Splitting words</h3>
 
-<p>You can combine computations together using another abstraction we provide: <code>Pipeline</code>. A pipeline allows you to say, for example, that the output from computation A will be processed by computation B. A pipeline begins with a <code>Source</code> stage, which is responsible for receiving and decoding incoming external messages. Likewise, the pipeline may end at a <code>Sink</code>, if it has anything to output, which encodes data and sends it to an external receiver. In this way, you can take individual computations and start turning them into applications that take in data from various external sources and ultimately produce outputs that are sent to external systems via sinks.</p>
+<p>After we decode a group of incoming lines, we pass it along to a stateless computation called <code>split</code>. <code>split</code> is responsible for breaking the text down into individual words. Our word splitting is mostly uninteresting, except for one important difference: our previous examples had one output for each input. When splitting text into words, we take one input and produce multiple outputs. Let&rsquo;s see how that is done.</p>
 
-<h2 id="market-spread-in-wallaroo">Market Spread in Wallaroo</h2>
+<pre><code class="language-python">@wallaroo.computation_multi(name=&quot;split into words&quot;)
+def split(lines):
+    punctuation = &quot; !\&quot;#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_`{|}~&quot;
 
-<p>Given these abstractions, what does our Market Spread application look like?</p>
+    words = []
 
-<p><img src="images/market-spread-in-wallaroo.png" alt="Market Spread in Wallaroo" /></p>
+    for line in lines.split(&quot;\n&quot;):
+        clean_line = line.lower().strip(punctuation)
+        for word in clean_line.split(&quot; &quot;):
+            clean_word = word.strip(punctuation)
+            words.append(clean_word)
 
-<p>You can see we end up with two pipelines, one for our <code>NBBO Feed</code> and another for the <code>Order Feed,</code> each with its own corresponding source. We have a single type of state that we are storing (<code>NBBO State</code> by symbol), a state computation&ndash;to update state and check orders against it&ndash;and finally a <code>Sink</code> that we send our outputs to.</p>
+    return words
+</code></pre>
 
-<h2 id="market-spread-performance">Market Spread Performance</h2>
+<p>Previously, we&rsquo;ve seen our stateless computations wrapped by the <code>computation</code> decorator. Why do we have both <code>computation</code> and <code>computation_multi</code>? The answer lies in Python&rsquo;s type system.</p>
 
-<p>Wallaroo has been developed to provide correct results quickly. What does quickly mean? Wallaroo is designed to process millions of events on a single machine, with median latencies that are measured in microseconds and tail latencies that are measured in single digit milliseconds. Low latencies are all well and good, but what does that mean in practice?</p>
+<h3 id="computation-vs-computation-multi"><code>computation</code> vs <code>computation_multi</code></h3>
 
-<p>Performance is, in the end, highly dependent on the type of data, the computations being performed, etc.  This guide isn&rsquo;t the place to present detailed benchmarks so let&rsquo;s give a quick idea of what the performance of a Wallaroo application can look like.</p>
+<p>Wallaroo&rsquo;s Python API allows a programmer to indicate that the output of a computation is meant to be treated as a single output by using the <code>compute</code> method. This allows us, for example, to split some text into words and have that list of words treated as a single item by Wallaroo. In our word splitting case, that isn&rsquo;t what we want. We want each word to be handled individually. <code>compute_multi</code> lets us tell Wallaroo that each of these words is a new message and should be handled individually.</p>
 
-<p>Let’s talk about the aforementioned Market Spread application and some recent performance numbers we’ve gotten with it. First, though, let’s highlight some key points:</p>
+<p>By using <code>computation_multi</code>, each word will be handled individually. This allows us to then route each one for counting. If you look below, you can see that our word key extractor function is expecting words, not a list of words, which makes sense.</p>
 
-<ul>
-<li>The logic is reasonably straightforward.</li>
-<li>The state it stores in memory remains constant in size.</li>
-<li>It has two streams of data, only one of which occasionally produces output that results in network traffic (1 out of 70,000).</li>
-<li>Messages are 50 to 60 bytes in size.</li>
-</ul>
+<pre><code class="language-python">@wallaroo.key_extractor
+def extract_word(word):
+    return word
+</code></pre>
 
-<p>During a recent performance testing run using 16 cores on an AWS m4 class machine, we were able to run each stream of data at around 1.5 million messages per second for a total of 3 million messages per second across the two streams. Our processing latencies were:</p>
+<h3 id="our-counting-guts">Our counting guts</h3>
 
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">50%</th>
-<th align="center">95%</th>
-<th align="center">99%</th>
-<th align="center">99.9%</th>
-<th align="center">99.99%</th>
-</tr>
-</thead>
+<p>The next three classes are the core of our word counting application. By this point, our messages have been split into individual words and run through our <code>key_extractor</code> function and will arrive at a state computation based on which word it is.</p>
 
-<tbody>
-<tr>
-<td align="center">&lt;=</td>
-<td align="center">66µs</td>
-<td align="center">0.5ms</td>
-<td align="center">0.5ms</td>
-<td align="center">0.5ms</td>
-<td align="center">1 ms</td>
-</tr>
-</tbody>
-</table>
+<p>Let&rsquo;s take a look at what we have. <code>count_word</code> is a state computation. When it&rsquo;s run, we update our <code>WordTotal</code> state to reflect the new incoming <code>word</code>. Then, it returns the running total for that word.</p>
 
-<p>Even with the application caveats that we laid out, we think that is some pretty impressive performance. Performance that we are committed to maintaining as we continue to add functionality to Wallaroo.</p>
+<pre><code class="language-python">class WordTotal(object):
+    count = 0
+
+@wallaroo.state_computation(name=&quot;count word&quot;, state=WordTotal)
+def count_word(word, word_total):
+    word_total.count = word_total.count + 1
+    return WordCount(word, word_total.count)
+</code></pre>
+
+<h3 id="hello-world-i-m-a-wordcount">Hello world! I&rsquo;m a <code>WordCount</code>.</h3>
+
+<p>By this point, our running word count has almost made it to the end of the pipeline. The only thing left is the sink and encoding. We don&rsquo;t do anything fancy with our encoding. We take the word and its count, and we format it into a single line of text that our receiver can record. As with the previous example, we encode the output for compatibility with both Python 2 and Python 3.</p>
+
+<pre><code class="language-python">@wallaroo.encoder
+def encode_word_count(word_count):
+    output = word_count.word + &quot; =&gt; &quot; + str(word_count.count) + &quot;\n&quot;
+    print output
+    return output.encode(&quot;utf-8&quot;)
+</code></pre>
+
+<h3 id="running-word-count-py">Running <code>word_count.py</code></h3>
+
+<p>The complete example is available <a href="https://github.com/WallarooLabs/wallaroo/tree/0.6.1/examples/python/word_count/">here</a>. To run it, follow the <a href="https://github.com/WallarooLabs/wallaroo/tree/0.6.1/examples/python/word_count/README.md">Word Count application instructions</a></p>
+
+<h2 id="next-steps">Next Steps</h2>
+
+<p>To learn how to make your application resilient and able to work across multiple workers, please continue to <a href="/python-tutorial/interworker-serialization-and-resilience/">Inter-worker Serialization and Resilience</a>.</p>
+
+<p>For further reading, please refer to the <a href="/python-tutorial/api/">Wallaroo Python API Classes</a>.</p>
 </main>
         </div>
       </div>

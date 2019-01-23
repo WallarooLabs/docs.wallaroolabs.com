@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>Wallaroo  | What is Wallaroo?</title>
+    <title>Wallaroo  | TCP Decoders and Encoders</title>
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
 
@@ -52,21 +52,34 @@
     
 
     
-      <link href="https://docs.wallaroolabs.com/index.xml" rel="alternate" type="application/rss+xml" title="Wallaroo" />
-      <link href="https://docs.wallaroolabs.com/index.xml" rel="feed" type="application/rss+xml" title="Wallaroo" />
-    
 
-    <meta property="og:title" content="What is Wallaroo?" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://docs.wallaroolabs.com/" />
+    <meta property="og:title" content="TCP Decoders and Encoders" />
+<meta property="og:description" content="Earlier, we spoke of sources and sinks and the role they play in Wallaroo. In this section, we are going to dive more into how you work with sources and sinks. We&rsquo;ll be covering two key concepts: Decoders and Encoders.
+Reviewing our terms Source Ingress point for inputs from external systems into a Wallaroo application.
+Sink Egress point for outputs from a Wallaroo application to external systems.
+Decoder Code that transforms a stream of bytes from an external system into a series of application input types." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://docs.wallaroolabs.com/python-tutorial/tcp-decoders-and-encoders/" />
 
-<meta itemprop="name" content="What is Wallaroo?">
-<meta itemprop="description" content="">
+<meta itemprop="name" content="TCP Decoders and Encoders">
+<meta itemprop="description" content="Earlier, we spoke of sources and sinks and the role they play in Wallaroo. In this section, we are going to dive more into how you work with sources and sinks. We&rsquo;ll be covering two key concepts: Decoders and Encoders.
+Reviewing our terms Source Ingress point for inputs from external systems into a Wallaroo application.
+Sink Egress point for outputs from a Wallaroo application to external systems.
+Decoder Code that transforms a stream of bytes from an external system into a series of application input types.">
 
+
+
+<meta itemprop="wordCount" content="920">
+
+
+
+<meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="What is Wallaroo?"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="TCP Decoders and Encoders"/>
+<meta name="twitter:description" content="Earlier, we spoke of sources and sinks and the role they play in Wallaroo. In this section, we are going to dive more into how you work with sources and sinks. We&rsquo;ll be covering two key concepts: Decoders and Encoders.
+Reviewing our terms Source Ingress point for inputs from external systems into a Wallaroo application.
+Sink Egress point for outputs from a Wallaroo application to external systems.
+Decoder Code that transforms a stream of bytes from an external system into a series of application input types."/>
 
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -209,8 +222,8 @@
       </li>
       
       <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".pytutorial">Python Tutorial</a>
-        <ul class="pytutorial desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2  primary-color" data-target=".pytutorial">Python Tutorial</a>
+        <ul class="pytutorial desktopmenu animated fadeIn list pl0 bg-light-gray db">
           <li class="f6 fw4">
             <a href="/python-tutorial/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
               Python API Introduction
@@ -257,7 +270,7 @@
             </a>
           </li>
           <li class="f6 fw4">
-            <a href="/python-tutorial/tcp-decoders-and-encoders/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+            <a href="/python-tutorial/tcp-decoders-and-encoders/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 primary-color ">
               TCP Decoders and Encoders
             </a>
           </li>
@@ -334,9 +347,33 @@
 </nav>
 
       </div>
-    <div class="flex-l" id="the-body"><div class="order-1 w-60-l mw9 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style="flex-grow:1;">
+    <div class="flex-l" id="the-body"><div class="order-2 w-100 w-20-l ph5-m ph0-l mb4 sticky dn db-l" id="context-menu"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">What's in this document</p>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#reviewing-our-terms">Reviewing our terms</a>
+<ul>
+<li><a href="#source">Source</a></li>
+<li><a href="#sink">Sink</a></li>
+<li><a href="#decoder">Decoder</a></li>
+<li><a href="#encoder">Encoder</a></li>
+</ul></li>
+<li><a href="#framed-message-protocols">Framed Message Protocols</a></li>
+<li><a href="#creating-a-decoder">Creating a Decoder</a></li>
+<li><a href="#creating-an-encoder">Creating an Encoder</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+
+
+
+
+</div><div class="order-1 w-60-l mw9 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style="flex-grow:1;">
         <div class="order-0 mt4 w-100 center mw7" style="clear: both;">
-          <a id="doc-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowDM()"></a></div>
+          <a id="doc-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowDM()"></a><a id="context-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowCM()"></a></div>
 
         <div class="documentation-copy center mw7">
           <header class="mt4 w-100">
@@ -344,125 +381,132 @@
                 
               
             </p>
-            <h1 class="f1 athelas mb1">What is Wallaroo?</h1>
+            <h1 class="f1 athelas mb1">TCP Decoders and Encoders</h1>
           </header>
 
           <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l">
 
-<p>Wallaroo is an ultrafast and scalable data processing engine that rapidly takes you from prototype to production by eliminating infrastructure complexity. It&rsquo;s designed for writing distributed data processing applications, especially demanding high-throughput, low-latency tasks where the accuracy of results is important. If you are familiar with the “big data” landscape, Wallaroo includes the “streaming data” category along with tools like Storm, Heron, and Samza. However, the core engine also supports long-running analysis such as might be used for large-scale analysis and model training.</p>
+<p>Earlier, we spoke of <a href="/core-concepts/">sources and sinks</a> and the role they play in Wallaroo. In this section, we are going to dive more into how you work with sources and sinks. We&rsquo;ll be covering two key concepts: <code>Decoder</code>s and <code>Encoder</code>s.</p>
 
-<p>When we set out to build Wallaroo, we had a few goals in mind. We wanted to improve the state of the art for distributed data processing by providing better per-worker throughput, dramatically lower latencies, easier state management, and an easier operational experience. In this introduction, we&rsquo;re going to touch on some of these points but not all of them. Over the course of this guide, we will explore Wallaroo more in-depth. To that end, this introduction will:</p>
+<h2 id="reviewing-our-terms">Reviewing our terms</h2>
 
-<ul>
-<li>Take you through what Wallaroo is</li>
-<li>Describe the problems Wallaroo is solving</li>
-<li>Discuss some of the key features including integrated state management and resilience</li>
-</ul>
+<h3 id="source">Source</h3>
 
-<h2 id="wallaroo-by-example-market-spread">Wallaroo by example: Market Spread</h2>
+<p>Ingress point for inputs from external systems into a Wallaroo application.</p>
 
-<p>Let’s start talking about what Wallaroo can do by way of an example. One demo application is called “Market Spread.” It’s based on a proof-of-concept we did for a large bank that was looking at ways to modernize their infrastructure. Market Spread is an application designed to run alongside a trading system. Its goal is to monitor market data for irregularities around different symbols and potentially withdraw some trades that have been sent to market should certain anomalies occur.</p>
+<h3 id="sink">Sink</h3>
 
-<p>When we break the application down into its key components we get:</p>
+<p>Egress point for outputs from a Wallaroo application to external systems.</p>
 
-<ul>
-<li>A stream of market data, aka “NBBO Stream”</li>
-<li>A stream of trades, aka “Order Stream”</li>
-<li>State in the form of latest market conditions for various symbols</li>
-<li>A calculation to possibly withdraw the trade based on state for that symbol</li>
-</ul>
+<h3 id="decoder">Decoder</h3>
 
-<p><img src="images/market-spread-overview.png" alt="Market Spread Diagram" /></p>
+<p>Code that transforms a stream of bytes from an external system
+into a series of application input types.</p>
 
-<p>For the proof of concept, our client was looking to handle hundreds of thousands of messages a second with median latencies measured in microseconds. Further, they needed flat, predictable tail latencies that were measured in single-digit milliseconds. While the proof of concept was only run on a single machine, the goal was to have an application that would be able to respond to ever-increasing rates of data and seamlessly scale to run on multiple machines while handling millions of messages a second.</p>
+<h3 id="encoder">Encoder</h3>
 
-<p>Distributed data processing applications are hard. We know. Over the course of our careers, we’ve been involved in building a lot of them. Here’s a quick checklist of things we’d need to worry about for an application like Market Spread if we were to start from scratch:</p>
+<p>Code that transforms an application output type into bytes for
+sending to an external system.</p>
 
-<ul>
-<li>Creating a robust communication layer between communicating processes</li>
-<li>Ensuring message replay occurs when a message fails to process.</li>
-<li>Ensuring messages aren’t processed twice on message replay</li>
-<li>Efficient sharding of data across multiple machines</li>
-<li>Optimizing computations for performance</li>
-<li>Minimizing administrative messages</li>
-<li>Minimizing data movement</li>
-<li>Handling message source back-pressure</li>
-<li>Metrics, monitoring, and telemetry</li>
-<li>Implementing our domain logic</li>
-</ul>
+<h2 id="framed-message-protocols">Framed Message Protocols</h2>
 
-<p>That’s a lot to tackle and a lot of code to introduce bugs in. Wallaroo is, in part, an answer to that problem. It creates a robust platform that handles sharding and partitioning data across many machines. By leveraging Wallaroo, you can build demanding high-performance applications like Market Spread without having to worry about replaying messages when failures occur or deduplicating data on message replay. At-least-once message processing and idempotence come as a core part of the platform. We focus on the hard infrastructure problems, so you don’t have to. By building Market Spread using Wallaroo, the checklist becomes:</p>
+<p>A Wallaroo TCP Source accepts a stream of bytes from an external source and turns that stream of bytes into a stream of application specific messages. As an application programmer, you provide a <code>Decoder</code> to tell Wallaroo how to turn that stream of bytes into messages.</p>
+
+<p>An incoming stream of bytes can represent many things: each byte could be an 8-bit unsigned integer, or every 4-byte block may be a 32-bit integer. Or the stream may be an ASCII sequence (each byte is a char), or a Unicode sequence (in which case characters aren&rsquo;t equally-wide!).</p>
+
+<p>Decoders are unique to the type of source. <code>TCPSource</code>s use a <a href="https://www.codeproject.com/Articles/37496/TCP-IP-Protocol-Design-Message-Framing">framed message protocol</a>. A framed message protocol boils down to:</p>
 
 <ul>
-<li>Implementing our domain logic</li>
+<li>We have a fixed size header that tells us how long a message is</li>
+<li>We have a variable length message payload</li>
 </ul>
 
-<h2 id="core-wallaroo-abstractions">Core Wallaroo abstractions</h2>
+<p>The message payload is what our application cares about. The fixed length header allows us to easily get the size of our payload. With these two pieces of information, we can quickly chop up a stream of incoming bytes into a series of messages.</p>
 
-<p>How does one go about building a Wallaroo application? Via our developer framework and its APIs which are the focus of this guide. The core abstractions from our API that we&rsquo;ll touch on in this introduction are:</p>
+<p>The size of the header is up to you the designer of the particular message type. You can make it 4 bytes, 8 bytes, 16, et cetera. The important part is that you need enough bytes to represent the length of your payload. For most data, a 4-byte header is plenty. In the abstract, this looks like</p>
+
+<pre><code>PayloadSize [x bytes] : Payload [bytes specified in PayloadSize]
+</code></pre>
+
+<p>So if our header is 4 bytes long, an incoming message would look something like:</p>
+
+<p>| header | payload |
+| - | - |
+| xxxx | some data here |</p>
+
+<p>Let&rsquo;s make that a bit more concrete. Let&rsquo;s say we are sending in two messages; each contains a string. The first has &ldquo;first&rdquo; as a payload and the second payload is &ldquo;not first&rdquo;. Our stream of bytes would be:</p>
 
 <ul>
-<li>Stateless Computation</li>
-<li>State Computation</li>
-<li>Pipeline</li>
-<li>Source</li>
-<li>Sink</li>
+<li>4-byte header whose value is <code>5</code></li>
+<li>5-byte payload containing the binary representation of the ASCII string &ldquo;first&rdquo;</li>
+<li>4-byte header whose value is <code>9</code></li>
+<li>9 byte payload containing the binary representation of the ASCII string &ldquo;not first&rdquo;</li>
 </ul>
 
-<p>The most important of these is a <code>computation</code>. Computations come in two varieties: stateless computation and state computation. A stateless computation takes some data as an input and creates some new data as an output. For example, a “double computation” might take in an integer such as 2 and output 4. A state computation is similar to a stateless computation except it takes an additional input: the state it will operate on. An example of a state computation would be a counter that keeps track of the running total of all numbers it has processed.</p>
+<h2 id="creating-a-decoder">Creating a Decoder</h2>
 
-<p>You can combine computations together using another abstraction we provide: <code>Pipeline</code>. A pipeline allows you to say, for example, that the output from computation A will be processed by computation B. A pipeline begins with a <code>Source</code> stage, which is responsible for receiving and decoding incoming external messages. Likewise, the pipeline may end at a <code>Sink</code>, if it has anything to output, which encodes data and sends it to an external receiver. In this way, you can take individual computations and start turning them into applications that take in data from various external sources and ultimately produce outputs that are sent to external systems via sinks.</p>
+<p>Wallaroo&rsquo;s <code>TCPSource</code> takes a decoder <em>function</em> that can process a framed message protocol. You&rsquo;ll need to implement three methods. Below is a decoder that we can use to process a stream of strings for a word count application.</p>
 
-<h2 id="market-spread-in-wallaroo">Market Spread in Wallaroo</h2>
+<pre><code class="language-python">@wallaroo.decoder(header_length=4, length_fmt=&quot;&gt;I&quot;)
+def decode_lines(bs):
+    return bs.decode(&quot;utf-8&quot;)
+</code></pre>
 
-<p>Given these abstractions, what does our Market Spread application look like?</p>
+<p><code>header_length</code> is the fixed size of our payload field.</p>
 
-<p><img src="images/market-spread-in-wallaroo.png" alt="Market Spread in Wallaroo" /></p>
+<p><code>length_fmt</code> is used internally to decode our message header to determine how long the payload is going to be. We rely on the Python <code>struct</code> package to decode the bytes. If you aren&rsquo;t familiar with <code>struct</code>, you can check out <a href="https://docs.python.org/2/library/struct.html">the documentation</a> to learn more. Remember, when using <code>struct</code>, don&rsquo;t forget to import it!</p>
 
-<p>You can see we end up with two pipelines, one for our <code>NBBO Feed</code> and another for the <code>Order Feed,</code> each with its own corresponding source. We have a single type of state that we are storing (<code>NBBO State</code> by symbol), a state computation&ndash;to update state and check orders against it&ndash;and finally a <code>Sink</code> that we send our outputs to.</p>
+<p><code>decode_lines</code> takes a series of bytes that represent your payload and turns it into an application message. In this case, our application message is a string, so we take the incoming byte stream <code>bs</code> and convert it to UTF-8 Python string.</p>
 
-<h2 id="market-spread-performance">Market Spread Performance</h2>
+<p>Here&rsquo;s a slightly more complicated example taken from our <a href="https://github.com/WallarooLabs/wallaroo/tree/0.6.1/examples/python/alphabet">Alphabet Popularity Contest example</a>.</p>
 
-<p>Wallaroo has been developed to provide correct results quickly. What does quickly mean? Wallaroo is designed to process millions of events on a single machine, with median latencies that are measured in microseconds and tail latencies that are measured in single digit milliseconds. Low latencies are all well and good, but what does that mean in practice?</p>
+<pre><code class="language-python">@wallaroo.decoder(header_length=4, length_fmt=&quot;&gt;I&quot;)
+def decode_votes(bs):
+    (letter, vote_count) = struct.unpack(&quot;&gt;sI&quot;, bs)
+    letter = letter.decode(&quot;utf-8&quot;)  # for Python 3 comptibility
+    return Votes(letter, vote_count)
+</code></pre>
 
-<p>Performance is, in the end, highly dependent on the type of data, the computations being performed, etc.  This guide isn&rsquo;t the place to present detailed benchmarks so let&rsquo;s give a quick idea of what the performance of a Wallaroo application can look like.</p>
+<p>Like we did in our previous example, we&rsquo;re using a 4-byte integer payload length header:</p>
 
-<p>Let’s talk about the aforementioned Market Spread application and some recent performance numbers we’ve gotten with it. First, though, let’s highlight some key points:</p>
+<pre><code class="language-python">@wallaroo.decoder(header_length=4, length_fmt=&quot;&gt;I&quot;)
+</code></pre>
 
-<ul>
-<li>The logic is reasonably straightforward.</li>
-<li>The state it stores in memory remains constant in size.</li>
-<li>It has two streams of data, only one of which occasionally produces output that results in network traffic (1 out of 70,000).</li>
-<li>Messages are 50 to 60 bytes in size.</li>
-</ul>
+<p>But this time, we are doing something slightly more complicated in our payload. Our payload is two items, a string representing a letter and some votes for that letter. We unpack those using <code>struct</code> and create a domain specific object <code>Votes</code> to return.</p>
 
-<p>During a recent performance testing run using 16 cores on an AWS m4 class machine, we were able to run each stream of data at around 1.5 million messages per second for a total of 3 million messages per second across the two streams. Our processing latencies were:</p>
+<h2 id="creating-an-encoder">Creating an Encoder</h2>
 
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">50%</th>
-<th align="center">95%</th>
-<th align="center">99%</th>
-<th align="center">99.9%</th>
-<th align="center">99.99%</th>
-</tr>
-</thead>
+<p>Wallaroo encoders do the opposite of decoders. A decoder takes a stream of bytes and turns in into messages for Wallaroo to process. An encoder receives a stream of messages and converts them into a stream of bytes for sending to another system.</p>
 
-<tbody>
-<tr>
-<td align="center">&lt;=</td>
-<td align="center">66µs</td>
-<td align="center">0.5ms</td>
-<td align="center">0.5ms</td>
-<td align="center">0.5ms</td>
-<td align="center">1 ms</td>
-</tr>
-</tbody>
-</table>
+<p>Here&rsquo;s a quick example encoder:</p>
 
-<p>Even with the application caveats that we laid out, we think that is some pretty impressive performance. Performance that we are committed to maintaining as we continue to add functionality to Wallaroo.</p>
+<pre><code class="language-python">@wallaroo.encoder
+def encode_data(data):
+    # data is a string
+    return data + &quot;\n&quot;
+</code></pre>
+
+<p>It takes a string that we want to send to an external system as an input, adds a newline at the end and returns it for sending.</p>
+
+<p>Here&rsquo;s a more complicated example taken from our <a href="https://github.com/WallarooLabs/wallaroo/tree/0.6.1/examples/python/alphabet">Alphabet Popularity Contest example</a>:</p>
+
+<pre><code class="language-python">class Votes(object):
+    def __init__(self, letter, votes):
+        self.letter = letter
+        self.votes = votes
+
+@wallaroo.encoder
+def encode_votes(votes):
+    return struct.pack(&quot;&gt;IsQ&quot;, 9, votes.letter, votes.votes)
+</code></pre>
+
+<p>Let&rsquo;s take a look at what is happening here. First of all, we are once again using the Python <code>struct</code> package. In this case, though, we are creating our own packed binary message. It&rsquo;s a framed message with a 4-byte header for the payload length, plus the payload:</p>
+
+<pre><code>| header | payload |
+| 9 | letter &amp; votes |
+</code></pre>
+
+<p>If we were encoding the letter &ldquo;A&rdquo; and a vote value of &ldquo;1&rdquo; our payload would be <code>'A\x00\x00\x00\x00\x00\x00\x00\x01'</code>. This along with our framing data can be sent along to another system that expects framed data.</p>
 </main>
         </div>
       </div>

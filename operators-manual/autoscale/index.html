@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>Wallaroo  | What is Wallaroo?</title>
+    <title>Wallaroo  | Autoscale</title>
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
 
@@ -52,21 +52,28 @@
     
 
     
-      <link href="https://docs.wallaroolabs.com/index.xml" rel="alternate" type="application/rss+xml" title="Wallaroo" />
-      <link href="https://docs.wallaroolabs.com/index.xml" rel="feed" type="application/rss+xml" title="Wallaroo" />
-    
 
-    <meta property="og:title" content="What is Wallaroo?" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://docs.wallaroolabs.com/" />
+    <meta property="og:title" content="Autoscale" />
+<meta property="og:description" content="Wallaroo is designed to support scale-independent development. It can adapt to changing demands by growing or shrinking to fit the available resources. You don’t have to update any code or bother with stopping your cluster and redeploying. This set of features is called “autoscale”.
+With autoscale enabled, you can add or remove workers from a running cluster. We call these “grow to fit” and “shrink to fit”, respectively (referring to the fact that the cluster grows or shrinks to fit your current resource requirements)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://docs.wallaroolabs.com/operators-manual/autoscale/" />
 
-<meta itemprop="name" content="What is Wallaroo?">
-<meta itemprop="description" content="">
+<meta itemprop="name" content="Autoscale">
+<meta itemprop="description" content="Wallaroo is designed to support scale-independent development. It can adapt to changing demands by growing or shrinking to fit the available resources. You don’t have to update any code or bother with stopping your cluster and redeploying. This set of features is called “autoscale”.
+With autoscale enabled, you can add or remove workers from a running cluster. We call these “grow to fit” and “shrink to fit”, respectively (referring to the fact that the cluster grows or shrinks to fit your current resource requirements).">
 
+
+
+<meta itemprop="wordCount" content="744">
+
+
+
+<meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="What is Wallaroo?"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="Autoscale"/>
+<meta name="twitter:description" content="Wallaroo is designed to support scale-independent development. It can adapt to changing demands by growing or shrinking to fit the available resources. You don’t have to update any code or bother with stopping your cluster and redeploying. This set of features is called “autoscale”.
+With autoscale enabled, you can add or remove workers from a running cluster. We call these “grow to fit” and “shrink to fit”, respectively (referring to the fact that the cluster grows or shrinks to fit your current resource requirements)."/>
 
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -275,8 +282,8 @@
       </li>
       
       <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".operators-manual">Operators Manual</a>
-        <ul class="operators-manual desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2  primary-color" data-target=".operators-manual">Operators Manual</a>
+        <ul class="operators-manual desktopmenu animated fadeIn list pl0 bg-light-gray db">
           <li class="f6 fw4">
             <a href="/operators-manual/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
               Operators Manual
@@ -288,7 +295,7 @@
             </a>
           </li>
           <li class="f6 fw4">
-            <a href="/operators-manual/autoscale/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+            <a href="/operators-manual/autoscale/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 primary-color ">
               Autoscale
             </a>
           </li>
@@ -334,9 +341,25 @@
 </nav>
 
       </div>
-    <div class="flex-l" id="the-body"><div class="order-1 w-60-l mw9 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style="flex-grow:1;">
+    <div class="flex-l" id="the-body"><div class="order-2 w-100 w-20-l ph5-m ph0-l mb4 sticky dn db-l" id="context-menu"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">What's in this document</p>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#grow-to-fit">Grow to Fit</a></li>
+<li><a href="#shrink-to-fit">Shrink to Fit</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+
+
+
+
+</div><div class="order-1 w-60-l mw9 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style="flex-grow:1;">
         <div class="order-0 mt4 w-100 center mw7" style="clear: both;">
-          <a id="doc-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowDM()"></a></div>
+          <a id="doc-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowDM()"></a><a id="context-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowCM()"></a></div>
 
         <div class="documentation-copy center mw7">
           <header class="mt4 w-100">
@@ -344,125 +367,153 @@
                 
               
             </p>
-            <h1 class="f1 athelas mb1">What is Wallaroo?</h1>
+            <h1 class="f1 athelas mb1">Autoscale</h1>
           </header>
 
           <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l">
 
-<p>Wallaroo is an ultrafast and scalable data processing engine that rapidly takes you from prototype to production by eliminating infrastructure complexity. It&rsquo;s designed for writing distributed data processing applications, especially demanding high-throughput, low-latency tasks where the accuracy of results is important. If you are familiar with the “big data” landscape, Wallaroo includes the “streaming data” category along with tools like Storm, Heron, and Samza. However, the core engine also supports long-running analysis such as might be used for large-scale analysis and model training.</p>
+<p>Wallaroo is designed to support scale-independent development. It can adapt to changing demands by growing or shrinking to fit the available resources. You don’t have to update any code or bother with stopping your cluster and redeploying. This set of features is called “autoscale”.</p>
 
-<p>When we set out to build Wallaroo, we had a few goals in mind. We wanted to improve the state of the art for distributed data processing by providing better per-worker throughput, dramatically lower latencies, easier state management, and an easier operational experience. In this introduction, we&rsquo;re going to touch on some of these points but not all of them. Over the course of this guide, we will explore Wallaroo more in-depth. To that end, this introduction will:</p>
+<p>With autoscale enabled, you can add or remove workers from a running cluster. We call these “grow to fit” and “shrink to fit”, respectively (referring to the fact that the cluster grows or shrinks to fit your current resource requirements). To enable autoscale, you must build a Wallaroo binary using the <code>-D autoscale</code> command line argument. Autoscale is set by default when running <code>make</code> for building Machida or the example Wallaroo applications.</p>
 
+<h2 id="grow-to-fit">Grow to Fit</h2>
+
+<p>While a Wallaroo cluster is running, new workers can join the cluster.  To add workers to a running cluster, you must know the control channel address of one of the workers in the running cluster.  Let’s assume it’s <code>127.0.0.1:12500</code>.  The following command would allow us to add one worker to a running cluster for the <code>alphabet</code> example app:</p>
+
+
+
+
+
+<div id="tabset-operators-manual-autoscale-1">
 <ul>
-<li>Take you through what Wallaroo is</li>
-<li>Describe the problems Wallaroo is solving</li>
-<li>Discuss some of the key features including integrated state management and resilience</li>
+  
+    
+  <li><a href="#tabset-operators-manual-autoscale-1-0">Python 2.7</a></li>
+
+    
+  <li><a href="#tabset-operators-manual-autoscale-1-1">Python 3</a></li>
+
 </ul>
 
-<h2 id="wallaroo-by-example-market-spread">Wallaroo by example: Market Spread</h2>
 
-<p>Let’s start talking about what Wallaroo can do by way of an example. One demo application is called “Market Spread.” It’s based on a proof-of-concept we did for a large bank that was looking at ways to modernize their infrastructure. Market Spread is an application designed to run alongside a trading system. Its goal is to monitor market data for irregularities around different symbols and potentially withdraw some trades that have been sent to market should certain anomalies occur.</p>
+<div id="tabset-operators-manual-autoscale-1-0">
+  
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+machida --application-module alphabet --in <span style="color:#ae81ff">127</span>.0.0.1:7010 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --out <span style="color:#ae81ff">127</span>.0.0.1:7002 --join <span style="color:#ae81ff">127</span>.0.0.1:12500 --name w3 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --ponythreads <span style="color:#ae81ff">1</span>
+</code></pre></div>
+  
+</div>
 
-<p>When we break the application down into its key components we get:</p>
 
+<div id="tabset-operators-manual-autoscale-1-1">
+  
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+machida3 --application-module alphabet --in <span style="color:#ae81ff">127</span>.0.0.1:7010 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --out <span style="color:#ae81ff">127</span>.0.0.1:7002 --join <span style="color:#ae81ff">127</span>.0.0.1:12500 --name w3 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --ponythreads <span style="color:#ae81ff">1</span>
+</code></pre></div>
+  
+</div>
+
+</div>
+
+<script>$(function(){$("#tabset-operators-manual-autoscale-1").tabs();});</script>
+
+
+<p>The <code>--in</code> argument specifies the port that the TCP source will listen on, and the <code>--out</code> argument specifies the target address for data output over TCP. <code>--join</code> is used to specify the control channel address of the running worker we are contacting in order to join.  <code>--name</code> is used to specify the name of the joining worker.</p>
+
+<p>If you want to add more than 1 new worker at a time, you must have all joining workers contact the same running worker and all must specify the same joining worker total as the <code>worker_count</code> command line argument.  For example, if 3 workers are joining, then in our case, they could all use <code>--join 127.0.0.1:12500</code> and <code>--worker-count 3</code>.  Their command lines might be as follows:</p>
+
+
+
+
+
+<div id="tabset-operators-manual-autoscale-2">
 <ul>
-<li>A stream of market data, aka “NBBO Stream”</li>
-<li>A stream of trades, aka “Order Stream”</li>
-<li>State in the form of latest market conditions for various symbols</li>
-<li>A calculation to possibly withdraw the trade based on state for that symbol</li>
+  
+    
+  <li><a href="#tabset-operators-manual-autoscale-2-0">Python 2.7</a></li>
+
+    
+  <li><a href="#tabset-operators-manual-autoscale-2-1">Python 3</a></li>
+
 </ul>
 
-<p><img src="images/market-spread-overview.png" alt="Market Spread Diagram" /></p>
 
-<p>For the proof of concept, our client was looking to handle hundreds of thousands of messages a second with median latencies measured in microseconds. Further, they needed flat, predictable tail latencies that were measured in single-digit milliseconds. While the proof of concept was only run on a single machine, the goal was to have an application that would be able to respond to ever-increasing rates of data and seamlessly scale to run on multiple machines while handling millions of messages a second.</p>
+<div id="tabset-operators-manual-autoscale-2-0">
+  
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+machida --application-module alphabet --in <span style="color:#ae81ff">127</span>.0.0.1:7010 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --out <span style="color:#ae81ff">127</span>.0.0.1:7002 --join <span style="color:#ae81ff">127</span>.0.0.1:12500 --name w3 --worker-count <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --ponythreads <span style="color:#ae81ff">1</span>
 
-<p>Distributed data processing applications are hard. We know. Over the course of our careers, we’ve been involved in building a lot of them. Here’s a quick checklist of things we’d need to worry about for an application like Market Spread if we were to start from scratch:</p>
+machida --application-module alphabet --in <span style="color:#ae81ff">127</span>.0.0.1:7010 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --out <span style="color:#ae81ff">127</span>.0.0.1:7002 --join <span style="color:#ae81ff">127</span>.0.0.1:12500 --name w4 --worker-count <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --ponythreads <span style="color:#ae81ff">1</span>
 
-<ul>
-<li>Creating a robust communication layer between communicating processes</li>
-<li>Ensuring message replay occurs when a message fails to process.</li>
-<li>Ensuring messages aren’t processed twice on message replay</li>
-<li>Efficient sharding of data across multiple machines</li>
-<li>Optimizing computations for performance</li>
-<li>Minimizing administrative messages</li>
-<li>Minimizing data movement</li>
-<li>Handling message source back-pressure</li>
-<li>Metrics, monitoring, and telemetry</li>
-<li>Implementing our domain logic</li>
-</ul>
+machida --application-module alphabet --in <span style="color:#ae81ff">127</span>.0.0.1:7010 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --out <span style="color:#ae81ff">127</span>.0.0.1:7002 --join <span style="color:#ae81ff">127</span>.0.0.1:12500 --name w5 --worker-count <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --ponythreads <span style="color:#ae81ff">1</span>
+</code></pre></div>
+  
+</div>
 
-<p>That’s a lot to tackle and a lot of code to introduce bugs in. Wallaroo is, in part, an answer to that problem. It creates a robust platform that handles sharding and partitioning data across many machines. By leveraging Wallaroo, you can build demanding high-performance applications like Market Spread without having to worry about replaying messages when failures occur or deduplicating data on message replay. At-least-once message processing and idempotence come as a core part of the platform. We focus on the hard infrastructure problems, so you don’t have to. By building Market Spread using Wallaroo, the checklist becomes:</p>
 
-<ul>
-<li>Implementing our domain logic</li>
-</ul>
+<div id="tabset-operators-manual-autoscale-2-1">
+  
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+machida3 --application-module alphabet --in <span style="color:#ae81ff">127</span>.0.0.1:7010 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --out <span style="color:#ae81ff">127</span>.0.0.1:7002 --join <span style="color:#ae81ff">127</span>.0.0.1:12500 --name w3 --worker-count <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --ponythreads <span style="color:#ae81ff">1</span>
 
-<h2 id="core-wallaroo-abstractions">Core Wallaroo abstractions</h2>
+machida3 --application-module alphabet --in <span style="color:#ae81ff">127</span>.0.0.1:7010 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --out <span style="color:#ae81ff">127</span>.0.0.1:7002 --join <span style="color:#ae81ff">127</span>.0.0.1:12500 --name w4 --worker-count <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --ponythreads <span style="color:#ae81ff">1</span>
 
-<p>How does one go about building a Wallaroo application? Via our developer framework and its APIs which are the focus of this guide. The core abstractions from our API that we&rsquo;ll touch on in this introduction are:</p>
+machida3 --application-module alphabet --in <span style="color:#ae81ff">127</span>.0.0.1:7010 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --out <span style="color:#ae81ff">127</span>.0.0.1:7002 --join <span style="color:#ae81ff">127</span>.0.0.1:12500 --name w5 --worker-count <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --ponythreads <span style="color:#ae81ff">1</span>
+</code></pre></div>
+  
+</div>
 
-<ul>
-<li>Stateless Computation</li>
-<li>State Computation</li>
-<li>Pipeline</li>
-<li>Source</li>
-<li>Sink</li>
-</ul>
+</div>
 
-<p>The most important of these is a <code>computation</code>. Computations come in two varieties: stateless computation and state computation. A stateless computation takes some data as an input and creates some new data as an output. For example, a “double computation” might take in an integer such as 2 and output 4. A state computation is similar to a stateless computation except it takes an additional input: the state it will operate on. An example of a state computation would be a counter that keeps track of the running total of all numbers it has processed.</p>
+<script>$(function(){$("#tabset-operators-manual-autoscale-2").tabs();});</script>
 
-<p>You can combine computations together using another abstraction we provide: <code>Pipeline</code>. A pipeline allows you to say, for example, that the output from computation A will be processed by computation B. A pipeline begins with a <code>Source</code> stage, which is responsible for receiving and decoding incoming external messages. Likewise, the pipeline may end at a <code>Sink</code>, if it has anything to output, which encodes data and sends it to an external receiver. In this way, you can take individual computations and start turning them into applications that take in data from various external sources and ultimately produce outputs that are sent to external systems via sinks.</p>
 
-<h2 id="market-spread-in-wallaroo">Market Spread in Wallaroo</h2>
+<h2 id="shrink-to-fit">Shrink to Fit</h2>
 
-<p>Given these abstractions, what does our Market Spread application look like?</p>
+<p>It is also possible to remove one or more workers from a running cluster.
+There are two ways to specify that workers should be removed from the cluster.  You can either specify the worker names or the total count of workers to be removed.  You must know the external channel address of one worker in the running cluster.</p>
 
-<p><img src="images/market-spread-in-wallaroo.png" alt="Market Spread in Wallaroo" /></p>
+<p>You can use the <code>cluster_shrinker</code> tool to send a shrink message to this channel. For example, if the external address is <code>127.0.0.1:5050</code> and we want to remove 2 workers from the cluster, we can run the following, using the <code>count</code> argument to specify the worker count to remove:</p>
 
-<p>You can see we end up with two pipelines, one for our <code>NBBO Feed</code> and another for the <code>Order Feed,</code> each with its own corresponding source. We have a single type of state that we are storing (<code>NBBO State</code> by symbol), a state computation&ndash;to update state and check orders against it&ndash;and finally a <code>Sink</code> that we send our outputs to.</p>
+<pre><code class="language-bash">cluster_shrinker --external 127.0.0.1:5050 --count 2
+</code></pre>
 
-<h2 id="market-spread-performance">Market Spread Performance</h2>
+<p>To request that workers <code>w2</code> and <code>w3</code> be removed, we can pass a comma-separated list of worker names as the <code>--workers</code> argument:</p>
 
-<p>Wallaroo has been developed to provide correct results quickly. What does quickly mean? Wallaroo is designed to process millions of events on a single machine, with median latencies that are measured in microseconds and tail latencies that are measured in single digit milliseconds. Low latencies are all well and good, but what does that mean in practice?</p>
+<pre><code class="language-bash">cluster_shrinker --external 127.0.0.1:5050 --workers w2,w3
+</code></pre>
 
-<p>Performance is, in the end, highly dependent on the type of data, the computations being performed, etc.  This guide isn&rsquo;t the place to present detailed benchmarks so let&rsquo;s give a quick idea of what the performance of a Wallaroo application can look like.</p>
+<p>To qualify for removal from the cluster, a worker must currently meet two criteria:</p>
 
-<p>Let’s talk about the aforementioned Market Spread application and some recent performance numbers we’ve gotten with it. First, though, let’s highlight some key points:</p>
+<ol>
+<li>It must have no sources placed on it.</li>
+<li>It must have no non-parallelized stateless computations placed on it.</li>
+</ol>
 
-<ul>
-<li>The logic is reasonably straightforward.</li>
-<li>The state it stores in memory remains constant in size.</li>
-<li>It has two streams of data, only one of which occasionally produces output that results in network traffic (1 out of 70,000).</li>
-<li>Messages are 50 to 60 bytes in size.</li>
-</ul>
+<p>If you send in a list of worker names that includes at least one invalid worker (either because the worker does not meet the 2 criteria or because it is an invalid name) then the shrink will not happen. If you send in a shrink count that’s higher than the number of workers meeting the 2 criteria, then Wallaroo will shrink by the maximum number of workers that do meet those criteria (which could be 0).</p>
 
-<p>During a recent performance testing run using 16 cores on an AWS m4 class machine, we were able to run each stream of data at around 1.5 million messages per second for a total of 3 million messages per second across the two streams. Our processing latencies were:</p>
+<p>The leaving workers will migrate state to the remaining workers and then shut down. The remaining workers will then handle all work for the application.</p>
 
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">50%</th>
-<th align="center">95%</th>
-<th align="center">99%</th>
-<th align="center">99.9%</th>
-<th align="center">99.99%</th>
-</tr>
-</thead>
+<p>You can query a running cluster to get a list of workers eligible for shutdown. In order to do this, pass the <code>--query</code> flag:</p>
 
-<tbody>
-<tr>
-<td align="center">&lt;=</td>
-<td align="center">66µs</td>
-<td align="center">0.5ms</td>
-<td align="center">0.5ms</td>
-<td align="center">0.5ms</td>
-<td align="center">1 ms</td>
-</tr>
-</tbody>
-</table>
-
-<p>Even with the application caveats that we laid out, we think that is some pretty impressive performance. Performance that we are committed to maintaining as we continue to add functionality to Wallaroo.</p>
+<pre><code class="language-bash">cluster_shrinker --external 127.0.0.1:5050 --query
+</code></pre>
 </main>
         </div>
       </div>

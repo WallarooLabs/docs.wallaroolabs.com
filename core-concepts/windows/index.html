@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>Wallaroo  | What is Wallaroo?</title>
+    <title>Wallaroo  | Windows</title>
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
 
@@ -52,21 +52,31 @@
     
 
     
-      <link href="https://docs.wallaroolabs.com/index.xml" rel="alternate" type="application/rss+xml" title="Wallaroo" />
-      <link href="https://docs.wallaroolabs.com/index.xml" rel="feed" type="application/rss+xml" title="Wallaroo" />
-    
 
-    <meta property="og:title" content="What is Wallaroo?" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://docs.wallaroolabs.com/" />
+    <meta property="og:title" content="Windows" />
+<meta property="og:description" content="Wallaroo supports windowing over aggregations. This allows you to break an infinite stream into manageable chunks and also allows you to see how your inputs evolve over time.
+There are two broad categories of windows currently supported: count-based and range-based. Range-based windows can be further divided into tumbling and sliding varieties. We&rsquo;ll look at each of these in turn.
+If you are not familiar with aggregations in Wallaroo, it might be helpful to read this section before proceeding." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://docs.wallaroolabs.com/core-concepts/windows/" />
 
-<meta itemprop="name" content="What is Wallaroo?">
-<meta itemprop="description" content="">
+<meta itemprop="name" content="Windows">
+<meta itemprop="description" content="Wallaroo supports windowing over aggregations. This allows you to break an infinite stream into manageable chunks and also allows you to see how your inputs evolve over time.
+There are two broad categories of windows currently supported: count-based and range-based. Range-based windows can be further divided into tumbling and sliding varieties. We&rsquo;ll look at each of these in turn.
+If you are not familiar with aggregations in Wallaroo, it might be helpful to read this section before proceeding.">
 
+
+
+<meta itemprop="wordCount" content="1217">
+
+
+
+<meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="What is Wallaroo?"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="Windows"/>
+<meta name="twitter:description" content="Wallaroo supports windowing over aggregations. This allows you to break an infinite stream into manageable chunks and also allows you to see how your inputs evolve over time.
+There are two broad categories of windows currently supported: count-based and range-based. Range-based windows can be further divided into tumbling and sliding varieties. We&rsquo;ll look at each of these in turn.
+If you are not familiar with aggregations in Wallaroo, it might be helpful to read this section before proceeding."/>
 
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -147,8 +157,8 @@
     
       
       <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".core-concepts">Core Concepts</a>
-        <ul class="core-concepts desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2  primary-color" data-target=".core-concepts">Core Concepts</a>
+        <ul class="core-concepts desktopmenu animated fadeIn list pl0 bg-light-gray db">
           <li class="f6 fw4">
             <a href="/core-concepts/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
               Wallaroo Core Concepts
@@ -175,7 +185,7 @@
             </a>
           </li>
           <li class="f6 fw4">
-            <a href="/core-concepts/windows/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+            <a href="/core-concepts/windows/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 primary-color ">
               Windows
             </a>
           </li>
@@ -334,9 +344,34 @@
 </nav>
 
       </div>
-    <div class="flex-l" id="the-body"><div class="order-1 w-60-l mw9 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style="flex-grow:1;">
+    <div class="flex-l" id="the-body"><div class="order-2 w-100 w-20-l ph5-m ph0-l mb4 sticky dn db-l" id="context-menu"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">What's in this document</p>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#count-based-windows">Count-based Windows</a></li>
+<li><a href="#range-based-windows">Range-based Windows</a>
+<ul>
+<li><a href="#tumbling-windows">Tumbling Windows</a></li>
+<li><a href="#window-triggers">Window Triggers</a>
+<ul>
+<li><a href="#message-trigger">Message Trigger</a></li>
+<li><a href="#timeout-trigger">Timeout Trigger</a></li>
+</ul></li>
+<li><a href="#sliding-windows">Sliding Windows</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+
+
+
+
+</div><div class="order-1 w-60-l mw9 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style="flex-grow:1;">
         <div class="order-0 mt4 w-100 center mw7" style="clear: both;">
-          <a id="doc-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowDM()"></a></div>
+          <a id="doc-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowDM()"></a><a id="context-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowCM()"></a></div>
 
         <div class="documentation-copy center mw7">
           <header class="mt4 w-100">
@@ -344,125 +379,154 @@
                 
               
             </p>
-            <h1 class="f1 athelas mb1">What is Wallaroo?</h1>
+            <h1 class="f1 athelas mb1">Windows</h1>
           </header>
 
           <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l">
 
-<p>Wallaroo is an ultrafast and scalable data processing engine that rapidly takes you from prototype to production by eliminating infrastructure complexity. It&rsquo;s designed for writing distributed data processing applications, especially demanding high-throughput, low-latency tasks where the accuracy of results is important. If you are familiar with the “big data” landscape, Wallaroo includes the “streaming data” category along with tools like Storm, Heron, and Samza. However, the core engine also supports long-running analysis such as might be used for large-scale analysis and model training.</p>
+<p>Wallaroo supports windowing over aggregations. This allows you to break an infinite stream into manageable chunks and also allows you to see how your inputs evolve over time.</p>
 
-<p>When we set out to build Wallaroo, we had a few goals in mind. We wanted to improve the state of the art for distributed data processing by providing better per-worker throughput, dramatically lower latencies, easier state management, and an easier operational experience. In this introduction, we&rsquo;re going to touch on some of these points but not all of them. Over the course of this guide, we will explore Wallaroo more in-depth. To that end, this introduction will:</p>
+<p>There are two broad categories of windows currently supported: count-based and range-based. Range-based windows can be further divided into tumbling and sliding varieties. We&rsquo;ll look at each of these in turn.</p>
 
-<ul>
-<li>Take you through what Wallaroo is</li>
-<li>Describe the problems Wallaroo is solving</li>
-<li>Discuss some of the key features including integrated state management and resilience</li>
-</ul>
+<p>If you are not familiar with aggregations in Wallaroo, it might be helpful to read <a href="/core-concepts/aggregations">this section</a> before proceeding.</p>
 
-<h2 id="wallaroo-by-example-market-spread">Wallaroo by example: Market Spread</h2>
+<h2 id="count-based-windows">Count-based Windows</h2>
 
-<p>Let’s start talking about what Wallaroo can do by way of an example. One demo application is called “Market Spread.” It’s based on a proof-of-concept we did for a large bank that was looking at ways to modernize their infrastructure. Market Spread is an application designed to run alongside a trading system. Its goal is to monitor market data for irregularities around different symbols and potentially withdraw some trades that have been sent to market should certain anomalies occur.</p>
+<p>Count-based windows emit an output every <code>n</code> input messages, where <code>n</code> is specified via the API. For example (using the Python API):</p>
 
-<p>When we break the application down into its key components we get:</p>
+<pre><code class="language-python">    (inputs
+        .to(wallaroo.count_windows(5)
+            .over(MySumAgg))
+        .to_sink(sink_config))
+</code></pre>
 
-<ul>
-<li>A stream of market data, aka “NBBO Stream”</li>
-<li>A stream of trades, aka “Order Stream”</li>
-<li>State in the form of latest market conditions for various symbols</li>
-<li>A calculation to possibly withdraw the trade based on state for that symbol</li>
-</ul>
+<p>This performs the user-defined <code>MySumAgg</code> aggregation for every 5 inputs.</p>
 
-<p><img src="images/market-spread-overview.png" alt="Market Spread Diagram" /></p>
+<pre><code>Messages:
+01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 
+|-------------|--------------|--------------|--------------|
+    window 1      window 2       window 3       window 4
+    sum = 15      sum = 40       sum = 65       sum = 90
+</code></pre>
 
-<p>For the proof of concept, our client was looking to handle hundreds of thousands of messages a second with median latencies measured in microseconds. Further, they needed flat, predictable tail latencies that were measured in single-digit milliseconds. While the proof of concept was only run on a single machine, the goal was to have an application that would be able to respond to ever-increasing rates of data and seamlessly scale to run on multiple machines while handling millions of messages a second.</p>
+<h2 id="range-based-windows">Range-based Windows</h2>
 
-<p>Distributed data processing applications are hard. We know. Over the course of our careers, we’ve been involved in building a lot of them. Here’s a quick checklist of things we’d need to worry about for an application like Market Spread if we were to start from scratch:</p>
+<p>Range-based windows are defined based on specific time-based ranges. They fall into two categories, tumbling and sliding. We&rsquo;ll look at tumbling first.</p>
 
-<ul>
-<li>Creating a robust communication layer between communicating processes</li>
-<li>Ensuring message replay occurs when a message fails to process.</li>
-<li>Ensuring messages aren’t processed twice on message replay</li>
-<li>Efficient sharding of data across multiple machines</li>
-<li>Optimizing computations for performance</li>
-<li>Minimizing administrative messages</li>
-<li>Minimizing data movement</li>
-<li>Handling message source back-pressure</li>
-<li>Metrics, monitoring, and telemetry</li>
-<li>Implementing our domain logic</li>
-</ul>
+<h3 id="tumbling-windows">Tumbling Windows</h3>
 
-<p>That’s a lot to tackle and a lot of code to introduce bugs in. Wallaroo is, in part, an answer to that problem. It creates a robust platform that handles sharding and partitioning data across many machines. By leveraging Wallaroo, you can build demanding high-performance applications like Market Spread without having to worry about replaying messages when failures occur or deduplicating data on message replay. At-least-once message processing and idempotence come as a core part of the platform. We focus on the hard infrastructure problems, so you don’t have to. By building Market Spread using Wallaroo, the checklist becomes:</p>
+<p>Tumbling range-based windows are non-overlapping fixed-size time-based windows.
+For example, let&rsquo;s define windows with a range of 3 seconds:</p>
 
-<ul>
-<li>Implementing our domain logic</li>
-</ul>
+<pre><code class="language-python">    (inputs
+        .to(wallaroo.range_windows(wallaroo.seconds(3))
+            .over(MySumAgg))
+        .to_sink(...))
+</code></pre>
 
-<h2 id="core-wallaroo-abstractions">Core Wallaroo abstractions</h2>
+<p>Assuming we start from time 00:00, this would produce the following tumbling windows:</p>
 
-<p>How does one go about building a Wallaroo application? Via our developer framework and its APIs which are the focus of this guide. The core abstractions from our API that we&rsquo;ll touch on in this introduction are:</p>
+<pre><code> Time (min:sec):
+|00:00|00:01|00:02|00:03|00:04|00:05|00:06|00:07|00:08|00:09|00:10|00:11
+|-----------------|-----------------|-----------------|-----------------|
+     window 1          window 2          window 3          window 4
+   [00:00,00:03)     [00:03,00:06)     [00:06,00:09)     [00:09,00:12)
+</code></pre>
 
-<ul>
-<li>Stateless Computation</li>
-<li>State Computation</li>
-<li>Pipeline</li>
-<li>Source</li>
-<li>Sink</li>
-</ul>
+<p>Each window above is indicated by an interval such as <code>[00:00,00:03)</code>, indicating &ldquo;the window containing all times equal to or greater than <code>00:00</code> and less than <code>00:03</code>&rdquo;.</p>
 
-<p>The most important of these is a <code>computation</code>. Computations come in two varieties: stateless computation and state computation. A stateless computation takes some data as an input and creates some new data as an output. For example, a “double computation” might take in an integer such as 2 and output 4. A state computation is similar to a stateless computation except it takes an additional input: the state it will operate on. An example of a state computation would be a counter that keeps track of the running total of all numbers it has processed.</p>
+<p>Incoming messages will be placed in a window based on the event time of the message. In the near future, you will be able to derive this event time from each input message that arrives at a Wallaroo source. For now, it is always the ingest time for the input message.</p>
 
-<p>You can combine computations together using another abstraction we provide: <code>Pipeline</code>. A pipeline allows you to say, for example, that the output from computation A will be processed by computation B. A pipeline begins with a <code>Source</code> stage, which is responsible for receiving and decoding incoming external messages. Likewise, the pipeline may end at a <code>Sink</code>, if it has anything to output, which encodes data and sends it to an external receiver. In this way, you can take individual computations and start turning them into applications that take in data from various external sources and ultimately produce outputs that are sent to external systems via sinks.</p>
+<p>So if we had the following four messages (min:sec.ms):</p>
 
-<h2 id="market-spread-in-wallaroo">Market Spread in Wallaroo</h2>
+<pre><code>&lt;id: 1, event_time: 00:04.043&gt;
+&lt;id: 2, event_time: 00:01.022&gt;
+&lt;id: 3, event_time: 00:06.000&gt;
+&lt;id: 4, event_time: 00:09.055&gt;
+</code></pre>
 
-<p>Given these abstractions, what does our Market Spread application look like?</p>
+<p>They would be placed as follows:</p>
 
-<p><img src="images/market-spread-in-wallaroo.png" alt="Market Spread in Wallaroo" /></p>
+<pre><code>&lt;id: 1, event_time: 00:04.043&gt; --&gt; window 2 [00:03,00:06)
+&lt;id: 2, event_time: 00:01.022&gt; --&gt; window 1 [00:00,00:03)
+&lt;id: 3, event_time: 00:06.000&gt; --&gt; window 3 [00:06,00:09)
+&lt;id: 4, event_time: 00:05.655&gt; --&gt; window 2 [00:03,00:06)
+</code></pre>
 
-<p>You can see we end up with two pipelines, one for our <code>NBBO Feed</code> and another for the <code>Order Feed,</code> each with its own corresponding source. We have a single type of state that we are storing (<code>NBBO State</code> by symbol), a state computation&ndash;to update state and check orders against it&ndash;and finally a <code>Sink</code> that we send our outputs to.</p>
+<p>Notice that it doesn&rsquo;t matter which order the messages arrive in. They will be placed in the correct windows based on event time.</p>
 
-<h2 id="market-spread-performance">Market Spread Performance</h2>
+<p>However, if there were no limit to how late messages can be, then we would have to keep around the state for each window indefinitely. This can add up quickly in a high-volume scenario. As a result, we currently throw away window data once the window output is triggered (i.e. the aggregation <code>output()</code> method is called and an output is produced for the window). This means that from then on, late messages are dropped on the floor. In future versions of Wallaroo, we will provide more fine-grained policies so that you can choose other options for late messages. In the meantime, the one knob we provide is a <code>delay</code> on triggering a window. For example:</p>
 
-<p>Wallaroo has been developed to provide correct results quickly. What does quickly mean? Wallaroo is designed to process millions of events on a single machine, with median latencies that are measured in microseconds and tail latencies that are measured in single digit milliseconds. Low latencies are all well and good, but what does that mean in practice?</p>
+<pre><code class="language-python">    (inputs
+        .to(wallaroo.range_windows(wallaroo.seconds(3))
+            .with_delay(wallaroo.seconds(3))
+            .over(MySumAgg))
+        .to_sink(sink_config))
+</code></pre>
 
-<p>Performance is, in the end, highly dependent on the type of data, the computations being performed, etc.  This guide isn&rsquo;t the place to present detailed benchmarks so let&rsquo;s give a quick idea of what the performance of a Wallaroo application can look like.</p>
+<p>This says that we delay triggering each window for 3 seconds. Think of the delay knob as setting either (1) an estimation of the maximum lateness for messages or (2) the lateness threshold beyond which you no longer care about messages. The knob is essentially trading off between latency (longer delays means longer waits for window outputs) and completeness (shorter delays potentially mean more ignored messages).</p>
 
-<p>Let’s talk about the aforementioned Market Spread application and some recent performance numbers we’ve gotten with it. First, though, let’s highlight some key points:</p>
+<p>IMPORTANT NOTE: If your application requires a guarantee that no messages are ever ignored, then it&rsquo;s not currently safe to use the Wallaroo windowing API unless you are certain that no messages will ever be later than your delay setting. However, as mentioned above, we will be adding more fine-grained policy control for late message in future versions.</p>
 
-<ul>
-<li>The logic is reasonably straightforward.</li>
-<li>The state it stores in memory remains constant in size.</li>
-<li>It has two streams of data, only one of which occasionally produces output that results in network traffic (1 out of 70,000).</li>
-<li>Messages are 50 to 60 bytes in size.</li>
-</ul>
+<h3 id="window-triggers">Window Triggers</h3>
 
-<p>During a recent performance testing run using 16 cores on an AWS m4 class machine, we were able to run each stream of data at around 1.5 million messages per second for a total of 3 million messages per second across the two streams. Our processing latencies were:</p>
+<p>We have talked about triggering window outputs but have not yet explained how this happens. There are two types of events that can potentially trigger a window output (corresponding to a call to the <code>output()</code> method on the underlying aggregation): (1) a message arrives at the window stage, and (2) a timeout is triggered. Each of these potentially triggers window outputs in different ways, so we&rsquo;ll look at them each in turn.</p>
 
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">50%</th>
-<th align="center">95%</th>
-<th align="center">99%</th>
-<th align="center">99.9%</th>
-<th align="center">99.99%</th>
-</tr>
-</thead>
+<h4 id="message-trigger">Message Trigger</h4>
 
-<tbody>
-<tr>
-<td align="center">&lt;=</td>
-<td align="center">66µs</td>
-<td align="center">0.5ms</td>
-<td align="center">0.5ms</td>
-<td align="center">0.5ms</td>
-<td align="center">1 ms</td>
-</tr>
-</tbody>
-</table>
+<p>When a message arrives at the window stage, we attempt to determine whether or not we have seen all messages for a given window, at which point we can trigger its output. We make this determination based on an event time watermark system internal to Wallaroo. As messages come into our system, we use their event timestamps to update these watermarks. We then propagate the latest watermarks downstream. A watermark is an estimate of how far we have progressed in event time up to a particular stage. It serves as a heuristic for determining whether we have seen all messages destined for a certain window. When using this heuristic in practice, we also take into account the user-defined <code>delay</code> parameter explained above.</p>
 
-<p>Even with the application caveats that we laid out, we think that is some pretty impressive performance. Performance that we are committed to maintaining as we continue to add functionality to Wallaroo.</p>
+<p>If a window ends at time 00:10, and the user-defined delay is 00:02, then we will trigger that window&rsquo;s output once we have a watermark passing the 00:12 mark. We check our watermark against our windows every time we receive a message at a stage containing those windows.</p>
+
+<h4 id="timeout-trigger">Timeout Trigger</h4>
+
+<p>If we only triggered window outputs based on incoming messages, then we would be left with a potential straggler problem. Imagine that our window range is defined in seconds but our incoming stream stopped sending for hours at a time. The last group of messages might have been placed in windows, but we never received a message with a watermark high enough to trigger those windows. In this situation, the latency for those windows would end up being hours long, since we&rsquo;d have to wait for the stream to start up again to get a chance to trigger them.</p>
+
+<p>This is where timeouts come in. We use timeouts to periodically check if we have not heard from our upstreams past a certain threshold. Currently, neither the timeouts nor the threshold are directly configurable by the user (though this will change in future releases). We set both the timeout and the threshold as a function of the window range plus the user-defined delay. If the threshold is passed, then we trigger the window outputs.</p>
+
+<h3 id="sliding-windows">Sliding Windows</h3>
+
+<p>Sliding range-based windows are overlapping fixed-size time-based windows.
+For example, let&rsquo;s define windows with a range of 6 seconds and a slide of 3 seconds:</p>
+
+<pre><code class="language-python">    (inputs
+        .to(wallaroo.range_windows(wallaroo.seconds(6))
+            .with_slide(wallaroo.seconds(3))
+            .over(MySumAgg))
+        .to_sink(...))
+</code></pre>
+
+<p>Assuming we start from time 00:00, this would produce the following sliding windows:</p>
+
+<pre><code> Time (min:sec):
+|00:00|00:01|00:02|00:03|00:04|00:05|00:06|00:07|00:08|00:09|00:10|00:11
+|-----------------------------------|
+   [00:00,00:06)                     
+                  |-----------------------------------|
+                     [00:03,00:09)                       
+                                    |-----------------------------------|
+                                        [00:06,00:12)     
+                                                      |------------------
+                                                          [00:09,00:15)     
+</code></pre>
+
+<p>Notice how these windows overlap. Messages will be assigned to more than one window at a time. Using our examples from above:</p>
+
+<pre><code>&lt;id: 1, event_time: 00:04:043&gt;
+&lt;id: 2, event_time: 00:01:022&gt;
+&lt;id: 3, event_time: 00:06:000&gt;
+&lt;id: 4, event_time: 00:09:055&gt;
+</code></pre>
+
+<p>These would be placed in our sliding windows as follows:</p>
+
+<pre><code>&lt;id: 1, event_time: 00:04:043&gt; --&gt; [00:00,00:06) and [00:03,00:09)
+&lt;id: 2, event_time: 00:01:022&gt; --&gt; [00:00,00:06)
+&lt;id: 3, event_time: 00:06:000&gt; --&gt; [00:03,00:09) and [00:06,00:12)
+&lt;id: 4, event_time: 00:05:655&gt; --&gt; [00:00,00:06) and [00:03,00:09)
+</code></pre>
+
+<p>Tumbling windows are actually a special case of sliding windows where the window range and slide are equal.</p>
 </main>
         </div>
       </div>

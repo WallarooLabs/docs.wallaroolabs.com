@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>Wallaroo  | What is Wallaroo?</title>
+    <title>Wallaroo  | Wallaroo and Virtualenv</title>
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
 
@@ -52,21 +52,34 @@
     
 
     
-      <link href="https://docs.wallaroolabs.com/index.xml" rel="alternate" type="application/rss+xml" title="Wallaroo" />
-      <link href="https://docs.wallaroolabs.com/index.xml" rel="feed" type="application/rss+xml" title="Wallaroo" />
-    
 
-    <meta property="og:title" content="What is Wallaroo?" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://docs.wallaroolabs.com/" />
+    <meta property="og:title" content="Wallaroo and Virtualenv" />
+<meta property="og:description" content="We recommend using virtualenv to handle your application&rsquo;s dependencies.
+While not required to run Wallaroo applications, virtualenv will ensure that your application and development environment are isolated from the rest of your Python installation(s) on your computer. In addition, virtualenv will ensure that Machida uses the correct version of Python if you have multiple versions installed on your computer.
+Installing Virtualenv Follow the instructions on the virtualenv website.
+Setting up Virtualenv for your Application To create a virtualenv for your application, run the following command" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://docs.wallaroolabs.com/python-tutorial/virtualenv/" />
 
-<meta itemprop="name" content="What is Wallaroo?">
-<meta itemprop="description" content="">
+<meta itemprop="name" content="Wallaroo and Virtualenv">
+<meta itemprop="description" content="We recommend using virtualenv to handle your application&rsquo;s dependencies.
+While not required to run Wallaroo applications, virtualenv will ensure that your application and development environment are isolated from the rest of your Python installation(s) on your computer. In addition, virtualenv will ensure that Machida uses the correct version of Python if you have multiple versions installed on your computer.
+Installing Virtualenv Follow the instructions on the virtualenv website.
+Setting up Virtualenv for your Application To create a virtualenv for your application, run the following command">
 
+
+
+<meta itemprop="wordCount" content="652">
+
+
+
+<meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="What is Wallaroo?"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:title" content="Wallaroo and Virtualenv"/>
+<meta name="twitter:description" content="We recommend using virtualenv to handle your application&rsquo;s dependencies.
+While not required to run Wallaroo applications, virtualenv will ensure that your application and development environment are isolated from the rest of your Python installation(s) on your computer. In addition, virtualenv will ensure that Machida uses the correct version of Python if you have multiple versions installed on your computer.
+Installing Virtualenv Follow the instructions on the virtualenv website.
+Setting up Virtualenv for your Application To create a virtualenv for your application, run the following command"/>
 
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -209,8 +222,8 @@
       </li>
       
       <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".pytutorial">Python Tutorial</a>
-        <ul class="pytutorial desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2  primary-color" data-target=".pytutorial">Python Tutorial</a>
+        <ul class="pytutorial desktopmenu animated fadeIn list pl0 bg-light-gray db">
           <li class="f6 fw4">
             <a href="/python-tutorial/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
               Python API Introduction
@@ -262,7 +275,7 @@
             </a>
           </li>
           <li class="f6 fw4">
-            <a href="/python-tutorial/virtualenv/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+            <a href="/python-tutorial/virtualenv/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 primary-color ">
               Wallaroo and Virtualenv
             </a>
           </li>
@@ -334,9 +347,31 @@
 </nav>
 
       </div>
-    <div class="flex-l" id="the-body"><div class="order-1 w-60-l mw9 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style="flex-grow:1;">
+    <div class="flex-l" id="the-body"><div class="order-2 w-100 w-20-l ph5-m ph0-l mb4 sticky dn db-l" id="context-menu"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">What's in this document</p>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#installing-virtualenv">Installing Virtualenv</a></li>
+<li><a href="#setting-up-virtualenv-for-your-application">Setting up Virtualenv for your Application</a>
+<ul>
+<li><a href="#import-errors-when-loading-your-application">Import Errors when Loading your Application</a></li>
+</ul></li>
+<li><a href="#cleaning-up-a-virtualenv">Cleaning up a Virtualenv</a></li>
+<li><a href="#using-virtualenv">Using Virtualenv</a></li>
+<li><a href="#running-a-wallaroo-application-with-virtualenv">Running a Wallaroo Application with Virtualenv</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+
+
+
+
+</div><div class="order-1 w-60-l mw9 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style="flex-grow:1;">
         <div class="order-0 mt4 w-100 center mw7" style="clear: both;">
-          <a id="doc-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowDM()"></a></div>
+          <a id="doc-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowDM()"></a><a id="context-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowCM()"></a></div>
 
         <div class="documentation-copy center mw7">
           <header class="mt4 w-100">
@@ -344,125 +379,194 @@
                 
               
             </p>
-            <h1 class="f1 athelas mb1">What is Wallaroo?</h1>
+            <h1 class="f1 athelas mb1">Wallaroo and Virtualenv</h1>
           </header>
 
           <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l">
 
-<p>Wallaroo is an ultrafast and scalable data processing engine that rapidly takes you from prototype to production by eliminating infrastructure complexity. It&rsquo;s designed for writing distributed data processing applications, especially demanding high-throughput, low-latency tasks where the accuracy of results is important. If you are familiar with the “big data” landscape, Wallaroo includes the “streaming data” category along with tools like Storm, Heron, and Samza. However, the core engine also supports long-running analysis such as might be used for large-scale analysis and model training.</p>
+<p>We recommend using <a href="https://virtualenv.pypa.io/en/stable/">virtualenv</a> to handle your application&rsquo;s dependencies.</p>
 
-<p>When we set out to build Wallaroo, we had a few goals in mind. We wanted to improve the state of the art for distributed data processing by providing better per-worker throughput, dramatically lower latencies, easier state management, and an easier operational experience. In this introduction, we&rsquo;re going to touch on some of these points but not all of them. Over the course of this guide, we will explore Wallaroo more in-depth. To that end, this introduction will:</p>
+<p>While not required to run Wallaroo applications, virtualenv will ensure that your application and development environment are isolated from the rest of your Python installation(s) on your computer. In addition, virtualenv will ensure that Machida uses the correct version of Python if you have multiple versions installed on your computer.</p>
 
+<h2 id="installing-virtualenv">Installing Virtualenv</h2>
+
+<p>Follow the instructions on <a href="https://virtualenv.pypa.io/en/stable/installation/">the virtualenv website</a>.</p>
+
+<h2 id="setting-up-virtualenv-for-your-application">Setting up Virtualenv for your Application</h2>
+
+<p>To create a virtualenv for your application, run the following command</p>
+
+
+
+
+
+<div id="tabset-python-tutorial-virtualenv-1">
 <ul>
-<li>Take you through what Wallaroo is</li>
-<li>Describe the problems Wallaroo is solving</li>
-<li>Discuss some of the key features including integrated state management and resilience</li>
+  
+    
+  <li><a href="#tabset-python-tutorial-virtualenv-1-0">Python 2.7</a></li>
+
+    
+  <li><a href="#tabset-python-tutorial-virtualenv-1-1">Python 3</a></li>
+
 </ul>
 
-<h2 id="wallaroo-by-example-market-spread">Wallaroo by example: Market Spread</h2>
 
-<p>Let’s start talking about what Wallaroo can do by way of an example. One demo application is called “Market Spread.” It’s based on a proof-of-concept we did for a large bank that was looking at ways to modernize their infrastructure. Market Spread is an application designed to run alongside a trading system. Its goal is to monitor market data for irregularities around different symbols and potentially withdraw some trades that have been sent to market should certain anomalies occur.</p>
+<div id="tabset-python-tutorial-virtualenv-1-0">
+  
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+virtualenv --python<span style="color:#f92672">=</span>python2 ENV
+</code></pre></div>
+  
+</div>
 
-<p>When we break the application down into its key components we get:</p>
 
+<div id="tabset-python-tutorial-virtualenv-1-1">
+  
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+virtualenv --python<span style="color:#f92672">=</span>python3 ENV
+</code></pre></div>
+  
+</div>
+
+</div>
+
+<script>$(function(){$("#tabset-python-tutorial-virtualenv-1").tabs();});</script>
+
+
+<p>This will create a directory named <code>ENV</code> and set up all of the scripts and dependencies required to run an isolated Python 2 virtual environment, located in <code>ENV</code>.</p>
+
+<h3 id="import-errors-when-loading-your-application">Import Errors when Loading your Application</h3>
+
+<p>If you have more than one Python version installed, virtualenv may set up the import paths incorrectly, or an alias may result in the wrong Python version being run. In that case, you may encounter errors such as</p>
+
+<pre><code class="language-python">Traceback (most recent call last):
+  File &quot;wallaroo-{{ 0.6.1 }}/examples/python/alerts_stateful/alerts.py&quot;, line 18, in &lt;module&gt;
+    import wallaroo
+  File &quot;wallaroo-{{ 0.6.1 }}/machida/wallaroo.py&quot;, line 16, in &lt;module&gt;
+    import argparse
+  File &quot;/usr/local/Cellar/python/2.7.14/Frameworks/Python.framework/Versions/2.7/lib/python2.7/argparse.py&quot;, line 86, in &lt;module&gt;
+    import copy as _copy
+  File &quot;/usr/local/Cellar/python/2.7.14/Frameworks/Python.framework/Versions/2.7/lib/python2.7/copy.py&quot;, line 52, in &lt;module&gt;
+    import weakref
+  File &quot;/usr/local/Cellar/python/2.7.14/Frameworks/Python.framework/Versions/2.7/lib/python2.7/weakref.py&quot;, line 14, in &lt;module&gt;
+    from _weakref import (
+ImportError: cannot import name _remove_dead_weakref
+Could not load module 'alerts'
+</code></pre>
+
+<p>In order to work correctly, virtualenv needs to be set up with the correct Python path. To do this, use <code>which</code> to get the absolute path of your intended Python version:</p>
+
+<pre><code class="language-bash">virtualenv --python=`which python` ENV
+</code></pre>
+
+<p>If you use a different Python, such as <code>python2</code> or <code>python3.5</code>, then substitute that into the <code>which</code> command:</p>
+
+<pre><code class="language-bash">virtualenv --python=`which python3.5` ENV
+</code></pre>
+
+<aside class="admonition note">
+  <div class="admonition-content"><p><strong>Note</strong>: it is critical that the Python version in the virtualenv is compatible with the version of Machida. For example, if you&rsquo;re using machida3, you need to setup your virtualenv for Python 3, and if you are using machida, you need to set up the virtualenv for Python 2.</p>
+</div>
+</aside>
+
+
+<h2 id="cleaning-up-a-virtualenv">Cleaning up a Virtualenv</h2>
+
+<p>To clean up or remove an installed virtualenv, all you need to do is delete the directory you created.</p>
+
+<p>For the <code>ENV</code> virtualenv set up above, the following will remove it entirely:</p>
+
+<pre><code class="language-bash">rm -fr ENV
+</code></pre>
+
+<h2 id="using-virtualenv">Using Virtualenv</h2>
+
+<p>It is assumed that every shell you start for Wallaroo was set up by following <a href="/python-tutorial/starting-a-new-shell/">Starting a new shell for Wallaroo</a> for your environment.</p>
+
+<p>To use the virtualenv, activate it in your shell. In the bash shell, this command is</p>
+
+<pre><code class="language-bash">$ source ENV/bin/activate
+(env) $
+</code></pre>
+
+<p>If this command does not work for your specific shell, please refer to the <a href="https://virtualenv.pypa.io/en/stable/userguide/#activate-script">virtualenv userguide</a>.</p>
+
+<p>Now, when you run <code>python</code> or <code>pip</code>, it will be using the ones set up in the virtual environment, and any new packages and dependencies will be installed within the <code>ENV</code> path.</p>
+
+<p>To install new modules using pip, run pip within an activated virtualenv:</p>
+
+<pre><code class="language-bash">(env) $ pip install ujson
+</code></pre>
+
+<p>To exit the virtualenv, use the <code>deactivate</code> command.</p>
+
+<h2 id="running-a-wallaroo-application-with-virtualenv">Running a Wallaroo Application with Virtualenv</h2>
+
+<p>To run a Wallaroo application with virtualenv, run it within an activated shell:</p>
+
+
+
+
+
+<div id="tabset-python-tutorial-virtualenv-2">
 <ul>
-<li>A stream of market data, aka “NBBO Stream”</li>
-<li>A stream of trades, aka “Order Stream”</li>
-<li>State in the form of latest market conditions for various symbols</li>
-<li>A calculation to possibly withdraw the trade based on state for that symbol</li>
+  
+    
+  <li><a href="#tabset-python-tutorial-virtualenv-2-0">Python 2.7</a></li>
+
+    
+  <li><a href="#tabset-python-tutorial-virtualenv-2-1">Python 3</a></li>
+
 </ul>
 
-<p><img src="images/market-spread-overview.png" alt="Market Spread Diagram" /></p>
 
-<p>For the proof of concept, our client was looking to handle hundreds of thousands of messages a second with median latencies measured in microseconds. Further, they needed flat, predictable tail latencies that were measured in single-digit milliseconds. While the proof of concept was only run on a single machine, the goal was to have an application that would be able to respond to ever-increasing rates of data and seamlessly scale to run on multiple machines while handling millions of messages a second.</p>
+<div id="tabset-python-tutorial-virtualenv-2-0">
+  
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+source ENV/bin/activate
+export PYTHONPATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/wallaroo-tutorial/wallaroo-{{ 0.6.1 }}/machida/lib:</span>$HOME<span style="color:#e6db74">/wallaroo-tutorial/wallaroo-{{ 0.6.1 }}/examples/python/alerts_stateful&#34;</span>
+machida --application-module alerts <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --out <span style="color:#ae81ff">127</span>.0.0.1:5555 --metrics <span style="color:#ae81ff">127</span>.0.0.1:5001 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --control <span style="color:#ae81ff">127</span>.0.0.1:6000 --data <span style="color:#ae81ff">127</span>.0.0.1:6001 --name worker-name <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --external <span style="color:#ae81ff">127</span>.0.0.1:5050 --cluster-initializer --ponythreads<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --ponynoblock
+</code></pre></div>
+  
+</div>
 
-<p>Distributed data processing applications are hard. We know. Over the course of our careers, we’ve been involved in building a lot of them. Here’s a quick checklist of things we’d need to worry about for an application like Market Spread if we were to start from scratch:</p>
 
-<ul>
-<li>Creating a robust communication layer between communicating processes</li>
-<li>Ensuring message replay occurs when a message fails to process.</li>
-<li>Ensuring messages aren’t processed twice on message replay</li>
-<li>Efficient sharding of data across multiple machines</li>
-<li>Optimizing computations for performance</li>
-<li>Minimizing administrative messages</li>
-<li>Minimizing data movement</li>
-<li>Handling message source back-pressure</li>
-<li>Metrics, monitoring, and telemetry</li>
-<li>Implementing our domain logic</li>
-</ul>
+<div id="tabset-python-tutorial-virtualenv-2-1">
+  
+    <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+source ENV/bin/activate
+export PYTHONPATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/wallaroo-tutorial/wallaroo-{{ 0.6.1 }}/machida/lib:</span>$HOME<span style="color:#e6db74">/wallaroo-tutorial/wallaroo-{{ 0.6.1 }}/examples/python/alerts_stateful&#34;</span>
+machida3 --application-module alerts <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --out <span style="color:#ae81ff">127</span>.0.0.1:5555 --metrics <span style="color:#ae81ff">127</span>.0.0.1:5001 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --control <span style="color:#ae81ff">127</span>.0.0.1:6000 --data <span style="color:#ae81ff">127</span>.0.0.1:6001 --name worker-name <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --external <span style="color:#ae81ff">127</span>.0.0.1:5050 --cluster-initializer --ponythreads<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --ponynoblock
+</code></pre></div>
+  
+</div>
 
-<p>That’s a lot to tackle and a lot of code to introduce bugs in. Wallaroo is, in part, an answer to that problem. It creates a robust platform that handles sharding and partitioning data across many machines. By leveraging Wallaroo, you can build demanding high-performance applications like Market Spread without having to worry about replaying messages when failures occur or deduplicating data on message replay. At-least-once message processing and idempotence come as a core part of the platform. We focus on the hard infrastructure problems, so you don’t have to. By building Market Spread using Wallaroo, the checklist becomes:</p>
+</div>
 
-<ul>
-<li>Implementing our domain logic</li>
-</ul>
+<script>$(function(){$("#tabset-python-tutorial-virtualenv-2").tabs();});</script>
 
-<h2 id="core-wallaroo-abstractions">Core Wallaroo abstractions</h2>
 
-<p>How does one go about building a Wallaroo application? Via our developer framework and its APIs which are the focus of this guide. The core abstractions from our API that we&rsquo;ll touch on in this introduction are:</p>
+<p>Please be aware that you&rsquo;ll still need to setup a sink as well. To run a sink for our example with Data Receiver, run</p>
 
-<ul>
-<li>Stateless Computation</li>
-<li>State Computation</li>
-<li>Pipeline</li>
-<li>Source</li>
-<li>Sink</li>
-</ul>
+<pre><code class="language-bash">data_receiver --framed --listen 127.0.0.1:5555 --ponythreads=1 --ponynoblock
+</code></pre>
 
-<p>The most important of these is a <code>computation</code>. Computations come in two varieties: stateless computation and state computation. A stateless computation takes some data as an input and creates some new data as an output. For example, a “double computation” might take in an integer such as 2 and output 4. A state computation is similar to a stateless computation except it takes an additional input: the state it will operate on. An example of a state computation would be a counter that keeps track of the running total of all numbers it has processed.</p>
+<p>or if you prefer to log the output into a file:</p>
 
-<p>You can combine computations together using another abstraction we provide: <code>Pipeline</code>. A pipeline allows you to say, for example, that the output from computation A will be processed by computation B. A pipeline begins with a <code>Source</code> stage, which is responsible for receiving and decoding incoming external messages. Likewise, the pipeline may end at a <code>Sink</code>, if it has anything to output, which encodes data and sends it to an external receiver. In this way, you can take individual computations and start turning them into applications that take in data from various external sources and ultimately produce outputs that are sent to external systems via sinks.</p>
+<pre><code class="language-bash">data_receiver \
+--framed --listen 127.0.0.1:5555 --ponythreads=1 --ponynoblock &gt; output
+</code></pre>
 
-<h2 id="market-spread-in-wallaroo">Market Spread in Wallaroo</h2>
-
-<p>Given these abstractions, what does our Market Spread application look like?</p>
-
-<p><img src="images/market-spread-in-wallaroo.png" alt="Market Spread in Wallaroo" /></p>
-
-<p>You can see we end up with two pipelines, one for our <code>NBBO Feed</code> and another for the <code>Order Feed,</code> each with its own corresponding source. We have a single type of state that we are storing (<code>NBBO State</code> by symbol), a state computation&ndash;to update state and check orders against it&ndash;and finally a <code>Sink</code> that we send our outputs to.</p>
-
-<h2 id="market-spread-performance">Market Spread Performance</h2>
-
-<p>Wallaroo has been developed to provide correct results quickly. What does quickly mean? Wallaroo is designed to process millions of events on a single machine, with median latencies that are measured in microseconds and tail latencies that are measured in single digit milliseconds. Low latencies are all well and good, but what does that mean in practice?</p>
-
-<p>Performance is, in the end, highly dependent on the type of data, the computations being performed, etc.  This guide isn&rsquo;t the place to present detailed benchmarks so let&rsquo;s give a quick idea of what the performance of a Wallaroo application can look like.</p>
-
-<p>Let’s talk about the aforementioned Market Spread application and some recent performance numbers we’ve gotten with it. First, though, let’s highlight some key points:</p>
-
-<ul>
-<li>The logic is reasonably straightforward.</li>
-<li>The state it stores in memory remains constant in size.</li>
-<li>It has two streams of data, only one of which occasionally produces output that results in network traffic (1 out of 70,000).</li>
-<li>Messages are 50 to 60 bytes in size.</li>
-</ul>
-
-<p>During a recent performance testing run using 16 cores on an AWS m4 class machine, we were able to run each stream of data at around 1.5 million messages per second for a total of 3 million messages per second across the two streams. Our processing latencies were:</p>
-
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">50%</th>
-<th align="center">95%</th>
-<th align="center">99%</th>
-<th align="center">99.9%</th>
-<th align="center">99.99%</th>
-</tr>
-</thead>
-
-<tbody>
-<tr>
-<td align="center">&lt;=</td>
-<td align="center">66µs</td>
-<td align="center">0.5ms</td>
-<td align="center">0.5ms</td>
-<td align="center">0.5ms</td>
-<td align="center">1 ms</td>
-</tr>
-</tbody>
-</table>
-
-<p>Even with the application caveats that we laid out, we think that is some pretty impressive performance. Performance that we are committed to maintaining as we continue to add functionality to Wallaroo.</p>
+<p>The contents of your pipeline&rsquo;s decoder will be added to a file named output in the directory from which this is run.</p>
 </main>
         </div>
       </div>
