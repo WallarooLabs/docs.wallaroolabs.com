@@ -15,17 +15,34 @@
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
     
 
-    
-    
-      <link href="/dist/css/app.955516233bcafa4d2a1c13cea63c7b50.css" rel="stylesheet">
-    
+    <style>
+      @font-face {
+        font-family: 'Icon';
+        src: url('/dist/fonts/icon.eot?52m981');
+        src: url('/dist/fonts/icon.eot?#iefix52m981')
+               format('embedded-opentype'),
+             url('/dist/fonts/icon.woff?52m981')
+               format('woff'),
+             url('/dist/fonts/icon.ttf?52m981')
+               format('truetype'),
+             url('/dist/fonts/icon.svg?52m981#icon')
+               format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
+
+    <link href="/dist/css/app.css" rel="stylesheet">
+    <link href="/dist/css/highlight.css" rel="stylesheet">
+    <link href="/dist/css/icon.css" rel="stylesheet">
+    <link href="/dist/css/wallaroo.css" rel="stylesheet">
 
     
       <link rel="stylesheet" href="/css/jquery-ui.min.css">
     
       <link rel="stylesheet" href="/css/jquery-ui.theme.min.css">
     
-      <link rel="stylesheet" href="/cshighlight.css">
+      <link rel="stylesheet" href="/css/highlight.css">
     
       <link rel="stylesheet" href="/css/my.css">
     
@@ -130,20 +147,18 @@
   </header>
 
 
-    <main class="pb7" role="main">
+    <main role="main">
       
-  <article class="w-100 ph4 pb5 pb6-ns pt1 pt5-ns">
-    <div class="flex-l">
-
-      <div class="order-0 w-100 w-20-l ph5-m ph0-l mb4 sticky dn db-l">
+  <article class="w-100 ph4 pb5 pb6-ns pt1 pt3-ns">
+      <div class="order-0 w-20 dn db-l doc-menu" id="doc-menu">
         
-<nav role="navigation" class="doc-menu bg-light-gray pl3 pr3">
+<nav role="navigation">
   <ul class="list pa0 nl2">
     
       
       <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pb2 " data-target=".core-concepts">Core Concepts</a>
-        <ul class="core-concepts desktopmenu animated fadeIn list pl0 pb2 bg-light-gray dn">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".core-concepts">Core Concepts</a>
+        <ul class="core-concepts desktopmenu animated fadeIn list pl0 bg-light-gray dn">
           <li class="f6 fw4">
             <a href="/core-concepts/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
               Wallaroo Core Concepts
@@ -178,8 +193,8 @@
       </li>
       
       <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pb2 " data-target=".pyinstallation">Python Installation Guide</a>
-        <ul class="pyinstallation desktopmenu animated fadeIn list pl0 pb2 bg-light-gray dn">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".pyinstallation">Python Installation Guide</a>
+        <ul class="pyinstallation desktopmenu animated fadeIn list pl0 bg-light-gray dn">
           <li class="f6 fw4">
             <a href="/python-installation/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
               Choosing an Installation Option
@@ -204,8 +219,8 @@
       </li>
       
       <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pb2 " data-target=".pytutorial">Python Tutorial</a>
-        <ul class="pytutorial desktopmenu animated fadeIn list pl0 pb2 bg-light-gray dn">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".pytutorial">Python Tutorial</a>
+        <ul class="pytutorial desktopmenu animated fadeIn list pl0 bg-light-gray dn">
           <li class="f6 fw4">
             <a href="/python-tutorial/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
               Python API Introduction
@@ -270,8 +285,8 @@
       </li>
       
       <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pb2  primary-color" data-target=".operators-manual">Operators Manual</a>
-        <ul class="operators-manual desktopmenu animated fadeIn list pl0 pb2 bg-light-gray db">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2  primary-color" data-target=".operators-manual">Operators Manual</a>
+        <ul class="operators-manual desktopmenu animated fadeIn list pl0 bg-light-gray db">
           <li class="f6 fw4">
             <a href="/operators-manual/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
               Operators Manual
@@ -311,8 +326,8 @@
       </li>
       
       <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pb2 " data-target=".appendix">Appendix</a>
-        <ul class="appendix desktopmenu animated fadeIn list pl0 pb2 bg-light-gray dn">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".appendix">Appendix</a>
+        <ul class="appendix desktopmenu animated fadeIn list pl0 bg-light-gray dn">
           <li class="f6 fw4">
             <a href="/appendix/giles-sender/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
               Giles sender
@@ -329,8 +344,7 @@
 </nav>
 
       </div>
-
-      <div class="order-2 w-100 w-20-l ph5-m ph0-l mb4 sticky dn db-l"><nav role="toc" class="toc bg-light-gray pl3 pr3 nested-list-reset nested-copy-line-height nested-links">
+    <div class="flex-l" id="the-body"><div class="order-2 w-100 w-20-l ph5-m ph0-l mb4 sticky dn db-l" id="context-menu"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
     <p class="f5 b mb3">What's in this document</p>
       <nav id="TableOfContents">
 <ul>
@@ -349,20 +363,22 @@
 </ul></li>
 </ul>
 </nav>
-  </nav>
+  </div>
 
 
 
 
-</div>
+</div><div class="order-1 w-60-l mw9 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style="flex-grow:1;">
+        <div class="order-0 mt4 w-100 center mw7" style="clear: both;">
+          <a id="doc-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowDM()"></a><a id="context-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowCM()"></a></div>
 
-      <div class="order-1 w-60-l mw7 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style="flex-grow:1;">
-        <div class="documentation-copy center measure-wide-l">
-          <header class="w-100">
-          <p class="f6 b helvetica tracked">
-            Operator's Manual
-          </p>
-          <h1 class="f1 athelas mb1">Data Redundancy</h1>
+        <div class="documentation-copy center mw7">
+          <header class="mt4 w-100">
+            <p class="f6 b helvetica tracked">
+                
+              
+            </p>
+            <h1 class="f1 athelas mb1">Data Redundancy</h1>
           </header>
 
           <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l">
@@ -505,42 +521,45 @@ testing/tools/dos-dumb-object-service/dos-server.py /var/lib/dos-server
   </article>
 
     </main>
-    <footer class="bg-green bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://docs.wallaroolabs.com/" >
-    &copy; 2018 Wallaroo
-  </a>
-    <div>
-<div hidden>
-  <span id="new-window-0">Opens in a new window</span>
-  <span id="new-window-1">Opens an external site</span>
-  <span id="new-window-2">Opens an external site in a new window</span>
-</div>
-
-
-
-
-
-
-
-
-</div>
-  </div>
-</footer>
-
     
-
-  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/languages/pony.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
 
 <script>
   var toggleBtns = document.getElementsByClassName('js-toggle')
   for (var i = 0; i < toggleBtns.length; i++) {
     toggleBtns[i].addEventListener('click', toggleClass, false)
   }
+
+  var myToggleBtns = document.getElementsByClassName('hide-show-toggle')
+  for (var i = 0; i < myToggleBtns.length; i++) {
+    myToggleBtns[i].addEventListener('click', hideShow, false)
+  }
+
+function hideShowDM() {
+  var menu = document.getElementById("doc-menu")
+  var thebody = document.getElementById("the-body")
+  if (window.getComputedStyle(menu).display == "none") {
+    menu.style.display = "block";
+    thebody.style.left = "300px";
+  } else {
+    menu.style.display = "none";
+    thebody.style.left = "0px";
+  }
+}
+
+function hideShowCM() {
+  var menu = document.getElementById("context-menu")
+  if (window.getComputedStyle(menu).display == "none") {
+    menu.style.display = "block";
+  } else {
+    menu.style.display = "none";
+  }
+}
 
 function toggleClass() {
   
@@ -568,18 +587,13 @@ function toggleClass() {
     }
   }
 
-
-
-
   let codeBlocks = document.getElementsByTagName('code')
-    for (let [key, codeBlock] of Object.entries(codeBlocks)){
-    var widthDif = codeBlock.scrollWidth - codeBlock.clientWidth
-    if (widthDif > 0)
-      codeBlock.parentNode.classList.add('expand')
+  for (let [key, codeBlock] of Object.entries(codeBlocks)){
+  var widthDif = codeBlock.scrollWidth - codeBlock.clientWidth
+  if (widthDif > 0)
+    codeBlock.parentNode.classList.add('expand')
   }
-
 </script>
-
 
   </body>
 </html>

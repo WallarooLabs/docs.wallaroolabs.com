@@ -15,17 +15,34 @@
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
     
 
-    
-    
-      <link href="/dist/css/app.955516233bcafa4d2a1c13cea63c7b50.css" rel="stylesheet">
-    
+    <style>
+      @font-face {
+        font-family: 'Icon';
+        src: url('/dist/fonts/icon.eot?52m981');
+        src: url('/dist/fonts/icon.eot?#iefix52m981')
+               format('embedded-opentype'),
+             url('/dist/fonts/icon.woff?52m981')
+               format('woff'),
+             url('/dist/fonts/icon.ttf?52m981')
+               format('truetype'),
+             url('/dist/fonts/icon.svg?52m981#icon')
+               format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
+
+    <link href="/dist/css/app.css" rel="stylesheet">
+    <link href="/dist/css/highlight.css" rel="stylesheet">
+    <link href="/dist/css/icon.css" rel="stylesheet">
+    <link href="/dist/css/wallaroo.css" rel="stylesheet">
 
     
       <link rel="stylesheet" href="/css/jquery-ui.min.css">
     
       <link rel="stylesheet" href="/css/jquery-ui.theme.min.css">
     
-      <link rel="stylesheet" href="/cshighlight.css">
+      <link rel="stylesheet" href="/css/highlight.css">
     
       <link rel="stylesheet" href="/css/my.css">
     
@@ -120,7 +137,7 @@
   </header>
 
 
-    <main class="pb7" role="main">
+    <main role="main">
       
   <article class="pa3 pa4-ns nested-copy-line-height nested-img">
   <main class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy mid-gray"></main>
@@ -128,15 +145,16 @@
       
         <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
   <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Appendix</span>
     <h1 class="f3 near-black">
       <a href="/appendix/giles-sender/" class="link black dim">
         Giles sender
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      Giles components act as external testers for Wallaroo. Giles Sender is used to mimic the behavior of an incoming data source. Giles Sender sends data to Wallaroo in one of four ways:
- With no other commandline options given, it will send string representations of integers, starting with 1 and increasing by 1 with each new message. With a file name given as the --file/-f argument it will send each line of the given file as a message.
+      
+        <p>Giles components act as external testers for Wallaroo. Giles Sender is used to mimic the behavior of an incoming data source. Giles Sender sends data to Wallaroo in one of four ways:
+ With no other commandline options given, it will send string representations of integers, starting with 1 and increasing by 1 with each new message. With a file name given as the --file/-f argument it will send each line of the given file as a message.</p>
+      
     </div>
   </div>
 </div>
@@ -144,15 +162,16 @@
       
         <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
   <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Appendix</span>
     <h1 class="f3 near-black">
       <a href="/appendix/wallaroo-docker-tips/" class="link black dim">
         Tips for using Wallaroo in Docker
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      In this section, we will cover some tips that can help facilitate the development process for users of the Wallaroo Docker image.
-Editing Wallaroo files within the Wallaroo Docker container When we start the Wallaroo Docker image with the -v /tmp/wallaroo-docker/wallaroo-0.6.1/wallaroo-src:/src/wallaroo option, as described in the Python Docker Installation Guide section, we will be creating a new directory locally at /tmp/wallaroo-docker/wallaroo-0.6.1/wallaroo-src if it does not exist. This directory will be populated with the Wallaroo source code when we start the container for the first time.
+      
+        <p>In this section, we will cover some tips that can help facilitate the development process for users of the Wallaroo Docker image.
+Editing Wallaroo files within the Wallaroo Docker container When we start the Wallaroo Docker image with the -v /tmp/wallaroo-docker/wallaroo-0.6.1/wallaroo-src:/src/wallaroo option, as described in the Python Docker Installation Guide section, we will be creating a new directory locally at /tmp/wallaroo-docker/wallaroo-0.6.1/wallaroo-src if it does not exist. This directory will be populated with the Wallaroo source code when we start the container for the first time.</p>
+      
     </div>
   </div>
 </div>
@@ -162,42 +181,45 @@ Editing Wallaroo files within the Wallaroo Docker container When we start the Wa
 </article>
 
     </main>
-    <footer class="bg-green bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://docs.wallaroolabs.com/" >
-    &copy; 2018 Wallaroo
-  </a>
-    <div>
-<div hidden>
-  <span id="new-window-0">Opens in a new window</span>
-  <span id="new-window-1">Opens an external site</span>
-  <span id="new-window-2">Opens an external site in a new window</span>
-</div>
-
-
-
-
-
-
-
-
-</div>
-  </div>
-</footer>
-
     
-
-  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/languages/pony.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
 
 <script>
   var toggleBtns = document.getElementsByClassName('js-toggle')
   for (var i = 0; i < toggleBtns.length; i++) {
     toggleBtns[i].addEventListener('click', toggleClass, false)
   }
+
+  var myToggleBtns = document.getElementsByClassName('hide-show-toggle')
+  for (var i = 0; i < myToggleBtns.length; i++) {
+    myToggleBtns[i].addEventListener('click', hideShow, false)
+  }
+
+function hideShowDM() {
+  var menu = document.getElementById("doc-menu")
+  var thebody = document.getElementById("the-body")
+  if (window.getComputedStyle(menu).display == "none") {
+    menu.style.display = "block";
+    thebody.style.left = "300px";
+  } else {
+    menu.style.display = "none";
+    thebody.style.left = "0px";
+  }
+}
+
+function hideShowCM() {
+  var menu = document.getElementById("context-menu")
+  if (window.getComputedStyle(menu).display == "none") {
+    menu.style.display = "block";
+  } else {
+    menu.style.display = "none";
+  }
+}
 
 function toggleClass() {
   
@@ -225,18 +247,13 @@ function toggleClass() {
     }
   }
 
-
-
-
   let codeBlocks = document.getElementsByTagName('code')
-    for (let [key, codeBlock] of Object.entries(codeBlocks)){
-    var widthDif = codeBlock.scrollWidth - codeBlock.clientWidth
-    if (widthDif > 0)
-      codeBlock.parentNode.classList.add('expand')
+  for (let [key, codeBlock] of Object.entries(codeBlocks)){
+  var widthDif = codeBlock.scrollWidth - codeBlock.clientWidth
+  if (widthDif > 0)
+    codeBlock.parentNode.classList.add('expand')
   }
-
 </script>
-
 
   </body>
 </html>
