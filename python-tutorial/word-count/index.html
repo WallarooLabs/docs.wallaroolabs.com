@@ -65,7 +65,7 @@ This section will take you through our Wallaroo word count example. Along the wa
 
 
 
-<meta itemprop="wordCount" content="878">
+<meta itemprop="wordCount" content="881">
 
 
 
@@ -394,11 +394,11 @@ This section will take you through our Wallaroo word count example. Along the wa
 <p>Let&rsquo;s dive in and take a look at our application setup:</p>
 
 <pre><code class="language-python">def application_setup(args):
-    in_host, in_port = wallaroo.tcp_parse_input_addrs(args)[0]
+    in_name, in_host, in_port = wallaroo.tcp_parse_input_addrs(args)[0]
     out_host, out_port = wallaroo.tcp_parse_output_addrs(args)[0]
 
     lines = wallaroo.source(&quot;Split and Count&quot;,
-                        wallaroo.TCPSourceConfig(in_host, in_port, 
+                        wallaroo.TCPSourceConfig(in_name, in_host, in_port,
                             decode_lines))
     pipeline = lines\
         .to(split)\
@@ -412,7 +412,7 @@ This section will take you through our Wallaroo word count example. Along the wa
 <p>By now, hopefully, most of this looks somewhat familiar. We&rsquo;re building on concepts we&rsquo;ve seen in our previous example applications. But instead of using an internal generator source to simulate inputs, we&rsquo;re listening on a TCPSource for lines of text from an external system:</p>
 
 <pre><code class="language-python">lines = wallaroo.source(&quot;Split and Count&quot;,
-                    wallaroo.TCPSourceConfig(in_host, in_port, 
+                    wallaroo.TCPSourceConfig(in_name, in_host, in_port,
                         decode_line))
 </code></pre>
 

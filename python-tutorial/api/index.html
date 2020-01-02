@@ -65,7 +65,7 @@ Overview In order to create a Wallaroo application in Python, you need to create
 
 
 
-<meta itemprop="wordCount" content="3489">
+<meta itemprop="wordCount" content="3508">
 
 
 
@@ -443,11 +443,11 @@ Overview In order to create a Wallaroo application in Python, you need to create
 <ul>
 <li><a href="#tcpsource">TCPSource</a>
 <ul>
-<li><a href="#wallaroo-tcpsourceconfig-host-port-decoder"><code>wallaroo.TCPSourceConfig(host, port, decoder)</code></a></li>
+<li><a href="#wallaroo-tcpsourceconfig-name-host-port-decoder"><code>wallaroo.TCPSourceConfig(name, host, port, decoder)</code></a></li>
 </ul></li>
 <li><a href="#kafkasource">KafkaSource</a>
 <ul>
-<li><a href="#wallaroo-kafkasourceconfig-topic-brokers-log-level-decoder"><code>wallaroo.KafkaSourceConfig(topic, brokers, log_level, decoder)</code></a></li>
+<li><a href="#wallaroo-kafkasourceconfig-name-topic-brokers-log-level-decoder"><code>wallaroo.KafkaSourceConfig(name, topic, brokers, log_level, decoder)</code></a></li>
 </ul></li>
 <li><a href="#source-decoder">Source Decoder</a></li>
 <li><a href="#wallaroo-decoder-header-length-length-fmt"><code>@wallaroo.decoder(header_length, length_fmt)</code></a>
@@ -1066,9 +1066,11 @@ def kafka_encode(data):
 
 <p>An instance of <code>TCPSourceConfig</code> is a required argument of <a href="#wallaroo-source-name-source-config">wallaroo.source</a>.</p>
 
-<h5 id="wallaroo-tcpsourceconfig-host-port-decoder"><code>wallaroo.TCPSourceConfig(host, port, decoder)</code></h5>
+<h5 id="wallaroo-tcpsourceconfig-name-host-port-decoder"><code>wallaroo.TCPSourceConfig(name, host, port, decoder)</code></h5>
 
 <p>The class used to define the properties of a Wallaroo TCPSource.</p>
+
+<p><code>name</code> is a string representing the source&rsquo;s name.</p>
 
 <p><code>host</code> is a string representing the host address.</p>
 
@@ -1084,9 +1086,11 @@ def kafka_encode(data):
 
 <p>An instance of <code>KafkaSourceConfig</code> is a required argument of <a href="#wallaroo-source-name-source-config">wallaroo.source</a>.</p>
 
-<h5 id="wallaroo-kafkasourceconfig-topic-brokers-log-level-decoder"><code>wallaroo.KafkaSourceConfig(topic, brokers, log_level, decoder)</code></h5>
+<h5 id="wallaroo-kafkasourceconfig-name-topic-brokers-log-level-decoder"><code>wallaroo.KafkaSourceConfig(name, topic, brokers, log_level, decoder)</code></h5>
 
 <p>The class used to define the properties of a Wallaroo KafkaSink.</p>
+
+<p><code>name</code> is a string representing the Wallaroo source name.</p>
 
 <p><code>topic</code> is a string.</p>
 

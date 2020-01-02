@@ -63,7 +63,7 @@
 
 
 
-<meta itemprop="wordCount" content="925">
+<meta itemprop="wordCount" content="933">
 
 
 
@@ -392,7 +392,7 @@
 
 <pre><code>```bash
 machida-resilience --application-module word_count \
-  --in 127.0.0.1:7010 --out 127.0.0.1:7002 \
+  --in 'Split and Count'@127.0.0.1:7010 --out 127.0.0.1:7002 \
   --metrics 127.0.0.1:5001 --control 127.0.0.1:6000 \
   --my-data 127.0.0.1:6003 --my-control 127.0.0.1:6002 \
   --external 127.0.0.1:5051 \
@@ -455,7 +455,7 @@ cd examples/python/word_count
 <li><p>Shell 2: Start initializer (remember to use <code>machida3-resilience</code> if using Python 3)</p>
 
 <pre><code class="language-bash">machida-resilience --application-module word_count \
-  --in 127.0.0.1:7010 --out 127.0.0.1:7002 \
+  --in 'Split and Count'@127.0.0.1:7010 --out 127.0.0.1:7002 \
   --metrics 127.0.0.1:5001 --control 127.0.0.1:6000 \
   --data 127.0.0.1:6001 --external 127.0.0.1:5050 \
   --name initializer --cluster-initializer --worker-count 2 \
@@ -467,7 +467,7 @@ cd examples/python/word_count
 <li><p>Shell 3: Start worker (remember to use <code>machida3-resilience</code> if using Python 3)</p>
 
 <pre><code class="language-bash">machida-resilience --application-module word_count \
-  --in 127.0.0.1:7010 --out 127.0.0.1:7002 \
+  --in 'Split and Count'@127.0.0.1:7010 --out 127.0.0.1:7002 \
   --metrics 127.0.0.1:5001 --control 127.0.0.1:6000 \
   --my-data 127.0.0.1:6003 --my-control 127.0.0.1:6002 \
   --external 127.0.0.1:5051 \
@@ -501,7 +501,7 @@ cd examples/python/word_count
 <li><p>Shell 3: Restart worker1 with the same command we used above, but save its log output to a new file (remember to use <code>machida3-resilience</code> if using Python 3)</p>
 
 <pre><code class="language-bash">machida-resilience --application-module word_count \
-  --in 127.0.0.1:7010 --out 127.0.0.1:7002 \
+  --in 'Split and Count'@127.0.0.1:7010 --out 127.0.0.1:7002 \
   --metrics 127.0.0.1:5001 --control 127.0.0.1:6000 \
   --my-data 127.0.0.1:6003 --my-control 127.0.0.1:6002 \
   --external 127.0.0.1:5051 \

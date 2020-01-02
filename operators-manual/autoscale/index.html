@@ -65,7 +65,7 @@ With autoscale enabled, you can add or remove workers from a running cluster. We
 
 
 
-<meta itemprop="wordCount" content="744">
+<meta itemprop="wordCount" content="748">
 
 
 
@@ -399,7 +399,7 @@ With autoscale enabled, you can add or remove workers from a running cluster. We
 <div id="tabset-operators-manual-autoscale-1-0">
   
     <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
-machida --application-module alphabet --in <span style="color:#ae81ff">127</span>.0.0.1:7010 <span style="color:#ae81ff">\
+machida --application-module alphabet --in alphabet@127.0.0.1:7010 <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --out <span style="color:#ae81ff">127</span>.0.0.1:7002 --join <span style="color:#ae81ff">127</span>.0.0.1:12500 --name w3 <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --ponythreads <span style="color:#ae81ff">1</span>
 </code></pre></div>
@@ -410,7 +410,7 @@ machida --application-module alphabet --in <span style="color:#ae81ff">127</span
 <div id="tabset-operators-manual-autoscale-1-1">
   
     <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
-machida3 --application-module alphabet --in <span style="color:#ae81ff">127</span>.0.0.1:7010 <span style="color:#ae81ff">\
+machida3 --application-module alphabet --in alphabet@127.0.0.1:7010 <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --out <span style="color:#ae81ff">127</span>.0.0.1:7002 --join <span style="color:#ae81ff">127</span>.0.0.1:12500 --name w3 <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --ponythreads <span style="color:#ae81ff">1</span>
 </code></pre></div>
@@ -422,7 +422,7 @@ machida3 --application-module alphabet --in <span style="color:#ae81ff">127</spa
 <script>$(function(){$("#tabset-operators-manual-autoscale-1").tabs();});</script>
 
 
-<p>The <code>--in</code> argument specifies the port that the TCP source will listen on, and the <code>--out</code> argument specifies the target address for data output over TCP. <code>--join</code> is used to specify the control channel address of the running worker we are contacting in order to join.  <code>--name</code> is used to specify the name of the joining worker.</p>
+<p>The <code>--in</code> argument specifies the name of the TCP source and the port it will listen on, and the <code>--out</code> argument specifies the target address for data output over TCP. <code>--join</code> is used to specify the control channel address of the running worker we are contacting in order to join.  <code>--name</code> is used to specify the name of the joining worker.</p>
 
 <p>If you want to add more than 1 new worker at a time, you must have all joining workers contact the same running worker and all must specify the same joining worker total as the <code>worker_count</code> command line argument.  For example, if 3 workers are joining, then in our case, they could all use <code>--join 127.0.0.1:12500</code> and <code>--worker-count 3</code>.  Their command lines might be as follows:</p>
 
@@ -445,15 +445,15 @@ machida3 --application-module alphabet --in <span style="color:#ae81ff">127</spa
 <div id="tabset-operators-manual-autoscale-2-0">
   
     <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
-machida --application-module alphabet --in <span style="color:#ae81ff">127</span>.0.0.1:7010 <span style="color:#ae81ff">\
+machida --application-module alphabet --in alphabet@127.0.0.1:7010 <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --out <span style="color:#ae81ff">127</span>.0.0.1:7002 --join <span style="color:#ae81ff">127</span>.0.0.1:12500 --name w3 --worker-count <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --ponythreads <span style="color:#ae81ff">1</span>
 
-machida --application-module alphabet --in <span style="color:#ae81ff">127</span>.0.0.1:7010 <span style="color:#ae81ff">\
+machida --application-module alphabet --in alphabet@127.0.0.1:7010 <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --out <span style="color:#ae81ff">127</span>.0.0.1:7002 --join <span style="color:#ae81ff">127</span>.0.0.1:12500 --name w4 --worker-count <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --ponythreads <span style="color:#ae81ff">1</span>
 
-machida --application-module alphabet --in <span style="color:#ae81ff">127</span>.0.0.1:7010 <span style="color:#ae81ff">\
+machida --application-module alphabet --in alphabet@127.0.0.1:7010 <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --out <span style="color:#ae81ff">127</span>.0.0.1:7002 --join <span style="color:#ae81ff">127</span>.0.0.1:12500 --name w5 --worker-count <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --ponythreads <span style="color:#ae81ff">1</span>
 </code></pre></div>
@@ -464,15 +464,15 @@ machida --application-module alphabet --in <span style="color:#ae81ff">127</span
 <div id="tabset-operators-manual-autoscale-2-1">
   
     <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
-machida3 --application-module alphabet --in <span style="color:#ae81ff">127</span>.0.0.1:7010 <span style="color:#ae81ff">\
+machida3 --application-module alphabet --in alphabet@127.0.0.1:7010 <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --out <span style="color:#ae81ff">127</span>.0.0.1:7002 --join <span style="color:#ae81ff">127</span>.0.0.1:12500 --name w3 --worker-count <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --ponythreads <span style="color:#ae81ff">1</span>
 
-machida3 --application-module alphabet --in <span style="color:#ae81ff">127</span>.0.0.1:7010 <span style="color:#ae81ff">\
+machida3 --application-module alphabet --in alphabet@127.0.0.1:7010 <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --out <span style="color:#ae81ff">127</span>.0.0.1:7002 --join <span style="color:#ae81ff">127</span>.0.0.1:12500 --name w4 --worker-count <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --ponythreads <span style="color:#ae81ff">1</span>
 
-machida3 --application-module alphabet --in <span style="color:#ae81ff">127</span>.0.0.1:7010 <span style="color:#ae81ff">\
+machida3 --application-module alphabet --in alphabet@127.0.0.1:7010 <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --out <span style="color:#ae81ff">127</span>.0.0.1:7002 --join <span style="color:#ae81ff">127</span>.0.0.1:12500 --name w5 --worker-count <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --ponythreads <span style="color:#ae81ff">1</span>
 </code></pre></div>

@@ -107,7 +107,7 @@ Set up Environment for the Wallaroo Tutorial Linux and MacOS If you haven&amp;rs
       
       <guid>https://docs.wallaroolabs.com/python-installation/python-wallaroo-up-installation-guide/</guid>
       <description>Supported Systems Wallaroo Up has been tested on:
- Amazon Linux 2 CentOS 7 Debian  Buster (Testing) Jessie Stretch  Fedora  27 28  Oracle Linux 7 Ubuntu  Artful Bionic Trusty Xenial   It should also work on Red Hat Enterprise Linux 7.
+ Amazon Linux 2 CentOS 7 Debian  Buster (Testing) Stretch  Fedora  27 28  Oracle Linux 7 Ubuntu  Bionic Xenial   It should also work on Red Hat Enterprise Linux 7.
 Memory requirements In order to compile the Wallaroo example applications, your system will need to have approximately 3 GB working memory (this can be RAM or swap).</description>
     </item>
     
@@ -284,7 +284,7 @@ A Stateless Application - Alerts The alerts.py application is going to receive t
       
       <guid>https://docs.wallaroolabs.com/python-tutorial/writing-your-own-stateful-application/</guid>
       <description>In this section, we will go over how to write a stateful application with the Wallaroo Python API. If you haven&amp;rsquo;t reviewed the simple stateless Alerts application example yet, you can find it here.
-A Stateful Application - Alphabet Our stateful application is going to add state to the Alerts example. Again, it receives as its inputs messages representing transactions. But now instead of statelessly checking individual transactions to see if they pass certain thresholds, it will add each transaction amount to a running total.</description>
+A Stateful Application - Alerts Our stateful application is going to add state to the Alerts example. Again, it receives as its inputs messages representing transactions. But now instead of statelessly checking individual transactions to see if they pass certain thresholds, it will add each transaction amount to a running total.</description>
     </item>
     
   </channel>
