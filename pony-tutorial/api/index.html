@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Wallaroo  | Wallaroo Pony API Classes</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.52" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    <style>
+      @font-face {
+        font-family: 'Icon';
+        src: url('/dist/fonts/icon.eot?52m981');
+        src: url('/dist/fonts/icon.eot?#iefix52m981')
+               format('embedded-opentype'),
+             url('/dist/fonts/icon.woff?52m981')
+               format('woff'),
+             url('/dist/fonts/icon.ttf?52m981')
+               format('truetype'),
+             url('/dist/fonts/icon.svg?52m981#icon')
+               format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
+
+    <link href="/dist/css/app.css" rel="stylesheet">
+    <link href="/dist/css/highlight.css" rel="stylesheet">
+    <link href="/dist/css/icon.css" rel="stylesheet">
+    <link href="/dist/css/wallaroo.css" rel="stylesheet">
+
+    
+      <link rel="stylesheet" href="/css/jquery-ui.min.css">
+    
+      <link rel="stylesheet" href="/css/jquery-ui.theme.min.css">
+    
+      <link rel="stylesheet" href="/css/highlight.css">
+    
+      <link rel="stylesheet" href="/css/my.css">
+    
+
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="Wallaroo Pony API Classes" />
+<meta property="og:description" content="The Wallaroo Pony API allows developers to create Wallaroo applications in Pony.
+Overview In order to create a Wallaroo application in Pony, you need to create the functions and classes that provide the required interfaces for each stage in your pipeline, and then connect them together in a topology structure. This topology structure should always be the last argument when calling Wallaroo.build_application(env, app_name, pipeline).
+Table of Contents  Application Setup Computation State StateComputation Data Aggregation Key KeyExtractor Windows Sink TCPSink KafkaSink Sink Encoder Source TCPSource KafkaSource Source Decoder  Application Setup After your program loads, it executes its entry point function, Main." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://docs.wallaroolabs.com/pony-tutorial/api/" />
+
+<meta itemprop="name" content="Wallaroo Pony API Classes">
+<meta itemprop="description" content="The Wallaroo Pony API allows developers to create Wallaroo applications in Pony.
+Overview In order to create a Wallaroo application in Pony, you need to create the functions and classes that provide the required interfaces for each stage in your pipeline, and then connect them together in a topology structure. This topology structure should always be the last argument when calling Wallaroo.build_application(env, app_name, pipeline).
+Table of Contents  Application Setup Computation State StateComputation Data Aggregation Key KeyExtractor Windows Sink TCPSink KafkaSink Sink Encoder Source TCPSource KafkaSource Source Decoder  Application Setup After your program loads, it executes its entry point function, Main.">
+
+
+
+<meta itemprop="wordCount" content="2989">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Wallaroo Pony API Classes"/>
+<meta name="twitter:description" content="The Wallaroo Pony API allows developers to create Wallaroo applications in Pony.
+Overview In order to create a Wallaroo application in Pony, you need to create the functions and classes that provide the required interfaces for each stage in your pipeline, and then connect them together in a topology structure. This topology structure should always be the last argument when calling Wallaroo.build_application(env, app_name, pipeline).
+Table of Contents  Application Setup Computation State StateComputation Data Aggregation Key KeyExtractor Windows Sink TCPSink KafkaSink Sink Encoder Source TCPSource KafkaSource Source Decoder  Application Setup After your program loads, it executes its entry point function, Main."/>
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+
+  <header>
+    <div class="bg-green">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="https://docs.wallaroolabs.com/" class="f3 fw2 hover-white no-underline white-90 dib">
+      Wallaroo
+    </a>
+    <div class="flex-l items-center">
+      
+        <ul class="pl0 mr3">
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/core-concepts/" title="Core Concepts page">
+              Core Concepts
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/pony-installation/" title="Installation page">
+              Installation
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/pony-tutorial/" title="Tutorial page">
+              Tutorial
+            </a>
+          </li>
+          
+          <li class="list f5 f4-ns fw4 dib pr3">
+            <a class="hover-white no-underline white-90" href="/operators-manual/" title="Operators Manual page">
+              Operators Manual
+            </a>
+          </li>
+          
+        </ul>
+      
+      
+<div hidden>
+  <span id="new-window-0">Opens in a new window</span>
+  <span id="new-window-1">Opens an external site</span>
+  <span id="new-window-2">Opens an external site in a new window</span>
+</div>
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+    <main role="main">
+      
+  <article class="w-100 ph4 pb5 pb6-ns pt1 pt3-ns">
+      <div class="order-0 w-20 dn db-l doc-menu" id="doc-menu">
+        
+<nav role="navigation">
+  <ul class="list pa0 nl2">
+    
+      
+      <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".core-concepts">Core Concepts</a>
+        <ul class="core-concepts desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+          <li class="f6 fw4">
+            <a href="/core-concepts/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Wallaroo Core Concepts
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/core-concepts/state/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              State
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/core-concepts/working-with-state/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Working with State
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/core-concepts/partitioning/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Partitioning
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/core-concepts/aggregations/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Aggregations
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/core-concepts/windows/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Windows
+            </a>
+          </li>
+        </ul>
+      </li>
+      
+      <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".ponyinstallation">Installation Guide</a>
+        <ul class="ponyinstallation desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+          <li class="f6 fw4">
+            <a href="/pony-installation/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Installing with Wallaroo Up
+            </a>
+          </li>
+        </ul>
+      </li>
+      
+      <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2  primary-color" data-target=".ponytutorial">Pony Tutorial</a>
+        <ul class="ponytutorial desktopmenu animated fadeIn list pl0 bg-light-gray db">
+          <li class="f6 fw4">
+            <a href="/pony-tutorial/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Pony API Introduction
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/pony-tutorial/running-a-wallaroo-application/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Running A Wallaroo Application
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/pony-tutorial/writing-your-own-application/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Writing Your Own Application
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/pony-tutorial/writing-your-own-stateful-application/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Writing Your Own Stateful Application
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/pony-tutorial/word-count/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Word Count
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/pony-tutorial/api/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 primary-color ">
+              Wallaroo Pony API Classes
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/pony-tutorial/tcp-decoders-and-encoders/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              TCP Decoders and Encoders
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/pony-tutorial/starting-a-new-shell/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Starting a new shell
+            </a>
+          </li>
+        </ul>
+      </li>
+      
+      <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".operators-manual">Operators Manual</a>
+        <ul class="operators-manual desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+          <li class="f6 fw4">
+            <a href="/operators-manual/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Operators Manual
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/operators-manual/running-wallaroo/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Running Wallaroo
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/operators-manual/autoscale/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Autoscale
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/operators-manual/resilience-crash/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Crash Resilience
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/operators-manual/resilience-data-redundancy/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Data Redundancy
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/operators-manual/command-line-options/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Command-Line Options
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/operators-manual/metrics-ui/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Wallaroo Metrics UI
+            </a>
+          </li>
+        </ul>
+      </li>
+      
+      <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".appendix">Appendix</a>
+        <ul class="appendix desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+          <li class="f6 fw4">
+            <a href="/appendix/giles-sender/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Giles sender
+            </a>
+          </li>
+          <li class="f6 fw4">
+            <a href="/appendix/wallaroo-docker-tips/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Tips for using Wallaroo in Docker
+            </a>
+          </li>
+        </ul>
+      </li>
+  </ul>
+</nav>
+
+      </div>
+    <div class="flex-l" id="the-body"><div class="order-2 w-100 w-20-l ph5-m ph0-l mb4 sticky dn db-l" id="context-menu"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">What's in this document</p>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#table-of-contents">Table of Contents</a>
+<ul>
+<li><a href="#application-setup">Application Setup</a>
+<ul>
+<li><a href="#partial-pipelines">Partial Pipelines</a></li>
+<li><a href="#merging-partial-pipelines">Merging Partial Pipelines</a></li>
+<li><a href="#building-an-application">Building an Application</a></li>
+</ul></li>
+<li><a href="#wallaroo"><code>Wallaroo</code></a>
+<ul>
+<li><a href="#wallaroo-source-inputtype-name-source-config"><code>wallaroo.source[InputType](name, source_config)</code></a>
+<ul>
+<li><a href="#to-computationoutputtype-computation"><code>to[ComputationOutputType](computation)</code></a></li>
+<li><a href="#key-by-keyextractor"><code>key_by(KeyExtractor)</code></a></li>
+<li><a href="#collect"><code>collect()</code></a></li>
+<li><a href="#to-sink-sink-config"><code>to_sink(sink_config)</code></a></li>
+<li><a href="#to-sinks-sink-configs"><code>to_sinks(sink_configs)</code></a></li>
+</ul></li>
+<li><a href="#wallaroo-build-application-env-application-name-pipeline"><code>Wallaroo.build_application(env, application_name, pipeline)</code></a></li>
+</ul></li>
+<li><a href="#computation">Computation</a>
+<ul>
+<li>
+<ul>
+<li><a href="#fun-apply-input-in-computationresult-out"><code>fun apply(input: In): ComputationResult[Out]</code></a></li>
+<li><a href="#fun-name-string"><code>fun name(): String</code></a>
+<ul>
+<li><a href="#example">Example</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><a href="#state">State</a>
+<ul>
+<li><a href="#example-state">Example State</a></li>
+</ul></li>
+<li><a href="#statecomputation">StateComputation</a>
+<ul>
+<li>
+<ul>
+<li><a href="#fun-apply-input-in-state-state-computationresult-out"><code>fun apply(input: In, state: State): ComputationResult[Out]</code></a></li>
+<li><a href="#example-1">Example</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#aggregation">Aggregation</a>
+<ul>
+<li>
+<ul>
+<li><a href="#example-2">Example</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#input">Input</a></li>
+<li><a href="#key">Key</a></li>
+<li><a href="#keyextractor">KeyExtractor</a>
+<ul>
+<li><a href="#example-key-extractor">Example Key Extractor</a></li>
+</ul></li>
+<li><a href="#windows">Windows</a>
+<ul>
+<li><a href="#count-based">Count-based</a>
+<ul>
+<li><a href="#example-3">Example</a></li>
+</ul></li>
+<li><a href="#range-based">Range-based</a>
+<ul>
+<li><a href="#example-4">Example</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#sink">Sink</a>
+<ul>
+<li><a href="#tcpsink">TCPSink</a>
+<ul>
+<li><a href="#tcpsinkconfig-outtype-from-options-encoder-tcpsinkconfigcliparser-env-args-0"><code>TCPSinkConfig[OutType].from_options(encoder, TCPSinkConfigCLIParser(env.args)?(0)?))</code></a></li>
+</ul></li>
+<li><a href="#kafkasink">KafkaSink</a>
+<ul>
+<li><a href="#kafkasinkconfig-outputtype-encoder-kafkasinkconfigcliparser-env-out-parse-options-env-args-env-root-as-ambientauth"><code>KafkaSinkConfig[OutputType](encoder, KafkaSinkConfigCLIParser(env.out).parse_options(env.args)?, env.root as AmbientAuth)</code></a></li>
+<li><a href="#kafkasinkconfigcliparser"><code>KafkaSinkConfigCLIParser</code></a></li>
+</ul></li>
+<li><a href="#sink-encoder">Sink Encoder</a>
+<ul>
+<li><a href="#example-encoder-for-a-tcpsink">Example encoder for a TCPSink</a></li>
+<li><a href="#example-encoder-for-a-kafka-sink">Example encoder for a Kafka Sink</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#source">Source</a>
+<ul>
+<li><a href="#tcpsource">TCPSource</a>
+<ul>
+<li><a href="#tcpsourceconfig-inputtype-from-options-frame-handler-tcpsourceconfigcliparser-source-env-args"><code>TCPSourceConfig[InputType].from_options(frame_handler, TCPSourceConfigCLIParser(source, env.args)?)</code></a></li>
+</ul></li>
+<li><a href="#kafkasource">KafkaSource</a>
+<ul>
+<li><a href="#kafkasourceconfig-inputtype-source-kafkasourceconfigcliparser-env-out-parse-options-env-args-env-root-as-ambientauth-decoder"><code>KafkaSourceConfig[InputType](source, KafkaSourceConfigCLIParser(env.out).parse_options(env.args)?, env.root as AmbientAuth, decoder)</code></a></li>
+<li><a href="#kafkasourceconfigcliparser-env-out-parse-options-env-args"><code>KafkaSourceConfigCLIParser(env.out).parse_options(env.args)?</code></a></li>
+</ul></li>
+<li><a href="#source-decoder">Source Decoder</a>
+<ul>
+<li><a href="#example-decoder-for-a-tcpsource">Example decoder for a TCPSource</a></li>
+</ul></li>
+<li><a href="#example-decoder-for-a-kafkasource">Example decoder for a KafkaSource</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+
+
+
+
+</div><div class="order-1 w-60-l mw9 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style="flex-grow:1;">
+        <div class="order-0 mt4 w-100 center mw7" style="clear: both;">
+          <a id="doc-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowDM()"></a><a id="context-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowCM()"></a></div>
+
+        <div class="documentation-copy center mw7">
+          <header class="mt4 w-100">
+            <p class="f6 b helvetica tracked">
+                
+              
+            </p>
+            <h1 class="f1 athelas mb1">Wallaroo Pony API Classes</h1>
+          </header>
+
+          <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l">
+
+<p>The Wallaroo Pony API allows developers to create Wallaroo applications in Pony.</p>
+
+<h2 id="overview">Overview</h2>
+
+<p>In order to create a Wallaroo application in Pony, you need to create the functions and classes that provide the required interfaces for each stage in your pipeline, and then connect them together in a topology structure. This topology structure should always be the last argument when calling <code>Wallaroo.build_application(env, app_name, pipeline)</code>.</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+
+<ul>
+<li><a href="#application-setup">Application Setup</a></li>
+<li><a href="#computation">Computation</a></li>
+<li><a href="#state">State</a></li>
+<li><a href="#statecomputation">StateComputation</a></li>
+<li><a href="#data">Data</a></li>
+<li><a href="#aggregation">Aggregation</a></li>
+<li><a href="#key">Key</a></li>
+<li><a href="#keyextractor">KeyExtractor</a></li>
+<li><a href="#windows">Windows</a></li>
+<li><a href="#sink">Sink</a></li>
+<li><a href="#tcpsink">TCPSink</a></li>
+<li><a href="#kafkasink">KafkaSink</a></li>
+<li><a href="#sink-encoder">Sink Encoder</a></li>
+<li><a href="#source">Source</a></li>
+<li><a href="#tcpsource">TCPSource</a></li>
+<li><a href="#kafkasource">KafkaSource</a></li>
+<li><a href="#source-decoder">Source Decoder</a></li>
+</ul>
+
+<h3 id="application-setup">Application Setup</h3>
+
+<p>After your program loads, it executes its entry point function, <code>Main.create</code>, which builds an application topology structure that tells Wallaroo how to connect the classes, functions, and objects behind the scenes using <code>Wallaroo.build_application</code>. A Wallaroo Pony application must call this function.</p>
+
+<h4 id="partial-pipelines">Partial Pipelines</h4>
+
+<p>A pipeline includes one or more sources. You use <code>Wallaroo.source[InputType](...)</code> to define a stream originating from a source. Each source stream can be followed by one or more computation stages. A linear sequence from a source through zero or more computations constitutes a partial pipeline. Here&rsquo;s an example using a stateless computation:</p>
+
+<pre><code>let inputs = Wallaroo.source[InputType](&quot;Source Name&quot;, source_config)
+let partial_pipeline =
+    inputs.to[InputType](my_stateless_computation)
+</code></pre>
+
+<p>This defines a partial pipeline that could be diagrammed as followed:</p>
+
+<pre><code>Source -&gt; my_stateless_computation -&gt;
+</code></pre>
+
+<p>The hanging arrow at the end indicates that the pipeline is partial. We can still add more stages, and to complete the pipeline we need one or more sinks.
+You create complete pipeline by terminating a partial pipeline with a call to <code>to_sink</code> or <code>to_sinks</code>. For example:</p>
+
+<pre><code>let inputs =
+    Wallaroo.source[InputType](&quot;Source Name&quot;, source_config)
+let complete_pipeline = recover val
+    inputs
+        .to[InputType](my_stateless_computation)
+        .to_sink(sink_config)
+end
+</code></pre>
+
+<p>Our pipeline is now complete:</p>
+
+<pre><code>Source -&gt; my_stateless_computation -&gt; Sink
+</code></pre>
+
+<p>Unless a call to <code>to</code> using a stateless computation is preceded by a call to <code>key_by</code> (which partitions messages by key), there are no guarantees around the order in which messages will be processed. That&rsquo;s because Wallaroo might parallelize a stateless computation if that is beneficial for scaling. That means the execution graph for the above pipeline could look like this:</p>
+
+<pre><code>         /-&gt; my_stateless_computation -\
+        /                               \
+Source ----&gt; my_stateless_computation ----&gt; Sink
+        \                               /
+         \-&gt; my_stateless_computation -/
+</code></pre>
+
+<p>Some messages will be routed to each of the parallel computation instances. When they merge again at the sink, these messages will be interleaved in a non-deterministic fashion.</p>
+
+<p>If you want to ensure that all messages are sent to the same target, then use the <code>collect()</code> API call. For example,</p>
+
+<pre><code>let inputs = Wallaroo.source[InputType](&quot;Source Name&quot;,
+    source_config)
+let complete_pipeline = recover val
+    inputs
+        .collect()
+        .to[InputType](my_stateless_computation)
+        .to_sink(sink_config))
+end
+</code></pre>
+
+<p>will cause all messages from the source to be sent to the same stateless computation instance:</p>
+
+<pre><code>Source -&gt; my_stateless_computation -&gt; Sink
+</code></pre>
+
+<h4 id="merging-partial-pipelines">Merging Partial Pipelines</h4>
+
+<p>You can merge two partial pipelines to form a new partial pipeline. For example:</p>
+
+<pre><code>let inputs1 = Wallaroo.source[InputType](&quot;Source 1&quot;,
+    source_config)
+let partial_pipeline1 = inputs1.to[Input1Type](computation1)
+
+let inputs2 = Wallaroo.source[InputType](&quot;Source 2&quot;,
+    source_config)
+let partial_pipeline2 = inputs2.to[Input2Type](computation2)
+
+inputs1.merge[Input2Type](inputs2)
+</code></pre>
+
+<p>The resulting partial pipeline could be</p>
+
+<pre><code>Source1 -&gt; computation1 -&gt;\
+                           \
+                            -&gt;
+                           /
+Source2 -&gt; computation2 -&gt;/
+</code></pre>
+
+<p>Again, the hanging arrow indicates we can still add more stages, and that to complete the pipeline we still need one or more sinks. You could also merge this partial pipeline with additional partial pipelines. When you merge partial pipelines in this way, you are not creating a join in the sense familiar from SQL joins. Instead, you are combining two streams into one, with messages from the first stream interwoven with messages from the second. That combined stream is then passed to the next stage following the hanging arrow.</p>
+
+<p>The following is an example of a complete pipeline including a merge where we first add one more computation before the sink:</p>
+
+<pre><code>let pipeline = recover val
+    inputs1.merge[Input2Type](inputs2)
+    .to[ComputationOutputType](computation3)
+    .to_sink(sink_config)
+end
+</code></pre>
+
+<p>The corresponding diagram for this definition would look like this:</p>
+
+<pre><code>Source1 -&gt; computation1 -&gt;\
+                           \
+                            -&gt; computation3 -&gt; Sink
+                           /
+Source2 -&gt; computation2 -&gt;/
+</code></pre>
+
+<h4 id="building-an-application">Building an Application</h4>
+
+<p>Once you have defined a complete pipeline, you must pass it into <code>Wallaroo.build_application(env, app_name, pipeline)</code>.</p>
+
+<p>For a simple application with a decoder, computation, and encoder, the application setup might look like</p>
+
+<pre><code>let pipeline = recover val
+    let inputs = Wallaroo.source[InputType](&quot;Source Name&quot;,
+        source_config)
+
+    inputs
+        .to[ComputationOutpputType](computation)
+        .to_sink(sink_config)
+end
+Wallaroo.build_application(env, &quot;Application Name&quot;, pipeline)
+</code></pre>
+
+<h3 id="wallaroo"><code>Wallaroo</code></h3>
+
+<p>The <code>Wallaroo</code> library provides two functions that are needed to define a Wallaroo application, <code>source[InputType]</code> and <code>build_application</code>.</p>
+
+<h4 id="wallaroo-source-inputtype-name-source-config"><code>wallaroo.source[InputType](name, source_config)</code></h4>
+
+<p>Create a partial pipeline originating at a source.</p>
+
+<p><code>name</code> must be a string.</p>
+
+<p><code>source_config</code> must be one of the <a href="#source">SourceConfig</a> classes.</p>
+
+<p>There are number of methods you can call on a partial pipeline object (such as the one returned by <code>source</code>).</p>
+
+<h5 id="to-computationoutputtype-computation"><code>to[ComputationOutputType](computation)</code></h5>
+
+<p>Add a computation <em>function</em> to the partial pipeline. This will either be a <a href="#computation">stateless</a> or a <a href="#statecomputation">state</a> computation. A call to <code>to</code> returns a new partial pipeline object.</p>
+
+<h5 id="key-by-keyextractor"><code>key_by(KeyExtractor)</code></h5>
+
+<p>Partition messages at this point based on the key extracted using the key_extractor function. A call to <code>key_by</code> returns a new partial pipeline object.</p>
+
+<p><code>key_extractor</code> must implement the <a href="#keyextractor">KeyExtractor</a> interface.</p>
+
+<h5 id="collect"><code>collect()</code></h5>
+
+<p>Interleave all partitions from the previous stage into one partition for all subsequent computations. This can be overridden later with key_by. The effect of collect() is similar to using a key_by that returns a constant key.</p>
+
+<p>This code:</p>
+
+<pre><code>inputs
+    .key_by(ExtractKey)
+    .to[ComputationOutputType](f)
+    .to[ComputationOutputType](g)
+    .to_sink(sink_config)
+</code></pre>
+
+<p>will partition the inputs into one partition per key. This scheme will apply to both f and g, which would look something like this:</p>
+
+<pre><code>         /-&gt; f -&gt; g -\
+        /             \
+Source ----&gt; f -&gt; g ----&gt; Sink
+        \             /
+         \-&gt; f -&gt; g -/
+</code></pre>
+
+<p>If we want to ensure that all the results from every instance of f are sent to a single instance of g (perhaps g is used to keep track of some information about all the outputs), we would write:</p>
+
+<pre><code>inputs
+    .key_by(extract_key)
+    .to[ComputationOutputType](f)
+    .collect()
+    .to[ComputationOutputType](g)
+    .to_sink(sink_config))
+</code></pre>
+
+<p>which would look something like:</p>
+
+<pre><code>         /-&gt; f -\
+        /        \
+Source ----&gt; f ----&gt; g -&gt; Sink
+        \        /
+         \-&gt; f -/
+</code></pre>
+
+<h5 id="to-sink-sink-config"><code>to_sink(sink_config)</code></h5>
+
+<p>Add a sink to the end of a pipeline. This returns a complete pipeline object that is ready to be passed to <code>Wallaroo.build_application</code>.</p>
+
+<p><code>sink_config</code> must be one of the <a href="#sink">SinkConfig</a> classes.</p>
+
+<h5 id="to-sinks-sink-configs"><code>to_sinks(sink_configs)</code></h5>
+
+<p>Add multiple sinks to the end of a pipeline. This returns a complete pipeline object that is ready to be passed to <code>Wallaroo.build_application</code>.</p>
+
+<p><code>sink_config</code> must be a list of <a href="#sink">SinkConfig</a> classes.</p>
+
+<p>At the moment, the same pipeline output is sent via all sinks. The ability to determine what output should be sent to which sinks will be added in a future version of Wallaroo.</p>
+
+<h4 id="wallaroo-build-application-env-application-name-pipeline"><code>Wallaroo.build_application(env, application_name, pipeline)</code></h4>
+
+<p>Returns the topology structure Wallaroo requires in order to construct the topology connecting all of the application components.</p>
+
+<p><code>env</code> must be the <code>Env</code> object passed down from our <code>create</code> function in <code>Main</code>, which represents the environment our application was evoked in.</p>
+
+<p><code>application_name</code> must be a <code>String</code>.</p>
+
+<p><code>pipeline</code> must be a complete pipeline object returned from either <code>to_sink</code> or <code>to_sinks</code>.</p>
+
+<h3 id="computation">Computation</h3>
+
+<p>A stateless computation is a simple function that takes input, returns an output, and does not modify any variables outside of its scope. A stateless computation should have <em>no side effects</em>.</p>
+
+<p>A <code>computation</code> function must use nominal subtyping and implement the <code>StatelessComputation</code> trait. The input and output types should be represented in the computation definition as <code>StatelessComputation[InputType, OutputType]</code>.</p>
+
+<h5 id="fun-apply-input-in-computationresult-out"><code>fun apply(input: In): ComputationResult[Out]</code></h5>
+
+<p>Create an <code>apply</code> function, which takes an object of the input type and returns an object of the output type.</p>
+
+<h5 id="fun-name-string"><code>fun name(): String</code></h5>
+
+<p>Create a <code>name</code> function that returns the name of the computation as a string.</p>
+
+<h6 id="example">Example</h6>
+
+<p>A Computation that doubles an integer:</p>
+
+<pre><code>primitive DoubleInt is StatelessComputation[I64, I64]
+  fun apply(int: I64): I64 =&gt;
+    int * 2
+</code></pre>
+
+<h3 id="state">State</h3>
+
+<p>State is an object that is passed to the <a href="#statecomputation">StateComputation</a> function. It can be any <code>ref</code> as long as it nominally declares itself as a <code>State</code> and can be as simple or as complex as you would like.</p>
+
+<h4 id="example-state">Example State</h4>
+
+<p>A <code>LetterState</code> keeps a count for how many times a letter in the English alphabet has been seen:</p>
+
+<pre><code>class LetterState is State
+  var letter: String = &quot; &quot;
+  var count: U64 = 0
+</code></pre>
+
+<h3 id="statecomputation">StateComputation</h3>
+
+<p>A state computation is similar to a <a href="#computation">Computation</a>, except that it takes an additional argument: <code>State</code>.</p>
+
+<p>Similarly to a Computation, a StateComputation function must implement the <code>StateComputation[InputType, OutputType, State ref]</code> trait.</p>
+
+<h5 id="fun-apply-input-in-state-state-computationresult-out"><code>fun apply(input: In, state: State): ComputationResult[Out]</code></h5>
+
+<p>Create an <code>apply</code> function, which takes an object of the input type and an object of the <code>State</code> type and returns an object of the output type.</p>
+
+<p><code>ComputationResult</code> represents the output data of the function (and will become the next stage&rsquo;s input data). If <code>Out</code> is <code>None</code>, no message will be delivered to the next stage in the pipeline as a result of this iteration of the StateComputation.</p>
+
+<h5 id="example-1">Example</h5>
+
+<p>An example StateComputation that keeps track of the maximum integer value it has seen so far, and only persists the state if a new max has been set.</p>
+
+<pre><code>class MaxState is State
+  var max: U64 = 0
+
+  fun update(num: U64) =&gt;
+    if num &gt; max then
+      max = num
+
+primitive UpdateMax is StateComputation[U64, U64, MaxState]
+  fun apply(num: U64, state: MaxState): U64 =&gt;
+    state.update(num)
+    state.max
+
+  fun name(): String =&gt; &quot;Max State&quot;
+</code></pre>
+
+<h3 id="aggregation">Aggregation</h3>
+
+<p>For an overview of what aggregations are and how they must be implemented, see <a href="/core-concepts/aggregations">here</a>.</p>
+
+<p>In order to implement an aggregation, you must create a class or primtivie that satisfies the  <code>Aggregation[In: Any val, Out: Any val, Acc: State ref]</code> interface, and you must implement five functions:</p>
+
+<p><code>initial_accumulator(): Acc</code>: returns the initial accumulator that is used by the aggregation. This must act as an identity element for <code>combine</code>.</p>
+
+<p><code>update(input: In, acc: Acc)</code>: uses <code>input</code> to update the accumulator <code>acc</code>.</p>
+
+<p><code>combine(acc1: Acc, acc2: Acc): Acc</code>: returns an accumulator created by combining <code>acc1</code> and <code>acc2</code>. This operation must be associative, and it must not mutate <code>acc1</code> or <code>acc2</code>.</p>
+
+<p><code>output(key: Key, window_end_ts: U64, acc: Acc): (Out | None)</code>: produces an output based on the accumulator <code>acc</code>. The <code>key</code> is passed in from the context in case it is needed when creating the output. This operation must not mutate <code>acc</code>.</p>
+
+<p><code>name(): String</code>: returns the name of the aggregation.</p>
+
+<h5 id="example-2">Example</h5>
+
+<pre><code>class val Event
+  // A generic event, bearing a key and a piece of data.
+  let event_data: U32
+  let event_key: Key
+
+  new val create(data: U32, key: Key) =&gt;
+    event_data = data
+    event_key = key
+
+class MySum is State
+  var sum_of_event_data: U32
+
+  new create(sum: U32) =&gt;
+    sum_of_event_data = sum
+
+primitive MySumAgg is Aggregation[Event, Event, MySum]
+  fun initial_accumulator(): MySum =&gt;
+    MySum(0)
+
+  fun update(e: Event, my_sum: MySum) =&gt;
+    my_sum.sum_of_event_data =
+      my_sum.sum_of_event_data + e.event_data
+
+  fun combine(sum1: MySum box, sum2: MySum box): MySum =&gt;
+    MySum(sum1.sum_of_event_data + sum2.sum_of_event_data)
+
+  fun output(key: Key, sum: MySum): (None | Event) =&gt;
+    if sum.sum_of_event_data &gt; 0 then
+      Event(sum.sum_of_event_data, key)
+    end
+
+  fun name(): String =&gt;
+</code></pre>
+
+<h3 id="input">Input</h3>
+
+<p><code>In</code> is the object that is passed to <a href="#computation">Computations</a> and <a href="#statecomputation">StateComputations</a>. It can be any Pony type as long as it has a <code>val</code> reference capability. It can be as simple or as complex as you would like it to be.</p>
+
+<h3 id="key">Key</h3>
+
+<p>Partition keys are <code>string</code> values.</p>
+
+<h3 id="keyextractor">KeyExtractor</h3>
+
+<p>A key extractor function must implement the <code>KeyExtractor[In: Any val]</code> interface and return the appropriate <a href="#key">Key</a> for <code>input</code> in its <code>apply(input: In): Key</code>.</p>
+
+<h4 id="example-key-extractor">Example Key Extractor</h4>
+
+<p>An example that partitions transactions based on the user associated with them:</p>
+
+<pre><code>primitive ExtractUser
+  fun apply(t: Transaction): String =&gt;
+    t.user()
+</code></pre>
+
+<h3 id="windows">Windows</h3>
+
+<p>For an in-depth overview of windows, see <a href="/core-concepts/windows">here</a>. Windows are either count-based or range-based.</p>
+
+<h4 id="count-based">Count-based</h4>
+
+<p><code>Wallaroo.count_windows(count)</code>: defines count-based windows that trigger an output every <code>count</code> messages.</p>
+
+<p><code>over[ThingToCount, SumCount, RunningTotal](MySumAgg)</code>: specifies the aggregation used for these windows.</p>
+
+<h5 id="example-3">Example</h5>
+
+<p>This defines count windows with a count of 5 over a user-defined <a href="#aggregation">aggregation</a> class <code>MySumAgg</code>:</p>
+
+<pre><code>inputs
+  .to[SumCount](Wallaroo.count_windows(5)
+    .over[ThingToCount, SumCount, RunningTotal](MySumAgg))
+  .to_sink(sink_config))
+</code></pre>
+
+<h4 id="range-based">Range-based</h4>
+
+<p><code>Wallaroo.range_windows(range)</code>: defines range-based windows with the specified <code>range</code>.</p>
+
+<p><code>with_slide(slide)</code>: optionally specifies a slide for these windows, resulting in sliding (overlapping) windows. For example, if the slide is 3 seconds, then a new window of length <code>range</code> (specified via <code>Wallaroo.range_windows(range)</code>) will be started every 3 seconds. The default slide is equal to the range (resulting in tumbling windows).</p>
+
+<p><code>with_delay(delay)</code>: optionally specifies a delay on triggering a window. This is either (1) an estimation of the maximum lateness expected for messages or (2) the lateness threshold beyond which you no longer care about messages. The default delay is 0.</p>
+
+<p><code>with_late_data_policy(policy)</code>: optionally specifies a policy to handle late data. You can use late data policies if you want more fine-grained control over late data other than just dropping late messages. See <a href="/core-concepts/windows">here</a> for more details.</p>
+
+<p><code>.over[ThingToCount, SumCount, RunningTotal](MySumAgg)</code>: specifies the aggregation used for these windows.</p>
+
+<h5 id="example-4">Example</h5>
+
+<p>This defines range-based sliding windows with a range of 6 seconds, a slide of 3 seconds, and a delay of 10 seconds:</p>
+
+<pre><code>inputs
+   .to[SumCount](Wallaroo.range_windows(Seconds(6))
+     .with_slide(Seconds(3))
+     .over[ThingToCount, SumCount, RunningTotal](MySumAgg))
+   .to_sink(sink_config)
+</code></pre>
+
+<p>This means windows of length 6 seconds will be started every 3 seconds. Each of these windows will be triggered 10 seconds after we have past the end of its range in event time.</p>
+
+<h3 id="sink">Sink</h3>
+
+<p>Wallaroo currently supports two types of sinks: <a href="#tcpsink">TCPSink</a>, <a href="#kafkasink">KafkaSink</a>.</p>
+
+<h4 id="tcpsink">TCPSink</h4>
+
+<p>A <code>TCPSink</code> is used to send output to an external system using TCP.</p>
+
+<p>The <code>TCPSinkConfig[Out: Any val]</code> class is used to define the properties of the <code>TCPSink</code>, which will be created by Wallaroo as part of the pipeline initialization process.</p>
+
+<p>A <code>TCPSinkConfig</code> may be passed on its own to <a href="#to-sink-sink-config">to_sink</a> or as part of a list to <a href="#to-sinks-sink-configs">to_sinks</a>.</p>
+
+<h5 id="tcpsinkconfig-outtype-from-options-encoder-tcpsinkconfigcliparser-env-args-0"><code>TCPSinkConfig[OutType].from_options(encoder, TCPSinkConfigCLIParser(env.args)?(0)?))</code></h5>
+
+<p>The class used to define the properties of a Wallaroo TCPSink.</p>
+
+<p><code>encoder</code> is a <a href="#sink-encoder">Sink Encoder</a> that returns <code>bytes</code>.</p>
+
+<p><code>TCPSinkConfigCLIParser</code> parses the command line arguments and returns the host and service for the sink in the form of <code>TCPSinkConfigOptions</code>.</p>
+
+<h4 id="kafkasink">KafkaSink</h4>
+
+<p>A <code>KafkaSink</code> is used to send output to an external Kafka cluster.</p>
+
+<p>The <code>KafkaSinkConfig[Out: Any val]</code> class is used to define the properties of the <code>KafkaSink</code>, which will be created by Wallaroo as part of the pipeline initialization process.</p>
+
+<h5 id="kafkasinkconfig-outputtype-encoder-kafkasinkconfigcliparser-env-out-parse-options-env-args-env-root-as-ambientauth"><code>KafkaSinkConfig[OutputType](encoder, KafkaSinkConfigCLIParser(env.out).parse_options(env.args)?, env.root as AmbientAuth)</code></h5>
+
+<p>The class used to define the properties of a Wallaroo KafkaSink.</p>
+
+<p><code>encoder</code> is a <a href="#sink-encoder">Sink Encoder</a> that returns <code>(bytes, key)</code>, where <code>key</code> may be a string or <code>None</code>.</p>
+
+<h5 id="kafkasinkconfigcliparser"><code>KafkaSinkConfigCLIParser</code></h5>
+
+<p>The helper class that parsers the Kafka Sink CLI options.</p>
+
+<p>Some of the available options are:</p>
+
+<p><code>topic</code> is a string.</p>
+
+<p><code>brokers</code> is a list of <code>(host, port)</code> pairs of strings.</p>
+
+<p><code>log_level</code> is one of the strings <code>Fine</code>, <code>Info</code>, <code>Warn</code>, <code>Error</code>.</p>
+
+<p><code>max_produce_buffer_ms</code> is an integer representing the <code>max_produce_buffer</code> value in milliseconds. The default value is <code>0</code>.</p>
+
+<p><code>max_message_size</code> is the maximum kafka message buffer size in bytes. The default vlaue is <code>100000</code>.</p>
+
+<h4 id="sink-encoder">Sink Encoder</h4>
+
+<p>The Sink Encoder is responsible for taking the output of the last computation in a pipeline and converting it into the data type that is accepted by the Sink.</p>
+
+<h5 id="example-encoder-for-a-tcpsink">Example encoder for a TCPSink</h5>
+
+<p>A complete <a href="#tcpsink">TCPSink</a> encoder example that takes a <code>LetterTotal</code> object and writes out the message size, in this case 9 bytes to represent the individual letter and 8 bytes for the count, followed by the letter and the count:</p>
+
+<pre><code>primitive LetterTotalEncoder
+  fun apply(t: LetterTotal val, wb: Writer = Writer): Array[ByteSeq] val =&gt;
+    wb.u32_be(9)
+    wb.write(t.letter) // Assumption: letter is 1 byte
+    wb.u64_be(t.count)
+    wb.done()
+</code></pre>
+
+<h5 id="example-encoder-for-a-kafka-sink">Example encoder for a Kafka Sink</h5>
+
+<p>A complete <code>KafkaSink</code> encoder example that takes a <code>F32</code> representing a Fahrenheit value and sends it out:</p>
+
+<pre><code>primitive FahrenheitEncoder
+  fun apply(f: F32, wb: Writer): (Array[ByteSeq] val, None, None) =&gt;
+    wb.f32_be(f)
+    (wb.done(), None, None)
+</code></pre>
+
+<h3 id="source">Source</h3>
+
+<p>Wallaroo currently supports two types of soruces: <a href="#tcpsource">TCPSource</a>, <a href="#kafkasource">KafkaSource</a>.</p>
+
+<h4 id="tcpsource">TCPSource</h4>
+
+<p>The TCP Source receives data from an external TCP connection and decodes it into the data type that the first computation in its pipeline expects.</p>
+
+<p>The <code>TCPSourceConfig</code> class is used to define the properties of the TCP Source, which will be created by Wallaroo as part of the pipeline initialization process.</p>
+
+<p>An instance of <code>TCPSourceConfig</code> is a required argument of <a href="#wallaroo-source-name-source-config">wallaroo.source</a>.</p>
+
+<h5 id="tcpsourceconfig-inputtype-from-options-frame-handler-tcpsourceconfigcliparser-source-env-args"><code>TCPSourceConfig[InputType].from_options(frame_handler, TCPSourceConfigCLIParser(source, env.args)?)</code></h5>
+
+<p>The class used to define the properties of a Wallaroo TCPSource.</p>
+
+<p><code>frame_handler</code> is a primitive or class that must implement the <code>FramedSourceHandler</code> interface.</p>
+
+<p><code>TCPSourceConfigCLIParser</code> is a helper which accepts a <code>source</code>, a String representing the Source name and <code>env.args</code> which is the arguments provided to the application. These arguments are then parsed to provide a <code>TCPSourceConfigOptions</code> which has the source name, host, and service port.</p>
+
+<h4 id="kafkasource">KafkaSource</h4>
+
+<p>A <code>KafkaSource</code> is used to get input from an external Kafka cluster.</p>
+
+<p>The <code>KafkaSourceConfig</code> class is used to define the properties of the <code>KafkaSource</code>, which will be created by Wallaroo as part of the pipeline initialization process.</p>
+
+<p>An instance of <code>KafkaSourceConfig</code> is a required argument of <a href="#wallaroo-source-name-source-config">wallaroo.source</a>.</p>
+
+<h5 id="kafkasourceconfig-inputtype-source-kafkasourceconfigcliparser-env-out-parse-options-env-args-env-root-as-ambientauth-decoder"><code>KafkaSourceConfig[InputType](source, KafkaSourceConfigCLIParser(env.out).parse_options(env.args)?, env.root as AmbientAuth, decoder)</code></h5>
+
+<p>The class used to define the properties of a Wallaroo KafkaSink.</p>
+
+<p><code>source</code> is a string representing the Wallaroo source name.</p>
+
+<p><code>env.root as AmbientAuth</code></p>
+
+<h5 id="kafkasourceconfigcliparser-env-out-parse-options-env-args"><code>KafkaSourceConfigCLIParser(env.out).parse_options(env.args)?</code></h5>
+
+<p>The helper class that parses the arguments needed for the <code>KafkaSource</code>, such as the <code>topic</code> and <code>brokers</code>.</p>
+
+<p><code>decoder</code> is a <a href="#source-decoder">Source Decoder</a>.</p>
+
+<h4 id="source-decoder">Source Decoder</h4>
+
+<p>The Source Decoder is responsible for two tasks:</p>
+
+<ol>
+<li>Telling Wallaroo <em>how many bytes to read</em> from its input source.</li>
+<li>Converting those bytes into an object that the rest of the application can process. <code>None</code> can be returned to completely discard a message.</li>
+</ol>
+
+<p>To define a source decoder, implement a <code>FramedSourceHandler</code> that has a <code>decode</code> function that takes bytes (<code>Array[U8]</code>) and returns the correct data type for the next stage in the pipeline.</p>
+
+<p>It is up to the developer to determine how to translate bytes into the next stage&rsquo;s input data type, and what information to keep or discard.</p>
+
+<p><code>header_length(): USize</code> is the function that returns the integer number of bytes to read for the header. The default value is 4.</p>
+
+<p><code>payload_length(data: Array[U8] iso): USize ?</code> is the function that returns the value of the size of the message.</p>
+
+<h5 id="example-decoder-for-a-tcpsource">Example decoder for a TCPSource</h5>
+
+<p>A complete <code>TCPSource</code> decoder example that decodes messages with a 32-bit unsigned integer _payload<em>length</em> and a <code>decode</code> function that returns a <code>String</code> from the data passed in:</p>
+
+<pre><code>primitive StringFrameHandler is FramedSourceHandler[String]
+  fun header_length(): USize =&gt;
+    4
+
+  fun payload_length(data: Array[U8] iso): USize ? =&gt;
+    Bytes.to_u32(data(0)?, data(1)?, data(2)?, data(3)?).usize()
+
+  fun decode(data: Array[U8] val): String =&gt;
+    String.from_array(data)
+</code></pre>
+
+<h4 id="example-decoder-for-a-kafkasource">Example decoder for a KafkaSource</h4>
+
+<p>A complete <code>KafkaSource</code> decoder example that decodes messages as a 32-bit signed int:</p>
+
+<pre><code>primitive CelsiusKafkaDecoder is SourceHandler[F32]
+  fun decode(a: Array[U8] val): F32 ? =&gt;
+    let r = Reader
+    r.append(a)
+    r.f32_be()?
+</code></pre>
+</main>
+        </div>
+      </div>
+    </div>
+  </article>
+
+    </main>
+    
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/languages/pony.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<script>
+  var toggleBtns = document.getElementsByClassName('js-toggle')
+  for (var i = 0; i < toggleBtns.length; i++) {
+    toggleBtns[i].addEventListener('click', toggleClass, false)
+  }
+
+  var myToggleBtns = document.getElementsByClassName('hide-show-toggle')
+  for (var i = 0; i < myToggleBtns.length; i++) {
+    myToggleBtns[i].addEventListener('click', hideShow, false)
+  }
+
+function hideShowDM() {
+  var menu = document.getElementById("doc-menu")
+  var thebody = document.getElementById("the-body")
+  if (window.getComputedStyle(menu).display == "none") {
+    menu.style.display = "block";
+    thebody.style.left = "300px";
+  } else {
+    menu.style.display = "none";
+    thebody.style.left = "0px";
+  }
+}
+
+function hideShowCM() {
+  var menu = document.getElementById("context-menu")
+  if (window.getComputedStyle(menu).display == "none") {
+    menu.style.display = "block";
+  } else {
+    menu.style.display = "none";
+  }
+}
+
+function toggleClass() {
+  
+  var content = this.dataset.target.split(' ')
+  
+  var mobileCurrentlyOpen = document.querySelector('.mobilemenu:not(.dn)')
+  var desktopCurrentlyOpen = document.querySelector('.desktopmenu:not(.dn)')
+  var desktopActive = document.querySelector('.desktopmenu:not(.dn)')
+
+  
+  for (var i = 0; i < content.length; i++) {
+    var matches = document.querySelectorAll(content[i]);
+    
+    [].forEach.call(matches, function(dom) {
+        dom.classList.contains('dn') ?
+        dom.classList.remove('dn') :
+        dom.classList.add('dn');
+         return false;
+       });
+        
+      if (mobileCurrentlyOpen) mobileCurrentlyOpen.classList.add('dn')
+      if (desktopCurrentlyOpen) desktopCurrentlyOpen.classList.add('dn')
+      if (desktopActive) desktopActive.classList.remove('db')
+
+    }
+  }
+
+  let codeBlocks = document.getElementsByTagName('code')
+  for (let [key, codeBlock] of Object.entries(codeBlocks)){
+  var widthDif = codeBlock.scrollWidth - codeBlock.clientWidth
+  if (widthDif > 0)
+    codeBlock.parentNode.classList.add('expand')
+  }
+</script>
+
+  </body>
+</html>

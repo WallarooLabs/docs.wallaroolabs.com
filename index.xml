@@ -47,7 +47,8 @@ Command-Line Parameters When running a Wallaroo application, we use some of the 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://docs.wallaroolabs.com/operators-manual/resilience-crash/</guid>
-      <description>Wallaroo is designed with built-in resilience. However, since the operations involved with maintaining resilience can impact performance, this mode is off by default. For python users, we provide a separate binary with resilience enabled: machida-resilience (and machida3-resilience for Python 3) as part of the default installation. For Go and Ponyc users, to enable resilience in a Wallaroo application, the binary needs to be built with -D resilience if using the ponyc compiler directly, or with resilience=on if using our Makefile build system (as is the case with Machida).</description>
+      <description>Wallaroo is designed with built-in resilience. However, since the operations involved with maintaining resilience can impact performance, this mode is off by default. For Pony users, to enable resilience in a Wallaroo application, the binary needs to be built with -D resilience if using the ponyc compiler directly, or with resilience=on if using our Makefile build system.
+How Does Wallaroo Implement Resilience Wallaroo&amp;rsquo;s resilience is based on the Chandy-Lamport snapshotting algorithm that minimizes the impact of checkpointing on processing in-flight messages.</description>
     </item>
     
     <item>
@@ -132,6 +133,16 @@ For example, in an application that keeps track of stock prices, the naïve appl
     
     <item>
       <title>Running A Wallaroo Application</title>
+      <link>https://docs.wallaroolabs.com/pony-tutorial/running-a-wallaroo-application/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.wallaroolabs.com/pony-tutorial/running-a-wallaroo-application/</guid>
+      <description>You should have already completed the setup instructions in the &amp;ldquo;Pony Installation&amp;rdquo; guide.
+  Running the Application Wallaroo applications are built using the Pony compiler. The compiler will build our application along with any other tools used, optimize it, and link whatever libraries were needed. Once compiled, the application can be run over and over again, independently from the compiler or anything else. It will exist as a complete program on it&amp;rsquo;s own.</description>
+    </item>
+    
+    <item>
+      <title>Running A Wallaroo Application</title>
       <link>https://docs.wallaroolabs.com/python-tutorial/running-a-wallaroo-application/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -148,6 +159,18 @@ For example, in an application that keeps track of stock prices, the naïve appl
       <guid>https://docs.wallaroolabs.com/operators-manual/running-wallaroo/</guid>
       <description>A Wallaroo application is distributed over one or more Wallaroo processes, which we call &amp;ldquo;workers&amp;rdquo;. Any Wallaroo cluster will have one worker designated as the &amp;ldquo;cluster initializer&amp;rdquo;, a temporary role played during cluster initialization.
 Workers communicate with each other over two channels: a control channel and a data channel. They send metrics data over TCP to an external metrics address. And they optionally listen for messages from external systems over an external channel.</description>
+    </item>
+    
+    <item>
+      <title>Starting a new shell</title>
+      <link>https://docs.wallaroolabs.com/pony-tutorial/starting-a-new-shell/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.wallaroolabs.com/pony-tutorial/starting-a-new-shell/</guid>
+      <description>In this section, we&amp;rsquo;re going to review how you can start a new shell for Wallaroo regardless of how you installed it.
+Wallaroo in Docker For each Shell you&amp;rsquo;re expected to setup, you&amp;rsquo;d have to run the following to enter the Wallaroo Docker container:
+Enter the Wallaroo Docker container:
+docker exec -it wally env-setup  This command will start a new Bash shell within the container, which will run the env-setup script to ensure our Wallaroo code repository is set up.</description>
     </item>
     
     <item>
@@ -170,6 +193,18 @@ Enter the Wallaroo Docker container:
       <guid>https://docs.wallaroolabs.com/core-concepts/state/</guid>
       <description>The expectation with Wallaroo is that most applications will be stateful. Understanding how Wallaroo handles state is key to being able to design effective Wallaroo applications. In this section, we&amp;rsquo;re going to take you through how state works in Wallaroo and what advantages this brings.
 Transactions in Wallaroo Transactions are awesome. Using a data management system that features transactions makes our lives as programmers much easier. Transactions provide certain guarantees about how data will be updated that make it easier to reason about our code, easier to understand what our code will do.</description>
+    </item>
+    
+    <item>
+      <title>TCP Decoders and Encoders</title>
+      <link>https://docs.wallaroolabs.com/pony-tutorial/tcp-decoders-and-encoders/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.wallaroolabs.com/pony-tutorial/tcp-decoders-and-encoders/</guid>
+      <description>Earlier, we spoke of sources and sinks and the role they play in Wallaroo. In this section, we are going to dive more into how you work with sources and sinks. We&amp;rsquo;ll be covering two key concepts: Decoders and Encoders.
+Reviewing our terms Source Ingress point for inputs from external systems into a Wallaroo application.
+Sink Egress point for outputs from a Wallaroo application to external systems.
+Decoder Code that transforms a stream of bytes from an external system into a series of application input types.</description>
     </item>
     
     <item>
@@ -215,6 +250,17 @@ Metrics are reported for 3 top level categories in a Wallaroo application: Pipel
     </item>
     
     <item>
+      <title>Wallaroo Pony API Classes</title>
+      <link>https://docs.wallaroolabs.com/pony-tutorial/api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.wallaroolabs.com/pony-tutorial/api/</guid>
+      <description>The Wallaroo Pony API allows developers to create Wallaroo applications in Pony.
+Overview In order to create a Wallaroo application in Pony, you need to create the functions and classes that provide the required interfaces for each stage in your pipeline, and then connect them together in a topology structure. This topology structure should always be the last argument when calling Wallaroo.build_application(env, app_name, pipeline).
+Table of Contents  Application Setup Computation State StateComputation Data Aggregation Key KeyExtractor Windows Sink TCPSink KafkaSink Sink Encoder Source TCPSource KafkaSource Source Decoder  Application Setup After your program loads, it executes its entry point function, Main.</description>
+    </item>
+    
+    <item>
       <title>Wallaroo Python API Classes</title>
       <link>https://docs.wallaroolabs.com/python-tutorial/api/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -249,6 +295,16 @@ If you are not familiar with aggregations in Wallaroo, it might be helpful to re
     
     <item>
       <title>Word Count</title>
+      <link>https://docs.wallaroolabs.com/pony-tutorial/word-count/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.wallaroolabs.com/pony-tutorial/word-count/</guid>
+      <description>Word count is the canonical streaming data application. It&amp;rsquo;s canonical not because everyone needs to count words but because it&amp;rsquo;s a good platform for demonstrating how to do many of the everyday tasks in a streaming application.
+This section will take you through our Wallaroo word count example. Along the way, we will introduce you to two new concepts: receiving and decoding data on a TCPSource, and splitting one incoming message into several outgoing ones.</description>
+    </item>
+    
+    <item>
+      <title>Word Count</title>
       <link>https://docs.wallaroolabs.com/python-tutorial/word-count/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -269,12 +325,32 @@ State computations Imagine a word counting application. We&amp;rsquo;ll have a s
     
     <item>
       <title>Writing Your Own Application</title>
+      <link>https://docs.wallaroolabs.com/pony-tutorial/writing-your-own-application/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.wallaroolabs.com/pony-tutorial/writing-your-own-application/</guid>
+      <description>In this section, we will go over the components that are required in order to write a Wallaroo Pony application. We will start with the stateless alerts.pony application from the examples section, then move on to an application that maintains and modifies state and uses partitioning to divide its work.
+A Stateless Application - Alerts The alerts.pony application is going to receive transactions as its input stream, check for certain conditions that should trigger alerts, and then send out any triggered alerts to its sink.</description>
+    </item>
+    
+    <item>
+      <title>Writing Your Own Application</title>
       <link>https://docs.wallaroolabs.com/python-tutorial/writing-your-own-application/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://docs.wallaroolabs.com/python-tutorial/writing-your-own-application/</guid>
       <description>In this section, we will go over the components that are required in order to write a Wallaroo Python application. We will start with the stateless alerts.py application from the examples section, then move on to an application that maintains and modifies state and uses partitioning to divide its work.
 A Stateless Application - Alerts The alerts.py application is going to receive transactions as its input stream, check for certain conditions that should trigger alerts, and then send out any triggered alerts to its sink.</description>
+    </item>
+    
+    <item>
+      <title>Writing Your Own Stateful Application</title>
+      <link>https://docs.wallaroolabs.com/pony-tutorial/writing-your-own-stateful-application/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://docs.wallaroolabs.com/pony-tutorial/writing-your-own-stateful-application/</guid>
+      <description>In this section, we will go over how to write a stateful application with the Wallaroo Pony API. If you haven&amp;rsquo;t reviewed the simple stateless Alerts application example yet, you can find it here.
+A Stateful Application - Alerts Our stateful application is going to add state to the Alerts example. Again, it receives as its inputs messages representing transactions. But now instead of statelessly checking individual transactions to see if they pass certain thresholds, it will add each transaction amount to a running total.</description>
     </item>
     
     <item>

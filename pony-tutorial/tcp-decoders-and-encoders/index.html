@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>Wallaroo  | Writing Your Own Stateful Application</title>
+    <title>Wallaroo  | TCP Decoders and Encoders</title>
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
 
@@ -53,27 +53,33 @@
 
     
 
-    <meta property="og:title" content="Writing Your Own Stateful Application" />
-<meta property="og:description" content="In this section, we will go over how to write a stateful application with the Wallaroo Python API. If you haven&rsquo;t reviewed the simple stateless Alerts application example yet, you can find it here.
-A Stateful Application - Alerts Our stateful application is going to add state to the Alerts example. Again, it receives as its inputs messages representing transactions. But now instead of statelessly checking individual transactions to see if they pass certain thresholds, it will add each transaction amount to a running total." />
+    <meta property="og:title" content="TCP Decoders and Encoders" />
+<meta property="og:description" content="Earlier, we spoke of sources and sinks and the role they play in Wallaroo. In this section, we are going to dive more into how you work with sources and sinks. We&rsquo;ll be covering two key concepts: Decoders and Encoders.
+Reviewing our terms Source Ingress point for inputs from external systems into a Wallaroo application.
+Sink Egress point for outputs from a Wallaroo application to external systems.
+Decoder Code that transforms a stream of bytes from an external system into a series of application input types." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://docs.wallaroolabs.com/python-tutorial/writing-your-own-stateful-application/" />
+<meta property="og:url" content="https://docs.wallaroolabs.com/pony-tutorial/tcp-decoders-and-encoders/" />
 
-<meta itemprop="name" content="Writing Your Own Stateful Application">
-<meta itemprop="description" content="In this section, we will go over how to write a stateful application with the Wallaroo Python API. If you haven&rsquo;t reviewed the simple stateless Alerts application example yet, you can find it here.
-A Stateful Application - Alerts Our stateful application is going to add state to the Alerts example. Again, it receives as its inputs messages representing transactions. But now instead of statelessly checking individual transactions to see if they pass certain thresholds, it will add each transaction amount to a running total.">
+<meta itemprop="name" content="TCP Decoders and Encoders">
+<meta itemprop="description" content="Earlier, we spoke of sources and sinks and the role they play in Wallaroo. In this section, we are going to dive more into how you work with sources and sinks. We&rsquo;ll be covering two key concepts: Decoders and Encoders.
+Reviewing our terms Source Ingress point for inputs from external systems into a Wallaroo application.
+Sink Egress point for outputs from a Wallaroo application to external systems.
+Decoder Code that transforms a stream of bytes from an external system into a series of application input types.">
 
 
 
-<meta itemprop="wordCount" content="642">
+<meta itemprop="wordCount" content="985">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Writing Your Own Stateful Application"/>
-<meta name="twitter:description" content="In this section, we will go over how to write a stateful application with the Wallaroo Python API. If you haven&rsquo;t reviewed the simple stateless Alerts application example yet, you can find it here.
-A Stateful Application - Alerts Our stateful application is going to add state to the Alerts example. Again, it receives as its inputs messages representing transactions. But now instead of statelessly checking individual transactions to see if they pass certain thresholds, it will add each transaction amount to a running total."/>
+<meta name="twitter:title" content="TCP Decoders and Encoders"/>
+<meta name="twitter:description" content="Earlier, we spoke of sources and sinks and the role they play in Wallaroo. In this section, we are going to dive more into how you work with sources and sinks. We&rsquo;ll be covering two key concepts: Decoders and Encoders.
+Reviewing our terms Source Ingress point for inputs from external systems into a Wallaroo application.
+Sink Egress point for outputs from a Wallaroo application to external systems.
+Decoder Code that transforms a stream of bytes from an external system into a series of application input types."/>
 
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -201,8 +207,8 @@ A Stateful Application - Alerts Our stateful application is going to add state t
       </li>
       
       <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".ponytutorial">Pony Tutorial</a>
-        <ul class="ponytutorial desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2  primary-color" data-target=".ponytutorial">Pony Tutorial</a>
+        <ul class="ponytutorial desktopmenu animated fadeIn list pl0 bg-light-gray db">
           <li class="f6 fw4">
             <a href="/pony-tutorial/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
               Pony API Introduction
@@ -234,7 +240,7 @@ A Stateful Application - Alerts Our stateful application is going to add state t
             </a>
           </li>
           <li class="f6 fw4">
-            <a href="/pony-tutorial/tcp-decoders-and-encoders/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+            <a href="/pony-tutorial/tcp-decoders-and-encoders/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 primary-color ">
               TCP Decoders and Encoders
             </a>
           </li>
@@ -306,9 +312,33 @@ A Stateful Application - Alerts Our stateful application is going to add state t
 </nav>
 
       </div>
-    <div class="flex-l" id="the-body"><div class="order-1 w-60-l mw9 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style="flex-grow:1;">
+    <div class="flex-l" id="the-body"><div class="order-2 w-100 w-20-l ph5-m ph0-l mb4 sticky dn db-l" id="context-menu"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">What's in this document</p>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#reviewing-our-terms">Reviewing our terms</a>
+<ul>
+<li><a href="#source">Source</a></li>
+<li><a href="#sink">Sink</a></li>
+<li><a href="#decoder">Decoder</a></li>
+<li><a href="#encoder">Encoder</a></li>
+</ul></li>
+<li><a href="#framed-message-protocols">Framed Message Protocols</a></li>
+<li><a href="#creating-a-decoder">Creating a Decoder</a></li>
+<li><a href="#creating-an-encoder">Creating an Encoder</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+
+
+
+
+</div><div class="order-1 w-60-l mw9 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style="flex-grow:1;">
         <div class="order-0 mt4 w-100 center mw7" style="clear: both;">
-          <a id="doc-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowDM()"></a></div>
+          <a id="doc-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowDM()"></a><a id="context-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowCM()"></a></div>
 
         <div class="documentation-copy center mw7">
           <header class="mt4 w-100">
@@ -316,118 +346,156 @@ A Stateful Application - Alerts Our stateful application is going to add state t
                 
               
             </p>
-            <h1 class="f1 athelas mb1">Writing Your Own Stateful Application</h1>
+            <h1 class="f1 athelas mb1">TCP Decoders and Encoders</h1>
           </header>
 
           <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l">
 
-<p>In this section, we will go over how to write a stateful application with the Wallaroo Python API. If you haven&rsquo;t reviewed the simple stateless Alerts application example yet, you can find it <a href="/python-tutorial/writing-your-own-application/">here</a>.</p>
+<p>Earlier, we spoke of <a href="/core-concepts/">sources and sinks</a> and the role they play in Wallaroo. In this section, we are going to dive more into how you work with sources and sinks. We&rsquo;ll be covering two key concepts: <code>Decoder</code>s and <code>Encoder</code>s.</p>
 
-<h2 id="a-stateful-application-alerts">A Stateful Application - Alerts</h2>
+<h2 id="reviewing-our-terms">Reviewing our terms</h2>
 
-<p>Our stateful application is going to add state to the Alerts example. Again, it receives as its inputs messages representing transactions. But now instead of statelessly checking individual transactions to see if they pass certain thresholds, it will add each transaction amount to a running total. It will then check that total to see if an alert should be emitted.</p>
+<h3 id="source">Source</h3>
 
-<p>As with the stateless Alerts example, we will list the components required:</p>
+<p>Ingress point for inputs from external systems into a Wallaroo application.</p>
 
-<ul>
-<li>Output encoding</li>
-<li>Computation for checking transactions</li>
-<li>State object</li>
-</ul>
+<h3 id="sink">Sink</h3>
 
-<h3 id="state-computation">State Computation</h3>
+<p>Egress point for outputs from a Wallaroo application to external systems.</p>
 
-<p>The state computation here is fairly straightforward: given a data object and a state object, update the state with the new data, and, based on a simple condition, determine whether we return some data representing an alert message.</p>
+<h3 id="decoder">Decoder</h3>
 
-<p>Our input type represents a transaction:</p>
-
-<pre><code class="language-python">class Transaction(object):
-    def __init__(self, user, amount):
-        self.user = user
-        self.amount = amount
-</code></pre>
-
-<p>We use these inputs to update state, and check whether the running total crosses certain thresholds, at which point we generate an alert:</p>
-
-<pre><code class="language-python">@wallaroo.state_computation(name=&quot;check transaction total&quot;, state=TransactionTotal)
-def check_transaction_total(transaction, state):
-    state.total = state.total + transaction.amount
-    if state.total &gt; 2000:
-        return DepositAlert(transaction.user, state.total)
-    elif state.total &lt; -2000:
-        return WithdrawalAlert(transaction.user, state.total)
-</code></pre>
-
-<h3 id="state">State</h3>
-
-<p>The state for this application keeps track of a running total of transactions:</p>
-
-<pre><code class="language-python">class TransactionTotal(object):
-    def __init__(self):
-        self.total = 0
-</code></pre>
+<p>Code that transforms a stream of bytes from an external system
+into a series of application input types.</p>
 
 <h3 id="encoder">Encoder</h3>
 
-<p>The encoder is going to receive either a <code>DepositAlert</code> or <code>WithdrawalAlert</code> instance and encode it into a string. Since we only generate alerts when certain conditions are met, not every input into the application results in an output sent to the sink.</p>
+<p>Code that transforms an application output type into bytes for
+sending to an external system.</p>
 
-<p>As with our previous stateless example, the sink requires a <code>bytes</code> object. In Python 2 this can be the string itself, but in Python 3 we need to encode it from unicode to <code>bytes</code>. Luckily, we can use <code>encode()</code> to get a <code>bytes</code> from a string in both versions:</p>
+<h2 id="framed-message-protocols">Framed Message Protocols</h2>
 
-<pre><code class="language-python">@wallaroo.encoder
-def encode_alert(alert):
-    return str(alert).encode()
+<p>A Wallaroo TCP Source accepts a stream of bytes from an external source and turns that stream of bytes into a stream of application specific messages. As an application programmer, you provide a <code>Decoder</code> to tell Wallaroo how to turn that stream of bytes into messages.</p>
+
+<p>An incoming stream of bytes can represent many things: each byte could be an 8-bit unsigned integer, or every 4-byte block may be a 32-bit integer. Or the stream may be an ASCII sequence (each byte is a char), or a Unicode sequence (in which case characters aren&rsquo;t equally-wide!).</p>
+
+<p>Decoders are unique to the type of source. <code>TCPSource</code>s use a <a href="https://www.codeproject.com/Articles/37496/TCP-IP-Protocol-Design-Message-Framing">framed message protocol</a>. A framed message protocol boils down to:</p>
+
+<ul>
+<li>We have a fixed size header that tells us how long a message is</li>
+<li>We have a variable length message payload</li>
+</ul>
+
+<p>The message payload is what our application cares about. The fixed length header allows us to easily get the size of our payload. With these two pieces of information, we can quickly chop up a stream of incoming bytes into a series of messages.</p>
+
+<p>The size of the header is up to you the designer of the particular message type. You can make it 4 bytes, 8 bytes, 16, et cetera. The important part is that you need enough bytes to represent the length of your payload. For most data, a 4-byte header is plenty. In the abstract, this looks like</p>
+
+<pre><code>PayloadSize [x bytes] : Payload [bytes specified in PayloadSize]
 </code></pre>
 
-<h3 id="partitioning">Partitioning</h3>
+<p>So if our header is 4 bytes long, an incoming message would look something like:</p>
 
-<p>In our stateless example, we looked at each transaction input in isolation and generated an alert based on its properties. This meant that Wallaroo could process all of these transactions in parallel without concern for how they were related to each other. But in our stateful example, we are accumulating totals. What do these totals refer to? For this application, they are the running totals per user. So each transaction object is associated with a particular user.</p>
+<p>| header | payload |
+| - | - |
+| xxxx | some data here |</p>
 
-<p>This means that a natural way to partition the work is by user. We accomplish this by defining a function for extracting keys from our input messages:</p>
+<p>Let&rsquo;s make that a bit more concrete. Let&rsquo;s say we are sending in two messages; each contains a string. The first has &ldquo;first&rdquo; as a payload and the second payload is &ldquo;not first&rdquo;. Our stream of bytes would be:</p>
 
-<pre><code class="language-python">@wallaroo.key_extractor
-def extract_user(transaction):
-    return transaction.user
+<ul>
+<li>4-byte header whose value is <code>5</code></li>
+<li>5-byte payload containing the binary representation of the ASCII string &ldquo;first&rdquo;</li>
+<li>4-byte header whose value is <code>9</code></li>
+<li>9 byte payload containing the binary representation of the ASCII string &ldquo;not first&rdquo;</li>
+</ul>
+
+<h2 id="creating-a-decoder">Creating a Decoder</h2>
+
+<p>Wallaroo&rsquo;s <code>TCPSource</code> takes a primitive or class that implements the <code>FramedSourceHandler</code> interface that can process a framed message protocol. You&rsquo;ll need to implement three methods. Below is a decoder that we can use to process a stream of strings for a word count application.</p>
+
+<pre><code>primitive StringFrameHandler is FramedSourceHandler[String]
+  fun header_length(): USize =&gt;
+    4
+
+  fun payload_length(data: Array[U8] iso): USize ? =&gt;
+    Bytes.to_u32(data(0)?, data(1)?, data(2)?, data(3)?).usize()
+
+  fun decode(data: Array[U8] val): String =&gt;
+    String.from_array(data)
 </code></pre>
 
-<h3 id="application-setup">Application Setup</h3>
+<p><code>header_length</code> is the fixed size of our payload field.</p>
 
-<p>Finally, let&rsquo;s set up our application topology:</p>
+<p><code>payload_length</code> is used internally to decode our message header to determine how long the payload is going to be. We rely on the WallarooLabs <code>Bytes</code> package to decode the bytes. Remember, when using <code>Bytes</code>, don&rsquo;t forget to import it using <code>use &quot;wallaroo_labs/bytes&quot;</code>!</p>
 
-<pre><code class="language-python">def application_setup(args):
-    out_host, out_port = wallaroo.tcp_parse_output_addrs(args)[0]
+<p><code>decode</code> takes a series of bytes that represent your payload and turns it into an application message. In this case, our application message is a string, so we take the incoming byte stream <code>data</code> and convert it to a Pony string.</p>
 
-    gen_source = wallaroo.GenSourceConfig(&quot;Alerts (stateful)&quot;, TransactionsGenerator())
+<p>Here&rsquo;s a slightly more complicated example taken from our <a href="https://github.com/WallarooLabs/wallaroo/tree/0.6.1/examples/pony/alphabet">Alphabet Popularity Contest example</a>.</p>
 
-    transactions = wallaroo.source(&quot;Alerts (stateful)&quot;, gen_source)
-    pipeline = (transactions
-        .key_by(extract_user)
-        .to(check_transaction_total)
-        .to_sink(wallaroo.TCPSinkConfig(out_host, out_port, encode_alert)))
+<pre><code>primitive VotesDecoder is FramedSourceHandler[Votes]
+  fun header_length(): USize =&gt;
+    4
 
-    return wallaroo.build_application(&quot;Alerts (stateful)&quot;, pipeline)
+  fun payload_length(data: Array[U8] iso): USize =&gt;
+    5
+
+  fun decode(data: Array[U8] val): Votes ? =&gt;
+    // Assumption: 1 byte for letter
+    let letter = String.from_array(data.trim(0, 1))
+    let count = Bytes.to_u32(data(1)?, data(2)?, data(3)?, data(4)?)
+    Votes(letter, count.u64())
 </code></pre>
 
-<p>The important difference between this setup and the stateless version from our last example (besides using a state computation rather than a stateless one) is the presence of:</p>
+<p>Like we did in our previous example, we&rsquo;re using a 4-byte integer payload length header:</p>
 
-<pre><code class="language-python">.key_by(extract_user)
+<pre><code>  fun header_length(): USize =&gt; 4
 </code></pre>
 
-<p>This ensures that all transactions for a given user are sent to the same state
-partition. This means that when defining our state type, we can take for granted that the key is an implicit context. We don&rsquo;t need to refer to the user
-anywhere in the state definition if we don&rsquo;t want to (and in this case we don&rsquo;t need to).</p>
+<p>But this time, we are doing something slightly more complicated in our payload. Our payload is two items, a string representing a letter and some votes for that letter. We unpack those using <code>String.from_array</code> and <code>Bytes.to_u32</code> respectively to create a domain specific object <code>Votes</code> to return.</p>
 
-<h3 id="miscellaneous">Miscellaneous</h3>
+<h2 id="creating-an-encoder">Creating an Encoder</h2>
 
-<p>This module needs its imports:</p>
+<p>Wallaroo encoders do the opposite of decoders. A decoder takes a stream of bytes and turns in into messages for Wallaroo to process. An encoder receives a stream of messages and converts them into a stream of bytes for sending to another system.</p>
 
-<pre><code class="language-python">import wallaroo
+<p>Here&rsquo;s a quick example encoder:</p>
+
+<pre><code>primitive AlertsEncoder
+  fun apply(alert: Alert, wb: Writer = Writer):
+    Array[ByteSeq] val
+  =&gt;
+    wb.write(alert.string())
+    wb.done()
 </code></pre>
 
-<h2 id="next-steps">Next Steps</h2>
+<p>It takes a string that we want to send to an external system as an input, adds a newline at the end and returns it for sending.</p>
 
-<p>The complete stateful alerts example is available <a href="https://github.com/WallarooLabs/wallaroo/tree/0.6.1/examples/python/alerts_stateful/">here</a>. To run it, follow the <a href="https://github.com/WallarooLabs/wallaroo/tree/0.6.1/examples/python/alerts_stateful/README.md">Alerts application instructions</a></p>
+<p>Here&rsquo;s a more complicated example taken from our <a href="https://github.com/WallarooLabs/wallaroo/tree/0.6.1/examples/pony/alphabet">Alphabet Popularity Contest example</a>:</p>
 
-<p>To learn how to make your application resilient and able to work across multiple workers, skip ahead to <a href="/python-tutorial/interworker-serialization-and-resilience/">Inter-worker Serialization and Resilience</a>. Otherwise, continue on to the next section of the tutorial, <a href="/python-tutorial/word-count/">Word Count</a>.</p>
+<pre><code>class val LetterTotal
+  let letter: String
+  let count: U64
+
+  new val create(l: String, c: U64) =&gt;
+    letter = l
+    count = c
+
+
+primitive LetterTotalEncoder
+  fun apply(t: LetterTotal val, wb: Writer = Writer):
+    Array[ByteSeq] val
+  =&gt;
+    wb.u32_be(9)
+    wb.write(t.letter) // Assumption: letter is 1 byte
+    wb.u64_be(t.count)
+    wb.done()
+</code></pre>
+
+<p>Let&rsquo;s take a look at what is happening here. First of all, we are once again using the Writer class to create our own packed binary message. It&rsquo;s a framed message with a 4-byte header for the payload length, plus the payload:</p>
+
+<pre><code>| header | payload |
+| 9 | letter &amp; votes |
+</code></pre>
+
+<p>If we were encoding the letter &ldquo;A&rdquo; and a vote value of &ldquo;1&rdquo; our payload would be <code>'A\x00\x00\x00\x00\x00\x00\x00\x01'</code>. This along with our framing data can be sent along to another system that expects framed data.</p>
 </main>
         </div>
       </div>

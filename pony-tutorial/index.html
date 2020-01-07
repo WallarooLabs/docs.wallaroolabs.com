@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>Wallaroo  | Writing Your Own Stateful Application</title>
+    <title>Wallaroo  | Pony API Introduction</title>
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
 
@@ -52,28 +52,21 @@
     
 
     
+      <link href="https://docs.wallaroolabs.com/pony-tutorial/index.xml" rel="alternate" type="application/rss+xml" title="Wallaroo" />
+      <link href="https://docs.wallaroolabs.com/pony-tutorial/index.xml" rel="feed" type="application/rss+xml" title="Wallaroo" />
+    
 
-    <meta property="og:title" content="Writing Your Own Stateful Application" />
-<meta property="og:description" content="In this section, we will go over how to write a stateful application with the Wallaroo Python API. If you haven&rsquo;t reviewed the simple stateless Alerts application example yet, you can find it here.
-A Stateful Application - Alerts Our stateful application is going to add state to the Alerts example. Again, it receives as its inputs messages representing transactions. But now instead of statelessly checking individual transactions to see if they pass certain thresholds, it will add each transaction amount to a running total." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://docs.wallaroolabs.com/python-tutorial/writing-your-own-stateful-application/" />
+    <meta property="og:title" content="Pony API Introduction" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://docs.wallaroolabs.com/pony-tutorial/" />
 
-<meta itemprop="name" content="Writing Your Own Stateful Application">
-<meta itemprop="description" content="In this section, we will go over how to write a stateful application with the Wallaroo Python API. If you haven&rsquo;t reviewed the simple stateless Alerts application example yet, you can find it here.
-A Stateful Application - Alerts Our stateful application is going to add state to the Alerts example. Again, it receives as its inputs messages representing transactions. But now instead of statelessly checking individual transactions to see if they pass certain thresholds, it will add each transaction amount to a running total.">
+<meta itemprop="name" content="Pony API Introduction">
+<meta itemprop="description" content="">
 
-
-
-<meta itemprop="wordCount" content="642">
-
-
-
-<meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Writing Your Own Stateful Application"/>
-<meta name="twitter:description" content="In this section, we will go over how to write a stateful application with the Wallaroo Python API. If you haven&rsquo;t reviewed the simple stateless Alerts application example yet, you can find it here.
-A Stateful Application - Alerts Our stateful application is going to add state to the Alerts example. Again, it receives as its inputs messages representing transactions. But now instead of statelessly checking individual transactions to see if they pass certain thresholds, it will add each transaction amount to a running total."/>
+<meta name="twitter:title" content="Pony API Introduction"/>
+<meta name="twitter:description" content=""/>
 
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -201,10 +194,10 @@ A Stateful Application - Alerts Our stateful application is going to add state t
       </li>
       
       <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".ponytutorial">Pony Tutorial</a>
-        <ul class="ponytutorial desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2  primary-color" data-target=".ponytutorial">Pony Tutorial</a>
+        <ul class="ponytutorial desktopmenu animated fadeIn list pl0 bg-light-gray db">
           <li class="f6 fw4">
-            <a href="/pony-tutorial/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+            <a href="/pony-tutorial/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 primary-color ">
               Pony API Introduction
             </a>
           </li>
@@ -306,9 +299,25 @@ A Stateful Application - Alerts Our stateful application is going to add state t
 </nav>
 
       </div>
-    <div class="flex-l" id="the-body"><div class="order-1 w-60-l mw9 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style="flex-grow:1;">
+    <div class="flex-l" id="the-body"><div class="order-2 w-100 w-20-l ph5-m ph0-l mb4 sticky dn db-l" id="context-menu"><div class="bg-light-gray pa3 nested-list-reset nested-copy-line-height nested-links">
+    <p class="f5 b mb3">What's in this document</p>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#pony-packages">Pony Packages</a></li>
+<li><a href="#next-steps">Next Steps</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+
+
+
+
+</div><div class="order-1 w-60-l mw9 ph0 ph5-ns mid-gray nested-copy-line-height no-underline nested-links nested-img nested-copy-seperator nested-blockquote mt0-ns" style="flex-grow:1;">
         <div class="order-0 mt4 w-100 center mw7" style="clear: both;">
-          <a id="doc-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowDM()"></a></div>
+          <a id="doc-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowDM()"></a><a id="context-menu-toggle" class="icon icon-menu" href="javascript:void(0)" onClick="hideShowCM()"></a></div>
 
         <div class="documentation-copy center mw7">
           <header class="mt4 w-100">
@@ -316,118 +325,22 @@ A Stateful Application - Alerts Our stateful application is going to add state t
                 
               
             </p>
-            <h1 class="f1 athelas mb1">Writing Your Own Stateful Application</h1>
+            <h1 class="f1 athelas mb1">Pony API Introduction</h1>
           </header>
 
           <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l">
 
-<p>In this section, we will go over how to write a stateful application with the Wallaroo Python API. If you haven&rsquo;t reviewed the simple stateless Alerts application example yet, you can find it <a href="/python-tutorial/writing-your-own-application/">here</a>.</p>
+<p>In order to write a Wallaroo application in Pony, the developer creates the classes and functions (provided by <a href="/pony-tutorial/api/">the Wallaroo API</a>) to be run at each stage of their application, along with an entry point called <code>Main</code>.</p>
 
-<h2 id="a-stateful-application-alerts">A Stateful Application - Alerts</h2>
+<p>For a basic overview of what Wallaroo does, read <a href="/">What is Wallaroo</a> and <a href="/core-concepts/">Core Concepts</a>. These documents will help you understand the system at a high level so that you can see how the pieces of the Pony API fit into it.</p>
 
-<p>Our stateful application is going to add state to the Alerts example. Again, it receives as its inputs messages representing transactions. But now instead of statelessly checking individual transactions to see if they pass certain thresholds, it will add each transaction amount to a running total. It will then check that total to see if an alert should be emitted.</p>
+<h2 id="pony-packages">Pony Packages</h2>
 
-<p>As with the stateless Alerts example, we will list the components required:</p>
-
-<ul>
-<li>Output encoding</li>
-<li>Computation for checking transactions</li>
-<li>State object</li>
-</ul>
-
-<h3 id="state-computation">State Computation</h3>
-
-<p>The state computation here is fairly straightforward: given a data object and a state object, update the state with the new data, and, based on a simple condition, determine whether we return some data representing an alert message.</p>
-
-<p>Our input type represents a transaction:</p>
-
-<pre><code class="language-python">class Transaction(object):
-    def __init__(self, user, amount):
-        self.user = user
-        self.amount = amount
-</code></pre>
-
-<p>We use these inputs to update state, and check whether the running total crosses certain thresholds, at which point we generate an alert:</p>
-
-<pre><code class="language-python">@wallaroo.state_computation(name=&quot;check transaction total&quot;, state=TransactionTotal)
-def check_transaction_total(transaction, state):
-    state.total = state.total + transaction.amount
-    if state.total &gt; 2000:
-        return DepositAlert(transaction.user, state.total)
-    elif state.total &lt; -2000:
-        return WithdrawalAlert(transaction.user, state.total)
-</code></pre>
-
-<h3 id="state">State</h3>
-
-<p>The state for this application keeps track of a running total of transactions:</p>
-
-<pre><code class="language-python">class TransactionTotal(object):
-    def __init__(self):
-        self.total = 0
-</code></pre>
-
-<h3 id="encoder">Encoder</h3>
-
-<p>The encoder is going to receive either a <code>DepositAlert</code> or <code>WithdrawalAlert</code> instance and encode it into a string. Since we only generate alerts when certain conditions are met, not every input into the application results in an output sent to the sink.</p>
-
-<p>As with our previous stateless example, the sink requires a <code>bytes</code> object. In Python 2 this can be the string itself, but in Python 3 we need to encode it from unicode to <code>bytes</code>. Luckily, we can use <code>encode()</code> to get a <code>bytes</code> from a string in both versions:</p>
-
-<pre><code class="language-python">@wallaroo.encoder
-def encode_alert(alert):
-    return str(alert).encode()
-</code></pre>
-
-<h3 id="partitioning">Partitioning</h3>
-
-<p>In our stateless example, we looked at each transaction input in isolation and generated an alert based on its properties. This meant that Wallaroo could process all of these transactions in parallel without concern for how they were related to each other. But in our stateful example, we are accumulating totals. What do these totals refer to? For this application, they are the running totals per user. So each transaction object is associated with a particular user.</p>
-
-<p>This means that a natural way to partition the work is by user. We accomplish this by defining a function for extracting keys from our input messages:</p>
-
-<pre><code class="language-python">@wallaroo.key_extractor
-def extract_user(transaction):
-    return transaction.user
-</code></pre>
-
-<h3 id="application-setup">Application Setup</h3>
-
-<p>Finally, let&rsquo;s set up our application topology:</p>
-
-<pre><code class="language-python">def application_setup(args):
-    out_host, out_port = wallaroo.tcp_parse_output_addrs(args)[0]
-
-    gen_source = wallaroo.GenSourceConfig(&quot;Alerts (stateful)&quot;, TransactionsGenerator())
-
-    transactions = wallaroo.source(&quot;Alerts (stateful)&quot;, gen_source)
-    pipeline = (transactions
-        .key_by(extract_user)
-        .to(check_transaction_total)
-        .to_sink(wallaroo.TCPSinkConfig(out_host, out_port, encode_alert)))
-
-    return wallaroo.build_application(&quot;Alerts (stateful)&quot;, pipeline)
-</code></pre>
-
-<p>The important difference between this setup and the stateless version from our last example (besides using a state computation rather than a stateless one) is the presence of:</p>
-
-<pre><code class="language-python">.key_by(extract_user)
-</code></pre>
-
-<p>This ensures that all transactions for a given user are sent to the same state
-partition. This means that when defining our state type, we can take for granted that the key is an implicit context. We don&rsquo;t need to refer to the user
-anywhere in the state definition if we don&rsquo;t want to (and in this case we don&rsquo;t need to).</p>
-
-<h3 id="miscellaneous">Miscellaneous</h3>
-
-<p>This module needs its imports:</p>
-
-<pre><code class="language-python">import wallaroo
-</code></pre>
+<p>Wallaroo programs that use the Pony API can use any packages that would be used with a normal Pony program, including your own packages and third party packages. In order to use them, add them as you normally would using <a href="https://github.com/ponylang/pony-stable">Pony Stable</a>.</p>
 
 <h2 id="next-steps">Next Steps</h2>
 
-<p>The complete stateful alerts example is available <a href="https://github.com/WallarooLabs/wallaroo/tree/0.6.1/examples/python/alerts_stateful/">here</a>. To run it, follow the <a href="https://github.com/WallarooLabs/wallaroo/tree/0.6.1/examples/python/alerts_stateful/README.md">Alerts application instructions</a></p>
-
-<p>To learn how to make your application resilient and able to work across multiple workers, skip ahead to <a href="/python-tutorial/interworker-serialization-and-resilience/">Inter-worker Serialization and Resilience</a>. Otherwise, continue on to the next section of the tutorial, <a href="/python-tutorial/word-count/">Word Count</a>.</p>
+<p>If you haven&rsquo;t already done so, set up your environment for writing and running Wallaroo Pony application, refer to <a href="/pony-installation/">our installation instructions</a>. Otherwise, <a href="/pony-tutorial/running-a-wallaroo-application/">onwards into the tutorial</a>.</p>
 </main>
         </div>
       </div>

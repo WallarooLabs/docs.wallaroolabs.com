@@ -54,23 +54,26 @@
     
 
     <meta property="og:title" content="Crash Resilience" />
-<meta property="og:description" content="Wallaroo is designed with built-in resilience. However, since the operations involved with maintaining resilience can impact performance, this mode is off by default. For python users, we provide a separate binary with resilience enabled: machida-resilience (and machida3-resilience for Python 3) as part of the default installation. For Go and Ponyc users, to enable resilience in a Wallaroo application, the binary needs to be built with -D resilience if using the ponyc compiler directly, or with resilience=on if using our Makefile build system (as is the case with Machida)." />
+<meta property="og:description" content="Wallaroo is designed with built-in resilience. However, since the operations involved with maintaining resilience can impact performance, this mode is off by default. For Pony users, to enable resilience in a Wallaroo application, the binary needs to be built with -D resilience if using the ponyc compiler directly, or with resilience=on if using our Makefile build system.
+How Does Wallaroo Implement Resilience Wallaroo&rsquo;s resilience is based on the Chandy-Lamport snapshotting algorithm that minimizes the impact of checkpointing on processing in-flight messages." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://docs.wallaroolabs.com/operators-manual/resilience-crash/" />
 
 <meta itemprop="name" content="Crash Resilience">
-<meta itemprop="description" content="Wallaroo is designed with built-in resilience. However, since the operations involved with maintaining resilience can impact performance, this mode is off by default. For python users, we provide a separate binary with resilience enabled: machida-resilience (and machida3-resilience for Python 3) as part of the default installation. For Go and Ponyc users, to enable resilience in a Wallaroo application, the binary needs to be built with -D resilience if using the ponyc compiler directly, or with resilience=on if using our Makefile build system (as is the case with Machida).">
+<meta itemprop="description" content="Wallaroo is designed with built-in resilience. However, since the operations involved with maintaining resilience can impact performance, this mode is off by default. For Pony users, to enable resilience in a Wallaroo application, the binary needs to be built with -D resilience if using the ponyc compiler directly, or with resilience=on if using our Makefile build system.
+How Does Wallaroo Implement Resilience Wallaroo&rsquo;s resilience is based on the Chandy-Lamport snapshotting algorithm that minimizes the impact of checkpointing on processing in-flight messages.">
 
 
 
-<meta itemprop="wordCount" content="933">
+<meta itemprop="wordCount" content="874">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Crash Resilience"/>
-<meta name="twitter:description" content="Wallaroo is designed with built-in resilience. However, since the operations involved with maintaining resilience can impact performance, this mode is off by default. For python users, we provide a separate binary with resilience enabled: machida-resilience (and machida3-resilience for Python 3) as part of the default installation. For Go and Ponyc users, to enable resilience in a Wallaroo application, the binary needs to be built with -D resilience if using the ponyc compiler directly, or with resilience=on if using our Makefile build system (as is the case with Machida)."/>
+<meta name="twitter:description" content="Wallaroo is designed with built-in resilience. However, since the operations involved with maintaining resilience can impact performance, this mode is off by default. For Pony users, to enable resilience in a Wallaroo application, the binary needs to be built with -D resilience if using the ponyc compiler directly, or with resilience=on if using our Makefile build system.
+How Does Wallaroo Implement Resilience Wallaroo&rsquo;s resilience is based on the Chandy-Lamport snapshotting algorithm that minimizes the impact of checkpointing on processing in-flight messages."/>
 
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -99,13 +102,13 @@
           </li>
           
           <li class="list f5 f4-ns fw4 dib pr3">
-            <a class="hover-white no-underline white-90" href="/python-installation/" title="Installation page">
+            <a class="hover-white no-underline white-90" href="/pony-installation/" title="Installation page">
               Installation
             </a>
           </li>
           
           <li class="list f5 f4-ns fw4 dib pr3">
-            <a class="hover-white no-underline white-90" href="/python-tutorial/" title="Tutorial page">
+            <a class="hover-white no-underline white-90" href="/pony-tutorial/" title="Tutorial page">
               Tutorial
             </a>
           </li>
@@ -187,25 +190,10 @@
       </li>
       
       <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".pyinstallation">Python Installation Guide</a>
-        <ul class="pyinstallation desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".ponyinstallation">Installation Guide</a>
+        <ul class="ponyinstallation desktopmenu animated fadeIn list pl0 bg-light-gray dn">
           <li class="f6 fw4">
-            <a href="/python-installation/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
-              Choosing an Installation Option
-            </a>
-          </li>
-          <li class="f6 fw4">
-            <a href="/python-installation/python-docker-installation-guide/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
-              Installing with Docker
-            </a>
-          </li>
-          <li class="f6 fw4">
-            <a href="/python-installation/python-vagrant-installation-guide/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
-              Installing with Vagrant
-            </a>
-          </li>
-          <li class="f6 fw4">
-            <a href="/python-installation/python-wallaroo-up-installation-guide/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+            <a href="/pony-installation/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
               Installing with Wallaroo Up
             </a>
           </li>
@@ -213,65 +201,45 @@
       </li>
       
       <li class="f5 w-100 hover-bg-light-gray hover-accent-color-light fw8">
-        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".pytutorial">Python Tutorial</a>
-        <ul class="pytutorial desktopmenu animated fadeIn list pl0 bg-light-gray dn">
+        <a href="javascript:void(0)" class="js-toggle dib w-100 link mid-gray hover-accent-color-light pl2 pr2 pv2 " data-target=".ponytutorial">Pony Tutorial</a>
+        <ul class="ponytutorial desktopmenu animated fadeIn list pl0 bg-light-gray dn">
           <li class="f6 fw4">
-            <a href="/python-tutorial/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
-              Python API Introduction
+            <a href="/pony-tutorial/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Pony API Introduction
             </a>
           </li>
           <li class="f6 fw4">
-            <a href="/python-tutorial/running-a-wallaroo-application/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+            <a href="/pony-tutorial/running-a-wallaroo-application/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
               Running A Wallaroo Application
             </a>
           </li>
           <li class="f6 fw4">
-            <a href="/python-tutorial/writing-your-own-application/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+            <a href="/pony-tutorial/writing-your-own-application/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
               Writing Your Own Application
             </a>
           </li>
           <li class="f6 fw4">
-            <a href="/python-tutorial/writing-your-own-stateful-application/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+            <a href="/pony-tutorial/writing-your-own-stateful-application/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
               Writing Your Own Stateful Application
             </a>
           </li>
           <li class="f6 fw4">
-            <a href="/python-tutorial/word-count/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+            <a href="/pony-tutorial/word-count/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
               Word Count
             </a>
           </li>
           <li class="f6 fw4">
-            <a href="/python-tutorial/interworker-serialization-and-resilience/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
-              Inter-worker Serialization and Resilience
+            <a href="/pony-tutorial/api/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+              Wallaroo Pony API Classes
             </a>
           </li>
           <li class="f6 fw4">
-            <a href="/python-tutorial/using-connectors/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
-              Using Connectors as Sources &amp; Sinks
-            </a>
-          </li>
-          <li class="f6 fw4">
-            <a href="/python-tutorial/api/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
-              Wallaroo Python API Classes
-            </a>
-          </li>
-          <li class="f6 fw4">
-            <a href="/python-tutorial/debugging/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
-              Debugging
-            </a>
-          </li>
-          <li class="f6 fw4">
-            <a href="/python-tutorial/tcp-decoders-and-encoders/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+            <a href="/pony-tutorial/tcp-decoders-and-encoders/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
               TCP Decoders and Encoders
             </a>
           </li>
           <li class="f6 fw4">
-            <a href="/python-tutorial/virtualenv/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
-              Wallaroo and Virtualenv
-            </a>
-          </li>
-          <li class="f6 fw4">
-            <a href="/python-tutorial/starting-a-new-shell/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
+            <a href="/pony-tutorial/starting-a-new-shell/" class="db link hover-bg-gray hover-white pl3 pr2 pv2 black ">
               Starting a new shell
             </a>
           </li>
@@ -376,7 +344,7 @@
 
           <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l">
 
-<p>Wallaroo is designed with built-in resilience. However, since the operations involved with maintaining resilience can impact performance, this mode is off by default. For python users, we provide a separate binary with resilience enabled: <code>machida-resilience</code> (and <code>machida3-resilience</code> for Python 3) as part of the default installation. For Go and Ponyc users, to enable resilience in a Wallaroo application, the binary needs to be built with <code>-D resilience</code> if using the <code>ponyc</code> compiler directly, or with <code>resilience=on</code> if using our Makefile build system (as is the case with <code>Machida</code>).</p>
+<p>Wallaroo is designed with built-in resilience. However, since the operations involved with maintaining resilience can impact performance, this mode is off by default. For Pony users, to enable resilience in a Wallaroo application, the binary needs to be built with <code>-D resilience</code> if using the <code>ponyc</code> compiler directly, or with <code>resilience=on</code> if using our Makefile build system.</p>
 
 <h2 id="how-does-wallaroo-implement-resilience">How Does Wallaroo Implement Resilience</h2>
 
@@ -388,11 +356,11 @@
 
 <p>When a crashed worker is restarted, if it can find its resilience files in the path specified by <code>--resilience-dir</code>, it will automatically start the recovery process. The simplest way to do this is to rerun the worker using the same command it was originally run with.</p>
 
-<p>For example, if we were running the bundled Python example <a href="https://github.com/WallarooLabs/wallaroo/tree/0.6.1/examples/python/word_count/">word_count</a>, this might look something like:</p>
+<p>For example, if we were running the bundled Pony example <a href="https://github.com/WallarooLabs/wallaroo/tree/0.6.1/examples/pony/word_count/">word_count</a>, this might look something like:</p>
 
 <pre><code>```bash
-machida-resilience --application-module word_count \
-  --in 'Split and Count'@127.0.0.1:7010 --out 127.0.0.1:7002 \
+./word_count --in 'Split and Count'@127.0.0.1:7010 \
+  --out 127.0.0.1:7002 \
   --metrics 127.0.0.1:5001 --control 127.0.0.1:6000 \
   --my-data 127.0.0.1:6003 --my-control 127.0.0.1:6002 \
   --external 127.0.0.1:5051 \
@@ -405,7 +373,7 @@ machida-resilience --application-module word_count \
 
 <h3 id="running-the-resilience-example">Running the resilience example</h3>
 
-<p>In order to run the example you will need Machida with resilience enabled, Giles Sender, Data Receiver, and the Cluster Shutdown tool. If you haven&rsquo;t yet set up Wallaroo, please visit our <a href="/python-installation/">setup</a> instructions to get started.</p>
+<p>In order to run the example you will need the Word Count binary compiled with resilience enabled, Giles Sender, Data Receiver, and the Cluster Shutdown tool. If you haven&rsquo;t yet set up Wallaroo, please visit our <a href="/pony-installation/">setup</a> instructions to get started.</p>
 
 <h4 id="starting-new-shells">Starting new shells</h4>
 
@@ -414,7 +382,7 @@ For each shell you&rsquo;re expected to setup, you&rsquo;d have to run the follo
 
 <pre><code class="language-bash">cd ~/wallaroo-tutorial/wallaroo-0.6.1
 source bin/activate
-cd examples/python/word_count
+cd examples/pony/word_count
 </code></pre>
 
 <ol>
@@ -452,10 +420,10 @@ cd examples/python/word_count
 <pre><code class="language-bash">data_receiver --listen 127.0.0.1:7002 | tee received.txt
 </code></pre></li>
 
-<li><p>Shell 2: Start initializer (remember to use <code>machida3-resilience</code> if using Python 3)</p>
+<li><p>Shell 2: Start initializer</p>
 
-<pre><code class="language-bash">machida-resilience --application-module word_count \
-  --in 'Split and Count'@127.0.0.1:7010 --out 127.0.0.1:7002 \
+<pre><code class="language-bash">./word_count --in 'Split and Count'@127.0.0.1:7010 \
+  --out 127.0.0.1:7002 \
   --metrics 127.0.0.1:5001 --control 127.0.0.1:6000 \
   --data 127.0.0.1:6001 --external 127.0.0.1:5050 \
   --name initializer --cluster-initializer --worker-count 2 \
@@ -464,10 +432,10 @@ cd examples/python/word_count
   | tee initializer.log
 </code></pre></li>
 
-<li><p>Shell 3: Start worker (remember to use <code>machida3-resilience</code> if using Python 3)</p>
+<li><p>Shell 3: Start worker</p>
 
-<pre><code class="language-bash">machida-resilience --application-module word_count \
-  --in 'Split and Count'@127.0.0.1:7010 --out 127.0.0.1:7002 \
+<pre><code class="language-bash">./word_count --in 'Split and Count'@127.0.0.1:7010 \
+  --out 127.0.0.1:7002 \
   --metrics 127.0.0.1:5001 --control 127.0.0.1:6000 \
   --my-data 127.0.0.1:6003 --my-control 127.0.0.1:6002 \
   --external 127.0.0.1:5051 \
@@ -490,7 +458,7 @@ cd examples/python/word_count
 
 <li><p>Shell 4: Kill the worker to simulate a crash (using SIGKILL)</p>
 
-<pre><code class="language-bash">pkill -f -KILL machida.*worker1
+<pre><code class="language-bash">pkill -f -KILL word_count.*worker1
 </code></pre></li>
 
 <li><p>Shell 4: Send some data directly to our data receiver to mark in the sink where the crash occurred (for demonstration purposes)</p>
@@ -498,10 +466,10 @@ cd examples/python/word_count
 <pre><code class="language-bash">echo '&lt;&lt;CRASH-and-RECOVER&gt;&gt;' | nc -q1 127.0.0.1 7002
 </code></pre></li>
 
-<li><p>Shell 3: Restart worker1 with the same command we used above, but save its log output to a new file (remember to use <code>machida3-resilience</code> if using Python 3)</p>
+<li><p>Shell 3: Restart worker1 with the same command we used above, but save its log output to a new file.</p>
 
-<pre><code class="language-bash">machida-resilience --application-module word_count \
-  --in 'Split and Count'@127.0.0.1:7010 --out 127.0.0.1:7002 \
+<pre><code class="language-bash">./word_count --in 'Split and Count'@127.0.0.1:7010 \
+  --out 127.0.0.1:7002 \
   --metrics 127.0.0.1:5001 --control 127.0.0.1:6000 \
   --my-data 127.0.0.1:6003 --my-control 127.0.0.1:6002 \
   --external 127.0.0.1:5051 \

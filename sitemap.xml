@@ -53,6 +53,10 @@
   </url>
   
   <url>
+    <loc>https://docs.wallaroolabs.com/pony-installation/</loc>
+  </url>
+  
+  <url>
     <loc>https://docs.wallaroolabs.com/python-installation/python-wallaroo-up-installation-guide/</loc>
   </url>
   
@@ -69,7 +73,15 @@
   </url>
   
   <url>
+    <loc>https://docs.wallaroolabs.com/pony-tutorial/</loc>
+  </url>
+  
+  <url>
     <loc>https://docs.wallaroolabs.com/python-tutorial/</loc>
+  </url>
+  
+  <url>
+    <loc>https://docs.wallaroolabs.com/pony-tutorial/running-a-wallaroo-application/</loc>
   </url>
   
   <url>
@@ -81,11 +93,19 @@
   </url>
   
   <url>
+    <loc>https://docs.wallaroolabs.com/pony-tutorial/starting-a-new-shell/</loc>
+  </url>
+  
+  <url>
     <loc>https://docs.wallaroolabs.com/python-tutorial/starting-a-new-shell/</loc>
   </url>
   
   <url>
     <loc>https://docs.wallaroolabs.com/core-concepts/state/</loc>
+  </url>
+  
+  <url>
+    <loc>https://docs.wallaroolabs.com/pony-tutorial/tcp-decoders-and-encoders/</loc>
   </url>
   
   <url>
@@ -118,6 +138,10 @@
   </url>
   
   <url>
+    <loc>https://docs.wallaroolabs.com/pony-tutorial/api/</loc>
+  </url>
+  
+  <url>
     <loc>https://docs.wallaroolabs.com/python-tutorial/api/</loc>
   </url>
   
@@ -134,6 +158,10 @@
   </url>
   
   <url>
+    <loc>https://docs.wallaroolabs.com/pony-tutorial/word-count/</loc>
+  </url>
+  
+  <url>
     <loc>https://docs.wallaroolabs.com/python-tutorial/word-count/</loc>
   </url>
   
@@ -142,7 +170,15 @@
   </url>
   
   <url>
+    <loc>https://docs.wallaroolabs.com/pony-tutorial/writing-your-own-application/</loc>
+  </url>
+  
+  <url>
     <loc>https://docs.wallaroolabs.com/python-tutorial/writing-your-own-application/</loc>
+  </url>
+  
+  <url>
+    <loc>https://docs.wallaroolabs.com/pony-tutorial/writing-your-own-stateful-application/</loc>
   </url>
   
   <url>
